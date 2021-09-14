@@ -33,7 +33,7 @@ namespace QLVT
         public static int mChiNhanh = 0;
 
         public static BindingSource bds_dspm = new BindingSource();//giữ bdsPM khi đăng nhập
-        public static frmMain 
+        public static frmMain frmChinh; //khai báo con trỏ, về sau là đối tượng frm Main
 
 
 
@@ -44,7 +44,8 @@ namespace QLVT
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            frmChinh = new frmMain();
+            Application.Run(frmChinh);
         }
     }
 }

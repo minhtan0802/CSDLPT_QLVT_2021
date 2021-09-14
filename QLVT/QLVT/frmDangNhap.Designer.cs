@@ -95,6 +95,7 @@ namespace QLVT
             this.btn_DangNhap.Size = new System.Drawing.Size(86, 32);
             this.btn_DangNhap.TabIndex = 7;
             this.btn_DangNhap.Text = "Đăng nhập";
+            this.btn_DangNhap.Click += new System.EventHandler(this.btn_DangNhap_Click);
             // 
             // btn_Thoat
             // 
@@ -119,6 +120,7 @@ namespace QLVT
             this.Controls.Add(this.label1);
             this.Name = "frmDangNhap";
             this.Text = "frmDangNhap";
+            this.Load += new System.EventHandler(this.frmDangNhap_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
