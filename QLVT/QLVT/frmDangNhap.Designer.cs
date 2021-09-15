@@ -79,6 +79,7 @@ namespace QLVT
             this.tb_MatKhau.Name = "tb_MatKhau";
             this.tb_MatKhau.Size = new System.Drawing.Size(179, 23);
             this.tb_MatKhau.TabIndex = 5;
+            this.tb_MatKhau.UseSystemPasswordChar = true;
             // 
             // cmb_ChiNhanh
             // 
@@ -87,6 +88,7 @@ namespace QLVT
             this.cmb_ChiNhanh.Name = "cmb_ChiNhanh";
             this.cmb_ChiNhanh.Size = new System.Drawing.Size(179, 24);
             this.cmb_ChiNhanh.TabIndex = 6;
+            this.cmb_ChiNhanh.SelectedIndexChanged += new System.EventHandler(this.cmb_ChiNhanh_SelectedIndexChanged);
             // 
             // btn_DangNhap
             // 
@@ -119,7 +121,6 @@ namespace QLVT
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "frmDangNhap";
-            this.Text = "frmDangNhap";
             this.Load += new System.EventHandler(this.frmDangNhap_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

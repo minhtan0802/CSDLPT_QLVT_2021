@@ -33,5 +33,15 @@ namespace QLVT
                 f.Show();
             }    
         }
+
+        public void HienThiMenu()
+        {
+            Program.frmChinh.MANV.Text = "Mã NV = " + Program.username;
+            Program.frmChinh.HOTEN.Text = "Họ tên= " + Program.mHoTen;
+            Program.frmChinh.NHOM.Text = "Nhóm " + Program.mGroup;
+            //Phân quyền
+            rib_BaoCao.Visible = rib_DanhMuc.Visible = rib_NghiepVu.Visible = true;
+            //tiếp tục if trên Program.mGroup để bật/ tắt các nút lệnh trên Menu chính
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace QLVT
             da.Fill(dt);
             conn_publisher.Close();
             Program.bds_dspm.DataSource = dt;
-            cmb_ChiNhanh.DataSource = Program.bds_dspm;
+            cmb_ChiNhanh.DataSource = Program.bds_dspm;//chứa danh sách data cung cấp cho nó
             cmb_ChiNhanh.DisplayMember = "TENCN";
             cmb_ChiNhanh.ValueMember = "TENSERVER";
 
@@ -38,6 +38,34 @@ namespace QLVT
         
         private void btn_DangNhap_Click(object sender, EventArgs e)
         {
+            if(tb_TaiKhoan.Text.Trim()==""|| tb_MatKhau.Text.Trim()=="")
+            {
+                MessageBox.Show("Tên tài khoản và mật khẩu không được để trống", "", MessageBoxButtons.OK);
+                return;
+            }
+            Program.mlogin = tb_TaiKhoan.Text;
+            Program.password = tb_MatKhau.Text;
+            if (Program.KetNoi() == 0) return;
+            Program.mChiNhanh = cmb_ChiNhanh.SelectedIndex;
+            Program.passwordDN = Program.password;
+            string strLenh = "EXEC sp_DangNhap '" + Program.mlogin + "'";
+
+            Program.myReader = Program.ExecSqlDataReader(strLenh);
+            if(Program.myReader == null)return;
+            Program.myReader.Read();
+
+            Program.username = Program.myReader.GetString(0);
+            if(Convert.IsDBNull(Program.username))
+            {
+                MessageBox.Show("Login bạn nhập không có quyền truy cập dữ liệu\nBạn xem lại username, password", "", MessageBoxButtons.OK);
+                return;
+            }
+            Program.mHoTen = Program.myReader.GetString(1);
+            Program.mGroup = Program.myReader.GetString(2);
+            Program.myReader.Close();
+            Program.conn.Close();
+            Program.frmChinh.HienThiMenu();
+
 
         }
         private int KetNoi_CSDLGOC()//chỉ tại trên form này thôi nên private
@@ -52,7 +80,7 @@ namespace QLVT
             }
             catch(Exception e)
             {
-                MessageBox.Show("Lỗi kết nối về CSDL gốc.\nVạn xem lại Tên Server của Publisher, và tên CSDL trong chuỗi kết nối.\n"+e.Message);
+                MessageBox.Show("Lỗi kết nối về CSDL gốc.\nVạn xem lại Tên Server của Publisher, và tên CSDL trong chuỗi kết nối.\n"+e.Message,"",MessageBoxButtons.OK);
                 return 0;
 
             }
@@ -63,7 +91,22 @@ namespace QLVT
         private void frmDangNhap_Load(object sender, EventArgs e)
         {
             if (KetNoi_CSDLGOC() == 0) return;
+            LayDSPM("SELECT * FROM get_Subcribers");
+            cmb_ChiNhanh.SelectedIndex = 1;
+            cmb_ChiNhanh.SelectedIndex = 0;
 
+        }
+
+        private void cmb_ChiNhanh_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.servername = cmb_ChiNhanh.SelectedValue.ToString();
+            }
+            catch(Exception ex)
+            {
+                
+            }
         }
     }
 }

@@ -45,7 +45,6 @@ D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\bin\Debug\es\DevExpress.Pdf.v19.2.Core.re
 D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\bin\Debug\ja\DevExpress.Pdf.v19.2.Core.resources.dll
 D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\bin\Debug\ru\DevExpress.Pdf.v19.2.Core.resources.dll
 D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.csproj.AssemblyReference.cache
-D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.Form1.resources
 D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.Properties.Resources.resources
 D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.csproj.GenerateResource.cache
 D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.exe.licenses
@@ -54,3 +53,4 @@ D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.csproj.CopyComplete
 D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.exe
 D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.pdb
 D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.frmDangNhap.resources
+D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.frmMain.resources
