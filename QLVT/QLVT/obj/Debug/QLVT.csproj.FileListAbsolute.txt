@@ -111,3 +111,4 @@ D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.csproj.CopyComp
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.exe
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.pdb
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.frmNhanVien.resources
+D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Debug\QLVT.frmNhanVien.resources
