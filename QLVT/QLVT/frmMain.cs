@@ -43,5 +43,17 @@ namespace QLVT
             rib_BaoCao.Visible = rib_DanhMuc.Visible = rib_NghiepVu.Visible = true;
             //tiếp tục if trên Program.mGroup để bật/ tắt các nút lệnh trên Menu chính
         }
+
+        private void btn_NhanVien_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExist(typeof(frmNhanVien));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmNhanVien f = new frmNhanVien();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
     }
 }
