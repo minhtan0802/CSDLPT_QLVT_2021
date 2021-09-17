@@ -149,6 +149,7 @@ namespace QLVT
             this.btn_VatTu.Caption = "Vật tư";
             this.btn_VatTu.Id = 9;
             this.btn_VatTu.Name = "btn_VatTu";
+            this.btn_VatTu.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_VatTu_ItemClick);
             // 
             // btn_Kho
             // 

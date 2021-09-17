@@ -55,5 +55,17 @@ namespace QLVT
                 f.Show();
             }
         }
+
+        private void btn_VatTu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExist(typeof(frmVatTu));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmVatTu f = new frmVatTu();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
     }
 }

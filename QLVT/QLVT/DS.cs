@@ -1,0 +1,17 @@
+﻿namespace QLVT
+{
+}
+namespace QLVT
+{
+
+
+    public partial class DS
+    {
+    }
+}
+namespace QLVT {
+    
+    
+    public partial class DS {
+    }
+}
