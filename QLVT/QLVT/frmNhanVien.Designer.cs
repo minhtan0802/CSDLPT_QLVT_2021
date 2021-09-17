@@ -47,7 +47,7 @@ namespace QLVT
             this.btnXoa = new DevExpress.XtraBars.BarButtonItem();
             this.btnUndo = new DevExpress.XtraBars.BarButtonItem();
             this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDSNV = new DevExpress.XtraBars.BarButtonItem();
+            this.btnChuyenCN = new DevExpress.XtraBars.BarButtonItem();
             this.btnThoat = new DevExpress.XtraBars.BarButtonItem();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.bar3 = new DevExpress.XtraBars.Bar();
@@ -83,7 +83,7 @@ namespace QLVT
             this.txtMACN = new System.Windows.Forms.TextBox();
             this.txtTen = new System.Windows.Forms.TextBox();
             this.txtHo = new System.Windows.Forms.TextBox();
-            this.txtNhanVien = new System.Windows.Forms.TextBox();
+            this.txtMaNV = new System.Windows.Forms.TextBox();
             this.bdsDH = new System.Windows.Forms.BindingSource(this.components);
             this.bdsPN = new System.Windows.Forms.BindingSource(this.components);
             this.bdsPX = new System.Windows.Forms.BindingSource(this.components);
@@ -200,7 +200,7 @@ namespace QLVT
             this.btnRefresh,
             this.barListItem1,
             this.btnThoat,
-            this.btnDSNV});
+            this.btnChuyenCN});
             this.barManager1.MainMenu = this.bar2;
             this.barManager1.MaxItemId = 9;
             this.barManager1.StatusBar = this.bar3;
@@ -218,7 +218,7 @@ namespace QLVT
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnXoa, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnUndo, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnRefresh, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnDSNV),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnChuyenCN, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnThoat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar1.Text = "Tools";
             // 
@@ -247,6 +247,7 @@ namespace QLVT
             this.btnGhi.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnGhi.ImageOptions.Image")));
             this.btnGhi.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnGhi.ImageOptions.LargeImage")));
             this.btnGhi.Name = "btnGhi";
+            this.btnGhi.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnGhi_ItemClick);
             // 
             // btnXoa
             // 
@@ -275,11 +276,14 @@ namespace QLVT
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRefresh_ItemClick);
             // 
-            // btnDSNV
+            // btnChuyenCN
             // 
-            this.btnDSNV.Caption = "In danh sách nhân viên";
-            this.btnDSNV.Id = 8;
-            this.btnDSNV.Name = "btnDSNV";
+            this.btnChuyenCN.Caption = "Chuyển chi nhánh";
+            this.btnChuyenCN.Id = 8;
+            this.btnChuyenCN.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnChuyenCN.ImageOptions.Image")));
+            this.btnChuyenCN.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnChuyenCN.ImageOptions.LargeImage")));
+            this.btnChuyenCN.Name = "btnChuyenCN";
+            this.btnChuyenCN.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDSNV_ItemClick);
             // 
             // btnThoat
             // 
@@ -366,6 +370,7 @@ namespace QLVT
             this.cmbChiNhanh.Name = "cmbChiNhanh";
             this.cmbChiNhanh.Size = new System.Drawing.Size(323, 28);
             this.cmbChiNhanh.TabIndex = 5;
+            this.cmbChiNhanh.SelectedIndexChanged += new System.EventHandler(this.cmbChiNhanh_SelectedIndexChanged);
             // 
             // bunifuLabel1
             // 
@@ -537,7 +542,7 @@ namespace QLVT
             this.panelCtrl_NhanVien.Controls.Add(hOLabel);
             this.panelCtrl_NhanVien.Controls.Add(this.txtHo);
             this.panelCtrl_NhanVien.Controls.Add(mANVLabel);
-            this.panelCtrl_NhanVien.Controls.Add(this.txtNhanVien);
+            this.panelCtrl_NhanVien.Controls.Add(this.txtMaNV);
             this.panelCtrl_NhanVien.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCtrl_NhanVien.Location = new System.Drawing.Point(0, 321);
             this.panelCtrl_NhanVien.Name = "panelCtrl_NhanVien";
@@ -614,13 +619,13 @@ namespace QLVT
             this.txtHo.Size = new System.Drawing.Size(179, 28);
             this.txtHo.TabIndex = 3;
             // 
-            // txtNhanVien
+            // txtMaNV
             // 
-            this.txtNhanVien.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsNV, "MANV", true));
-            this.txtNhanVien.Location = new System.Drawing.Point(194, 22);
-            this.txtNhanVien.Name = "txtNhanVien";
-            this.txtNhanVien.Size = new System.Drawing.Size(180, 28);
-            this.txtNhanVien.TabIndex = 1;
+            this.txtMaNV.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsNV, "MANV", true));
+            this.txtMaNV.Location = new System.Drawing.Point(194, 22);
+            this.txtMaNV.Name = "txtMaNV";
+            this.txtMaNV.Size = new System.Drawing.Size(180, 28);
+            this.txtMaNV.TabIndex = 1;
             // 
             // bdsDH
             // 
@@ -712,7 +717,7 @@ namespace QLVT
         private System.Windows.Forms.TextBox txtMACN;
         private System.Windows.Forms.TextBox txtTen;
         private System.Windows.Forms.TextBox txtHo;
-        private System.Windows.Forms.TextBox txtNhanVien;
+        private System.Windows.Forms.TextBox txtMaNV;
         private DevExpress.XtraEditors.DateEdit dtpNgaySinh;
         private DevExpress.XtraBars.BarButtonItem btnSua;
         private DevExpress.XtraBars.BarButtonItem btnGhi;
@@ -721,7 +726,7 @@ namespace QLVT
         private DevExpress.XtraBars.BarButtonItem btnRefresh;
         private DevExpress.XtraBars.BarButtonItem btnThoat;
         private DevExpress.XtraBars.BarListItem barListItem1;
-        private DevExpress.XtraBars.BarButtonItem btnDSNV;
+        private DevExpress.XtraBars.BarButtonItem btnChuyenCN;
         private System.Windows.Forms.CheckBox ckbXoa;
         private DSTableAdapters.DatHangTableAdapter datHangTableAdapter;
         private System.Windows.Forms.BindingSource bdsDH;

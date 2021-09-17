@@ -47,6 +47,7 @@ namespace QLVT
             Program.password = tb_MatKhau.Text;
             if (Program.KetNoi() == 0) return;
             Program.mChiNhanh = cmb_ChiNhanh.SelectedIndex;
+            Program.mloginDN = Program.mlogin;
             Program.passwordDN = Program.password;
             string strLenh = "EXEC sp_DangNhap '" + Program.mlogin + "'";
 
