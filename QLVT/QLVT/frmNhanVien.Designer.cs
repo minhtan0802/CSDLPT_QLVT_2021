@@ -57,8 +57,8 @@ namespace QLVT
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barListItem1 = new DevExpress.XtraBars.BarListItem();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.label1 = new System.Windows.Forms.Label();
             this.cmbChiNhanh = new System.Windows.Forms.ComboBox();
-            this.bunifuLabel1 = new Bunifu.UI.WinForms.BunifuLabel();
             this.bdsNV = new System.Windows.Forms.BindingSource(this.components);
             this.NHANVIENTableAdapter = new QLVT.DSTableAdapters.NhanVienTableAdapter();
             this.tableAdapterManager = new QLVT.DSTableAdapters.TableAdapterManager();
@@ -355,13 +355,22 @@ namespace QLVT
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.label1);
             this.panelControl1.Controls.Add(this.cmbChiNhanh);
-            this.panelControl1.Controls.Add(this.bunifuLabel1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 51);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1248, 50);
             this.panelControl1.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(34, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 17);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Chi nhánh";
             // 
             // cmbChiNhanh
             // 
@@ -371,22 +380,6 @@ namespace QLVT
             this.cmbChiNhanh.Size = new System.Drawing.Size(323, 28);
             this.cmbChiNhanh.TabIndex = 5;
             this.cmbChiNhanh.SelectedIndexChanged += new System.EventHandler(this.cmbChiNhanh_SelectedIndexChanged);
-            // 
-            // bunifuLabel1
-            // 
-            this.bunifuLabel1.AllowParentOverrides = false;
-            this.bunifuLabel1.AutoEllipsis = false;
-            this.bunifuLabel1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.bunifuLabel1.CursorType = System.Windows.Forms.Cursors.Default;
-            this.bunifuLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bunifuLabel1.Location = new System.Drawing.Point(23, 15);
-            this.bunifuLabel1.Name = "bunifuLabel1";
-            this.bunifuLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel1.Size = new System.Drawing.Size(68, 20);
-            this.bunifuLabel1.TabIndex = 0;
-            this.bunifuLabel1.Text = "Chi Nhánh";
-            this.bunifuLabel1.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.bunifuLabel1.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 
             // bdsNV
             // 
@@ -581,8 +574,6 @@ namespace QLVT
             this.txtLuong.Name = "txtLuong";
             this.txtLuong.Properties.DisplayFormat.FormatString = "n0";
             this.txtLuong.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.txtLuong.Properties.EditFormat.FormatString = "n0";
-            this.txtLuong.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtLuong.Size = new System.Drawing.Size(306, 22);
             this.txtLuong.TabIndex = 10;
             // 
@@ -698,7 +689,6 @@ namespace QLVT
         private System.Windows.Forms.BindingSource bdsNV;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private System.Windows.Forms.ComboBox cmbChiNhanh;
-        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel1;
         private DSTableAdapters.NhanVienTableAdapter NHANVIENTableAdapter;
         private DSTableAdapters.TableAdapterManager tableAdapterManager;
         private DevExpress.XtraGrid.GridControl gcNhanVien;
@@ -734,5 +724,6 @@ namespace QLVT
         private System.Windows.Forms.BindingSource bdsPN;
         private DSTableAdapters.PhieuXuatTableAdapter phieuXuatTableAdapter;
         private System.Windows.Forms.BindingSource bdsPX;
+        private System.Windows.Forms.Label label1;
     }
 }

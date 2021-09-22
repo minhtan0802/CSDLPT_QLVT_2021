@@ -42,6 +42,10 @@ namespace QLVT
             //Phân quyền
             rib_BaoCao.Visible = rib_DanhMuc.Visible = rib_NghiepVu.Visible = true;
             //tiếp tục if trên Program.mGroup để bật/ tắt các nút lệnh trên Menu chính
+            if (Program.mGroup=="USER")
+            {
+                btn_TaoTaiKhoan.Enabled = false;
+            }    
         }
 
         private void btn_NhanVien_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -63,6 +67,18 @@ namespace QLVT
             else
             {
                 frmVatTu f = new frmVatTu();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void btn_Kho_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExist(typeof(frmKho));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmKho f = new frmKho();
                 f.MdiParent = this;
                 f.Show();
             }

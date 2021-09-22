@@ -228,22 +228,46 @@ namespace QLVT
                 dtpNgaySinh.Focus();
                 return;
             }
-            if (int.Parse(txtLuong.Text.Trim()) < 400000)
-            {
-                MessageBox.Show("Lương của nhân viên không được nhỏ 400 nghìn", "", MessageBoxButtons.OK);
-                txtLuong.Focus();
-                return;
-            }
+            string luong = txtLuong.Text.ToString() ;
+            while (luong.IndexOf('.') != -1)
+                luong=luong.Remove(luong.IndexOf('.'), 1);
+            if (int.Parse(luong) < 4000000)
+                {
+                    MessageBox.Show("Lương của nhân viên không được nhỏ 4.000.000đ", "", MessageBoxButtons.OK);
+                    txtLuong.Focus();
+                    return;
+                }
+           
             if (txtDiaChi.Text.Trim() == "")
             {
                 MessageBox.Show("Địa chỉ không được thiếu", "", MessageBoxButtons.OK);
                 txtDiaChi.Focus();
                 return;
             }
-            string strLenh = "EXEC sp_TraCuu " + txtMaNV.Text  + "MANV";
-
-            Program.myReader = Program.ExecSqlDataReader(strLenh);
+           string strLenh = "EXEC sp_TraCuu @code='" + txtMaNV.Text+"'"+", @type='MANV'";
+            int kiemTraNV = Program.ExecSqlNonQuery(strLenh);
+            if(kiemTraNV!=1)
+            {
+                try
+                {
+                    bdsNV.EndEdit();
+                    bdsNV.ResetCurrentItem();
+                    this.NHANVIENTableAdapter.Connection.ConnectionString = Program.connstr;
+                    this.NHANVIENTableAdapter.Update(this.DS.NhanVien);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi ghi nhân viên.\n" + ex.Message, "", MessageBoxButtons.OK);
+                    return;
+                }
+                gcNhanVien.Enabled = true;
+                btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
+                btnGhi.Enabled = btnUndo.Enabled = false;
+                panelCtrl_NhanVien.Enabled = false;
+            }    
+           
             
         }
+
     }
 }

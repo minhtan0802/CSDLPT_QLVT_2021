@@ -156,6 +156,7 @@ namespace QLVT
             this.btn_Kho.Caption = "Kho";
             this.btn_Kho.Id = 10;
             this.btn_Kho.Name = "btn_Kho";
+            this.btn_Kho.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_Kho_ItemClick);
             // 
             // btn_LapDDH
             // 

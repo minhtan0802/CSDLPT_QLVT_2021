@@ -475,7 +475,7 @@ namespace QLVT
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmVatTu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmVatTu";
+            this.Text = "VẬT TƯ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmVatTu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
