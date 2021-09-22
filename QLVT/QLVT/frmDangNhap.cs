@@ -109,5 +109,10 @@ namespace QLVT
                 
             }
         }
+
+        private void btn_Thoat_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

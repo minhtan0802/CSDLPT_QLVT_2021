@@ -116,14 +116,17 @@ namespace QLVT
             // btn_TaoTaiKhoan
             // 
             this.btn_TaoTaiKhoan.Caption = "Tạo tài khoản";
+            this.btn_TaoTaiKhoan.Enabled = false;
             this.btn_TaoTaiKhoan.Id = 2;
             this.btn_TaoTaiKhoan.Name = "btn_TaoTaiKhoan";
             // 
             // btn_DangXuat
             // 
             this.btn_DangXuat.Caption = "Đăng xuất";
+            this.btn_DangXuat.Enabled = false;
             this.btn_DangXuat.Id = 3;
             this.btn_DangXuat.Name = "btn_DangXuat";
+            this.btn_DangXuat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_DangXuat_ItemClick);
             // 
             // btn_NhanVien
             // 
@@ -156,6 +159,7 @@ namespace QLVT
             this.btn_Kho.Caption = "Kho";
             this.btn_Kho.Id = 10;
             this.btn_Kho.Name = "btn_Kho";
+            this.btn_Kho.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_Kho_ItemClick);
             // 
             // btn_LapDDH
             // 

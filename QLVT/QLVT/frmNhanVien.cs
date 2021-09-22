@@ -87,6 +87,7 @@ namespace QLVT
             bdsNV.AddNew();
             txtMACN.Text = macn;
             dtpNgaySinh.EditValue = "";
+            ckbXoa.Checked = false;
 
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
@@ -228,97 +229,114 @@ namespace QLVT
                 dtpNgaySinh.Focus();
                 return;
             }
-            if (dtpNgaySinh.DateTime >= DateTime.Now)
+            if (dtpNgaySinh.DateTime>=DateTime.Now)
             {
-                MessageBox.Show("Ngày sinh nhân viên không được vượt quá ngày giờ hệ thống", "", MessageBoxButtons.OK);
+                MessageBox.Show("Ngày sinh nhân viên không được lớn hơn hoặc bằng ngày hiện tại ", "", MessageBoxButtons.OK);
                 dtpNgaySinh.Focus();
                 return;
-            }
-            if (int.Parse(txtLuong.Text.ToString().Trim()) < 400000)
+            }    
+            else if (!((DateTime.Now.Year - dtpNgaySinh.DateTime.Year) > 15||((DateTime.Now.Year-dtpNgaySinh.DateTime.Year)==15&&((DateTime.Now.Month - dtpNgaySinh.DateTime.Month)==0)
+                && ((DateTime.Now.Day - dtpNgaySinh.DateTime.Day)==0))))
             {
-                MessageBox.Show("Lương của nhân viên không được nhỏ 400 nghìn", "", MessageBoxButtons.OK);
-                txtLuong.Focus();
+                MessageBox.Show("Nhân viên phải đủ 15t trở lên mới được nhận việc", "", MessageBoxButtons.OK);
+                dtpNgaySinh.Focus();
                 return;
-            }
+            }    
+            string luong = txtLuong.Text.ToString() ;
+            while (luong.IndexOf('.') != -1)
+                luong=luong.Remove(luong.IndexOf('.'), 1);
+            if (int.Parse(luong) < 4000000)
+                {
+                    MessageBox.Show("Lương của nhân viên không được nhỏ 4.000.000đ", "", MessageBoxButtons.OK);
+                    txtLuong.Focus();
+                    return;
+                }
+           
             if (txtDiaChi.Text.Trim() == "")
             {
                 MessageBox.Show("Địa chỉ không được thiếu", "", MessageBoxButtons.OK);
                 txtDiaChi.Focus();
                 return;
             }
-            //string strLenh = "EXEC sp_TraCuu '" + txtMaNV.Text + " MANV" + "'";
-
-            //Program.myReader = Program.ExecSqlDataReader(strLenh);
-            String maNV = txtMACN.Text;
-            String query_MANV = "DECLARE	@return_value int " +
-                               "EXEC @return_value = [dbo].[sp_TraCuu] " +
-                               "@p1, @p2 " +
-                               "SELECT 'Return Value' = @return_value";
-            SqlCommand sqlCommand = new SqlCommand(query_MANV, Program.conn);
-            sqlCommand.Parameters.AddWithValue("@p1", maNV);
-            sqlCommand.Parameters.AddWithValue("@p2", "MANV");
-            SqlDataReader dataReader = null;
-            try
+            
+           string strLenh = "EXEC sp_TraCuu @code='" + txtMaNV.Text+"'"+", @type='MANV'";
+            int kiemTraNV = Program.ExecSqlNonQuery(strLenh);
+            if(kiemTraNV!=1)
             {
-                dataReader = sqlCommand.ExecuteReader();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Thực thi database thất bại!\n" + ex.Message, "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            try
+                try
                 {
-                    dataReader = sqlCommand.ExecuteReader();
+                    bdsNV.EndEdit();
+                    bdsNV.ResetCurrentItem();
+                    this.NHANVIENTableAdapter.Connection.ConnectionString = Program.connstr;
+                    this.NHANVIENTableAdapter.Update(this.DS.NhanVien);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Thực thi database thất bại!\n" + ex.Message, "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Lỗi ghi nhân viên.\n" + ex.Message, "", MessageBoxButtons.OK);
                     return;
                 }
-            dataReader.Read();
-            int result_value_MANV = int.Parse(dataReader.GetValue(0).ToString());
-            dataReader.Close();
-            // Check ràng buộc MANV
-            int indexMaNV = bdsNV.Find("MANV", txtMaNV.Text);
+                gcNhanVien.Enabled = true;
+                btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
+                btnGhi.Enabled = btnUndo.Enabled = false;
+                panelCtrl_NhanVien.Enabled = false;
+            }    
+           
+            
+        }
 
-            int indexCurrent = bdsNV.Position;
-            if (result_value_MANV == 1 && (indexMaNV != indexCurrent))
+        private void txtLuong_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                MessageBox.Show("Mã nhân viên đã tồn tại!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                e.Handled = true;
             }
+        }
 
-            else
+        private void txtMaNV_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                DialogResult dr = MessageBox.Show("Bạn có chắc muốn ghi dữ liệu vào Database?", "Thông báo",
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (dr == DialogResult.OK)
+                e.Handled = true;
+            }
+        }
+
+        private void txtHo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            string specialChar = @"\|!#$%&/()=?»«@£§€{}.-;'<>_,";
+            foreach (var item in specialChar)
+            {
+                if (e.KeyChar==item)
                 {
-                    try
-                    {
-                        //Program.flagCloseFormKho = true; //Bật cờ cho phép tắt Form NV
-                        btnThem.Enabled = btnXoa.Enabled = gcNhanVien.Enabled = panelCtrl_NhanVien.Enabled = true;
-                        btnRefresh.Enabled = btnGhi.Enabled = true;
-                        btnUndo.Enabled = true;
-                        this.bdsNV.EndEdit();
-                        this.NHANVIENTableAdapter.Update(this.DS.NhanVien);
-                        //undolist.Push(maNV);
-                        //undolist.Push("INSERT");
-                        bdsNV.Position = vitri;
-                        
-                    }
-                    catch (Exception ex)
-                    {
-                        // Khi Update database lỗi thì xóa record vừa thêm trong bds
-                        bdsNV.RemoveCurrent();
-                        MessageBox.Show("Thất bại. Vui lòng kiểm tra lại!\n" + ex.Message, "Lỗi",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    e.Handled = true;
+
+                }    
+            }
+        }
+
+        private void txtTen_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            string specialChar = @"\|!#$%&/()=?»«@£§€{}.-;'<>_,";
+            foreach (var item in specialChar)
+            {
+                if (e.KeyChar == item)
+                {
+                    e.Handled = true;
+
                 }
             }
+        }
+
+        private void gcNhanVien_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
