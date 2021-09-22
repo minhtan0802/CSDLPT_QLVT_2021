@@ -228,7 +228,13 @@ namespace QLVT
                 dtpNgaySinh.Focus();
                 return;
             }
-            if (int.Parse(txtLuong.Text.Trim()) < 400000)
+            if (dtpNgaySinh.DateTime >= DateTime.Now)
+            {
+                MessageBox.Show("Ngày sinh nhân viên không được vượt quá ngày giờ hệ thống", "", MessageBoxButtons.OK);
+                dtpNgaySinh.Focus();
+                return;
+            }
+            if (int.Parse(txtLuong.Text.ToString().Trim()) < 400000)
             {
                 MessageBox.Show("Lương của nhân viên không được nhỏ 400 nghìn", "", MessageBoxButtons.OK);
                 txtLuong.Focus();
@@ -240,10 +246,79 @@ namespace QLVT
                 txtDiaChi.Focus();
                 return;
             }
-            string strLenh = "EXEC sp_TraCuu " + txtMaNV.Text  + "MANV";
+            //string strLenh = "EXEC sp_TraCuu '" + txtMaNV.Text + " MANV" + "'";
 
-            Program.myReader = Program.ExecSqlDataReader(strLenh);
-            
+            //Program.myReader = Program.ExecSqlDataReader(strLenh);
+            String maNV = txtMACN.Text;
+            String query_MANV = "DECLARE	@return_value int " +
+                               "EXEC @return_value = [dbo].[sp_TraCuu] " +
+                               "@p1, @p2 " +
+                               "SELECT 'Return Value' = @return_value";
+            SqlCommand sqlCommand = new SqlCommand(query_MANV, Program.conn);
+            sqlCommand.Parameters.AddWithValue("@p1", maNV);
+            sqlCommand.Parameters.AddWithValue("@p2", "MANV");
+            SqlDataReader dataReader = null;
+            try
+            {
+                dataReader = sqlCommand.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Thực thi database thất bại!\n" + ex.Message, "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            try
+                {
+                    dataReader = sqlCommand.ExecuteReader();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Thực thi database thất bại!\n" + ex.Message, "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            dataReader.Read();
+            int result_value_MANV = int.Parse(dataReader.GetValue(0).ToString());
+            dataReader.Close();
+            // Check ràng buộc MANV
+            int indexMaNV = bdsNV.Find("MANV", txtMaNV.Text);
+
+            int indexCurrent = bdsNV.Position;
+            if (result_value_MANV == 1 && (indexMaNV != indexCurrent))
+            {
+                MessageBox.Show("Mã nhân viên đã tồn tại!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            else
+            {
+                DialogResult dr = MessageBox.Show("Bạn có chắc muốn ghi dữ liệu vào Database?", "Thông báo",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dr == DialogResult.OK)
+                {
+                    try
+                    {
+                        //Program.flagCloseFormKho = true; //Bật cờ cho phép tắt Form NV
+                        btnThem.Enabled = btnXoa.Enabled = gcNhanVien.Enabled = panelCtrl_NhanVien.Enabled = true;
+                        btnRefresh.Enabled = btnGhi.Enabled = true;
+                        btnUndo.Enabled = true;
+                        this.bdsNV.EndEdit();
+                        this.NHANVIENTableAdapter.Update(this.DS.NhanVien);
+                        //undolist.Push(maNV);
+                        //undolist.Push("INSERT");
+                        bdsNV.Position = vitri;
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        // Khi Update database lỗi thì xóa record vừa thêm trong bds
+                        bdsNV.RemoveCurrent();
+                        MessageBox.Show("Thất bại. Vui lòng kiểm tra lại!\n" + ex.Message, "Lỗi",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 }
