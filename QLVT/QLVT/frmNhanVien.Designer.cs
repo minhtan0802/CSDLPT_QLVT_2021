@@ -430,6 +430,7 @@ namespace QLVT
             this.gcNhanVien.TabIndex = 6;
             this.gcNhanVien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.gcNhanVien.Click += new System.EventHandler(this.gcNhanVien_Click);
             // 
             // gridView1
             // 
@@ -515,6 +516,7 @@ namespace QLVT
             this.colTrangThaiXoa.FieldName = "TrangThaiXoa";
             this.colTrangThaiXoa.MinWidth = 25;
             this.colTrangThaiXoa.Name = "colTrangThaiXoa";
+            this.colTrangThaiXoa.ShowUnboundExpressionMenu = true;
             this.colTrangThaiXoa.Visible = true;
             this.colTrangThaiXoa.VisibleIndex = 7;
             this.colTrangThaiXoa.Width = 94;
@@ -576,6 +578,7 @@ namespace QLVT
             this.txtLuong.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtLuong.Size = new System.Drawing.Size(306, 22);
             this.txtLuong.TabIndex = 10;
+            this.txtLuong.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLuong_KeyPress);
             // 
             // txtDiaChi
             // 
@@ -601,6 +604,7 @@ namespace QLVT
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(100, 28);
             this.txtTen.TabIndex = 5;
+            this.txtTen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTen_KeyPress);
             // 
             // txtHo
             // 
@@ -609,6 +613,7 @@ namespace QLVT
             this.txtHo.Name = "txtHo";
             this.txtHo.Size = new System.Drawing.Size(179, 28);
             this.txtHo.TabIndex = 3;
+            this.txtHo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHo_KeyPress);
             // 
             // txtMaNV
             // 
@@ -617,6 +622,7 @@ namespace QLVT
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(180, 28);
             this.txtMaNV.TabIndex = 1;
+            this.txtMaNV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaNV_KeyPress);
             // 
             // bdsDH
             // 

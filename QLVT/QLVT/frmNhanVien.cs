@@ -87,6 +87,7 @@ namespace QLVT
             bdsNV.AddNew();
             txtMACN.Text = macn;
             dtpNgaySinh.EditValue = "";
+            ckbXoa.Checked = false;
 
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
@@ -228,6 +229,19 @@ namespace QLVT
                 dtpNgaySinh.Focus();
                 return;
             }
+            if (dtpNgaySinh.DateTime>=DateTime.Now)
+            {
+                MessageBox.Show("Ngày sinh nhân viên không được lớn hơn hoặc bằng ngày hiện tại ", "", MessageBoxButtons.OK);
+                dtpNgaySinh.Focus();
+                return;
+            }    
+            else if (!((DateTime.Now.Year - dtpNgaySinh.DateTime.Year) > 15||((DateTime.Now.Year-dtpNgaySinh.DateTime.Year)==15&&((DateTime.Now.Month - dtpNgaySinh.DateTime.Month)==0)
+                && ((DateTime.Now.Day - dtpNgaySinh.DateTime.Day)==0))))
+            {
+                MessageBox.Show("Nhân viên phải đủ 15t trở lên mới được nhận việc", "", MessageBoxButtons.OK);
+                dtpNgaySinh.Focus();
+                return;
+            }    
             string luong = txtLuong.Text.ToString() ;
             while (luong.IndexOf('.') != -1)
                 luong=luong.Remove(luong.IndexOf('.'), 1);
@@ -244,6 +258,7 @@ namespace QLVT
                 txtDiaChi.Focus();
                 return;
             }
+            
            string strLenh = "EXEC sp_TraCuu @code='" + txtMaNV.Text+"'"+", @type='MANV'";
             int kiemTraNV = Program.ExecSqlNonQuery(strLenh);
             if(kiemTraNV!=1)
@@ -269,5 +284,59 @@ namespace QLVT
             
         }
 
+        private void txtLuong_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtMaNV_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtHo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            string specialChar = @"\|!#$%&/()=?»«@£§€{}.-;'<>_,";
+            foreach (var item in specialChar)
+            {
+                if (e.KeyChar==item)
+                {
+                    e.Handled = true;
+
+                }    
+            }
+        }
+
+        private void txtTen_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            string specialChar = @"\|!#$%&/()=?»«@£§€{}.-;'<>_,";
+            foreach (var item in specialChar)
+            {
+                if (e.KeyChar == item)
+                {
+                    e.Handled = true;
+
+                }
+            }
+        }
+
+        private void gcNhanVien_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

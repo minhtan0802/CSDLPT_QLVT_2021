@@ -35,6 +35,7 @@ namespace QLVT
 
         public static BindingSource bds_dspm = new BindingSource();//giữ bdsPM khi đăng nhập
         public static frmMain frmChinh; //khai báo con trỏ, về sau là đối tượng frm Main
+        public static frmDangNhap frmDN;
 
         public static int KetNoi()
         {
@@ -118,6 +119,7 @@ namespace QLVT
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            frmDN = new frmDangNhap();
             frmChinh = new frmMain();
             Application.Run(frmChinh);
             

@@ -106,6 +106,7 @@ namespace QLVT
             this.btn_Thoat.Size = new System.Drawing.Size(98, 32);
             this.btn_Thoat.TabIndex = 8;
             this.btn_Thoat.Text = "Thoát";
+            this.btn_Thoat.Click += new System.EventHandler(this.btn_Thoat_Click);
             // 
             // frmDangNhap
             // 
@@ -133,10 +134,10 @@ namespace QLVT
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tb_TaiKhoan;
-        private System.Windows.Forms.TextBox tb_MatKhau;
         private System.Windows.Forms.ComboBox cmb_ChiNhanh;
         private DevExpress.XtraEditors.SimpleButton btn_DangNhap;
         private DevExpress.XtraEditors.SimpleButton btn_Thoat;
+        public System.Windows.Forms.TextBox tb_TaiKhoan;
+        public System.Windows.Forms.TextBox tb_MatKhau;
     }
 }

@@ -28,9 +28,9 @@ namespace QLVT
             if (frm != null) frm.Activate();
             else
             {
-                frmDangNhap f = new frmDangNhap();
-                f.MdiParent = this;
-                f.Show();
+                Program.frmDN = new frmDangNhap();
+                Program.frmDN.MdiParent = this;
+                Program.frmDN.Show();
             }    
         }
 
@@ -39,6 +39,8 @@ namespace QLVT
             Program.frmChinh.MANV.Text = "Mã NV = " + Program.username;
             Program.frmChinh.HOTEN.Text = "Họ tên= " + Program.mHoTen;
             Program.frmChinh.NHOM.Text = "Nhóm " + Program.mGroup;
+            btn_DangXuat.Enabled = true;
+            btn_DangNhap.Enabled = true;
             //Phân quyền
             rib_BaoCao.Visible = rib_DanhMuc.Visible = rib_NghiepVu.Visible = true;
             //tiếp tục if trên Program.mGroup để bật/ tắt các nút lệnh trên Menu chính
@@ -82,6 +84,24 @@ namespace QLVT
                 f.MdiParent = this;
                 f.Show();
             }
+        }
+
+        private void btn_DangXuat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExist(typeof(frmKho));
+            if (frm != null) frm.Close();
+            frm = this.CheckExist(typeof(frmNhanVien));
+            if (frm != null) frm.Close();
+            frm = this.CheckExist(typeof(frmVatTu));
+            if (frm != null) frm.Close();
+            btn_DangXuat.Enabled = btn_TaoTaiKhoan.Enabled=rib_DanhMuc.Visible = rib_BaoCao.Visible = rib_NghiepVu.Visible = false;
+            MANV.Text = "MANV";
+            HOTEN.Text = "HOTEN";
+            NHOM.Text = "NHOM";
+            Program.frmDN.tb_TaiKhoan.Text = Program.frmDN.tb_MatKhau.Text = "";
+            
+            
+
         }
     }
 }
