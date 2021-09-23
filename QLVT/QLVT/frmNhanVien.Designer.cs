@@ -292,6 +292,7 @@ namespace QLVT
             this.btnThoat.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.ImageOptions.Image")));
             this.btnThoat.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnThoat.ImageOptions.LargeImage")));
             this.btnThoat.Name = "btnThoat";
+            this.btnThoat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThoat_ItemClick);
             // 
             // bar2
             // 
@@ -426,11 +427,12 @@ namespace QLVT
             this.gcNhanVien.MainView = this.gridView1;
             this.gcNhanVien.MenuManager = this.barManager1;
             this.gcNhanVien.Name = "gcNhanVien";
-            this.gcNhanVien.Size = new System.Drawing.Size(1248, 220);
+            this.gcNhanVien.Size = new System.Drawing.Size(1248, 213);
             this.gcNhanVien.TabIndex = 6;
             this.gcNhanVien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             this.gcNhanVien.Click += new System.EventHandler(this.gcNhanVien_Click);
+            this.gcNhanVien.MouseCaptureChanged += new System.EventHandler(this.gcNhanVien_MouseCaptureChanged);
             // 
             // gridView1
             // 
@@ -453,16 +455,17 @@ namespace QLVT
             this.colMANV.Name = "colMANV";
             this.colMANV.Visible = true;
             this.colMANV.VisibleIndex = 0;
-            this.colMANV.Width = 94;
+            this.colMANV.Width = 152;
             // 
             // colHO
             // 
             this.colHO.FieldName = "HO";
             this.colHO.MinWidth = 25;
             this.colHO.Name = "colHO";
+            this.colHO.OptionsEditForm.UseEditorColRowSpan = false;
             this.colHO.Visible = true;
             this.colHO.VisibleIndex = 1;
-            this.colHO.Width = 94;
+            this.colHO.Width = 152;
             // 
             // colTEN
             // 
@@ -471,7 +474,7 @@ namespace QLVT
             this.colTEN.Name = "colTEN";
             this.colTEN.Visible = true;
             this.colTEN.VisibleIndex = 2;
-            this.colTEN.Width = 94;
+            this.colTEN.Width = 152;
             // 
             // colDIACHI
             // 
@@ -480,7 +483,7 @@ namespace QLVT
             this.colDIACHI.Name = "colDIACHI";
             this.colDIACHI.Visible = true;
             this.colDIACHI.VisibleIndex = 3;
-            this.colDIACHI.Width = 94;
+            this.colDIACHI.Width = 152;
             // 
             // colNGAYSINH
             // 
@@ -489,7 +492,7 @@ namespace QLVT
             this.colNGAYSINH.Name = "colNGAYSINH";
             this.colNGAYSINH.Visible = true;
             this.colNGAYSINH.VisibleIndex = 4;
-            this.colNGAYSINH.Width = 94;
+            this.colNGAYSINH.Width = 156;
             // 
             // colLUONG
             // 
@@ -500,7 +503,7 @@ namespace QLVT
             this.colLUONG.Name = "colLUONG";
             this.colLUONG.Visible = true;
             this.colLUONG.VisibleIndex = 5;
-            this.colLUONG.Width = 94;
+            this.colLUONG.Width = 150;
             // 
             // colMACN
             // 
@@ -509,7 +512,7 @@ namespace QLVT
             this.colMACN.Name = "colMACN";
             this.colMACN.Visible = true;
             this.colMACN.VisibleIndex = 6;
-            this.colMACN.Width = 94;
+            this.colMACN.Width = 150;
             // 
             // colTrangThaiXoa
             // 
@@ -519,7 +522,7 @@ namespace QLVT
             this.colTrangThaiXoa.ShowUnboundExpressionMenu = true;
             this.colTrangThaiXoa.Visible = true;
             this.colTrangThaiXoa.VisibleIndex = 7;
-            this.colTrangThaiXoa.Width = 94;
+            this.colTrangThaiXoa.Width = 154;
             // 
             // panelCtrl_NhanVien
             // 
@@ -539,9 +542,9 @@ namespace QLVT
             this.panelCtrl_NhanVien.Controls.Add(mANVLabel);
             this.panelCtrl_NhanVien.Controls.Add(this.txtMaNV);
             this.panelCtrl_NhanVien.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCtrl_NhanVien.Location = new System.Drawing.Point(0, 321);
+            this.panelCtrl_NhanVien.Location = new System.Drawing.Point(0, 314);
             this.panelCtrl_NhanVien.Name = "panelCtrl_NhanVien";
-            this.panelCtrl_NhanVien.Size = new System.Drawing.Size(1248, 232);
+            this.panelCtrl_NhanVien.Size = new System.Drawing.Size(1248, 239);
             this.panelCtrl_NhanVien.TabIndex = 7;
             // 
             // ckbXoa

@@ -85,8 +85,10 @@ namespace QLVT
             vitri = bdsNV.Position;
             panelCtrl_NhanVien.Enabled = true;
             bdsNV.AddNew();
+            txtMaNV.Enabled = true;
             txtMACN.Text = macn;
             dtpNgaySinh.EditValue = "";
+            ckbXoa.Enabled = false;
             ckbXoa.Checked = false;
 
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
@@ -108,6 +110,7 @@ namespace QLVT
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsNV.Position;
+            txtMACN.Enabled = txtMaNV.Enabled = false;
             panelCtrl_NhanVien.Enabled = true;
             btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
@@ -259,9 +262,14 @@ namespace QLVT
                 return;
             }
             
-           string strLenh = "EXEC sp_TraCuu @code='" + txtMaNV.Text+"'"+", @type='MANV'";
-            int kiemTraNV = Program.ExecSqlNonQuery(strLenh);
-            if(kiemTraNV!=1)
+           string strLenh= "EXEC sp_TraCuu @code='" + txtMaNV.Text+"'"+", @type='MANV'";
+            int kiemTraMaNV = 0;
+            if (txtMaNV.Enabled == true)
+            {
+                kiemTraMaNV = Program.ExecSqlNonQuery(strLenh);
+            }
+         
+            if(kiemTraMaNV!=1)
             {
                 try
                 {
@@ -278,6 +286,7 @@ namespace QLVT
                 gcNhanVien.Enabled = true;
                 btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
                 btnGhi.Enabled = btnUndo.Enabled = false;
+               
                 panelCtrl_NhanVien.Enabled = false;
             }    
            
@@ -334,9 +343,35 @@ namespace QLVT
             }
         }
 
-        private void gcNhanVien_Click(object sender, EventArgs e)
+        private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 
+        }
+
+        private void gcNhanVien_Click(object sender, EventArgs e)
+        {
+            if (ckbXoa.Checked==true)
+            {
+                btnSua.Enabled = false;
+            }
+            else
+            {
+                btnSua.Enabled = true;
+            }
+                
+        }
+        private void gcNhanVien_MouseCaptureChanged(object sender, EventArgs e)
+        {
+
+            if (ckbXoa.Checked == true)
+            {
+                btnSua.Enabled = false;
+            }
+            else
+            {
+                btnSua.Enabled = true;
+            }
+         
         }
     }
 }
