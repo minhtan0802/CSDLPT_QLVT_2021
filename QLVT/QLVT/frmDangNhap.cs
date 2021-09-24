@@ -66,6 +66,8 @@ namespace QLVT
             Program.myReader.Close();
             Program.conn.Close();
             Program.frmChinh.HienThiMenu();
+           
+            
 
 
         }

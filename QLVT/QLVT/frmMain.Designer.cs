@@ -374,7 +374,6 @@ namespace QLVT
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
         private DevExpress.XtraBars.Ribbon.RibbonPage rib_HeThong;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
-        private DevExpress.XtraBars.BarButtonItem btn_DangNhap;
         private DevExpress.XtraBars.BarButtonItem btn_TaoTaiKhoan;
         private DevExpress.XtraBars.BarButtonItem btn_DangXuat;
         private DevExpress.XtraBars.BarButtonItem btn_NhanVien;
@@ -409,6 +408,7 @@ namespace QLVT
         private DevExpress.XtraBars.BarButtonItem barButtonItem5;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup11;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup12;
+        public DevExpress.XtraBars.BarButtonItem btn_DangNhap;
     }
 }
 
