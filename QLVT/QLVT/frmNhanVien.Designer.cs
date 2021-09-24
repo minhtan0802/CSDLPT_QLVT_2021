@@ -321,7 +321,7 @@ namespace QLVT
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1248, 51);
+            this.barDockControlTop.Size = new System.Drawing.Size(1299, 51);
             // 
             // barDockControlBottom
             // 
@@ -329,7 +329,7 @@ namespace QLVT
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 553);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1248, 20);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1299, 20);
             // 
             // barDockControlLeft
             // 
@@ -343,7 +343,7 @@ namespace QLVT
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1248, 51);
+            this.barDockControlRight.Location = new System.Drawing.Point(1299, 51);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 502);
             // 
@@ -360,7 +360,7 @@ namespace QLVT
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 51);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1248, 50);
+            this.panelControl1.Size = new System.Drawing.Size(1299, 50);
             this.panelControl1.TabIndex = 4;
             // 
             // label1
@@ -426,7 +426,7 @@ namespace QLVT
             this.gcNhanVien.MainView = this.gridView1;
             this.gcNhanVien.MenuManager = this.barManager1;
             this.gcNhanVien.Name = "gcNhanVien";
-            this.gcNhanVien.Size = new System.Drawing.Size(1248, 220);
+            this.gcNhanVien.Size = new System.Drawing.Size(1299, 220);
             this.gcNhanVien.TabIndex = 6;
             this.gcNhanVien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -448,6 +448,7 @@ namespace QLVT
             // 
             // colMANV
             // 
+            this.colMANV.Caption = "MÃ NHÂN VIÊN";
             this.colMANV.FieldName = "MANV";
             this.colMANV.MinWidth = 25;
             this.colMANV.Name = "colMANV";
@@ -457,6 +458,7 @@ namespace QLVT
             // 
             // colHO
             // 
+            this.colHO.Caption = "HỌ";
             this.colHO.FieldName = "HO";
             this.colHO.MinWidth = 25;
             this.colHO.Name = "colHO";
@@ -466,6 +468,7 @@ namespace QLVT
             // 
             // colTEN
             // 
+            this.colTEN.Caption = "TÊN";
             this.colTEN.FieldName = "TEN";
             this.colTEN.MinWidth = 25;
             this.colTEN.Name = "colTEN";
@@ -475,6 +478,7 @@ namespace QLVT
             // 
             // colDIACHI
             // 
+            this.colDIACHI.Caption = "ĐỊA CHỈ";
             this.colDIACHI.FieldName = "DIACHI";
             this.colDIACHI.MinWidth = 25;
             this.colDIACHI.Name = "colDIACHI";
@@ -484,6 +488,7 @@ namespace QLVT
             // 
             // colNGAYSINH
             // 
+            this.colNGAYSINH.Caption = "NGÀY SINH";
             this.colNGAYSINH.FieldName = "NGAYSINH";
             this.colNGAYSINH.MinWidth = 25;
             this.colNGAYSINH.Name = "colNGAYSINH";
@@ -493,6 +498,7 @@ namespace QLVT
             // 
             // colLUONG
             // 
+            this.colLUONG.Caption = "LƯƠNG";
             this.colLUONG.DisplayFormat.FormatString = "n0";
             this.colLUONG.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colLUONG.FieldName = "LUONG";
@@ -541,7 +547,7 @@ namespace QLVT
             this.panelCtrl_NhanVien.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCtrl_NhanVien.Location = new System.Drawing.Point(0, 321);
             this.panelCtrl_NhanVien.Name = "panelCtrl_NhanVien";
-            this.panelCtrl_NhanVien.Size = new System.Drawing.Size(1248, 232);
+            this.panelCtrl_NhanVien.Size = new System.Drawing.Size(1299, 232);
             this.panelCtrl_NhanVien.TabIndex = 7;
             // 
             // ckbXoa
@@ -646,7 +652,7 @@ namespace QLVT
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1248, 573);
+            this.ClientSize = new System.Drawing.Size(1299, 573);
             this.Controls.Add(this.panelCtrl_NhanVien);
             this.Controls.Add(this.gcNhanVien);
             this.Controls.Add(this.panelControl1);

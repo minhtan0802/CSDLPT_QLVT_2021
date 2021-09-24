@@ -242,16 +242,24 @@ namespace QLVT
                 dtpNgaySinh.Focus();
                 return;
             }    
-            string luong = txtLuong.Text.ToString() ;
-            while (luong.IndexOf('.') != -1)
-                luong=luong.Remove(luong.IndexOf('.'), 1);
-            if (int.Parse(luong) < 4000000)
+            try
+            {
+                string luong = txtLuong.Text.ToString();
+                while (luong.IndexOf('.') != -1)
+                    luong = luong.Remove(luong.IndexOf('.'), 1);
+                if (int.Parse(luong) < 4000000)
                 {
                     MessageBox.Show("Lương của nhân viên không được nhỏ 4.000.000đ", "", MessageBoxButtons.OK);
                     txtLuong.Focus();
                     return;
                 }
-           
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Lỗi" + ex.Message, "", MessageBoxButtons.OK);
+                return;
+            }
             if (txtDiaChi.Text.Trim() == "")
             {
                 MessageBox.Show("Địa chỉ không được thiếu", "", MessageBoxButtons.OK);
