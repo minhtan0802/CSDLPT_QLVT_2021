@@ -52,8 +52,8 @@ namespace QLVT
             {
                 cmbChiNhanh.Enabled = false;
                 btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnChuyenCN.Enabled = true;
-                btnGhi.Enabled = btnUndo.Enabled=false;
-                
+                btnGhi.Enabled = btnUndo.Enabled = false;
+
             }
         }
 
@@ -235,19 +235,19 @@ namespace QLVT
                 dtpNgaySinh.Focus();
                 return;
             }
-            if (dtpNgaySinh.DateTime>=DateTime.Now)
+            if (dtpNgaySinh.DateTime >= DateTime.Now)
             {
                 MessageBox.Show("Ngày sinh nhân viên không được lớn hơn hoặc bằng ngày hiện tại ", "", MessageBoxButtons.OK);
                 dtpNgaySinh.Focus();
                 return;
-            }    
-            else if (!((DateTime.Now.Year - dtpNgaySinh.DateTime.Year) > 15||((DateTime.Now.Year-dtpNgaySinh.DateTime.Year)==15&&((DateTime.Now.Month - dtpNgaySinh.DateTime.Month)==0)
-                && ((DateTime.Now.Day - dtpNgaySinh.DateTime.Day)==0))))
+            }
+            else if (!((DateTime.Now.Year - dtpNgaySinh.DateTime.Year) > 15 || ((DateTime.Now.Year - dtpNgaySinh.DateTime.Year) == 15 && ((DateTime.Now.Month - dtpNgaySinh.DateTime.Month) == 0)
+                && ((DateTime.Now.Day - dtpNgaySinh.DateTime.Day) == 0))))
             {
                 MessageBox.Show("Nhân viên phải đủ 15t trở lên mới được nhận việc", "", MessageBoxButtons.OK);
                 dtpNgaySinh.Focus();
                 return;
-            }    
+            }
             try
             {
                 string luong = txtLuong.Text.ToString();
@@ -261,7 +261,7 @@ namespace QLVT
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Lỗi" + ex.Message, "", MessageBoxButtons.OK);
                 return;
@@ -272,15 +272,15 @@ namespace QLVT
                 txtDiaChi.Focus();
                 return;
             }
-            
-           string strLenh= "EXEC sp_TraCuu @code='" + txtMaNV.Text+"'"+", @type='MANV'";
+
+            string strLenh = "EXEC sp_TraCuu @code='" + txtMaNV.Text + "'" + ", @type='MANV'";
             int kiemTraMaNV = 0;
             if (txtMaNV.Enabled == true)
             {
                 kiemTraMaNV = Program.ExecSqlNonQuery(strLenh);
             }
-         
-            if(kiemTraMaNV!=1)
+
+            if (kiemTraMaNV != 1)
             {
                 try
                 {
@@ -297,11 +297,11 @@ namespace QLVT
                 gcNhanVien.Enabled = true;
                 btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
                 btnGhi.Enabled = btnUndo.Enabled = false;
-               
+
                 panelCtrl_NhanVien.Enabled = false;
-            }    
-           
-            
+            }
+
+
         }
 
         private void txtLuong_KeyPress(object sender, KeyPressEventArgs e)
@@ -329,11 +329,11 @@ namespace QLVT
             string specialChar = @"\|!#$%&/()=?»«@£§€{}.-;'<>_,";
             foreach (var item in specialChar)
             {
-                if (e.KeyChar==item)
+                if (e.KeyChar == item)
                 {
                     e.Handled = true;
 
-                }    
+                }
             }
         }
 
@@ -359,7 +359,7 @@ namespace QLVT
             this.Close();
         }
 
-     
+
 
         private void gcNhanVien_MouseCaptureChanged(object sender, EventArgs e)
         {
@@ -373,6 +373,12 @@ namespace QLVT
             {
                 btnSua.Enabled = true;
             }
+        }
+
+        private void btnChuyenCN_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+                frmChuyenCN f = new frmChuyenCN();
+                f.Show();
         }
     }
 }

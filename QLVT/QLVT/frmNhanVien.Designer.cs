@@ -206,7 +206,7 @@ namespace QLVT
             // 
             this.bar1.BarName = "Tools";
             this.bar1.DockCol = 0;
-            this.bar1.DockRow = 1;
+            this.bar1.DockRow = 0;
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnThem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
@@ -280,7 +280,7 @@ namespace QLVT
             this.btnChuyenCN.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnChuyenCN.ImageOptions.Image")));
             this.btnChuyenCN.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnChuyenCN.ImageOptions.LargeImage")));
             this.btnChuyenCN.Name = "btnChuyenCN";
-            this.btnChuyenCN.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDSNV_ItemClick);
+            this.btnChuyenCN.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnChuyenCN_ItemClick);
             // 
             // btnThoat
             // 
@@ -309,7 +309,7 @@ namespace QLVT
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1248, 30);
+            this.barDockControlTop.Size = new System.Drawing.Size(1299, 30);
             // 
             // barDockControlBottom
             // 
@@ -331,7 +331,7 @@ namespace QLVT
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1248, 30);
+            this.barDockControlRight.Location = new System.Drawing.Point(1299, 30);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 523);
             // 
@@ -414,7 +414,7 @@ namespace QLVT
             this.gcNhanVien.MainView = this.gridView1;
             this.gcNhanVien.MenuManager = this.barManager1;
             this.gcNhanVien.Name = "gcNhanVien";
-            this.gcNhanVien.Size = new System.Drawing.Size(1248, 213);
+            this.gcNhanVien.Size = new System.Drawing.Size(1299, 213);
             this.gcNhanVien.TabIndex = 6;
             this.gcNhanVien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -537,7 +537,7 @@ namespace QLVT
             this.panelCtrl_NhanVien.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCtrl_NhanVien.Location = new System.Drawing.Point(0, 293);
             this.panelCtrl_NhanVien.Name = "panelCtrl_NhanVien";
-            this.panelCtrl_NhanVien.Size = new System.Drawing.Size(1248, 260);
+            this.panelCtrl_NhanVien.Size = new System.Drawing.Size(1299, 260);
             this.panelCtrl_NhanVien.TabIndex = 7;
             // 
             // ckbXoa
