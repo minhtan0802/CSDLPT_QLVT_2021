@@ -50,7 +50,7 @@ namespace QLVT
             cmbChiNhanh.DisplayMember = "TENCN";
             cmbChiNhanh.ValueMember = "TENSERVER";
             cmbChiNhanh.SelectedIndex = Program.mChiNhanh;
-
+            panelCtrl_Kho.Enabled = false;
             if (Program.mGroup == "CONGTY")
             {
                 cmbChiNhanh.Enabled = true;
@@ -59,7 +59,8 @@ namespace QLVT
             else
             {
                 cmbChiNhanh.Enabled = false;
-                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnGhi.Enabled = btnUndo.Enabled = btnChuyenCN.Enabled = true;
+                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled =  btnChuyenCN.Enabled = btnRefresh.Enabled = true;
+                btnGhi.Enabled = btnUndo.Enabled =  false;
             }
 
 
@@ -100,14 +101,14 @@ namespace QLVT
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsKho.Position;
-            panelCtr_Kho.Enabled = true;
+            panelCtrl_Kho.Enabled = true;
             bdsKho.AddNew();
             
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
             gcKho.Enabled = true;
-            panelCtr_Kho.Enabled = true;
-            txtMACN.Text = macn;
+            panelCtrl_Kho.Enabled = true;
+            txtMaCN.Text = macn;
             txtMaKho.Enabled = true;
         }
 
@@ -115,8 +116,8 @@ namespace QLVT
         {
             vitri = bdsKho.Position;
             tenkho = txtTenKho.Text;
-            txtMACN.Enabled = txtMaKho.Enabled = false;
-            panelCtr_Kho.Enabled = true;
+            txtMaCN.Enabled = txtMaKho.Enabled = false;
+            panelCtrl_Kho.Enabled = true;
             btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
             gcKho.Enabled = false;
@@ -173,7 +174,7 @@ namespace QLVT
                 btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
                 btnGhi.Enabled = btnUndo.Enabled = false;
                
-                panelCtr_Kho.Enabled = false;
+                panelCtrl_Kho.Enabled = false;
             }
         }
 
@@ -182,7 +183,7 @@ namespace QLVT
             bdsKho.CancelEdit();
             if (btnThem.Enabled == false) bdsKho.Position = vitri;
             gcKho.Enabled = true;
-            panelCtr_Kho.Enabled = true;
+            panelCtrl_Kho.Enabled = false;
             btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
             btnGhi.Enabled = btnUndo.Enabled = false;
         }
@@ -272,6 +273,9 @@ namespace QLVT
             if (bdsKho.Count == 0) btnXoa.Enabled = false;
         }
 
-       
+        private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            this.Close();
+        }
     }
     }

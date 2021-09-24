@@ -42,14 +42,15 @@ namespace QLVT
             // TODO: This line of code loads data into the 'DS.CTPX' table. You can move, or remove it, as needed.
             this.CTPXTableAdapter.Connection.ConnectionString = Program.connstr;
             this.CTPXTableAdapter.Fill(this.DS.CTPX);
-
+            panelCtrl_VatTu.Enabled = false;
             if (Program.mGroup == "CONGTY")
             {
                 btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
             }
             else
             {
-                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnGhi.Enabled = btnUndo.Enabled = true;
+                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = true;
+                btnGhi.Enabled = btnUndo.Enabled = false;
             }
          
 
@@ -71,7 +72,7 @@ namespace QLVT
             bdsVatTu.CancelEdit();
             if (btnThem.Enabled == false) bdsVatTu.Position = vitri;
             gcVatTu.Enabled = true;
-            panelCtrl_VatTu.Enabled = true;
+            panelCtrl_VatTu.Enabled = false;
             btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
             btnGhi.Enabled = btnUndo.Enabled = false;
         }
@@ -144,6 +145,11 @@ namespace QLVT
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 
+        }
+
+        private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            this.Close();
         }
     }
 }

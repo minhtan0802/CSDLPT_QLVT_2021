@@ -41,6 +41,7 @@ namespace QLVT
             cmbChiNhanh.DisplayMember = "TENCN";
             cmbChiNhanh.ValueMember = "TENSERVER";
             cmbChiNhanh.SelectedIndex = Program.mChiNhanh;
+            panelCtrl_NhanVien.Enabled = false;
 
             if (Program.mGroup == "CONGTY")
             {
@@ -50,7 +51,9 @@ namespace QLVT
             else
             {
                 cmbChiNhanh.Enabled = false;
-                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnGhi.Enabled = btnUndo.Enabled = btnChuyenCN.Enabled = true;
+                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnChuyenCN.Enabled = true;
+                btnGhi.Enabled = btnUndo.Enabled=false;
+                
             }
         }
 
@@ -102,7 +105,7 @@ namespace QLVT
             bdsNV.CancelEdit();
             if (btnThem.Enabled == false) bdsNV.Position = vitri;
             gcNhanVien.Enabled = true;
-            panelCtrl_NhanVien.Enabled = true;
+            panelCtrl_NhanVien.Enabled = false;
             btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
             btnGhi.Enabled = btnUndo.Enabled = false;
         }
@@ -345,33 +348,23 @@ namespace QLVT
 
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            this.Close();
         }
 
-        private void gcNhanVien_Click(object sender, EventArgs e)
-        {
-            if (ckbXoa.Checked==true)
-            {
-                btnSua.Enabled = false;
-            }
-            else
-            {
-                btnSua.Enabled = true;
-            }
-                
-        }
+     
+
         private void gcNhanVien_MouseCaptureChanged(object sender, EventArgs e)
         {
-
             if (ckbXoa.Checked == true)
             {
                 btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                btnChuyenCN.Enabled = false;
             }
             else
             {
                 btnSua.Enabled = true;
             }
-         
         }
     }
 }
