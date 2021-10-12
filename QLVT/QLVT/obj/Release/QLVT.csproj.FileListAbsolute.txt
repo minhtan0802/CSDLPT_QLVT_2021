@@ -194,3 +194,5 @@ D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.pdb
 D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmVatTu.resources
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmVatTu.resources
 D:\HK7 2021\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmKho.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmKho.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmChuyenCN.resources

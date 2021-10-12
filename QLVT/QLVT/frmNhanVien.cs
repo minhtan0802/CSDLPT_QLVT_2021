@@ -53,8 +53,8 @@ namespace QLVT
             {
                 cmbChiNhanh.Enabled = false;
                 btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnChuyenCN.Enabled = true;
-                btnGhi.Enabled = btnUndo.Enabled=false;
-                
+                btnGhi.Enabled = btnUndo.Enabled = false;
+
             }
         }
 
@@ -236,44 +236,52 @@ namespace QLVT
                 dtpNgaySinh.Focus();
                 return;
             }
-            if (dtpNgaySinh.DateTime>=DateTime.Now)
+            if (dtpNgaySinh.DateTime >= DateTime.Now)
             {
                 MessageBox.Show("Ngày sinh nhân viên không được lớn hơn hoặc bằng ngày hiện tại ", "", MessageBoxButtons.OK);
                 dtpNgaySinh.Focus();
                 return;
-            }    
-            else if (!((DateTime.Now.Year - dtpNgaySinh.DateTime.Year) > 15||((DateTime.Now.Year-dtpNgaySinh.DateTime.Year)==15&&((DateTime.Now.Month - dtpNgaySinh.DateTime.Month)==0)
-                && ((DateTime.Now.Day - dtpNgaySinh.DateTime.Day)==0))))
+            }
+            else if (!((DateTime.Now.Year - dtpNgaySinh.DateTime.Year) > 15 || ((DateTime.Now.Year - dtpNgaySinh.DateTime.Year) == 15 && ((DateTime.Now.Month - dtpNgaySinh.DateTime.Month) == 0)
+                && ((DateTime.Now.Day - dtpNgaySinh.DateTime.Day) == 0))))
             {
                 MessageBox.Show("Nhân viên phải đủ 15t trở lên mới được nhận việc", "", MessageBoxButtons.OK);
                 dtpNgaySinh.Focus();
                 return;
-            }    
-            string luong = txtLuong.Text.ToString() ;
-            while (luong.IndexOf('.') != -1)
-                luong=luong.Remove(luong.IndexOf('.'), 1);
-            if (int.Parse(luong) < 4000000)
+            }
+            try
+            {
+                string luong = txtLuong.Text.ToString();
+                while (luong.IndexOf('.') != -1)
+                    luong = luong.Remove(luong.IndexOf('.'), 1);
+                if (int.Parse(luong) < 4000000)
                 {
                     MessageBox.Show("Lương của nhân viên không được nhỏ 4.000.000đ", "", MessageBoxButtons.OK);
                     txtLuong.Focus();
                     return;
                 }
-           
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi" + ex.Message, "", MessageBoxButtons.OK);
+                return;
+            }
             if (txtDiaChi.Text.Trim() == "")
             {
                 MessageBox.Show("Địa chỉ không được thiếu", "", MessageBoxButtons.OK);
                 txtDiaChi.Focus();
                 return;
             }
-            
-           string strLenh= "EXEC sp_TraCuu @code='" + txtMaNV.Text+"'"+", @type='MANV'";
+
+            string strLenh = "EXEC sp_TraCuu @code='" + txtMaNV.Text + "'" + ", @type='MANV'";
             int kiemTraMaNV = 0;
             if (txtMaNV.Enabled == true)
             {
                 kiemTraMaNV = Program.ExecSqlNonQuery(strLenh);
             }
-         
-            if(kiemTraMaNV!=1)
+
+            if (kiemTraMaNV != 1)
             {
                 try
                 {
@@ -324,11 +332,11 @@ namespace QLVT
             string specialChar = @"\|!#$%&/()=?»«@£§€{}.-;'<>_,";
             foreach (var item in specialChar)
             {
-                if (e.KeyChar==item)
+                if (e.KeyChar == item)
                 {
                     e.Handled = true;
 
-                }    
+                }
             }
         }
 
@@ -354,7 +362,7 @@ namespace QLVT
             this.Close();
         }
 
-     
+
 
         
     }
