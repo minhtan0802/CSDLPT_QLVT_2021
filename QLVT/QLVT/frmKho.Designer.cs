@@ -45,7 +45,6 @@ namespace QLVT
             this.btnXoa = new DevExpress.XtraBars.BarButtonItem();
             this.btnUndo = new DevExpress.XtraBars.BarButtonItem();
             this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
-            this.btnChuyenCN = new DevExpress.XtraBars.BarButtonItem();
             this.btnThoat = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barDockControl2 = new DevExpress.XtraBars.BarDockControl();
@@ -147,7 +146,7 @@ namespace QLVT
             // 
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControlTop.Location = new System.Drawing.Point(0, 30);
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 50);
             this.barDockControlTop.Manager = null;
             this.barDockControlTop.Size = new System.Drawing.Size(854, 0);
             // 
@@ -155,7 +154,7 @@ namespace QLVT
             // 
             this.barDockControl1.CausesValidation = false;
             this.barDockControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControl1.Location = new System.Drawing.Point(0, 30);
+            this.barDockControl1.Location = new System.Drawing.Point(0, 50);
             this.barDockControl1.Manager = null;
             this.barDockControl1.Size = new System.Drawing.Size(854, 0);
             // 
@@ -177,8 +176,7 @@ namespace QLVT
             this.btnUndo,
             this.btnRefresh,
             this.barListItem1,
-            this.btnThoat,
-            this.btnChuyenCN});
+            this.btnThoat});
             this.barManager1.MaxItemId = 9;
             this.barManager1.StatusBar = this.bar3;
             // 
@@ -195,7 +193,6 @@ namespace QLVT
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnXoa, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnUndo, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnRefresh, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnChuyenCN, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnThoat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar1.Text = "Tools";
             // 
@@ -253,15 +250,6 @@ namespace QLVT
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRefresh_ItemClick);
             // 
-            // btnChuyenCN
-            // 
-            this.btnChuyenCN.Caption = "Chuyển chi nhánh";
-            this.btnChuyenCN.Id = 8;
-            this.btnChuyenCN.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnChuyenCN.ImageOptions.Image")));
-            this.btnChuyenCN.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnChuyenCN.ImageOptions.LargeImage")));
-            this.btnChuyenCN.Name = "btnChuyenCN";
-            this.btnChuyenCN.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnChuyenCN_ItemClick);
-            // 
             // btnThoat
             // 
             this.btnThoat.Caption = "Thoát";
@@ -289,7 +277,7 @@ namespace QLVT
             this.barDockControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControl2.Location = new System.Drawing.Point(0, 0);
             this.barDockControl2.Manager = this.barManager1;
-            this.barDockControl2.Size = new System.Drawing.Size(854, 30);
+            this.barDockControl2.Size = new System.Drawing.Size(854, 50);
             // 
             // barDockControlBottom
             // 
@@ -303,17 +291,17 @@ namespace QLVT
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 30);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 50);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 556);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 536);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(854, 30);
+            this.barDockControlRight.Location = new System.Drawing.Point(854, 50);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 556);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 536);
             // 
             // barListItem1
             // 
@@ -326,7 +314,7 @@ namespace QLVT
             this.panelControl1.Controls.Add(this.label1);
             this.panelControl1.Controls.Add(this.cmbChiNhanh);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(0, 30);
+            this.panelControl1.Location = new System.Drawing.Point(0, 50);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(854, 50);
             this.panelControl1.TabIndex = 8;
@@ -367,7 +355,7 @@ namespace QLVT
             // 
             this.gcKho.DataSource = this.bdsKho;
             this.gcKho.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gcKho.Location = new System.Drawing.Point(0, 80);
+            this.gcKho.Location = new System.Drawing.Point(0, 100);
             this.gcKho.MainView = this.gridView1;
             this.gcKho.MenuManager = this.barManager1;
             this.gcKho.Name = "gcKho";
@@ -537,14 +525,15 @@ namespace QLVT
             this.panelCtrl_Kho.Controls.Add(mAKHOLabel);
             this.panelCtrl_Kho.Controls.Add(this.txtMaKho);
             this.panelCtrl_Kho.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCtrl_Kho.Location = new System.Drawing.Point(0, 271);
+            this.panelCtrl_Kho.Location = new System.Drawing.Point(0, 291);
             this.panelCtrl_Kho.Name = "panelCtrl_Kho";
-            this.panelCtrl_Kho.Size = new System.Drawing.Size(854, 315);
+            this.panelCtrl_Kho.Size = new System.Drawing.Size(854, 295);
             this.panelCtrl_Kho.TabIndex = 16;
             // 
             // txtMaCN
             // 
             this.txtMaCN.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsKho, "MACN", true));
+            this.txtMaCN.Enabled = false;
             this.txtMaCN.Location = new System.Drawing.Point(579, 107);
             this.txtMaCN.MenuManager = this.barManager1;
             this.txtMaCN.Name = "txtMaCN";
@@ -572,6 +561,7 @@ namespace QLVT
             // txtMaKho
             // 
             this.txtMaKho.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsKho, "MAKHO", true));
+            this.txtMaKho.Enabled = false;
             this.txtMaKho.Location = new System.Drawing.Point(217, 49);
             this.txtMaKho.MenuManager = this.barManager1;
             this.txtMaKho.Name = "txtMaKho";
@@ -631,7 +621,6 @@ namespace QLVT
         private DevExpress.XtraBars.BarButtonItem btnXoa;
         private DevExpress.XtraBars.BarButtonItem btnUndo;
         private DevExpress.XtraBars.BarButtonItem btnRefresh;
-        private DevExpress.XtraBars.BarButtonItem btnChuyenCN;
         private DevExpress.XtraBars.BarButtonItem btnThoat;
         private DevExpress.XtraBars.Bar bar3;
         private DevExpress.XtraBars.BarDockControl barDockControl2;

@@ -42,6 +42,7 @@ namespace QLVT
             cmbChiNhanh.ValueMember = "TENSERVER";
             cmbChiNhanh.SelectedIndex = Program.mChiNhanh;
             panelCtrl_NhanVien.Enabled = false;
+         //   txtMaNV.Enabled = false;
 
             if (Program.mGroup == "CONGTY")
             {
@@ -96,7 +97,7 @@ namespace QLVT
 
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
-            gcNhanVien.Enabled = true;
+            gcNhanVien.Enabled = false;
             panelCtrl_NhanVien.Enabled = true;
         }
 
@@ -289,8 +290,10 @@ namespace QLVT
                 gcNhanVien.Enabled = true;
                 btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
                 btnGhi.Enabled = btnUndo.Enabled = false;
-               
+
                 panelCtrl_NhanVien.Enabled = false;
+                ckbXoa.Enabled = true;
+                this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
             }    
            
             
@@ -353,18 +356,6 @@ namespace QLVT
 
      
 
-        private void gcNhanVien_MouseCaptureChanged(object sender, EventArgs e)
-        {
-            if (ckbXoa.Checked == true)
-            {
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                btnChuyenCN.Enabled = false;
-            }
-            else
-            {
-                btnSua.Enabled = true;
-            }
-        }
+        
     }
 }

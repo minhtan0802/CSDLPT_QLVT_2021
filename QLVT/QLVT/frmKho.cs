@@ -54,12 +54,12 @@ namespace QLVT
             if (Program.mGroup == "CONGTY")
             {
                 cmbChiNhanh.Enabled = true;
-                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnGhi.Enabled = btnUndo.Enabled = btnChuyenCN.Enabled = false;
+                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
             }
             else
             {
                 cmbChiNhanh.Enabled = false;
-                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled =  btnChuyenCN.Enabled = btnRefresh.Enabled = true;
+                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled =  btnRefresh.Enabled = true;
                 btnGhi.Enabled = btnUndo.Enabled =  false;
             }
 
@@ -106,7 +106,7 @@ namespace QLVT
             
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
-            gcKho.Enabled = true;
+            gcKho.Enabled = false;
             panelCtrl_Kho.Enabled = true;
             txtMaCN.Text = macn;
             txtMaKho.Enabled = true;

@@ -73,7 +73,6 @@ namespace QLVT
             this.colNGAYSINH = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colLUONG = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colMACN = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTrangThaiXoa = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelCtrl_NhanVien = new DevExpress.XtraEditors.PanelControl();
             this.ckbXoa = new System.Windows.Forms.CheckBox();
             this.dtpNgaySinh = new DevExpress.XtraEditors.DateEdit();
@@ -206,7 +205,7 @@ namespace QLVT
             // 
             this.bar1.BarName = "Tools";
             this.bar1.DockCol = 0;
-            this.bar1.DockRow = 1;
+            this.bar1.DockRow = 0;
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnThem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
@@ -217,6 +216,7 @@ namespace QLVT
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnRefresh, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnChuyenCN, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnThoat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            this.bar1.Offset = 1;
             this.bar1.Text = "Tools";
             // 
             // btnThem
@@ -309,7 +309,7 @@ namespace QLVT
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1248, 30);
+            this.barDockControlTop.Size = new System.Drawing.Size(1248, 50);
             // 
             // barDockControlBottom
             // 
@@ -323,17 +323,17 @@ namespace QLVT
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 30);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 50);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 523);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 503);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1248, 30);
+            this.barDockControlRight.Location = new System.Drawing.Point(1248, 50);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 523);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 503);
             // 
             // barListItem1
             // 
@@ -346,7 +346,7 @@ namespace QLVT
             this.panelControl1.Controls.Add(this.label1);
             this.panelControl1.Controls.Add(this.cmbChiNhanh);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(0, 30);
+            this.panelControl1.Location = new System.Drawing.Point(0, 50);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1248, 50);
             this.panelControl1.TabIndex = 4;
@@ -410,7 +410,7 @@ namespace QLVT
             this.gcNhanVien.DataSource = this.bdsNV;
             this.gcNhanVien.Dock = System.Windows.Forms.DockStyle.Top;
             this.gcNhanVien.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
-            this.gcNhanVien.Location = new System.Drawing.Point(0, 80);
+            this.gcNhanVien.Location = new System.Drawing.Point(0, 100);
             this.gcNhanVien.MainView = this.gridView1;
             this.gcNhanVien.MenuManager = this.barManager1;
             this.gcNhanVien.Name = "gcNhanVien";
@@ -418,7 +418,6 @@ namespace QLVT
             this.gcNhanVien.TabIndex = 6;
             this.gcNhanVien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
-            this.gcNhanVien.MouseCaptureChanged += new System.EventHandler(this.gcNhanVien_MouseCaptureChanged);
             // 
             // gridView1
             // 
@@ -429,8 +428,7 @@ namespace QLVT
             this.colDIACHI,
             this.colNGAYSINH,
             this.colLUONG,
-            this.colMACN,
-            this.colTrangThaiXoa});
+            this.colMACN});
             this.gridView1.GridControl = this.gcNhanVien;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
@@ -501,16 +499,6 @@ namespace QLVT
             this.colMACN.VisibleIndex = 6;
             this.colMACN.Width = 150;
             // 
-            // colTrangThaiXoa
-            // 
-            this.colTrangThaiXoa.FieldName = "TrangThaiXoa";
-            this.colTrangThaiXoa.MinWidth = 25;
-            this.colTrangThaiXoa.Name = "colTrangThaiXoa";
-            this.colTrangThaiXoa.ShowUnboundExpressionMenu = true;
-            this.colTrangThaiXoa.Visible = true;
-            this.colTrangThaiXoa.VisibleIndex = 7;
-            this.colTrangThaiXoa.Width = 154;
-            // 
             // panelCtrl_NhanVien
             // 
             this.panelCtrl_NhanVien.Controls.Add(trangThaiXoaLabel);
@@ -529,9 +517,9 @@ namespace QLVT
             this.panelCtrl_NhanVien.Controls.Add(mANVLabel);
             this.panelCtrl_NhanVien.Controls.Add(this.txtMaNV);
             this.panelCtrl_NhanVien.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCtrl_NhanVien.Location = new System.Drawing.Point(0, 293);
+            this.panelCtrl_NhanVien.Location = new System.Drawing.Point(0, 313);
             this.panelCtrl_NhanVien.Name = "panelCtrl_NhanVien";
-            this.panelCtrl_NhanVien.Size = new System.Drawing.Size(1248, 260);
+            this.panelCtrl_NhanVien.Size = new System.Drawing.Size(1248, 240);
             this.panelCtrl_NhanVien.TabIndex = 7;
             // 
             // ckbXoa
@@ -608,6 +596,7 @@ namespace QLVT
             // txtMaNV
             // 
             this.txtMaNV.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsNV, "MANV", true));
+            this.txtMaNV.Enabled = false;
             this.txtMaNV.Location = new System.Drawing.Point(194, 22);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(180, 28);
@@ -696,7 +685,6 @@ namespace QLVT
         private DevExpress.XtraGrid.Columns.GridColumn colNGAYSINH;
         private DevExpress.XtraGrid.Columns.GridColumn colLUONG;
         private DevExpress.XtraGrid.Columns.GridColumn colMACN;
-        private DevExpress.XtraGrid.Columns.GridColumn colTrangThaiXoa;
         private DevExpress.XtraEditors.TextEdit txtLuong;
         private System.Windows.Forms.TextBox txtDiaChi;
         private System.Windows.Forms.TextBox txtMACN;
