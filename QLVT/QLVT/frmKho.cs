@@ -100,6 +100,7 @@ namespace QLVT
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            txtMaKho.Enabled = true;
             vitri = bdsKho.Position;
             panelCtrl_Kho.Enabled = true;
             bdsKho.AddNew();
@@ -109,7 +110,7 @@ namespace QLVT
             gcKho.Enabled = false;
             panelCtrl_Kho.Enabled = true;
             txtMaCN.Text = macn;
-            txtMaKho.Enabled = true;
+            
         }
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
