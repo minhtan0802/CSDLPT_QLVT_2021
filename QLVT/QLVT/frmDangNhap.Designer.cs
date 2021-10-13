@@ -134,10 +134,10 @@ namespace QLVT
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private DevExpress.XtraEditors.SimpleButton btn_DangNhap;
         private DevExpress.XtraEditors.SimpleButton btn_Thoat;
         public System.Windows.Forms.TextBox tb_TaiKhoan;
         public System.Windows.Forms.TextBox tb_MatKhau;
         public System.Windows.Forms.ComboBox cmb_ChiNhanh;
+        public DevExpress.XtraEditors.SimpleButton btn_DangNhap;
     }
 }

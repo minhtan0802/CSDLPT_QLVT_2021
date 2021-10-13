@@ -80,6 +80,7 @@ namespace QLVT
             NHOM.Text = "NHOM";
             Program.frmDN.tb_TaiKhoan.Text = Program.frmDN.tb_MatKhau.Text = "";
             btn_DangNhap.Enabled = true;
+            Program.frmDN.btn_DangNhap.Enabled = true;
             Program.frmDN.tb_TaiKhoan.Enabled = Program.frmDN.tb_MatKhau.Enabled = Program.frmDN.cmb_ChiNhanh.Enabled = true;
             
             
@@ -108,6 +109,11 @@ namespace QLVT
                 f.MdiParent = this;
                 f.Show();
             }
+        }
+
+        private void ribbonControl1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

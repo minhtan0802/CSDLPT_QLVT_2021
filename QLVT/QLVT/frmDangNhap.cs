@@ -68,9 +68,14 @@ namespace QLVT
                 return;
             }
             cmb_ChiNhanh.Enabled =tb_TaiKhoan.Enabled=tb_MatKhau.Enabled= false;
+            btn_DangNhap.Enabled = false;
          
             Program.mHoTen = Program.myReader.GetString(1);
             Program.mGroup = Program.myReader.GetString(2);
+            if (!Program.mGroup.Equals("USER"))
+            {
+                Program.frmChinh.btn_TaoTaiKhoan.Enabled = true;
+            }
             Program.myReader.Close();
             Program.conn.Close();
             Program.frmChinh.HienThiMenu();
