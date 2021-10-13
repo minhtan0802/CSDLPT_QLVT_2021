@@ -58,13 +58,15 @@ namespace QLVT
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            tb_MaVatTu.Enabled = true;
             vitri = bdsVatTu.Position;
             panelCtrl_VatTu.Enabled = true;
             bdsVatTu.AddNew();
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
             gcVatTu.Enabled = false;
-            panelCtrl_VatTu.Enabled = false;
+         
+
         }
 
         private void btnUndo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -144,7 +146,59 @@ namespace QLVT
 
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (tb_MaVatTu.Text.Trim() == "")
+            {
+                MessageBox.Show("Mã vật tư không được thiếu", "", MessageBoxButtons.OK);
+                tb_MaVatTu.Focus();
+                return;
+            }
+            if (tb_TenVatTu.Text.Trim() == "")
+            {
+                MessageBox.Show("Tên vật tư không được thiếu", "", MessageBoxButtons.OK);
+                tb_TenVatTu.Focus();
+                return;
+            }
+            if (tb_DonViTinh.Text.Trim() == "")
+            {
+                MessageBox.Show("Đơn vị tính không được thiếu", "", MessageBoxButtons.OK);
+                tb_DonViTinh.Focus();
+                return;
+            }
+            if (nud_SoLuongTon.Value==0)
+            {
+                MessageBox.Show("Số lượng phải lớn hơn 0", "", MessageBoxButtons.OK);
+                tb_DonViTinh.Focus();
+                return;
+            }
+            string strLenhMK = "EXEC sp_TraCuu @code='" + tb_MaVatTu.Text + "'" + ", @type='MAVT'";
+        
+            int kiemTraMaVT = 0;
+            if (tb_MaVatTu.Enabled == true)
+            {
+                kiemTraMaVT = Program.ExecSqlNonQuery(strLenhMK);
+            }
+           
 
+            if (kiemTraMaVT != 1)
+            {
+                try
+                {
+                    bdsVatTu.EndEdit();
+                    bdsVatTu.ResetCurrentItem();
+                    this.VatTuTableAdapter.Connection.ConnectionString = Program.connstr;
+                    this.VatTuTableAdapter.Update(this.DS.Vattu);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi ghi vật tư.\n" + ex.Message, "", MessageBoxButtons.OK);
+                    return;
+                }
+                gcVatTu.Enabled = true;
+                btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
+                btnGhi.Enabled = btnUndo.Enabled = false;
+
+                 panelCtrl_VatTu.Enabled = false;
+            }
         }
 
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

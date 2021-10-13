@@ -28,6 +28,7 @@ namespace QLVT
             cmb_ChiNhanh.DataSource = Program.bds_dspm;//chứa danh sách data cung cấp cho nó
             cmb_ChiNhanh.DisplayMember = "TENCN";
             cmb_ChiNhanh.ValueMember = "TENSERVER";
+            
 
         }
         public frmDangNhap()
@@ -45,6 +46,11 @@ namespace QLVT
             }
             Program.mlogin = tb_TaiKhoan.Text;
             Program.password = tb_MatKhau.Text;
+            if (Program.mlogin=="sa")
+            {
+                MessageBox.Show("Login bạn nhập không có quyền truy cập dữ liệu\nBạn xem lại username, password", "", MessageBoxButtons.OK);
+                return;
+            }    
             if (Program.KetNoi() == 0) return;
             Program.mChiNhanh = cmb_ChiNhanh.SelectedIndex;
             Program.mloginDN = Program.mlogin;
@@ -61,8 +67,15 @@ namespace QLVT
                 MessageBox.Show("Login bạn nhập không có quyền truy cập dữ liệu\nBạn xem lại username, password", "", MessageBoxButtons.OK);
                 return;
             }
+            cmb_ChiNhanh.Enabled =tb_TaiKhoan.Enabled=tb_MatKhau.Enabled= false;
+            btn_DangNhap.Enabled = false;
+         
             Program.mHoTen = Program.myReader.GetString(1);
             Program.mGroup = Program.myReader.GetString(2);
+            if (!Program.mGroup.Equals("USER"))
+            {
+                Program.frmChinh.btn_TaoTaiKhoan.Enabled = true;
+            }
             Program.myReader.Close();
             Program.conn.Close();
             Program.frmChinh.HienThiMenu();

@@ -62,6 +62,31 @@ namespace QLVT
             }
         }
 
+     
+
+    
+
+        private void btn_DangXuat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExist(typeof(frmKho));
+            if (frm != null) frm.Close();
+            frm = this.CheckExist(typeof(frmNhanVien));
+            if (frm != null) frm.Close();
+            frm = this.CheckExist(typeof(frmVatTu));
+            if (frm != null) frm.Close();
+            btn_DangXuat.Enabled = btn_TaoTaiKhoan.Enabled=rib_DanhMuc.Visible = rib_BaoCao.Visible = rib_NghiepVu.Visible = false;
+            MANV.Text = "MANV";
+            HOTEN.Text = "HOTEN";
+            NHOM.Text = "NHOM";
+            Program.frmDN.tb_TaiKhoan.Text = Program.frmDN.tb_MatKhau.Text = "";
+            btn_DangNhap.Enabled = true;
+            Program.frmDN.btn_DangNhap.Enabled = true;
+            Program.frmDN.tb_TaiKhoan.Enabled = Program.frmDN.tb_MatKhau.Enabled = Program.frmDN.cmb_ChiNhanh.Enabled = true;
+            
+            
+
+        }
+
         private void btn_VatTu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Form frm = this.CheckExist(typeof(frmVatTu));
@@ -86,21 +111,8 @@ namespace QLVT
             }
         }
 
-        private void btn_DangXuat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void ribbonControl1_Click(object sender, EventArgs e)
         {
-            Form frm = this.CheckExist(typeof(frmKho));
-            if (frm != null) frm.Close();
-            frm = this.CheckExist(typeof(frmNhanVien));
-            if (frm != null) frm.Close();
-            frm = this.CheckExist(typeof(frmVatTu));
-            if (frm != null) frm.Close();
-            btn_DangXuat.Enabled = btn_TaoTaiKhoan.Enabled=rib_DanhMuc.Visible = rib_BaoCao.Visible = rib_NghiepVu.Visible = false;
-            MANV.Text = "MANV";
-            HOTEN.Text = "HOTEN";
-            NHOM.Text = "NHOM";
-            Program.frmDN.tb_TaiKhoan.Text = Program.frmDN.tb_MatKhau.Text = "";
-            
-            
 
         }
     }

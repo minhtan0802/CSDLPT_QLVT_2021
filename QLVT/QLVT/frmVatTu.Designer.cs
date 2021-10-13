@@ -43,7 +43,6 @@ namespace QLVT
             this.btnXoa = new DevExpress.XtraBars.BarButtonItem();
             this.btnUndo = new DevExpress.XtraBars.BarButtonItem();
             this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDSNV = new DevExpress.XtraBars.BarButtonItem();
             this.btnThoat = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -143,8 +142,7 @@ namespace QLVT
             this.btnUndo,
             this.btnRefresh,
             this.barListItem1,
-            this.btnThoat,
-            this.btnDSNV});
+            this.btnThoat});
             this.barManager1.MaxItemId = 9;
             this.barManager1.StatusBar = this.bar3;
             // 
@@ -161,7 +159,6 @@ namespace QLVT
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnXoa, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnUndo, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnRefresh, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnDSNV),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnThoat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar1.Text = "Tools";
             // 
@@ -219,12 +216,6 @@ namespace QLVT
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRefresh_ItemClick);
             // 
-            // btnDSNV
-            // 
-            this.btnDSNV.Caption = "In danh sách vật tư";
-            this.btnDSNV.Id = 8;
-            this.btnDSNV.Name = "btnDSNV";
-            // 
             // btnThoat
             // 
             this.btnThoat.Caption = "Thoát";
@@ -252,7 +243,7 @@ namespace QLVT
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(809, 30);
+            this.barDockControlTop.Size = new System.Drawing.Size(809, 50);
             // 
             // barDockControlBottom
             // 
@@ -266,17 +257,17 @@ namespace QLVT
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 30);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 50);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 563);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 543);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(809, 30);
+            this.barDockControlRight.Location = new System.Drawing.Point(809, 50);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 563);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 543);
             // 
             // barListItem1
             // 
@@ -317,7 +308,7 @@ namespace QLVT
             // 
             this.gcVatTu.DataSource = this.bdsVatTu;
             this.gcVatTu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gcVatTu.Location = new System.Drawing.Point(0, 30);
+            this.gcVatTu.Location = new System.Drawing.Point(0, 50);
             this.gcVatTu.MainView = this.gridView1;
             this.gcVatTu.MenuManager = this.barManager1;
             this.gcVatTu.Name = "gcVatTu";
@@ -380,6 +371,7 @@ namespace QLVT
             // tb_MaVatTu
             // 
             this.tb_MaVatTu.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsVatTu, "MAVT", true));
+            this.tb_MaVatTu.Enabled = false;
             this.tb_MaVatTu.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_MaVatTu.Location = new System.Drawing.Point(223, 38);
             this.tb_MaVatTu.Name = "tb_MaVatTu";
@@ -424,9 +416,9 @@ namespace QLVT
             this.panelCtrl_VatTu.Controls.Add(mAVTLabel);
             this.panelCtrl_VatTu.Controls.Add(this.tb_MaVatTu);
             this.panelCtrl_VatTu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCtrl_VatTu.Location = new System.Drawing.Point(0, 263);
+            this.panelCtrl_VatTu.Location = new System.Drawing.Point(0, 283);
             this.panelCtrl_VatTu.Name = "panelCtrl_VatTu";
-            this.panelCtrl_VatTu.Size = new System.Drawing.Size(809, 330);
+            this.panelCtrl_VatTu.Size = new System.Drawing.Size(809, 310);
             this.panelCtrl_VatTu.TabIndex = 6;
             // 
             // bdsCTPX
@@ -502,7 +494,6 @@ namespace QLVT
         private DevExpress.XtraBars.BarButtonItem btnXoa;
         private DevExpress.XtraBars.BarButtonItem btnUndo;
         private DevExpress.XtraBars.BarButtonItem btnRefresh;
-        private DevExpress.XtraBars.BarButtonItem btnDSNV;
         private DevExpress.XtraBars.BarButtonItem btnThoat;
         private DevExpress.XtraBars.Bar bar3;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
