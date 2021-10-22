@@ -74,6 +74,8 @@ namespace QLVT
             if (frm != null) frm.Close();
             frm = this.CheckExist(typeof(frmVatTu));
             if (frm != null) frm.Close();
+            frm = this.CheckExist(typeof(frmTaoTaiKhoan));
+            if (frm != null) frm.Close();
             btn_DangXuat.Enabled = btn_TaoTaiKhoan.Enabled=rib_DanhMuc.Visible = rib_BaoCao.Visible = rib_NghiepVu.Visible = false;
             MANV.Text = "MANV";
             HOTEN.Text = "HOTEN";
@@ -114,6 +116,24 @@ namespace QLVT
         private void ribbonControl1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_TaoTaiKhoan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Program.frmTaoAcc.LayDSNVChuaCoAcc("EXEC sp_getTaiKhoanChuaCoAcc");
+            if (Program.frmTaoAcc.dt.Rows.Count==0)
+            {
+                MessageBox.Show("Tất cả nhân viên ở chi nhánh này đều đã có tài khoản", "", MessageBoxButtons.OK);
+                return;
+            }    
+            Form frm = this.CheckExist(typeof(frmTaoTaiKhoan));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmTaoTaiKhoan f = new frmTaoTaiKhoan();
+                f.MdiParent = this;
+                f.Show();
+            }
         }
     }
 }

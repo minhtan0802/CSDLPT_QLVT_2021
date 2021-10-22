@@ -17,7 +17,8 @@ namespace QLVT
         public static SqlConnection conn = new SqlConnection();
         public static String connstr;
       //  public static String connstr_publisher = "Data Source=LAPTOP-0GIVQL73;Initial Catalog=QLVT;Integrated Security=True";
-        public static String connstr_publisher = "Data Source=LAPTOP-LJSAF82J;Initial Catalog=QLVT;Integrated Security=True";
+     //   public static String connstr_publisher = "Data Source=LAPTOP-LJSAF82J;Initial Catalog=QLVT;Integrated Security=True";
+        public static String connstr_publisher = "Data Source=LAPTOP-V0HI7R3V\\SERVER;Initial Catalog=QLVT;Integrated Security=True";
         public static SqlDataReader myReader;
         public static String servername = "";
         public static String username = "";
@@ -34,9 +35,10 @@ namespace QLVT
         public static int mChiNhanh = 0;
 
         public static BindingSource bds_dspm = new BindingSource();//giữ bdsPM khi đăng nhập
+        public static BindingSource bds_DSNVChuaCoAcc = new BindingSource();//giữ ds nhân viên chưa có acc
         public static frmMain frmChinh; //khai báo con trỏ, về sau là đối tượng frm Main
         public static frmDangNhap frmDN;
-
+        public static frmTaoTaiKhoan frmTaoAcc;
         public static int KetNoi()
         {
             if (Program.conn != null && Program.conn.State == ConnectionState.Open)
@@ -111,7 +113,7 @@ namespace QLVT
 
             }
         }
-
+      
 
 
         [STAThread]
@@ -121,6 +123,7 @@ namespace QLVT
             Application.SetCompatibleTextRenderingDefault(false);
             frmDN = new frmDangNhap();
             frmChinh = new frmMain();
+            frmTaoAcc = new frmTaoTaiKhoan();
             Application.Run(frmChinh);
             
         }

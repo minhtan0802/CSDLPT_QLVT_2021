@@ -117,6 +117,7 @@ namespace QLVT
             this.btn_TaoTaiKhoan.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_TaoTaiKhoan.ImageOptions.Image")));
             this.btn_TaoTaiKhoan.Name = "btn_TaoTaiKhoan";
             this.btn_TaoTaiKhoan.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btn_TaoTaiKhoan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_TaoTaiKhoan_ItemClick);
             // 
             // btn_DangXuat
             // 

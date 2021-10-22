@@ -302,6 +302,9 @@ namespace QLVT
                 panelCtrl_NhanVien.Enabled = false;
                 ckbXoa.Enabled = true;
                 this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
+                //     frmTaoAcc.LayDSNVChuaCoAcc("EXEC sp_getTaiKhoanChuaCoAcc");
+                //  frm
+                Program.frmTaoAcc.LayDSNVChuaCoAcc("EXEC sp_getTaiKhoanChuaCoAcc");
             }    
            
             
