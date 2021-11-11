@@ -14,6 +14,17 @@ namespace QLVT
         public frmMain()
         {
             InitializeComponent();
+      
+        }
+        private const int CP_NOCLOSE_BUTTON = 0x200;
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams myCp = base.CreateParams;
+                myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
+                return myCp;
+            }
         }
         private Form CheckExist(Type ftype)
         {
@@ -68,24 +79,39 @@ namespace QLVT
 
         private void btn_DangXuat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Form frm = this.CheckExist(typeof(frmKho));
-            if (frm != null) frm.Close();
-            frm = this.CheckExist(typeof(frmNhanVien));
-            if (frm != null) frm.Close();
-            frm = this.CheckExist(typeof(frmVatTu));
-            if (frm != null) frm.Close();
-            frm = this.CheckExist(typeof(frmTaoTaiKhoan));
-            if (frm != null) frm.Close();
-            btn_DangXuat.Enabled = btn_TaoTaiKhoan.Enabled=rib_DanhMuc.Visible = rib_BaoCao.Visible = rib_NghiepVu.Visible = false;
-            MANV.Text = "MANV";
-            HOTEN.Text = "HOTEN";
-            NHOM.Text = "NHOM";
-            Program.frmDN.tb_TaiKhoan.Text = Program.frmDN.tb_MatKhau.Text = "";
-            btn_DangNhap.Enabled = true;
-            Program.frmDN.btn_DangNhap.Enabled = true;
-            Program.frmDN.tb_TaiKhoan.Enabled = Program.frmDN.tb_MatKhau.Enabled = Program.frmDN.cmb_ChiNhanh.Enabled = true;
-            
-            
+
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất không?", "Thông báo", MessageBoxButtons.YesNo);
+            if (result == DialogResult.No)
+            {
+                return;
+
+            }
+            else
+            {
+                Form frm = this.CheckExist(typeof(frmKho));
+                if (frm != null) frm.Close();
+                frm = this.CheckExist(typeof(frmNhanVien));
+                if (frm != null) frm.Close();
+                frm = this.CheckExist(typeof(frmVatTu));
+                if (frm != null) frm.Close();
+                frm = this.CheckExist(typeof(frmTaoTaiKhoan));
+                if (frm != null) frm.Close();
+                frm = this.CheckExist(typeof(frmDonDatHang));
+                if (frm != null) frm.Close();
+                btn_DangXuat.Enabled = btn_TaoTaiKhoan.Enabled = rib_DanhMuc.Visible = rib_BaoCao.Visible = rib_NghiepVu.Visible = false;
+                MANV.Text = "MANV";
+                HOTEN.Text = "HOTEN";
+                NHOM.Text = "NHOM";
+                Program.frmDN.tb_TaiKhoan.Text = Program.frmDN.tb_MatKhau.Text = "";
+                btn_DangNhap.Enabled = true;
+                Program.frmDN.btn_DangNhap.Enabled = true;
+                Program.frmDN.tb_TaiKhoan.Enabled = Program.frmDN.tb_MatKhau.Enabled = Program.frmDN.cmb_ChiNhanh.Enabled = true;
+                Program.frmChinh.Hide();
+                Program.frmDN.Show();
+
+            }
+
+
 
         }
 
@@ -120,6 +146,7 @@ namespace QLVT
 
         private void btn_TaoTaiKhoan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            Program.frmTaoAcc = new frmTaoTaiKhoan();
             Program.frmTaoAcc.LayDSNVChuaCoAcc("EXEC sp_getTaiKhoanChuaCoAcc");
             if (Program.frmTaoAcc.dt.Rows.Count==0)
             {
@@ -134,6 +161,54 @@ namespace QLVT
                 f.MdiParent = this;
                 f.Show();
             }
+        }
+
+        private void btn_LapDDH_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExist(typeof(frmDonDatHang));
+            if (frm != null) frm.Activate();
+            else
+            {
+                Program.frmDDH = new frmDonDatHang();
+                Program.frmDDH.MdiParent = this;
+                Program.frmDDH.Show();
+            }
+        }
+
+        private void barButtonItem6_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExist(typeof(Test));
+            if (frm != null) frm.Activate();
+            else
+            {
+                Test f = new Test();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void btn_LapPhieu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+            Form frm = this.CheckExist(typeof(frmPhieuNhap));
+            if (frm != null) frm.Activate();
+            else
+            {
+                Program.frmPN = new frmPhieuNhap();
+                Program.frmPN.MdiParent = this;
+                Program.frmPN.Show();
+            }
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+          
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+        
+            Program.frmDN.Close();
         }
     }
 }
