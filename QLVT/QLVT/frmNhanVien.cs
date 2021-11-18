@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraReports.UI;
 
 namespace QLVT
 {
@@ -163,12 +164,14 @@ namespace QLVT
                     bdsNV.RemoveCurrent();//Xóa trên máy hiện tại trước
                     this.NHANVIENTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.NHANVIENTableAdapter.Update(this.DS.NhanVien);//Xóa trên CSDL
+                    MessageBox.Show("Xóa nhân viên thành công!", "", MessageBoxButtons.OK);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Lỗi xóa nhân viên. Bạn hãy xóa lại\n" + ex.Message, "", MessageBoxButtons.OK);
                     this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
                     bdsNV.Position = bdsNV.Find("MANV", manv);
+                    
                     return;
                 }
             }
@@ -302,6 +305,9 @@ namespace QLVT
                 panelCtrl_NhanVien.Enabled = false;
                 ckbXoa.Enabled = true;
                 this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
+                //     frmTaoAcc.LayDSNVChuaCoAcc("EXEC sp_getTaiKhoanChuaCoAcc");
+                //  frm
+                Program.frmTaoAcc.LayDSNVChuaCoAcc("EXEC sp_getTaiKhoanChuaCoAcc");
             }    
            
             
@@ -360,6 +366,23 @@ namespace QLVT
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             this.Close();
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Xrpt_DSNhanVien rpt = new Xrpt_DSNhanVien();
+            string tenCN = "";
+            if (Program.servername.Contains("1"))
+            {
+                tenCN = "1";
+            }
+            else
+            {
+                tenCN = "2";
+            }
+            rpt.label_TieuDe.Text = "DANH SÁCH NHÂN VIÊN CHI NHÁNH " + tenCN;
+            ReportPrintTool print = new ReportPrintTool(rpt);
+            print.ShowPreviewDialog();
         }
     }
 }

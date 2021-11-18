@@ -16,8 +16,9 @@ namespace QLVT
         /// </summary>
         public static SqlConnection conn = new SqlConnection();
         public static String connstr;
-        public static String connstr_publisher = "Data Source=LAPTOP-0GIVQL73;Initial Catalog=QLVT;Integrated Security=True";
-        //public static String connstr_publisher = "Data Source=LAPTOP-LJSAF82J;Initial Catalog=QLVT;Integrated Security=True";
+      //  public static String connstr_publisher = "Data Source=LAPTOP-0GIVQL73;Initial Catalog=QLVT;Integrated Security=True";
+     //   public static String connstr_publisher = "Data Source=LAPTOP-LJSAF82J;Initial Catalog=QLVT;Integrated Security=True";
+        public static String connstr_publisher = "Data Source=LAPTOP-V0HI7R3V\\SERVER;Initial Catalog=QLVT;Integrated Security=True";
         public static SqlDataReader myReader;
         public static String servername = "";
         public static String username = "";
@@ -32,11 +33,18 @@ namespace QLVT
         public static String mGroup = "";
         public static String mHoTen = "";
         public static int mChiNhanh = 0;
+        public static String MDDH = "";
+        public static String frmPN_maDDH = "";
 
         public static BindingSource bds_dspm = new BindingSource();//giữ bdsPM khi đăng nhập
+        public static BindingSource bds_DSNVChuaCoAcc = new BindingSource();//giữ ds nhân viên chưa có acc
         public static frmMain frmChinh; //khai báo con trỏ, về sau là đối tượng frm Main
         public static frmDangNhap frmDN;
-
+        public static frmTaoTaiKhoan frmTaoAcc;
+        public static frmDonDatHang frmDDH;
+        public static frmPhieuNhap frmPN;
+        public static int soLuongVatTu = 0;
+        public static BindingSource bds_CTPN = new BindingSource();
         public static int KetNoi()
         {
             if (Program.conn != null && Program.conn.State == ConnectionState.Open)
@@ -111,6 +119,79 @@ namespace QLVT
 
             }
         }
+        public static void savePhieu(string loaiPhieu, string maDon,BindingSource bds, DevExpress.XtraGrid.Views.Grid.GridView gridView)
+        {
+            if (loaiPhieu.Equals("dathang") && bds.Count!=0)
+            {
+                Program.ExecSqlNonQuery("EXEC sp_deleteAllCTDDH '" + Program.MDDH + "'");
+            }
+
+            String MaPhieu = maDon;
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("MaSoPhieu", typeof(string));
+            dt.Columns.Add("MAVT", typeof(string));
+            dt.Columns.Add("SOLUONG", typeof(int));
+            dt.Columns.Add("DONGIA", typeof(float));
+
+            string[] valueTemp = new string[4];
+            int index = 0;
+            int soLuong = 0;
+            float donGia = 0;
+            int rowCount = bds.Count;
+            for (int rows = 0; rows <rowCount; rows++)
+            {
+
+
+                valueTemp[0] = ((DataRowView)bds[rows])["MAVT"].ToString();
+               
+
+                soLuong = Int32.Parse(((DataRowView)bds[rows])["SOLUONG"].ToString());
+                donGia = float.Parse(((DataRowView)bds[rows])["DONGIA"].ToString());
+
+                dt.Rows.Add(MaPhieu, valueTemp[0], soLuong, donGia);
+
+            }
+
+            SqlParameter para = new SqlParameter();
+            para.SqlDbType = SqlDbType.Structured;
+            para.TypeName = "dbo.TYPE_CTPhieu";
+            SqlCommand sqlcmd = new SqlCommand();
+            if (loaiPhieu.Equals("dathang"))
+            {
+              
+                para.ParameterName = "@CTDDH";
+                para.Value = dt;
+                Program.KetNoi();
+                 sqlcmd = new SqlCommand("sp_updateCTDDH", Program.conn);
+            }
+            else if (loaiPhieu.Equals("phieunhap"))
+            {
+                para.ParameterName = "@CTPN";
+                para.Value = dt;
+                Program.KetNoi();
+                sqlcmd = new SqlCommand("sp_updateCTPN", Program.conn);
+            }
+            sqlcmd.Parameters.Clear();
+            sqlcmd.CommandType = CommandType.StoredProcedure;
+            sqlcmd.Parameters.Add(para);
+            sqlcmd.ExecuteNonQuery();
+
+
+        }
+        public static bool CheckOpened(string name)
+        {
+            FormCollection fc = Application.OpenForms;
+
+            foreach (Form frm in fc)
+            {
+                if (frm.Text == name)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
 
 
@@ -120,8 +201,11 @@ namespace QLVT
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             frmDN = new frmDangNhap();
-            frmChinh = new frmMain();
-            Application.Run(frmChinh);
+           
+        //    frmDN.Show();
+          
+      
+        Application.Run(frmDN);
             
         }
     }

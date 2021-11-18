@@ -52,6 +52,7 @@ namespace QLVT
                 return;
             }    
             if (Program.KetNoi() == 0) return;
+           
             Program.mChiNhanh = cmb_ChiNhanh.SelectedIndex;
             Program.mloginDN = Program.mlogin;
             Program.passwordDN = Program.password;
@@ -67,6 +68,7 @@ namespace QLVT
                 MessageBox.Show("Login bạn nhập không có quyền truy cập dữ liệu\nBạn xem lại username, password", "", MessageBoxButtons.OK);
                 return;
             }
+            Program.frmChinh = new frmMain();
             cmb_ChiNhanh.Enabled =tb_TaiKhoan.Enabled=tb_MatKhau.Enabled= false;
             btn_DangNhap.Enabled = false;
          
@@ -78,9 +80,11 @@ namespace QLVT
             }
             Program.myReader.Close();
             Program.conn.Close();
+            this.Hide();
+            Program.frmChinh.Show();
             Program.frmChinh.HienThiMenu();
-           
-            
+
+
 
 
         }
@@ -128,6 +132,18 @@ namespace QLVT
         private void btn_Thoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void frmDangNhap_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn muốn thoát hoàn toàn chương trình không?", "Thông báo", MessageBoxButtons.YesNo);
+            if (result == DialogResult.No)
+            {
+                e.Cancel = true;
+
+            }
+
+
         }
     }
 }

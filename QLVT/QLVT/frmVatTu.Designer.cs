@@ -71,6 +71,7 @@ namespace QLVT
             this.CTPNTableAdapter = new QLVT.DSTableAdapters.CTPNTableAdapter();
             this.bdsCTDDH = new System.Windows.Forms.BindingSource(this.components);
             this.CTDDHTableAdapter = new QLVT.DSTableAdapters.CTDDHTableAdapter();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             mAVTLabel = new System.Windows.Forms.Label();
             tENVTLabel = new System.Windows.Forms.Label();
             dVTLabel = new System.Windows.Forms.Label();
@@ -142,8 +143,9 @@ namespace QLVT
             this.btnUndo,
             this.btnRefresh,
             this.barListItem1,
-            this.btnThoat});
-            this.barManager1.MaxItemId = 9;
+            this.btnThoat,
+            this.barButtonItem1});
+            this.barManager1.MaxItemId = 10;
             this.barManager1.StatusBar = this.bar3;
             // 
             // bar1
@@ -159,7 +161,8 @@ namespace QLVT
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnXoa, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnUndo, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnRefresh, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnThoat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnThoat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1)});
             this.bar1.Text = "Tools";
             // 
             // btnThem
@@ -312,7 +315,7 @@ namespace QLVT
             this.gcVatTu.MainView = this.gridView1;
             this.gcVatTu.MenuManager = this.barManager1;
             this.gcVatTu.Name = "gcVatTu";
-            this.gcVatTu.Size = new System.Drawing.Size(809, 233);
+            this.gcVatTu.Size = new System.Drawing.Size(809, 253);
             this.gcVatTu.TabIndex = 5;
             this.gcVatTu.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -416,9 +419,9 @@ namespace QLVT
             this.panelCtrl_VatTu.Controls.Add(mAVTLabel);
             this.panelCtrl_VatTu.Controls.Add(this.tb_MaVatTu);
             this.panelCtrl_VatTu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCtrl_VatTu.Location = new System.Drawing.Point(0, 283);
+            this.panelCtrl_VatTu.Location = new System.Drawing.Point(0, 303);
             this.panelCtrl_VatTu.Name = "panelCtrl_VatTu";
-            this.panelCtrl_VatTu.Size = new System.Drawing.Size(809, 310);
+            this.panelCtrl_VatTu.Size = new System.Drawing.Size(809, 290);
             this.panelCtrl_VatTu.TabIndex = 6;
             // 
             // bdsCTPX
@@ -447,6 +450,15 @@ namespace QLVT
             // CTDDHTableAdapter
             // 
             this.CTDDHTableAdapter.ClearBeforeFill = true;
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "In danh sách vật tư";
+            this.barButtonItem1.Id = 9;
+            this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
+            this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // frmVatTu
             // 
@@ -500,10 +512,7 @@ namespace QLVT
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
-        private System.Windows.Forms.BindingSource bdsVatTu;
-        private DS DS;
         private DevExpress.XtraBars.BarListItem barListItem1;
-        private DSTableAdapters.VattuTableAdapter VatTuTableAdapter;
         private DSTableAdapters.TableAdapterManager tableAdapterManager;
         private DevExpress.XtraGrid.GridControl gcVatTu;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
@@ -522,5 +531,9 @@ namespace QLVT
         private DSTableAdapters.CTPNTableAdapter CTPNTableAdapter;
         private System.Windows.Forms.BindingSource bdsCTDDH;
         private DSTableAdapters.CTDDHTableAdapter CTDDHTableAdapter;
+        private System.Windows.Forms.BindingSource bdsVatTu;
+        private DS DS;
+        private DSTableAdapters.VattuTableAdapter VatTuTableAdapter;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
     }
 }

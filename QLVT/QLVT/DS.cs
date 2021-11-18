@@ -16,9 +16,12 @@ namespace QLVT {
     }
 }
 
-namespace QLVT.DSTableAdapters {
-    
-    
+namespace QLVT.DSTableAdapters
+{
+    partial class sp_getVatTuChuaCoTableAdapter
+    {
+    }
+
     public partial class NhanVienTableAdapter {
     }
 }

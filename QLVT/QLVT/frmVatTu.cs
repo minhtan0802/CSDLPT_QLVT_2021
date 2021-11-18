@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraReports.UI;
 
 namespace QLVT
 {
@@ -29,6 +30,10 @@ namespace QLVT
 
         private void frmVatTu_Load(object sender, EventArgs e)
         {
+            foreach (DataRow row in this.DS.Vattu)
+            {
+                Program.soLuongVatTu++;
+            }
             DS.EnforceConstraints = false;
             // TODO: This line of code loads data into the 'DS.VatTu' table. You can move, or remove it, as needed.
             this.VatTuTableAdapter.Connection.ConnectionString = Program.connstr;
@@ -131,6 +136,10 @@ namespace QLVT
                     bdsVatTu.RemoveCurrent();//Xóa trên máy hiện tại trước
                     this.VatTuTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.VatTuTableAdapter.Update(this.DS.Vattu);//Xóa trên CSDL
+                    foreach (DataRow row in this.DS.Vattu)
+                    {
+                        Program.soLuongVatTu++;
+                    }
                 }
                 catch(Exception ex)
                 {
@@ -187,6 +196,10 @@ namespace QLVT
                     bdsVatTu.ResetCurrentItem();
                     this.VatTuTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.VatTuTableAdapter.Update(this.DS.Vattu);
+                    foreach (DataRow row in this.DS.Vattu)
+                    {
+                        Program.soLuongVatTu++;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -204,6 +217,13 @@ namespace QLVT
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             this.Close();
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Xrpt_DSVatTu rpt = new Xrpt_DSVatTu();
+            ReportPrintTool print = new ReportPrintTool(rpt);
+            print.ShowPreviewDialog();
         }
     }
 }
