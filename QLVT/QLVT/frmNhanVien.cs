@@ -361,9 +361,5 @@ namespace QLVT
         {
             this.Close();
         }
-
-
-
-        
     }
 }
