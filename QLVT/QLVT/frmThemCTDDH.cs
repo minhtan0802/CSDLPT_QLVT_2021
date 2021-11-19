@@ -48,11 +48,12 @@ namespace QLVT
                this.sp_getVatTuChuaCoTableAdapter.Fill(this.DS.sp_getVatTuChuaCo, Program.MDDH);*/
             this.sp_getVTChuaCoTableAdapter.Connection.ConnectionString = Program.connstr;
             this.sp_getVTChuaCoTableAdapter.Fill(this.DS.sp_getVTChuaCo,Program.frmDDH.getDTVTDaCo());
+          
             if(bds_spgetVTChuaCo.Count!=0)
             {
                 txt_TenVT.Text = (((DataRowView)bds_spgetVTChuaCo[0])["TENVT"].ToString());
-            }    
-          
+            }
+         
             /* 
               int max = Int32.Parse(((DataRowView)bds_sp_getVatTuChuaCo[0])["SOLUONGTON"].ToString());
               spin_SoLuong.Properties.MaxValue = max;
@@ -92,7 +93,7 @@ namespace QLVT
             if (spin_DonGia.Value==0)
             {
                 MessageBox.Show("Đơn giá phải lớn hơn 0", "", MessageBoxButtons.OK);
-                spin_SoLuong.Focus();
+                spin_DonGia.Focus();
                 return;
             }
             if (MessageBox.Show("Bạn có muốn thêm vật tư này vào chi tiết ĐĐH?", "Xác nhận",
@@ -141,6 +142,7 @@ namespace QLVT
         private void gc_sp_getVatTuChuaCo_MouseCaptureChanged(object sender, EventArgs e)
         {
             txt_TenVT.Text = (((DataRowView)bds_spgetVTChuaCo[0])["TENVT"].ToString());
+           
             /*  int max = Int32.Parse(gridView_VatTuChuaCo.GetFocusedRowCellValue("SOLUONGTON").ToString());
                spin_SoLuong.Value = 0;
                spin_DonGia.Value = 0;

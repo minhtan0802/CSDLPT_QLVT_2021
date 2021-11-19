@@ -210,6 +210,7 @@ namespace QLVT
                 this.phieuNhapTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.phieuNhapTableAdapter.Fill(this.DS.PhieuNhap);
                 macn = ((DataRowView)bdsNV[0])["MACN"].ToString();
+             
             }
         }
 
@@ -307,7 +308,7 @@ namespace QLVT
                 this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
                 //     frmTaoAcc.LayDSNVChuaCoAcc("EXEC sp_getTaiKhoanChuaCoAcc");
                 //  frm
-                Program.frmTaoAcc.LayDSNVChuaCoAcc("EXEC sp_getTaiKhoanChuaCoAcc");
+              
             }    
            
             
@@ -383,6 +384,11 @@ namespace QLVT
             rpt.label_TieuDe.Text = "DANH SÁCH NHÂN VIÊN CHI NHÁNH " + tenCN;
             ReportPrintTool print = new ReportPrintTool(rpt);
             print.ShowPreviewDialog();
+        }
+
+        private void panelControl1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -34,17 +34,19 @@ namespace QLVT
         public static String mHoTen = "";
         public static int mChiNhanh = 0;
         public static String MDDH = "";
-        public static String frmPN_maDDH = "";
+     
 
         public static BindingSource bds_dspm = new BindingSource();//giữ bdsPM khi đăng nhập
+        public static BindingSource bds_dspm_TaoTK = new BindingSource();
         public static BindingSource bds_DSNVChuaCoAcc = new BindingSource();//giữ ds nhân viên chưa có acc
         public static frmMain frmChinh; //khai báo con trỏ, về sau là đối tượng frm Main
         public static frmDangNhap frmDN;
-        public static frmTaoTaiKhoan frmTaoAcc;
+    
         public static frmDonDatHang frmDDH;
         public static frmPhieuNhap frmPN;
         public static int soLuongVatTu = 0;
-        public static BindingSource bds_CTPN = new BindingSource();
+        public static frmThemCTPN frmCTPN;
+        public static frmTaoTaiKhoan frmTaoAcc;
         public static int KetNoi()
         {
             if (Program.conn != null && Program.conn.State == ConnectionState.Open)
@@ -121,7 +123,7 @@ namespace QLVT
         }
         public static void savePhieu(string loaiPhieu, string maDon,BindingSource bds, DevExpress.XtraGrid.Views.Grid.GridView gridView)
         {
-            if (loaiPhieu.Equals("dathang") && bds.Count!=0)
+            if (loaiPhieu.Equals("dh") && bds.Count!=0)
             {
                 Program.ExecSqlNonQuery("EXEC sp_deleteAllCTDDH '" + Program.MDDH + "'");
             }
@@ -154,27 +156,27 @@ namespace QLVT
             }
 
             SqlParameter para = new SqlParameter();
+            SqlParameter para2 = new SqlParameter();
+        
             para.SqlDbType = SqlDbType.Structured;
             para.TypeName = "dbo.TYPE_CTPhieu";
+
+         
             SqlCommand sqlcmd = new SqlCommand();
-            if (loaiPhieu.Equals("dathang"))
-            {
-              
-                para.ParameterName = "@CTDDH";
-                para.Value = dt;
-                Program.KetNoi();
-                 sqlcmd = new SqlCommand("sp_updateCTDDH", Program.conn);
-            }
-            else if (loaiPhieu.Equals("phieunhap"))
-            {
-                para.ParameterName = "@CTPN";
-                para.Value = dt;
-                Program.KetNoi();
-                sqlcmd = new SqlCommand("sp_updateCTPN", Program.conn);
-            }
+            para.ParameterName = "@CTPhieu";
+            para.Value = dt;
+
+           
+            Program.KetNoi();
+           sqlcmd = new SqlCommand("sp_updateCTPhieu", Program.conn);
+            
+           
             sqlcmd.Parameters.Clear();
             sqlcmd.CommandType = CommandType.StoredProcedure;
             sqlcmd.Parameters.Add(para);
+
+            
+            sqlcmd.Parameters.Add("type", SqlDbType.NChar).Value = loaiPhieu;
             sqlcmd.ExecuteNonQuery();
 
 

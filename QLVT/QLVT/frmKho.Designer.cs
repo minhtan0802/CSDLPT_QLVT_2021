@@ -146,7 +146,7 @@ namespace QLVT
             // 
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControlTop.Location = new System.Drawing.Point(0, 50);
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 57);
             this.barDockControlTop.Manager = null;
             this.barDockControlTop.Size = new System.Drawing.Size(854, 0);
             // 
@@ -154,7 +154,7 @@ namespace QLVT
             // 
             this.barDockControl1.CausesValidation = false;
             this.barDockControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControl1.Location = new System.Drawing.Point(0, 50);
+            this.barDockControl1.Location = new System.Drawing.Point(0, 57);
             this.barDockControl1.Manager = null;
             this.barDockControl1.Size = new System.Drawing.Size(854, 0);
             // 
@@ -277,31 +277,31 @@ namespace QLVT
             this.barDockControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControl2.Location = new System.Drawing.Point(0, 0);
             this.barDockControl2.Manager = this.barManager1;
-            this.barDockControl2.Size = new System.Drawing.Size(854, 50);
+            this.barDockControl2.Size = new System.Drawing.Size(854, 57);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 586);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 573);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(854, 20);
+            this.barDockControlBottom.Size = new System.Drawing.Size(854, 27);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 50);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 57);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 536);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 516);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(854, 50);
+            this.barDockControlRight.Location = new System.Drawing.Point(854, 57);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 536);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 516);
             // 
             // barListItem1
             // 
@@ -314,7 +314,7 @@ namespace QLVT
             this.panelControl1.Controls.Add(this.label1);
             this.panelControl1.Controls.Add(this.cmbChiNhanh);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(0, 50);
+            this.panelControl1.Location = new System.Drawing.Point(0, 57);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(854, 50);
             this.panelControl1.TabIndex = 8;
@@ -330,6 +330,7 @@ namespace QLVT
             // 
             // cmbChiNhanh
             // 
+            this.cmbChiNhanh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbChiNhanh.FormattingEnabled = true;
             this.cmbChiNhanh.Location = new System.Drawing.Point(134, 15);
             this.cmbChiNhanh.Name = "cmbChiNhanh";
@@ -355,7 +356,7 @@ namespace QLVT
             // 
             this.gcKho.DataSource = this.bdsKho;
             this.gcKho.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gcKho.Location = new System.Drawing.Point(0, 100);
+            this.gcKho.Location = new System.Drawing.Point(0, 107);
             this.gcKho.MainView = this.gridView1;
             this.gcKho.MenuManager = this.barManager1;
             this.gcKho.Name = "gcKho";
@@ -384,7 +385,7 @@ namespace QLVT
             this.colMAKHO2.Name = "colMAKHO2";
             this.colMAKHO2.Visible = true;
             this.colMAKHO2.VisibleIndex = 0;
-            this.colMAKHO2.Width = 94;
+            this.colMAKHO2.Width = 127;
             // 
             // colTENKHO2
             // 
@@ -525,9 +526,9 @@ namespace QLVT
             this.panelCtrl_Kho.Controls.Add(mAKHOLabel);
             this.panelCtrl_Kho.Controls.Add(this.txtMaKho);
             this.panelCtrl_Kho.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCtrl_Kho.Location = new System.Drawing.Point(0, 291);
+            this.panelCtrl_Kho.Location = new System.Drawing.Point(0, 298);
             this.panelCtrl_Kho.Name = "panelCtrl_Kho";
-            this.panelCtrl_Kho.Size = new System.Drawing.Size(854, 295);
+            this.panelCtrl_Kho.Size = new System.Drawing.Size(854, 275);
             this.panelCtrl_Kho.TabIndex = 16;
             // 
             // txtMaCN
@@ -537,7 +538,7 @@ namespace QLVT
             this.txtMaCN.Location = new System.Drawing.Point(579, 107);
             this.txtMaCN.MenuManager = this.barManager1;
             this.txtMaCN.Name = "txtMaCN";
-            this.txtMaCN.Size = new System.Drawing.Size(154, 22);
+            this.txtMaCN.Size = new System.Drawing.Size(154, 26);
             this.txtMaCN.TabIndex = 7;
             // 
             // txtDiaChi
@@ -546,7 +547,7 @@ namespace QLVT
             this.txtDiaChi.Location = new System.Drawing.Point(579, 49);
             this.txtDiaChi.MenuManager = this.barManager1;
             this.txtDiaChi.Name = "txtDiaChi";
-            this.txtDiaChi.Size = new System.Drawing.Size(154, 22);
+            this.txtDiaChi.Size = new System.Drawing.Size(154, 26);
             this.txtDiaChi.TabIndex = 5;
             // 
             // txtTenKho
@@ -555,7 +556,7 @@ namespace QLVT
             this.txtTenKho.Location = new System.Drawing.Point(217, 107);
             this.txtTenKho.MenuManager = this.barManager1;
             this.txtTenKho.Name = "txtTenKho";
-            this.txtTenKho.Size = new System.Drawing.Size(125, 22);
+            this.txtTenKho.Size = new System.Drawing.Size(125, 26);
             this.txtTenKho.TabIndex = 3;
             // 
             // txtMaKho
@@ -565,14 +566,14 @@ namespace QLVT
             this.txtMaKho.Location = new System.Drawing.Point(217, 49);
             this.txtMaKho.MenuManager = this.barManager1;
             this.txtMaKho.Name = "txtMaKho";
-            this.txtMaKho.Size = new System.Drawing.Size(125, 22);
+            this.txtMaKho.Size = new System.Drawing.Size(125, 26);
             this.txtMaKho.TabIndex = 1;
             // 
             // frmKho
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 606);
+            this.ClientSize = new System.Drawing.Size(854, 600);
             this.Controls.Add(this.panelCtrl_Kho);
             this.Controls.Add(this.gcKho);
             this.Controls.Add(this.panelControl1);

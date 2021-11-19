@@ -67,6 +67,7 @@ namespace QLVT
             vitri = bdsVatTu.Position;
             panelCtrl_VatTu.Enabled = true;
             bdsVatTu.AddNew();
+            nud_SoLuongTon.Value = 0;
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
             gcVatTu.Enabled = false;
@@ -173,12 +174,12 @@ namespace QLVT
                 tb_DonViTinh.Focus();
                 return;
             }
-            if (nud_SoLuongTon.Value==0)
+          /*  if (nud_SoLuongTon.Value==0)
             {
                 MessageBox.Show("Số lượng phải lớn hơn 0", "", MessageBoxButtons.OK);
                 tb_DonViTinh.Focus();
                 return;
-            }
+            }*/
             string strLenhMK = "EXEC sp_TraCuu @code='" + tb_MaVatTu.Text + "'" + ", @type='MAVT'";
         
             int kiemTraMaVT = 0;

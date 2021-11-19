@@ -44,6 +44,7 @@ namespace QLVT
             this.btnUndo = new DevExpress.XtraBars.BarButtonItem();
             this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
             this.btnThoat = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -71,7 +72,6 @@ namespace QLVT
             this.CTPNTableAdapter = new QLVT.DSTableAdapters.CTPNTableAdapter();
             this.bdsCTDDH = new System.Windows.Forms.BindingSource(this.components);
             this.CTDDHTableAdapter = new QLVT.DSTableAdapters.CTDDHTableAdapter();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             mAVTLabel = new System.Windows.Forms.Label();
             tENVTLabel = new System.Windows.Forms.Label();
             dVTLabel = new System.Windows.Forms.Label();
@@ -228,6 +228,15 @@ namespace QLVT
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThoat_ItemClick);
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "In danh sách vật tư";
+            this.barButtonItem1.Id = 9;
+            this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
+            this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            // 
             // bar3
             // 
             this.bar3.BarName = "Status bar";
@@ -246,31 +255,31 @@ namespace QLVT
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(809, 50);
+            this.barDockControlTop.Size = new System.Drawing.Size(809, 57);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 593);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 580);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(809, 20);
+            this.barDockControlBottom.Size = new System.Drawing.Size(809, 27);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 50);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 57);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 543);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 523);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(809, 50);
+            this.barDockControlRight.Location = new System.Drawing.Point(809, 57);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 543);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 523);
             // 
             // barListItem1
             // 
@@ -311,7 +320,7 @@ namespace QLVT
             // 
             this.gcVatTu.DataSource = this.bdsVatTu;
             this.gcVatTu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gcVatTu.Location = new System.Drawing.Point(0, 50);
+            this.gcVatTu.Location = new System.Drawing.Point(0, 57);
             this.gcVatTu.MainView = this.gridView1;
             this.gcVatTu.MenuManager = this.barManager1;
             this.gcVatTu.Name = "gcVatTu";
@@ -339,7 +348,7 @@ namespace QLVT
             this.colMAVT.Name = "colMAVT";
             this.colMAVT.Visible = true;
             this.colMAVT.VisibleIndex = 0;
-            this.colMAVT.Width = 94;
+            this.colMAVT.Width = 127;
             // 
             // colTENVT
             // 
@@ -402,6 +411,7 @@ namespace QLVT
             // nud_SoLuongTon
             // 
             this.nud_SoLuongTon.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.bdsVatTu, "SOLUONGTON", true));
+            this.nud_SoLuongTon.Enabled = false;
             this.nud_SoLuongTon.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nud_SoLuongTon.Location = new System.Drawing.Point(563, 97);
             this.nud_SoLuongTon.Name = "nud_SoLuongTon";
@@ -419,9 +429,9 @@ namespace QLVT
             this.panelCtrl_VatTu.Controls.Add(mAVTLabel);
             this.panelCtrl_VatTu.Controls.Add(this.tb_MaVatTu);
             this.panelCtrl_VatTu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCtrl_VatTu.Location = new System.Drawing.Point(0, 303);
+            this.panelCtrl_VatTu.Location = new System.Drawing.Point(0, 310);
             this.panelCtrl_VatTu.Name = "panelCtrl_VatTu";
-            this.panelCtrl_VatTu.Size = new System.Drawing.Size(809, 290);
+            this.panelCtrl_VatTu.Size = new System.Drawing.Size(809, 270);
             this.panelCtrl_VatTu.TabIndex = 6;
             // 
             // bdsCTPX
@@ -451,21 +461,12 @@ namespace QLVT
             // 
             this.CTDDHTableAdapter.ClearBeforeFill = true;
             // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "In danh sách vật tư";
-            this.barButtonItem1.Id = 9;
-            this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
-            this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
-            this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
-            // 
             // frmVatTu
             // 
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(809, 613);
+            this.ClientSize = new System.Drawing.Size(809, 607);
             this.Controls.Add(this.panelCtrl_VatTu);
             this.Controls.Add(this.gcVatTu);
             this.Controls.Add(this.barDockControlLeft);

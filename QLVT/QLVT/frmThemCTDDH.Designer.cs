@@ -34,7 +34,7 @@ namespace QLVT
             System.Windows.Forms.Label dONGIALabel;
             System.Windows.Forms.Label mAVTLabel;
             System.Windows.Forms.Label tENVTLabel1;
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             this.bds_sp_getCTDDH = new System.Windows.Forms.BindingSource(this.components);
             this.DS = new QLVT.DS();
             this.bdsVatTu = new System.Windows.Forms.BindingSource(this.components);
@@ -51,12 +51,12 @@ namespace QLVT
             this.bds_sp_getVatTuChuaCo = new System.Windows.Forms.BindingSource(this.components);
             this.sp_getCTDDHTableAdapter = new QLVT.DSTableAdapters.sp_getCTDDHTableAdapter();
             this.sp_getVatTuChuaCoTableAdapter = new QLVT.DSTableAdapters.sp_getVatTuChuaCoTableAdapter();
-            this.spin_DonGia = new DevExpress.XtraEditors.SpinEdit();
+            this.spin_SoLuong = new DevExpress.XtraEditors.SpinEdit();
             this.btn_Them = new DevExpress.XtraEditors.SimpleButton();
             this.txt_TenVT = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txt_MaVT = new DevExpress.XtraEditors.TextEdit();
-            this.spin_SoLuong = new DevExpress.XtraEditors.SpinEdit();
+            this.spin_DonGia = new DevExpress.XtraEditors.SpinEdit();
             this.spgetCTPNBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sp_getCTPNTableAdapter = new QLVT.DSTableAdapters.sp_getCTPNTableAdapter();
             this.sp_getVTChuaCoTableAdapter = new QLVT.DSTableAdapters.sp_getVTChuaCoTableAdapter();
@@ -72,10 +72,10 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.bds_spgetVTChuaCo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_VatTuChuaCo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getVatTuChuaCo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spin_DonGia.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spin_SoLuong.Properties)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaVT.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spin_SoLuong.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spin_DonGia.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spgetCTPNBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -155,7 +155,7 @@ namespace QLVT
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(426, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(396, 408);
+            this.groupBox2.Size = new System.Drawing.Size(396, 402);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Vật tư";
@@ -164,13 +164,13 @@ namespace QLVT
             // 
             this.gc_sp_getVatTuChuaCo.DataSource = this.bds_spgetVTChuaCo;
             this.gc_sp_getVatTuChuaCo.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridLevelNode2.RelationName = "Level1";
+            gridLevelNode1.RelationName = "Level1";
             this.gc_sp_getVatTuChuaCo.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
+            gridLevelNode1});
             this.gc_sp_getVatTuChuaCo.Location = new System.Drawing.Point(3, 18);
             this.gc_sp_getVatTuChuaCo.MainView = this.gridView_VatTuChuaCo;
             this.gc_sp_getVatTuChuaCo.Name = "gc_sp_getVatTuChuaCo";
-            this.gc_sp_getVatTuChuaCo.Size = new System.Drawing.Size(390, 387);
+            this.gc_sp_getVatTuChuaCo.Size = new System.Drawing.Size(390, 381);
             this.gc_sp_getVatTuChuaCo.TabIndex = 0;
             this.gc_sp_getVatTuChuaCo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_VatTuChuaCo});
@@ -249,27 +249,27 @@ namespace QLVT
             // 
             this.sp_getVatTuChuaCoTableAdapter.ClearBeforeFill = true;
             // 
-            // spin_DonGia
+            // spin_SoLuong
             // 
-            this.spin_DonGia.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bds_sp_getCTDDH, "DONGIA", true));
-            this.spin_DonGia.EditValue = new decimal(new int[] {
+            this.spin_SoLuong.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bds_sp_getCTDDH, "DONGIA", true));
+            this.spin_SoLuong.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spin_DonGia.Location = new System.Drawing.Point(89, 196);
-            this.spin_DonGia.Name = "spin_DonGia";
-            this.spin_DonGia.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.spin_SoLuong.Location = new System.Drawing.Point(92, 137);
+            this.spin_SoLuong.Name = "spin_SoLuong";
+            this.spin_SoLuong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spin_DonGia.Properties.IsFloatValue = false;
-            this.spin_DonGia.Properties.Mask.EditMask = "n0";
-            this.spin_DonGia.Properties.MaxValue = new decimal(new int[] {
+            this.spin_SoLuong.Properties.IsFloatValue = false;
+            this.spin_SoLuong.Properties.Mask.EditMask = "n0";
+            this.spin_SoLuong.Properties.MaxValue = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
-            this.spin_DonGia.Size = new System.Drawing.Size(159, 24);
-            this.spin_DonGia.TabIndex = 7;
+            this.spin_SoLuong.Size = new System.Drawing.Size(155, 34);
+            this.spin_SoLuong.TabIndex = 7;
             // 
             // btn_Them
             // 
@@ -294,18 +294,18 @@ namespace QLVT
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txt_MaVT);
-            this.groupBox1.Controls.Add(this.spin_SoLuong);
+            this.groupBox1.Controls.Add(this.spin_DonGia);
             this.groupBox1.Controls.Add(tENVTLabel1);
             this.groupBox1.Controls.Add(this.txt_TenVT);
             this.groupBox1.Controls.Add(mAVTLabel);
             this.groupBox1.Controls.Add(this.btn_Them);
             this.groupBox1.Controls.Add(dONGIALabel);
-            this.groupBox1.Controls.Add(this.spin_DonGia);
+            this.groupBox1.Controls.Add(this.spin_SoLuong);
             this.groupBox1.Controls.Add(sOLUONGLabel);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(426, 408);
+            this.groupBox1.Size = new System.Drawing.Size(426, 402);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin";
@@ -317,29 +317,29 @@ namespace QLVT
             this.txt_MaVT.Enabled = false;
             this.txt_MaVT.Location = new System.Drawing.Point(92, 40);
             this.txt_MaVT.Name = "txt_MaVT";
-            this.txt_MaVT.Size = new System.Drawing.Size(156, 22);
+            this.txt_MaVT.Size = new System.Drawing.Size(156, 26);
             this.txt_MaVT.TabIndex = 14;
             // 
-            // spin_SoLuong
+            // spin_DonGia
             // 
-            this.spin_SoLuong.EditValue = new decimal(new int[] {
+            this.spin_DonGia.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spin_SoLuong.Location = new System.Drawing.Point(90, 141);
-            this.spin_SoLuong.Name = "spin_SoLuong";
-            this.spin_SoLuong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.spin_DonGia.Location = new System.Drawing.Point(89, 193);
+            this.spin_DonGia.Name = "spin_DonGia";
+            this.spin_DonGia.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spin_SoLuong.Properties.IsFloatValue = false;
-            this.spin_SoLuong.Properties.Mask.EditMask = "n0";
-            this.spin_SoLuong.Properties.MaxValue = new decimal(new int[] {
+            this.spin_DonGia.Properties.IsFloatValue = false;
+            this.spin_DonGia.Properties.Mask.EditMask = "n0";
+            this.spin_DonGia.Properties.MaxValue = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
-            this.spin_SoLuong.Size = new System.Drawing.Size(158, 24);
-            this.spin_SoLuong.TabIndex = 13;
+            this.spin_DonGia.Size = new System.Drawing.Size(158, 34);
+            this.spin_DonGia.TabIndex = 13;
             // 
             // spgetCTPNBindingSource
             // 
@@ -358,7 +358,7 @@ namespace QLVT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 408);
+            this.ClientSize = new System.Drawing.Size(822, 402);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmThemCTDDH";
@@ -372,11 +372,11 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.bds_spgetVTChuaCo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_VatTuChuaCo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getVatTuChuaCo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spin_DonGia.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spin_SoLuong.Properties)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaVT.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spin_SoLuong.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spin_DonGia.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spgetCTPNBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -401,8 +401,8 @@ namespace QLVT
         private DevExpress.XtraEditors.SimpleButton btn_Them;
         private System.Windows.Forms.TextBox txt_TenVT;
         private System.Windows.Forms.GroupBox groupBox1;
-        public DevExpress.XtraEditors.SpinEdit spin_DonGia;
         public DevExpress.XtraEditors.SpinEdit spin_SoLuong;
+        public DevExpress.XtraEditors.SpinEdit spin_DonGia;
         private System.Windows.Forms.BindingSource bds_spgetVTChuaCo;
         private System.Windows.Forms.BindingSource spgetCTPNBindingSource;
         private DSTableAdapters.sp_getCTPNTableAdapter sp_getCTPNTableAdapter;

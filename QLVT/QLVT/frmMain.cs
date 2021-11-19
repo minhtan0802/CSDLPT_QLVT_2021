@@ -146,21 +146,34 @@ namespace QLVT
 
         private void btn_TaoTaiKhoan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Program.frmTaoAcc = new frmTaoTaiKhoan();
-            Program.frmTaoAcc.LayDSNVChuaCoAcc("EXEC sp_getTaiKhoanChuaCoAcc");
-            if (Program.frmTaoAcc.dt.Rows.Count==0)
+            /*  Form frm = this.CheckExist(typeof(frmTaoTaiKhoan));
+              if (frm != null) frm.Activate();
+              else
+              {
+                  Program.frmTaoAcc = new frmTaoTaiKhoan();
+                  Program.frmTaoAcc.MdiParent = this;
+                  Program.frmTaoAcc.Dock = DockStyle.Fill;
+
+
+
+                  Program.frmTaoAcc.Show();
+                  if (Program.frmTaoAcc.get_bds_ChiNhanhTTK().Rows.Count == 0)
+                  {
+                      MessageBox.Show("Tất cả nhân viên ở chi nhánh này đã có tài khoản", "", MessageBoxButtons.OK);
+                  }
+              }*/
+            if (!Program.CheckOpened("Tạo tài khoản"))
             {
-                MessageBox.Show("Tất cả nhân viên ở chi nhánh này đều đã có tài khoản", "", MessageBoxButtons.OK);
-                return;
-            }    
-            Form frm = this.CheckExist(typeof(frmTaoTaiKhoan));
-            if (frm != null) frm.Activate();
-            else
-            {
-                frmTaoTaiKhoan f = new frmTaoTaiKhoan();
-                f.MdiParent = this;
-                f.Show();
+                Program.frmTaoAcc = new frmTaoTaiKhoan();
+                Program.frmTaoAcc.Show();
+                if (Program.frmTaoAcc.get_bds_ChiNhanhTTK().Rows.Count == 0)
+                {
+                    MessageBox.Show("Tất cả nhân viên ở chi nhánh này đã có tài khoản", "", MessageBoxButtons.OK);
+                }
             }
+            else return;
+
+
         }
 
         private void btn_LapDDH_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
