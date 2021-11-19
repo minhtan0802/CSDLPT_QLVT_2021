@@ -61,7 +61,7 @@ namespace QLVT
             this.colMANV = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colMAKHO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bds_spgetCTDDH = new System.Windows.Forms.BindingSource(this.components);
-            this.sp_getCTDDHTableAdapter = new QLVT.DSTableAdapters.sp_getCTDDHTableAdapter();
+            this.Sp_getCTDDHTableAdapter = new QLVT.DSTableAdapters.sp_getCTDDHTableAdapter();
             this.panelCtrl_DatHang = new DevExpress.XtraEditors.PanelControl();
             this.label_Kho = new System.Windows.Forms.Label();
             this.cmb_MaKho = new System.Windows.Forms.ComboBox();
@@ -266,31 +266,31 @@ namespace QLVT
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1521, 50);
+            this.barDockControlTop.Size = new System.Drawing.Size(1521, 57);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 736);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 719);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1521, 20);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1521, 27);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 50);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 57);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 686);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 662);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1521, 50);
+            this.barDockControlRight.Location = new System.Drawing.Point(1521, 57);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 686);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 662);
             // 
             // barListItem1
             // 
@@ -331,7 +331,7 @@ namespace QLVT
             // 
             this.gc_DatHang.DataSource = this.bdsDatHang;
             this.gc_DatHang.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gc_DatHang.Location = new System.Drawing.Point(0, 100);
+            this.gc_DatHang.Location = new System.Drawing.Point(0, 107);
             this.gc_DatHang.MainView = this.gridView_DatHang;
             this.gc_DatHang.MenuManager = this.barManager1;
             this.gc_DatHang.Name = "gc_DatHang";
@@ -363,7 +363,7 @@ namespace QLVT
             this.colMasoDDH.OptionsColumn.AllowEdit = false;
             this.colMasoDDH.Visible = true;
             this.colMasoDDH.VisibleIndex = 0;
-            this.colMasoDDH.Width = 94;
+            this.colMasoDDH.Width = 127;
             // 
             // colNGAY
             // 
@@ -415,7 +415,7 @@ namespace QLVT
             // 
             // sp_getCTDDHTableAdapter
             // 
-            this.sp_getCTDDHTableAdapter.ClearBeforeFill = true;
+            this.Sp_getCTDDHTableAdapter.ClearBeforeFill = true;
             // 
             // panelCtrl_DatHang
             // 
@@ -433,9 +433,9 @@ namespace QLVT
             this.panelCtrl_DatHang.Controls.Add(this.txt_MDDH);
             this.panelCtrl_DatHang.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelCtrl_DatHang.Enabled = false;
-            this.panelCtrl_DatHang.Location = new System.Drawing.Point(0, 351);
+            this.panelCtrl_DatHang.Location = new System.Drawing.Point(0, 358);
             this.panelCtrl_DatHang.Name = "panelCtrl_DatHang";
-            this.panelCtrl_DatHang.Size = new System.Drawing.Size(850, 385);
+            this.panelCtrl_DatHang.Size = new System.Drawing.Size(850, 361);
             this.panelCtrl_DatHang.TabIndex = 30;
             // 
             // label_Kho
@@ -472,7 +472,7 @@ namespace QLVT
             this.txt_MaNV.Location = new System.Drawing.Point(408, 94);
             this.txt_MaNV.MenuManager = this.barManager1;
             this.txt_MaNV.Name = "txt_MaNV";
-            this.txt_MaNV.Size = new System.Drawing.Size(125, 22);
+            this.txt_MaNV.Size = new System.Drawing.Size(125, 26);
             this.txt_MaNV.TabIndex = 7;
             // 
             // txt_NCC
@@ -481,7 +481,7 @@ namespace QLVT
             this.txt_NCC.Location = new System.Drawing.Point(138, 96);
             this.txt_NCC.MenuManager = this.barManager1;
             this.txt_NCC.Name = "txt_NCC";
-            this.txt_NCC.Size = new System.Drawing.Size(125, 22);
+            this.txt_NCC.Size = new System.Drawing.Size(125, 26);
             this.txt_NCC.TabIndex = 5;
             this.txt_NCC.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.txt_NCC_EditValueChanging);
             // 
@@ -497,7 +497,7 @@ namespace QLVT
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEdit_NgayLap.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit_NgayLap.Size = new System.Drawing.Size(125, 22);
+            this.dateEdit_NgayLap.Size = new System.Drawing.Size(125, 26);
             this.dateEdit_NgayLap.TabIndex = 3;
             // 
             // txt_MDDH
@@ -507,7 +507,7 @@ namespace QLVT
             this.txt_MDDH.Location = new System.Drawing.Point(138, 30);
             this.txt_MDDH.MenuManager = this.barManager1;
             this.txt_MDDH.Name = "txt_MDDH";
-            this.txt_MDDH.Size = new System.Drawing.Size(125, 22);
+            this.txt_MDDH.Size = new System.Drawing.Size(125, 26);
             this.txt_MDDH.TabIndex = 1;
             // 
             // bdsVatTu
@@ -536,9 +536,9 @@ namespace QLVT
             this.groupBox_CTDDH.Controls.Add(this.btn_ThemCTDDH);
             this.groupBox_CTDDH.Controls.Add(this.btn_XoaCTDDH);
             this.groupBox_CTDDH.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox_CTDDH.Location = new System.Drawing.Point(850, 351);
+            this.groupBox_CTDDH.Location = new System.Drawing.Point(850, 358);
             this.groupBox_CTDDH.Name = "groupBox_CTDDH";
-            this.groupBox_CTDDH.Size = new System.Drawing.Size(671, 385);
+            this.groupBox_CTDDH.Size = new System.Drawing.Size(671, 361);
             this.groupBox_CTDDH.TabIndex = 39;
             this.groupBox_CTDDH.TabStop = false;
             this.groupBox_CTDDH.Text = "Chi tiết đơn đặt hàng";
@@ -612,6 +612,8 @@ namespace QLVT
             // colSOLUONG
             // 
             this.colSOLUONG.Caption = "Số lượng";
+            this.colSOLUONG.DisplayFormat.FormatString = "n0";
+            this.colSOLUONG.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colSOLUONG.FieldName = "SOLUONG";
             this.colSOLUONG.MinWidth = 25;
             this.colSOLUONG.Name = "colSOLUONG";
@@ -666,7 +668,7 @@ namespace QLVT
             this.panelControl1.Controls.Add(this.label1);
             this.panelControl1.Controls.Add(this.cmbChiNhanh);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(0, 50);
+            this.panelControl1.Location = new System.Drawing.Point(0, 57);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1521, 50);
             this.panelControl1.TabIndex = 44;
@@ -694,7 +696,7 @@ namespace QLVT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1521, 756);
+            this.ClientSize = new System.Drawing.Size(1521, 746);
             this.Controls.Add(this.groupBox_CTDDH);
             this.Controls.Add(this.panelCtrl_DatHang);
             this.Controls.Add(this.gc_DatHang);
@@ -779,7 +781,7 @@ namespace QLVT
         private DevExpress.XtraGrid.Columns.GridColumn colTENVT;
         private DevExpress.XtraGrid.Columns.GridColumn colDONGIA;
         private DevExpress.XtraGrid.Columns.GridColumn colSOLUONG;
-        public DSTableAdapters.sp_getCTDDHTableAdapter sp_getCTDDHTableAdapter;
+        private DSTableAdapters.sp_getCTDDHTableAdapter sp_getCTDDHTableAdapter;
         public DS DS;
         public DevExpress.XtraEditors.SimpleButton btn_ThemCTDDH;
         public DevExpress.XtraGrid.Views.Grid.GridView gridView_getCTDDH;
@@ -797,5 +799,7 @@ namespace QLVT
         private DevExpress.XtraGrid.GridControl gc_sp_getCTDDH;
         public System.Windows.Forms.BindingSource bds_spgetCTDDH;
         public DevExpress.XtraGrid.GridControl gc_DatHang;
+
+        public DSTableAdapters.sp_getCTDDHTableAdapter Sp_getCTDDHTableAdapter { get => sp_getCTDDHTableAdapter; set => sp_getCTDDHTableAdapter = value; }
     }
 }

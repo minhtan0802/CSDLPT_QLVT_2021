@@ -14,6 +14,28 @@ namespace QLVT
     public partial class frmPhieuNhap : DevExpress.XtraEditors.XtraForm
     {
         string mapn = "";
+        string mddh = "";
+        int soLuongDDH = 0;
+        int sumCTDDH = 0;
+        public int getSumCTDDH()
+        {
+            return sumCTDDH;
+        }
+        public void setSumCTDDH(int sum)
+        {
+            this.sumCTDDH = sum;
+        }
+        DataTable dtCTPN = new DataTable();
+       
+        public DataTable getDTCTPN()
+        {
+            return dtCTPN;  
+        }    
+
+        public string getMDDH()
+        {
+            return mddh;
+        }
         public frmPhieuNhap()
         {
             InitializeComponent();
@@ -44,17 +66,18 @@ namespace QLVT
             this.khoTableAdapter.Connection.ConnectionString = Program.connstr;
             this.khoTableAdapter.Fill(this.DS.Kho);
 
-            Program.bds_CTPN = bds_spgetCTPN;
+          
             if (bdsDH.Count != 0)
             {
        
-               Program.frmPN_maDDH = ((DataRowView)bdsDH[0])["MasoDDH"].ToString();
-             
-              
+              mddh = ((DataRowView)bdsDH[0])["MasoDDH"].ToString();
+              //cmb_Kho.Text = ((DataRowView)bdsPN[0])["MAKHO"].ToString();
+
+
             }
             else
             {
-                Program.frmPN_maDDH = "";
+                mddh = "";
             }
             
             if (bdsPN.Count != 0)
@@ -64,7 +87,8 @@ namespace QLVT
                 this.sp_getCTPNTableAdapter.Fill(DS.sp_getCTPN, mapn);
                 btn_ThemCTPN.Enabled = false;
                 btnThem.Enabled = false;
-               
+               gridView_CTPN.OptionsBehavior.Editable = false;
+
             }
             else
             {
@@ -73,6 +97,7 @@ namespace QLVT
                 mapn = "";
                 this.sp_getCTPNTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.sp_getCTPNTableAdapter.Fill(DS.sp_getCTPN, mapn);
+                gridView_CTPN.OptionsBehavior.Editable = false;
             }
 
             if (Program.mGroup == "CONGTY")
@@ -109,10 +134,11 @@ namespace QLVT
                 btnThem.Enabled = false;
                 btnXoa.Enabled = false;
                 mapn = gridView_PN.GetRowCellValue(0, "MAPN").ToString();
-                
+                cmb_Kho.Text = ((DataRowView)bdsPN[0])["MAKHO"].ToString();
                 this.sp_getCTPNTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.sp_getCTPNTableAdapter.Fill(DS.sp_getCTPN, mapn);
                 gridView_CTPN.OptionsBehavior.Editable = false;
+                
 
             }
             else
@@ -121,9 +147,12 @@ namespace QLVT
                 mapn = "";
                 this.sp_getCTPNTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.sp_getCTPNTableAdapter.Fill(DS.sp_getCTPN, mapn);
+                gridView_CTPN.OptionsBehavior.Editable = true;
             }
-            Program.frmPN_maDDH = gridView_DDH.GetRowCellValue(gridView_DDH.FocusedRowHandle, "MasoDDH").ToString();
-          
+        
+            mddh= ((DataRowView)bdsDH[bdsDH.Position])["MasoDDH"].ToString(); ;
+            MessageBox.Show("MDDH: " + mddh);
+
         }
 
         private void panelControl4_Paint(object sender, PaintEventArgs e)
@@ -143,10 +172,12 @@ namespace QLVT
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            label_Kho.Text = "Kho";
+            sumCTDDH = 0;
+            Program.frmCTPN = new frmThemCTPN();
+            label_Kho.Text = "Kho:";
             gc_DDH.Enabled = false;
             panelCtrl_ThemPN.Enabled = true;
-            btn_ThemCTPN.Enabled = true;
+            btn_xoaCTPN.Enabled = true;
             btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
             bdsPN.AddNew();
@@ -159,6 +190,23 @@ namespace QLVT
             int vitriKho=bdsKho.Find("MAKHO", makho);
             cmb_Kho.SelectedIndex = vitriKho;
             cmb_Kho.Update();
+            dtCTPN = new DataTable();
+            dtCTPN.Columns.Add("MAVT");
+            this.sp_getCTDDHTableAdapter.Connection.ConnectionString = Program.connstr;
+            this.sp_getCTDDHTableAdapter.Fill(this.DS.sp_getCTDDH, Program.frmPN.getMDDH());
+            
+            for (int i = 0; i < bds_spCTDDH.Count; i++)
+            {
+                Program.frmPN.bds_spgetCTPN.AddNew();
+                ((DataRowView)Program.frmPN.bds_spgetCTPN[i])["MAVT"] = ((DataRowView) bds_spCTDDH[i])["MAVT"];
+                ((DataRowView)Program.frmPN.bds_spgetCTPN[i])["TENVT"] = ((DataRowView)bds_spCTDDH[i])["TENVT"];
+                ((DataRowView)Program.frmPN.bds_spgetCTPN[i])["DONGIA"] = ((DataRowView)bds_spCTDDH[i])["DONGIA"];
+                ((DataRowView)Program.frmPN.bds_spgetCTPN[i])["SOLUONG"] = ((DataRowView)bds_spCTDDH[i])["SOLUONG"];
+                dtCTPN.Rows.Add(((DataRowView)bds_spCTDDH[i])["MAVT"]);
+                sumCTDDH++;
+            }
+            
+            soLuongDDH = Int32.Parse(((DataRowView)bds_spCTDDH[0])["SOLUONG"].ToString());
         }
         private int savePN()
         {
@@ -182,7 +230,7 @@ namespace QLVT
         {
             try
             {
-                Program.savePhieu("phieunhap", txt_MaPN.Text, bds_spgetCTPN, gridView_CTPN);
+                Program.savePhieu("n", txt_MaPN.Text, bds_spgetCTPN, gridView_CTPN);
                 this.CTPNTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.CTPNTableAdapter.Fill(this.DS.CTPN);
                 MessageBox.Show("Ghi thành công", "", MessageBoxButtons.OK);
@@ -204,12 +252,18 @@ namespace QLVT
                 txt_MaPN.Focus();
                 return;
             }
-            if (cmb_Kho.SelectedIndex == -1)
+            if (cmb_Kho.SelectedIndex == -1 && cmb_Kho.Text=="")
             {
                 MessageBox.Show("Kho không được thiếu", "", MessageBoxButtons.OK);
                 cmb_Kho.Focus();
                 return;
             }
+            if (cmb_Kho.SelectedIndex==-1 && cmb_Kho.Text!="")
+            {
+                MessageBox.Show("Kho không có ở chi nhánh này", "", MessageBoxButtons.OK);
+                cmb_Kho.Focus();
+                return;
+            }    
             if (Program.ExecSqlNonQuery("EXEC sp_TraCuu '" + txt_MaPN.Text + "'" + ", 'MAPN'") == 1)
             {
                 txt_MaPN.Focus();
@@ -228,6 +282,7 @@ namespace QLVT
       
             btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
             btnGhi.Enabled = btnUndo.Enabled = false;
+            btn_xoaCTPN.Enabled = btn_ThemCTPN.Enabled= false;
             label_Kho.Text = "Mã kho:";
             panelCtrl_ThemPN.Enabled = false;
             gc_DDH.Enabled = true;
@@ -286,6 +341,130 @@ namespace QLVT
 
         private void btn_GhiCTPN_Click(object sender, EventArgs e)
         {
+           
+        }
+
+        private void gc_sp_getCTPN_EditorKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (gridView_CTPN.FocusedColumn.FieldName == "SOLUONG" || gridView_CTPN.FocusedColumn.FieldName == "DONGIA")
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                load();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi Reload: " + ex.Message, "", MessageBoxButtons.OK);
+                return;
+            }
+        }
+
+        private void gridView_PN_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            if (gridView_CTPN.FocusedColumn.FieldName == "SOLUONG")
+            {
+                int rows = gridView_CTPN.FocusedRowHandle;
+                int number = 0;
+                String soLuongString = e.Value as string;
+                if (soLuongString.Equals(""))
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Không được để trống";
+                }
+                else if (!Int32.TryParse(soLuongString, out number))
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Vui lòng nhập số";
+                }
+                else if (Int32.Parse(soLuongString) == 0 && gridView_CTPN.FocusedColumn.FieldName == "SOLUONG")
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Số lượng phải phải lớn hơn 0";
+                }
+
+
+            }
+        }
+
+        private void fillToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.sp_getCTDDHTableAdapter.Fill(this.DS.sp_getCTDDH, mddh);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void gc_sp_getCTPN_MouseCaptureChanged(object sender, EventArgs e)
+        {
+            soLuongDDH = Int32.Parse(((DataRowView)bds_spgetCTPN[bds_spgetCTPN.Position])["SOLUONG"].ToString());
+        }
+
+        private void gridView_CTPN_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            if (gridView_CTPN.FocusedColumn.FieldName == "SOLUONG" || gridView_CTPN.FocusedColumn.FieldName == "DONGIA")
+            {
+                int rows = gridView_CTPN.FocusedRowHandle;
+                int number = 0;
+                String soLuongString = e.Value as string;
+                if (soLuongString.Equals(""))
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Không được để trống";
+                }
+                else if (!Int32.TryParse(soLuongString, out number))
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Vui lòng nhập số";
+                }
+                else if (Int32.Parse(soLuongString) == 0 && gridView_CTPN.FocusedColumn.FieldName == "SOLUONG")
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Số lượng phải phải lớn hơn 0";
+                }
+                else if (Int32.Parse(soLuongString) > soLuongDDH && gridView_CTPN.FocusedColumn.FieldName == "SOLUONG")
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Số lượng nhập không được lớn hơn số lượng đã đặt là " + soLuongDDH;
+                }
+
+
+            }
+        }
+
+        private void btn_xoaCTPN_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Bạn có thật sự muốn xóa kho này?", "Xác nhận",
+              MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                dtCTPN.Rows.RemoveAt(bds_spgetCTPN.Position);
+
+                //gridView_getCTDDH.DeleteSelectedRows();
+                bds_spgetCTPN.RemoveAt(bds_spgetCTPN.Position);
+                btn_ThemCTPN.Enabled = true;
+                btnThoat.Enabled = false;
+                if (bds_spgetCTPN.Count == 0)
+                {
+                    btn_xoaCTPN.Enabled = false;
+                }
+                else
+                {
+                    btn_xoaCTPN.Enabled = true;
+                }
+            }
            
         }
     }

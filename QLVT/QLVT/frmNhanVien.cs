@@ -178,6 +178,11 @@ namespace QLVT
             if (bdsNV.Count == 0) btnXoa.Enabled = false;
         }
 
+        private void btnDSNV_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
         private void cmbChiNhanh_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbChiNhanh.SelectedValue.ToString() == "System.Data.DataRowView") return;
@@ -205,6 +210,7 @@ namespace QLVT
                 this.phieuNhapTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.phieuNhapTableAdapter.Fill(this.DS.PhieuNhap);
                 macn = ((DataRowView)bdsNV[0])["MACN"].ToString();
+             
             }
         }
 
@@ -302,7 +308,7 @@ namespace QLVT
                 this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
                 //     frmTaoAcc.LayDSNVChuaCoAcc("EXEC sp_getTaiKhoanChuaCoAcc");
                 //  frm
-                Program.frmTaoAcc.LayDSNVChuaCoAcc("EXEC sp_getTaiKhoanChuaCoAcc");
+              
             }    
            
             
@@ -380,40 +386,9 @@ namespace QLVT
             print.ShowPreviewDialog();
         }
 
-
-        String CNchuyen;
-        public void chuyenChiNhanh(String index)
+        private void panelControl1_Paint(object sender, PaintEventArgs e)
         {
-            CNchuyen = index;
-            if (CNchuyen != Program.servername)
-            {
-                String maCN = "";
-                if (CNchuyen.Contains("2")) maCN = "CN2";
-                else if (CNchuyen.Contains("1")) maCN = "CN1";
 
-                String maNV = ((DataRowView)bdsNV[bdsNV.Position])["MANV"].ToString();
-                string strLenh = "EXEC sp_ChuyenChiNhanhNV @MANV='" + maNV + "'" + ", @MACN='" + maCN + "'";
-                try
-                {
-                    Program.ExecSqlNonQuery(strLenh);
-                    MessageBox.Show("Chuyển nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
-                    btnUndo.Enabled = true;
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }   
-            else
-                MessageBox.Show("Vui lòng chọn CN khác chi nhánh hiện tại", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-        private void btnChuyenCN_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            
-            frmChuyenCN pickCN = new frmChuyenCN();
-            pickCN.getCN = new frmChuyenCN.getChiNhanh(chuyenChiNhanh);
-            pickCN.ShowDialog();
         }
     }
 }

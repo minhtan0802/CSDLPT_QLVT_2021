@@ -93,14 +93,14 @@ namespace QLVT
             this.barButtonItem6});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ribbonControl1.MaxItemId = 25;
+            this.ribbonControl1.MaxItemId = 26;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.rib_HeThong,
             this.rib_DanhMuc,
             this.rib_NghiepVu,
             this.rib_BaoCao});
-            this.ribbonControl1.Size = new System.Drawing.Size(1602, 193);
+            this.ribbonControl1.Size = new System.Drawing.Size(1602, 225);
             this.ribbonControl1.Click += new System.EventHandler(this.ribbonControl1_Click);
             // 
             // btn_DangNhap
@@ -350,6 +350,7 @@ namespace QLVT
             // 
             // frmMain
             // 
+            this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.True;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1602, 608);

@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,6 +15,8 @@ namespace QLVT
 {
     public partial class frmDangNhap : DevExpress.XtraEditors.XtraForm
     {
+     
+        
         private SqlConnection conn_publisher = new SqlConnection();
 
         private void LayDSPM(String cmd)
@@ -25,7 +28,7 @@ namespace QLVT
             da.Fill(dt);
             conn_publisher.Close();
             Program.bds_dspm.DataSource = dt;
-            Program.bds_dspm_ChuyenCN.DataSource = dt;
+            Program.bds_dspm_TaoTK.DataSource = dt;
             cmb_ChiNhanh.DataSource = Program.bds_dspm;//chứa danh sách data cung cấp cho nó
             
             cmb_ChiNhanh.DisplayMember = "TENCN";
@@ -36,6 +39,8 @@ namespace QLVT
         public frmDangNhap()
         {
             InitializeComponent();
+      
+         
         }
         
         
@@ -90,6 +95,7 @@ namespace QLVT
 
 
         }
+
         private int KetNoi_CSDLGOC()//chỉ tại trên form này thôi nên private
         {
             if (conn_publisher != null && conn_publisher.State == ConnectionState.Open)
@@ -112,6 +118,7 @@ namespace QLVT
         }
         private void frmDangNhap_Load(object sender, EventArgs e)
         {
+          
             if (KetNoi_CSDLGOC() == 0) return;
             LayDSPM("SELECT * FROM get_Subcribers");
             cmb_ChiNhanh.SelectedIndex = 1;
@@ -146,6 +153,33 @@ namespace QLVT
             }
 
 
+        }
+
+        private void cb_ShowPass_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!cb_ShowPass.Checked)
+            {
+                tb_MatKhau.UseSystemPasswordChar = true;
+            }
+            else
+            {
+                tb_MatKhau.UseSystemPasswordChar = false;
+            }
+        }
+
+        private void textEdit1_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_TaiKhoan_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_DangNhap_MouseHover(object sender, EventArgs e)
+        {
+           
         }
     }
 }
