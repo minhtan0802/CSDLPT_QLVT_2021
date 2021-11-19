@@ -29,6 +29,7 @@ namespace QLVT
             conn_publisher.Close();
             Program.bds_dspm.DataSource = dt;
             Program.bds_dspm_TaoTK.DataSource = dt;
+            Program.bds_dspm_ChuyenCN.DataSource = dt;
             cmb_ChiNhanh.DataSource = Program.bds_dspm;//chứa danh sách data cung cấp cho nó
             
             cmb_ChiNhanh.DisplayMember = "TENCN";
