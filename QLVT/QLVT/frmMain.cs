@@ -210,5 +210,10 @@ namespace QLVT
         
             Program.frmDN.Close();
         }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

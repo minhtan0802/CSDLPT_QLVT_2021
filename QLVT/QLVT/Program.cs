@@ -16,9 +16,9 @@ namespace QLVT
         /// </summary>
         public static SqlConnection conn = new SqlConnection();
         public static String connstr;
-      //  public static String connstr_publisher = "Data Source=LAPTOP-0GIVQL73;Initial Catalog=QLVT;Integrated Security=True";
-     //   public static String connstr_publisher = "Data Source=LAPTOP-LJSAF82J;Initial Catalog=QLVT;Integrated Security=True";
-        public static String connstr_publisher = "Data Source=LAPTOP-V0HI7R3V\\SERVER;Initial Catalog=QLVT;Integrated Security=True";
+        public static String connstr_publisher = "Data Source=LAPTOP-0GIVQL73;Initial Catalog=QLVT;Integrated Security=True";
+        //   public static String connstr_publisher = "Data Source=LAPTOP-LJSAF82J;Initial Catalog=QLVT;Integrated Security=True";
+        //public static String connstr_publisher = "Data Source=LAPTOP-V0HI7R3V\\SERVER;Initial Catalog=QLVT;Integrated Security=True";
         public static SqlDataReader myReader;
         public static String servername = "";
         public static String username = "";
@@ -45,6 +45,7 @@ namespace QLVT
         public static frmPhieuNhap frmPN;
         public static int soLuongVatTu = 0;
         public static BindingSource bds_CTPN = new BindingSource();
+        public static BindingSource bds_dspm_ChuyenCN = new BindingSource();
         public static int KetNoi()
         {
             if (Program.conn != null && Program.conn.State == ConnectionState.Open)

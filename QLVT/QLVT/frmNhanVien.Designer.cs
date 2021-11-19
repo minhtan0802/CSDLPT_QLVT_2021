@@ -49,6 +49,7 @@ namespace QLVT
             this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
             this.btnChuyenCN = new DevExpress.XtraBars.BarButtonItem();
             this.btnThoat = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -85,7 +86,6 @@ namespace QLVT
             this.bdsDH = new System.Windows.Forms.BindingSource(this.components);
             this.bdsPN = new System.Windows.Forms.BindingSource(this.components);
             this.bdsPX = new System.Windows.Forms.BindingSource(this.components);
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             mANVLabel = new System.Windows.Forms.Label();
             hOLabel = new System.Windows.Forms.Label();
             mACNLabel = new System.Windows.Forms.Label();
@@ -283,7 +283,7 @@ namespace QLVT
             this.btnChuyenCN.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnChuyenCN.ImageOptions.Image")));
             this.btnChuyenCN.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnChuyenCN.ImageOptions.LargeImage")));
             this.btnChuyenCN.Name = "btnChuyenCN";
-            this.btnChuyenCN.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDSNV_ItemClick);
+            this.btnChuyenCN.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnChuyenCN_ItemClick);
             // 
             // btnThoat
             // 
@@ -293,6 +293,16 @@ namespace QLVT
             this.btnThoat.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnThoat.ImageOptions.LargeImage")));
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThoat_ItemClick);
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "In DS Nhân viên";
+            this.barButtonItem1.Id = 9;
+            this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
+            this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // bar3
             // 
@@ -620,16 +630,6 @@ namespace QLVT
             // 
             this.bdsPX.DataMember = "FK_PX_NhanVien";
             this.bdsPX.DataSource = this.bdsNV;
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "In DS Nhân viên";
-            this.barButtonItem1.Id = 9;
-            this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
-            this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
-            this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // frmNhanVien
             // 

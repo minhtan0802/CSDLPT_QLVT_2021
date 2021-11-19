@@ -34,7 +34,7 @@ namespace QLVT
             System.Windows.Forms.Label dONGIALabel;
             System.Windows.Forms.Label mAVTLabel;
             System.Windows.Forms.Label tENVTLabel1;
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             this.bds_sp_getCTDDH = new System.Windows.Forms.BindingSource(this.components);
             this.DS = new QLVT.DS();
             this.bdsVatTu = new System.Windows.Forms.BindingSource(this.components);
@@ -164,9 +164,9 @@ namespace QLVT
             // 
             this.gc_sp_getVatTuChuaCo.DataSource = this.bds_spgetVTChuaCo;
             this.gc_sp_getVatTuChuaCo.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridLevelNode2.RelationName = "Level1";
+            gridLevelNode1.RelationName = "Level1";
             this.gc_sp_getVatTuChuaCo.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
+            gridLevelNode1});
             this.gc_sp_getVatTuChuaCo.Location = new System.Drawing.Point(3, 18);
             this.gc_sp_getVatTuChuaCo.MainView = this.gridView_VatTuChuaCo;
             this.gc_sp_getVatTuChuaCo.Name = "gc_sp_getVatTuChuaCo";
