@@ -33,7 +33,6 @@ namespace QLVT
             System.Windows.Forms.Label mAVTLabel;
             System.Windows.Forms.Label tENVTLabel;
             System.Windows.Forms.Label dVTLabel;
-            System.Windows.Forms.Label sOLUONGTONLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVatTu));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
@@ -64,7 +63,6 @@ namespace QLVT
             this.tb_MaVatTu = new System.Windows.Forms.TextBox();
             this.tb_TenVatTu = new System.Windows.Forms.TextBox();
             this.tb_DonViTinh = new System.Windows.Forms.TextBox();
-            this.nud_SoLuongTon = new System.Windows.Forms.NumericUpDown();
             this.panelCtrl_VatTu = new DevExpress.XtraEditors.PanelControl();
             this.bdsCTPX = new System.Windows.Forms.BindingSource(this.components);
             this.CTPXTableAdapter = new QLVT.DSTableAdapters.CTPXTableAdapter();
@@ -75,13 +73,11 @@ namespace QLVT
             mAVTLabel = new System.Windows.Forms.Label();
             tENVTLabel = new System.Windows.Forms.Label();
             dVTLabel = new System.Windows.Forms.Label();
-            sOLUONGTONLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsVatTu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcVatTu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_SoLuongTon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelCtrl_VatTu)).BeginInit();
             this.panelCtrl_VatTu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bdsCTPX)).BeginInit();
@@ -115,15 +111,6 @@ namespace QLVT
             dVTLabel.Size = new System.Drawing.Size(79, 17);
             dVTLabel.TabIndex = 4;
             dVTLabel.Text = "Đơn vị tính:";
-            // 
-            // sOLUONGTONLabel
-            // 
-            sOLUONGTONLabel.AutoSize = true;
-            sOLUONGTONLabel.Location = new System.Drawing.Point(445, 100);
-            sOLUONGTONLabel.Name = "sOLUONGTONLabel";
-            sOLUONGTONLabel.Size = new System.Drawing.Size(92, 17);
-            sOLUONGTONLabel.TabIndex = 6;
-            sOLUONGTONLabel.Text = "Số lượng tồn:";
             // 
             // barManager1
             // 
@@ -408,20 +395,8 @@ namespace QLVT
             this.tb_DonViTinh.Size = new System.Drawing.Size(174, 22);
             this.tb_DonViTinh.TabIndex = 5;
             // 
-            // nud_SoLuongTon
-            // 
-            this.nud_SoLuongTon.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.bdsVatTu, "SOLUONGTON", true));
-            this.nud_SoLuongTon.Enabled = false;
-            this.nud_SoLuongTon.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nud_SoLuongTon.Location = new System.Drawing.Point(563, 97);
-            this.nud_SoLuongTon.Name = "nud_SoLuongTon";
-            this.nud_SoLuongTon.Size = new System.Drawing.Size(80, 22);
-            this.nud_SoLuongTon.TabIndex = 7;
-            // 
             // panelCtrl_VatTu
             // 
-            this.panelCtrl_VatTu.Controls.Add(sOLUONGTONLabel);
-            this.panelCtrl_VatTu.Controls.Add(this.nud_SoLuongTon);
             this.panelCtrl_VatTu.Controls.Add(dVTLabel);
             this.panelCtrl_VatTu.Controls.Add(this.tb_DonViTinh);
             this.panelCtrl_VatTu.Controls.Add(tENVTLabel);
@@ -485,7 +460,6 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.bdsVatTu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcVatTu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_SoLuongTon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelCtrl_VatTu)).EndInit();
             this.panelCtrl_VatTu.ResumeLayout(false);
             this.panelCtrl_VatTu.PerformLayout();
@@ -522,7 +496,6 @@ namespace QLVT
         private DevExpress.XtraGrid.Columns.GridColumn colDVT;
         private DevExpress.XtraGrid.Columns.GridColumn colSOLUONGTON;
         private DevExpress.XtraEditors.PanelControl panelCtrl_VatTu;
-        private System.Windows.Forms.NumericUpDown nud_SoLuongTon;
         private System.Windows.Forms.TextBox tb_DonViTinh;
         private System.Windows.Forms.TextBox tb_TenVatTu;
         private System.Windows.Forms.TextBox tb_MaVatTu;

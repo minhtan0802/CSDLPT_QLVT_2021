@@ -112,14 +112,26 @@
     <Compile Include="frmPhieuNhap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPhieuNhap.Designer.cs">
+    <Compile Include="frmPhieuNhap.designer.cs">
       <DependentUpon>frmPhieuNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPhieuXuat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPhieuXuat.Designer.cs">
+      <DependentUpon>frmPhieuXuat.cs</DependentUpon>
     </Compile>
     <Compile Include="frmThemCTPN.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmThemCTPN.Designer.cs">
       <DependentUpon>frmThemCTPN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmThemCTPX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmThemCTPX.Designer.cs">
+      <DependentUpon>frmThemCTPX.cs</DependentUpon>
     </Compile>
     <Compile Include="frmVatTu.cs">
       <SubType>Form</SubType>
@@ -183,8 +195,14 @@
     <EmbeddedResource Include="frmPhieuNhap.resx">
       <DependentUpon>frmPhieuNhap.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPhieuXuat.resx">
+      <DependentUpon>frmPhieuXuat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmThemCTPN.resx">
       <DependentUpon>frmThemCTPN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmThemCTPX.resx">
+      <DependentUpon>frmThemCTPX.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVatTu.resx">
       <DependentUpon>frmVatTu.cs</DependentUpon>

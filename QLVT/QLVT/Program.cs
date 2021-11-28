@@ -16,9 +16,9 @@ namespace QLVT
         /// </summary>
         public static SqlConnection conn = new SqlConnection();
         public static String connstr;
-       public static String connstr_publisher = "Data Source=LAPTOP-0GIVQL73;Initial Catalog=QLVT;Integrated Security=True";
+    //   public static String connstr_publisher = "Data Source=LAPTOP-0GIVQL73;Initial Catalog=QLVT;Integrated Security=True";
      //   public static String connstr_publisher = "Data Source=LAPTOP-LJSAF82J;Initial Catalog=QLVT;Integrated Security=True";
-     //   public static String connstr_publisher = "Data Source=LAPTOP-V0HI7R3V\\SERVER;Initial Catalog=QLVT;Integrated Security=True";
+       public static String connstr_publisher = "Data Source=LAPTOP-V0HI7R3V\\SERVER;Initial Catalog=QLVT;Integrated Security=True";
         public static SqlDataReader myReader;
         public static String servername = "";
         public static String username = "";
@@ -48,6 +48,7 @@ namespace QLVT
         public static int soLuongVatTu = 0;
         public static frmThemCTPN frmCTPN;
         public static frmTaoTaiKhoan frmTaoAcc;
+        public static frmPhieuXuat frmPX;
         public static int KetNoi()
         {
             if (Program.conn != null && Program.conn.State == ConnectionState.Open)
@@ -124,9 +125,9 @@ namespace QLVT
         }
         public static void savePhieu(string loaiPhieu, string maDon,BindingSource bds, DevExpress.XtraGrid.Views.Grid.GridView gridView)
         {
-            if (loaiPhieu.Equals("dh") && bds.Count!=0)
+            if (loaiPhieu.Equals("dh"))
             {
-                Program.ExecSqlNonQuery("EXEC sp_deleteAllCTDDH '" + Program.MDDH + "'");
+                Program.ExecSqlNonQuery("EXEC sp_deleteAllCTDDH '" + maDon + "'");
             }
 
             String MaPhieu = maDon;
@@ -142,12 +143,13 @@ namespace QLVT
             int soLuong = 0;
             float donGia = 0;
             int rowCount = bds.Count;
+       
             for (int rows = 0; rows <rowCount; rows++)
             {
 
-
+            
                 valueTemp[0] = ((DataRowView)bds[rows])["MAVT"].ToString();
-               
+              
 
                 soLuong = Int32.Parse(((DataRowView)bds[rows])["SOLUONG"].ToString());
                 donGia = float.Parse(((DataRowView)bds[rows])["DONGIA"].ToString());
@@ -195,7 +197,74 @@ namespace QLVT
             }
             return false;
         }
+        public static string StandardString(string strInput, string type)
+        {
+            string strResult = "";
+             strInput = strInput.Trim().ToLower();
+                while (strInput.Contains("  "))
+                    strInput = strInput.Replace("  ", " ");
+           
+                string[] arrResult = strInput.Split(' ');
+          
+                foreach (string item in arrResult)
+            {
+                if (type.Equals("name") && item.Length>0)
+                {
+                    if(item.Length==1)
+                    {
+                        strResult += item.Substring(0, 1).ToUpper() + " ";
+                    }    
+                    else
+                    {
+                        strResult += item.Substring(0, 1).ToUpper() + item.Substring(1) + " ";
+                    }    
+                    
+                } 
+                else if(type.Equals(""))
+                {
+                    strResult += item+" ";
+                }
+                else if(type.Equals("add"))
+                {
+                    string temp = "";
+                    if (item.Equals(".") || item.Equals(",") || item.Equals(";") || item.Equals("-"))
+                    {
+                        strResult = strResult.TrimEnd() + item + " ";
+                        temp = item;
+                    }
+                    else if ((temp.Equals(".") && (!item.Equals(".") || !item.Equals(",") || !item.Equals(";") || !item.Equals("-")))&& item.Length>0 )
+                    {
+                        if(item.Length ==1)
+                        {
+                            strResult += item.Substring(0, 1).ToUpper() + " ";
+                            temp = item;
+                        }   
+                        else
+                        {
+                            strResult += item.Substring(0, 1).ToUpper() + item.Substring(1) + " ";
+                            temp = item;
+                        }    
+                        
+                    }
+                    else if(item.Length > 0)
+                    { 
+                        if(item.Length == 1)
+                        {
+                            strResult = strResult + item.Substring(0, 1).ToUpper()  + " ";
+                            temp = item;
+                        } 
+                        else
+                        {
+                            strResult = strResult + item.Substring(0, 1).ToUpper() + item.Substring(1) + " ";
+                            temp = item;
+                        }    
+                        
+                    }
 
+                }    
+            }    
+            return strResult.TrimEnd();
+        }
 
 
         [STAThread]

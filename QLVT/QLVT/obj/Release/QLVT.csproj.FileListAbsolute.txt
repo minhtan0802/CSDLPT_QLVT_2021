@@ -503,3 +503,5 @@ D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmTaoTaiKhoa
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Test.resources
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_DSNhanVien.resources
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_DSVatTu.resources
+D:\University\HK7 2021-2022\CSDLPT\Project\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmPhieuXuat.resources
+D:\University\HK7 2021-2022\CSDLPT\Project\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmThemCTPX.resources

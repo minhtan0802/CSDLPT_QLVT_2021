@@ -16,6 +16,10 @@ namespace QLVT
         int vitri = 0;
         string macn = "";
         string tenkho = "";
+        string maKhoTemp = "";
+        string tenKhoTemp = "";
+        string diaChiTemp = "";
+        string tenKhoMoi = "";
         public frmKho()
         {
             InitializeComponent();
@@ -59,8 +63,8 @@ namespace QLVT
             else
             {
                 cmbChiNhanh.Enabled = false;
-                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled =  btnRefresh.Enabled = true;
-                btnGhi.Enabled = btnUndo.Enabled =  false;
+                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = true;
+                btnGhi.Enabled = btnUndo.Enabled = false;
             }
 
 
@@ -94,87 +98,104 @@ namespace QLVT
                 this.datHangTableAdapter.Fill(this.DS.DatHang);
                 this.phieuNhapTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.phieuNhapTableAdapter.Fill(this.DS.PhieuNhap);
-                macn = ((DataRowView)bdsKho[0])["MACN"].ToString();
+                if (Program.servername.Contains("1"))
+                {
+                    macn = "CN1";
+                }
+                else
+                {
+                    macn = "CN2";
+                }
+
             }
         }
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             txtMaKho.Enabled = true;
-            vitri = bdsKho.Position;
+            btnThem.Enabled = false;
+            btnGhi.Enabled = true;
             panelCtrl_Kho.Enabled = true;
             bdsKho.AddNew();
-            
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
-            btnGhi.Enabled = btnUndo.Enabled = true;
-            gcKho.Enabled = false;
+        
+            vitri = bdsKho.Position;
+            gridView_Kho.Columns[0].OptionsColumn.AllowEdit = true;
+            gridView_Kho.SetRowCellValue(bdsKho.Position, "MACN", macn);
+            gridView_Kho.FocusedRowHandle = bdsKho.Position;
+            //   gcKho.Enabled = false;
             panelCtrl_Kho.Enabled = true;
+       //     ((DataRowView)bdsKho[vitri])["MACN"] = macn;
             txtMaCN.Text = macn;
-            
+
         }
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            vitri = bdsKho.Position;
-            tenkho = txtTenKho.Text;
-            txtMaCN.Enabled = txtMaKho.Enabled = false;
-            panelCtrl_Kho.Enabled = true;
-            btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
-            btnGhi.Enabled = btnUndo.Enabled = true;
-            gcKho.Enabled = false;
         }
 
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (txtMaKho.Text.Trim() == "")
+            gridView_Kho.FocusInvalidRow();
+            if (((DataRowView)bdsKho[bdsKho.Position])["MAKHO"].ToString() == "")
             {
                 MessageBox.Show("Mã kho không được thiếu", "", MessageBoxButtons.OK);
-                txtMaKho.Focus();
+                gridView_Kho.FocusedRowHandle = bdsKho.Position;
                 return;
             }
-            if (txtTenKho.Text.Trim() == "")
+            if (((DataRowView)bdsKho[bdsKho.Position])["TENKHO"].ToString().Trim()=="")
             {
                 MessageBox.Show("Tên kho không được thiếu", "", MessageBoxButtons.OK);
                 txtTenKho.Focus();
                 return;
             }
-            if (txtDiaChi.Text.Trim() == "")
+            if (((DataRowView)bdsKho[bdsKho.Position])["DIACHI"].ToString().Trim() == "")
             {
                 MessageBox.Show("Địa chỉ không được thiếu", "", MessageBoxButtons.OK);
                 txtDiaChi.Focus();
                 return;
-            }    
-            string strLenhMK = "EXEC sp_TraCuu @code='" + txtMaKho.Text + "'" + ", @type='MAKHO'";
-            string strLenhTK = "EXEC sp_TraCuu @code='" + txtTenKho.Text + "'" + ", @type='TENKHO'";
+            }
+            string strLenhMK = "EXEC sp_TraCuu @code='" + ((DataRowView)bdsKho[bdsKho.Position])["MAKHO"].ToString() + "'" + ", @type='MAKHO'";
+            string strLenhTK = "EXEC sp_TraCuu @code='" + ((DataRowView)bdsKho[bdsKho.Position])["TENKHO"].ToString() + "'" + ", @type='TENKHO'";
             int kiemTraMK = 0;
-            if (txtMaKho.Enabled == true)
+            int kiemtraTK = 0;
+        
+            if(gridView_Kho.Columns["MAKHO"].OptionsColumn.AllowEdit==true)
             {
                 kiemTraMK = Program.ExecSqlNonQuery(strLenhMK);
+                kiemtraTK = Program.ExecSqlNonQuery(strLenhTK);
+
             }
-            int kiemtraTK = 0;
-            if (!(txtTenKho.Text == tenkho))//edit
+           
+          
+            tenKhoMoi = Program.StandardString(tenKhoMoi, "name");
+       
+            if (gridView_Kho.Columns["TENKHO"].OptionsColumn.AllowEdit == false && !tenkho.Equals(tenKhoMoi))
             {
                 kiemtraTK = Program.ExecSqlNonQuery(strLenhTK);
             }    
-               
-            if (kiemTraMK != 1 && kiemtraTK!=1)
+             
+            if (kiemTraMK != 1 && kiemtraTK != 1)
             {
                 try
                 {
+                    ((DataRowView)bdsKho[bdsKho.Position])["DIACHI"] = Program.StandardString(((DataRowView)bdsKho[bdsKho.Position])["DIACHI"].ToString(), "add");
+                    ((DataRowView)bdsKho[bdsKho.Position])["TENKHO"] =tenKhoMoi;
                     bdsKho.EndEdit();
                     bdsKho.ResetCurrentItem();
                     this.khoTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.khoTableAdapter.Update(this.DS.Kho);
+                    MessageBox.Show("Ghi thành công", "", MessageBoxButtons.OK);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Lỗi ghi kho.\n" + ex.Message, "", MessageBoxButtons.OK);
                     return;
                 }
+                gridView_Kho.Columns[0].OptionsColumn.AllowEdit = false;
                 gcKho.Enabled = true;
                 btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
                 btnGhi.Enabled = btnUndo.Enabled = false;
-               
+
                 panelCtrl_Kho.Enabled = false;
             }
         }
@@ -278,5 +299,75 @@ namespace QLVT
         {
             this.Close();
         }
+
+        private void gcKho_EditorKeyPress(object sender, KeyPressEventArgs e)
+        {
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
+            btnGhi.Enabled = btnUndo.Enabled = true;
+            if (gridView_Kho.FocusedColumn.FieldName.Equals("MAKHO"))
+            {
+                if (e.KeyChar == Convert.ToChar(Keys.Space) || (!char.IsLetter(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(Keys.Back)))
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.KeyChar = Convert.ToChar(e.KeyChar.ToString().ToUpper());
+                }    
+            } 
+        }
+
+        private void gridView_Kho_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            if (gridView_Kho.FocusedColumn.FieldName == "MAKHO")
+            {
+                string maKhoTemp = e.Value as string;
+                if (maKhoTemp.Length > 4)
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Mã kho chỉ được tối đa 4 ký tự";
+                }
+            }
+            else if (gridView_Kho.FocusedColumn.FieldName == "TENKHO")
+            {
+                string tenKhoTemp = e.Value as string;
+                if (tenKhoTemp.Trim().Length > 30)
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Tên kho chỉ được tối đa 30 ký tự";
+                }
+            }
+            else if (gridView_Kho.FocusedColumn.FieldName == "DIACHI")
+            {
+                string diaChiTemp = e.Value as string;
+                if (diaChiTemp.Trim().Length > 100)
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Địa chỉ kho chỉ được tối đa 100 ký tự";
+                }
+            }
+
+
+
+
+        }
+
+        private void gridView_Kho_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        { 
+        }
+
+        private void gridView_Kho_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            if (gridView_Kho.FocusedColumn.FieldName.Equals("TENKHO"))
+            {
+                tenKhoMoi = e.Value as string;
+            }    
+            
+        }
+
+        private void gridView_Kho_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            tenkho = ((DataRowView)bdsKho[bdsKho.Position])["TENKHO"].ToString();
+        }
     }
-    }
+}

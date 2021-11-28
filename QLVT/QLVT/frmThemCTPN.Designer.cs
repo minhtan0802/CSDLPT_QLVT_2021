@@ -30,79 +30,90 @@ namespace QLVT
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.label1 = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label tENVTLabel1;
+            System.Windows.Forms.Label mAVTLabel;
+            System.Windows.Forms.Label dONGIALabel;
+            System.Windows.Forms.Label sOLUONGLabel;
             this.DS = new QLVT.DS();
             this.bds_sp_CTDDH = new System.Windows.Forms.BindingSource(this.components);
             this.sp_getCTDDHTableAdapter = new QLVT.DSTableAdapters.sp_getCTDDHTableAdapter();
             this.tableAdapterManager = new QLVT.DSTableAdapters.TableAdapterManager();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.gc_sp_getVTConThieuCTPN = new DevExpress.XtraGrid.GridControl();
-            this.bds_sp_getVTConThieuCTPN = new System.Windows.Forms.BindingSource(this.components);
+            this.groupBox_VT = new System.Windows.Forms.GroupBox();
+            this.sp_getVatTuConThieuCTPhieuGridControl = new DevExpress.XtraGrid.GridControl();
+            this.bds_sp_getVatTuConThieuCTPhieu = new System.Windows.Forms.BindingSource(this.components);
             this.gridView_getVTConThieuCTPN = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colMAVT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTENVT = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colDONGIA = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colSOLUONG = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btn_ThemVaoCTPN = new System.Windows.Forms.Button();
+            this.colDVT = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSOLUONGTON = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.groupBox_InfoVT = new System.Windows.Forms.GroupBox();
+            this.txt_TENVT = new DevExpress.XtraEditors.TextEdit();
+            this.txt_MAVT = new DevExpress.XtraEditors.TextEdit();
+            this.spin_DonGia = new DevExpress.XtraEditors.SpinEdit();
+            this.btn_Them = new DevExpress.XtraEditors.SimpleButton();
+            this.spin_SoLuong = new DevExpress.XtraEditors.SpinEdit();
+            this.bds_sp_getVTConThieuCTPN = new System.Windows.Forms.BindingSource(this.components);
             this.bds_sp_getCTPN = new System.Windows.Forms.BindingSource(this.components);
             this.sp_getCTPNTableAdapter = new QLVT.DSTableAdapters.sp_getCTPNTableAdapter();
-            this.fillToolStrip = new System.Windows.Forms.ToolStrip();
-            this.mAPNToolStripLabel = new System.Windows.Forms.ToolStripLabel();
-            this.mAPNToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
-            this.fillToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.fillToolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.maPNToolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.maPNToolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.fillToolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.fillToolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.maDDHToolStripLabel = new System.Windows.Forms.ToolStripLabel();
-            this.maDDHToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
-            this.fillToolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.fillToolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.maDDHToolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.maDDHToolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.fillToolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.sp_getVTConThieuCTPNTableAdapter = new QLVT.DSTableAdapters.sp_getVTConThieuCTPNTableAdapter();
-            this.fillToolStrip4 = new System.Windows.Forms.ToolStrip();
-            this.maDDHToolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.maDDHToolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
-            this.fillToolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
+            this.sp_getVatTuConThieuCTPhieuTableAdapter = new QLVT.DSTableAdapters.sp_getVatTuConThieuCTPhieuTableAdapter();
+            tENVTLabel1 = new System.Windows.Forms.Label();
+            mAVTLabel = new System.Windows.Forms.Label();
+            dONGIALabel = new System.Windows.Forms.Label();
+            sOLUONGLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bds_sp_CTDDH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gc_sp_getVTConThieuCTPN)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getVTConThieuCTPN)).BeginInit();
+            this.groupBox_VT.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sp_getVatTuConThieuCTPhieuGridControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getVatTuConThieuCTPhieu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_getVTConThieuCTPN)).BeginInit();
+            this.groupBox_InfoVT.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_TENVT.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_MAVT.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spin_DonGia.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spin_SoLuong.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getVTConThieuCTPN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getCTPN)).BeginInit();
-            this.fillToolStrip.SuspendLayout();
-            this.fillToolStrip1.SuspendLayout();
-            this.fillToolStrip2.SuspendLayout();
-            this.fillToolStrip3.SuspendLayout();
-            this.fillToolStrip4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelControl1
+            // tENVTLabel1
             // 
-            this.panelControl1.Controls.Add(this.label1);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(0, 0);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(920, 46);
-            this.panelControl1.TabIndex = 37;
+            tENVTLabel1.AutoSize = true;
+            tENVTLabel1.Location = new System.Drawing.Point(40, 81);
+            tENVTLabel1.Name = "tENVTLabel1";
+            tENVTLabel1.Size = new System.Drawing.Size(59, 17);
+            tENVTLabel1.TabIndex = 22;
+            tENVTLabel1.Text = "Tên VT:";
             // 
-            // label1
+            // mAVTLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(302, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(273, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "CHI TIẾT ĐƠN ĐẶT HÀNG";
+            mAVTLabel.AutoSize = true;
+            mAVTLabel.Location = new System.Drawing.Point(48, 31);
+            mAVTLabel.Name = "mAVTLabel";
+            mAVTLabel.Size = new System.Drawing.Size(53, 17);
+            mAVTLabel.TabIndex = 21;
+            mAVTLabel.Text = "Mã VT:";
+            // 
+            // dONGIALabel
+            // 
+            dONGIALabel.AutoSize = true;
+            dONGIALabel.Location = new System.Drawing.Point(37, 188);
+            dONGIALabel.Name = "dONGIALabel";
+            dONGIALabel.Size = new System.Drawing.Size(61, 17);
+            dONGIALabel.TabIndex = 18;
+            dONGIALabel.Text = "Đơn giá:";
+            // 
+            // sOLUONGLabel
+            // 
+            sOLUONGLabel.AutoSize = true;
+            sOLUONGLabel.Location = new System.Drawing.Point(30, 129);
+            sOLUONGLabel.Name = "sOLUONGLabel";
+            sOLUONGLabel.Size = new System.Drawing.Size(68, 17);
+            sOLUONGLabel.TabIndex = 17;
+            sOLUONGLabel.Text = "Số lượng:";
             // 
             // DS
             // 
@@ -136,47 +147,62 @@ namespace QLVT
             // 
             // panelControl2
             // 
-            this.panelControl2.Controls.Add(this.gc_sp_getVTConThieuCTPN);
-            this.panelControl2.Controls.Add(this.btn_ThemVaoCTPN);
+            this.panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl2.Controls.Add(this.groupBox_VT);
+            this.panelControl2.Controls.Add(this.groupBox_InfoVT);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl2.Location = new System.Drawing.Point(0, 46);
+            this.panelControl2.Location = new System.Drawing.Point(0, 0);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(920, 330);
+            this.panelControl2.Size = new System.Drawing.Size(914, 327);
             this.panelControl2.TabIndex = 38;
             // 
-            // gc_sp_getVTConThieuCTPN
+            // groupBox_VT
             // 
-            this.gc_sp_getVTConThieuCTPN.DataSource = this.bds_sp_getVTConThieuCTPN;
-            this.gc_sp_getVTConThieuCTPN.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gc_sp_getVTConThieuCTPN.Location = new System.Drawing.Point(2, 2);
-            this.gc_sp_getVTConThieuCTPN.MainView = this.gridView_getVTConThieuCTPN;
-            this.gc_sp_getVTConThieuCTPN.Name = "gc_sp_getVTConThieuCTPN";
-            this.gc_sp_getVTConThieuCTPN.Size = new System.Drawing.Size(916, 194);
-            this.gc_sp_getVTConThieuCTPN.TabIndex = 1;
-            this.gc_sp_getVTConThieuCTPN.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.groupBox_VT.Controls.Add(this.sp_getVatTuConThieuCTPhieuGridControl);
+            this.groupBox_VT.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox_VT.Location = new System.Drawing.Point(373, 0);
+            this.groupBox_VT.Name = "groupBox_VT";
+            this.groupBox_VT.Size = new System.Drawing.Size(541, 327);
+            this.groupBox_VT.TabIndex = 2;
+            this.groupBox_VT.TabStop = false;
+            this.groupBox_VT.Text = "Chi tiết đơn đặt hàng";
+            this.groupBox_VT.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // sp_getVatTuConThieuCTPhieuGridControl
+            // 
+            this.sp_getVatTuConThieuCTPhieuGridControl.DataSource = this.bds_sp_getVatTuConThieuCTPhieu;
+            this.sp_getVatTuConThieuCTPhieuGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sp_getVatTuConThieuCTPhieuGridControl.Location = new System.Drawing.Point(3, 18);
+            this.sp_getVatTuConThieuCTPhieuGridControl.MainView = this.gridView_getVTConThieuCTPN;
+            this.sp_getVatTuConThieuCTPhieuGridControl.Name = "sp_getVatTuConThieuCTPhieuGridControl";
+            this.sp_getVatTuConThieuCTPhieuGridControl.Size = new System.Drawing.Size(535, 306);
+            this.sp_getVatTuConThieuCTPhieuGridControl.TabIndex = 1;
+            this.sp_getVatTuConThieuCTPhieuGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_getVTConThieuCTPN});
+            this.sp_getVatTuConThieuCTPhieuGridControl.MouseCaptureChanged += new System.EventHandler(this.sp_getVatTuConThieuCTPhieuGridControl_MouseCaptureChanged);
             // 
-            // bds_sp_getVTConThieuCTPN
+            // bds_sp_getVatTuConThieuCTPhieu
             // 
-            this.bds_sp_getVTConThieuCTPN.DataMember = "sp_getVTConThieuCTPN";
-            this.bds_sp_getVTConThieuCTPN.DataSource = this.DS;
+            this.bds_sp_getVatTuConThieuCTPhieu.DataMember = "sp_getVatTuConThieuCTPhieu";
+            this.bds_sp_getVatTuConThieuCTPhieu.DataSource = this.DS;
             // 
             // gridView_getVTConThieuCTPN
             // 
             this.gridView_getVTConThieuCTPN.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colMAVT,
             this.colTENVT,
-            this.colDONGIA,
-            this.colSOLUONG});
-            this.gridView_getVTConThieuCTPN.GridControl = this.gc_sp_getVTConThieuCTPN;
+            this.colDVT,
+            this.colSOLUONGTON});
+            this.gridView_getVTConThieuCTPN.GridControl = this.sp_getVatTuConThieuCTPhieuGridControl;
             this.gridView_getVTConThieuCTPN.Name = "gridView_getVTConThieuCTPN";
-            this.gridView_getVTConThieuCTPN.OptionsBehavior.Editable = false;
+            this.gridView_getVTConThieuCTPN.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_getVTConThieuCTPN_FocusedRowChanged);
             // 
             // colMAVT
             // 
             this.colMAVT.FieldName = "MAVT";
             this.colMAVT.MinWidth = 25;
             this.colMAVT.Name = "colMAVT";
+            this.colMAVT.OptionsColumn.AllowEdit = false;
             this.colMAVT.Visible = true;
             this.colMAVT.VisibleIndex = 0;
             this.colMAVT.Width = 94;
@@ -186,38 +212,137 @@ namespace QLVT
             this.colTENVT.FieldName = "TENVT";
             this.colTENVT.MinWidth = 25;
             this.colTENVT.Name = "colTENVT";
+            this.colTENVT.OptionsColumn.AllowEdit = false;
             this.colTENVT.Visible = true;
             this.colTENVT.VisibleIndex = 1;
             this.colTENVT.Width = 94;
             // 
-            // colDONGIA
+            // colDVT
             // 
-            this.colDONGIA.FieldName = "DONGIA";
-            this.colDONGIA.MinWidth = 25;
-            this.colDONGIA.Name = "colDONGIA";
-            this.colDONGIA.Visible = true;
-            this.colDONGIA.VisibleIndex = 2;
-            this.colDONGIA.Width = 94;
+            this.colDVT.DisplayFormat.FormatString = "n0";
+            this.colDVT.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colDVT.FieldName = "DONGIA";
+            this.colDVT.GroupFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colDVT.MinWidth = 25;
+            this.colDVT.Name = "colDVT";
+            this.colDVT.Visible = true;
+            this.colDVT.VisibleIndex = 2;
+            this.colDVT.Width = 94;
             // 
-            // colSOLUONG
+            // colSOLUONGTON
             // 
-            this.colSOLUONG.FieldName = "SOLUONG";
-            this.colSOLUONG.MinWidth = 25;
-            this.colSOLUONG.Name = "colSOLUONG";
-            this.colSOLUONG.Visible = true;
-            this.colSOLUONG.VisibleIndex = 3;
-            this.colSOLUONG.Width = 94;
+            this.colSOLUONGTON.DisplayFormat.FormatString = "n0";
+            this.colSOLUONGTON.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colSOLUONGTON.FieldName = "SOLUONG";
+            this.colSOLUONGTON.GroupFormat.FormatString = "n0";
+            this.colSOLUONGTON.GroupFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colSOLUONGTON.MinWidth = 25;
+            this.colSOLUONGTON.Name = "colSOLUONGTON";
+            this.colSOLUONGTON.Visible = true;
+            this.colSOLUONGTON.VisibleIndex = 3;
+            this.colSOLUONGTON.Width = 94;
             // 
-            // btn_ThemVaoCTPN
+            // groupBox_InfoVT
             // 
-            this.btn_ThemVaoCTPN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_ThemVaoCTPN.Location = new System.Drawing.Point(307, 223);
-            this.btn_ThemVaoCTPN.Name = "btn_ThemVaoCTPN";
-            this.btn_ThemVaoCTPN.Size = new System.Drawing.Size(294, 42);
-            this.btn_ThemVaoCTPN.TabIndex = 0;
-            this.btn_ThemVaoCTPN.Text = "Thêm CTPN";
-            this.btn_ThemVaoCTPN.UseVisualStyleBackColor = true;
-            this.btn_ThemVaoCTPN.Click += new System.EventHandler(this.btn_ThemVaoCTPN_Click);
+            this.groupBox_InfoVT.Controls.Add(this.txt_TENVT);
+            this.groupBox_InfoVT.Controls.Add(this.txt_MAVT);
+            this.groupBox_InfoVT.Controls.Add(this.spin_DonGia);
+            this.groupBox_InfoVT.Controls.Add(tENVTLabel1);
+            this.groupBox_InfoVT.Controls.Add(mAVTLabel);
+            this.groupBox_InfoVT.Controls.Add(this.btn_Them);
+            this.groupBox_InfoVT.Controls.Add(dONGIALabel);
+            this.groupBox_InfoVT.Controls.Add(this.spin_SoLuong);
+            this.groupBox_InfoVT.Controls.Add(sOLUONGLabel);
+            this.groupBox_InfoVT.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox_InfoVT.Location = new System.Drawing.Point(0, 0);
+            this.groupBox_InfoVT.Name = "groupBox_InfoVT";
+            this.groupBox_InfoVT.Size = new System.Drawing.Size(373, 327);
+            this.groupBox_InfoVT.TabIndex = 3;
+            this.groupBox_InfoVT.TabStop = false;
+            this.groupBox_InfoVT.Text = "Thông tin";
+            this.groupBox_InfoVT.MouseCaptureChanged += new System.EventHandler(this.groupBox_InfoVT_MouseCaptureChanged);
+            // 
+            // txt_TENVT
+            // 
+            this.txt_TENVT.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bds_sp_getVatTuConThieuCTPhieu, "TENVT", true));
+            this.txt_TENVT.Enabled = false;
+            this.txt_TENVT.Location = new System.Drawing.Point(107, 76);
+            this.txt_TENVT.Name = "txt_TENVT";
+            this.txt_TENVT.Size = new System.Drawing.Size(155, 26);
+            this.txt_TENVT.TabIndex = 27;
+            // 
+            // txt_MAVT
+            // 
+            this.txt_MAVT.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bds_sp_getVatTuConThieuCTPhieu, "MAVT", true));
+            this.txt_MAVT.Enabled = false;
+            this.txt_MAVT.Location = new System.Drawing.Point(107, 22);
+            this.txt_MAVT.Name = "txt_MAVT";
+            this.txt_MAVT.Size = new System.Drawing.Size(155, 26);
+            this.txt_MAVT.TabIndex = 26;
+            // 
+            // spin_DonGia
+            // 
+            this.spin_DonGia.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.spin_DonGia.Location = new System.Drawing.Point(107, 179);
+            this.spin_DonGia.Name = "spin_DonGia";
+            this.spin_DonGia.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.spin_DonGia.Properties.DisplayFormat.FormatString = "n0";
+            this.spin_DonGia.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.spin_DonGia.Properties.IsFloatValue = false;
+            this.spin_DonGia.Properties.Mask.EditMask = "n0";
+            this.spin_DonGia.Properties.MaxValue = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.spin_DonGia.Size = new System.Drawing.Size(158, 34);
+            this.spin_DonGia.TabIndex = 23;
+            // 
+            // btn_Them
+            // 
+            this.btn_Them.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(109)))), ((int)(((byte)(156)))));
+            this.btn_Them.Appearance.Options.UseBackColor = true;
+            this.btn_Them.Location = new System.Drawing.Point(136, 234);
+            this.btn_Them.Name = "btn_Them";
+            this.btn_Them.Size = new System.Drawing.Size(94, 29);
+            this.btn_Them.TabIndex = 20;
+            this.btn_Them.Text = "Thêm";
+            this.btn_Them.Click += new System.EventHandler(this.btn_Them_Click);
+            // 
+            // spin_SoLuong
+            // 
+            this.spin_SoLuong.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.spin_SoLuong.Location = new System.Drawing.Point(107, 125);
+            this.spin_SoLuong.Name = "spin_SoLuong";
+            this.spin_SoLuong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.spin_SoLuong.Properties.DisplayFormat.FormatString = "n0";
+            this.spin_SoLuong.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.spin_SoLuong.Properties.IsFloatValue = false;
+            this.spin_SoLuong.Properties.Mask.EditMask = "n0";
+            this.spin_SoLuong.Properties.MaxValue = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.spin_SoLuong.Size = new System.Drawing.Size(155, 34);
+            this.spin_SoLuong.TabIndex = 19;
+            this.spin_SoLuong.InvalidValue += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.spin_SoLuong_InvalidValue);
+            this.spin_SoLuong.Validating += new System.ComponentModel.CancelEventHandler(this.spin_SoLuong_Validating);
+            // 
+            // bds_sp_getVTConThieuCTPN
+            // 
+            this.bds_sp_getVTConThieuCTPN.DataMember = "sp_getVTConThieuCTPN";
+            this.bds_sp_getVTConThieuCTPN.DataSource = this.DS;
             // 
             // bds_sp_getCTPN
             // 
@@ -228,254 +353,68 @@ namespace QLVT
             // 
             this.sp_getCTPNTableAdapter.ClearBeforeFill = true;
             // 
-            // fillToolStrip
-            // 
-            this.fillToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.fillToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mAPNToolStripLabel,
-            this.mAPNToolStripTextBox,
-            this.fillToolStripButton});
-            this.fillToolStrip.Location = new System.Drawing.Point(0, 376);
-            this.fillToolStrip.Name = "fillToolStrip";
-            this.fillToolStrip.Size = new System.Drawing.Size(920, 31);
-            this.fillToolStrip.TabIndex = 40;
-            this.fillToolStrip.Text = "fillToolStrip";
-            // 
-            // mAPNToolStripLabel
-            // 
-            this.mAPNToolStripLabel.Name = "mAPNToolStripLabel";
-            this.mAPNToolStripLabel.Size = new System.Drawing.Size(54, 28);
-            this.mAPNToolStripLabel.Text = "MAPN:";
-            // 
-            // mAPNToolStripTextBox
-            // 
-            this.mAPNToolStripTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.mAPNToolStripTextBox.Name = "mAPNToolStripTextBox";
-            this.mAPNToolStripTextBox.Size = new System.Drawing.Size(100, 31);
-            // 
-            // fillToolStripButton
-            // 
-            this.fillToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.fillToolStripButton.Name = "fillToolStripButton";
-            this.fillToolStripButton.Size = new System.Drawing.Size(32, 28);
-            this.fillToolStripButton.Text = "Fill";
-            this.fillToolStripButton.Click += new System.EventHandler(this.fillToolStripButton_Click);
-            // 
-            // fillToolStrip1
-            // 
-            this.fillToolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.fillToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.maPNToolStripLabel1,
-            this.maPNToolStripTextBox1,
-            this.fillToolStripButton1});
-            this.fillToolStrip1.Location = new System.Drawing.Point(0, 407);
-            this.fillToolStrip1.Name = "fillToolStrip1";
-            this.fillToolStrip1.Size = new System.Drawing.Size(920, 31);
-            this.fillToolStrip1.TabIndex = 41;
-            this.fillToolStrip1.Text = "fillToolStrip1";
-            // 
-            // maPNToolStripLabel1
-            // 
-            this.maPNToolStripLabel1.Name = "maPNToolStripLabel1";
-            this.maPNToolStripLabel1.Size = new System.Drawing.Size(52, 28);
-            this.maPNToolStripLabel1.Text = "MaPN:";
-            // 
-            // maPNToolStripTextBox1
-            // 
-            this.maPNToolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.maPNToolStripTextBox1.Name = "maPNToolStripTextBox1";
-            this.maPNToolStripTextBox1.Size = new System.Drawing.Size(100, 31);
-            // 
-            // fillToolStripButton1
-            // 
-            this.fillToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.fillToolStripButton1.Name = "fillToolStripButton1";
-            this.fillToolStripButton1.Size = new System.Drawing.Size(32, 28);
-            this.fillToolStripButton1.Text = "Fill";
-            this.fillToolStripButton1.Click += new System.EventHandler(this.fillToolStripButton1_Click);
-            // 
-            // fillToolStrip2
-            // 
-            this.fillToolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.fillToolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.maDDHToolStripLabel,
-            this.maDDHToolStripTextBox,
-            this.fillToolStripButton2});
-            this.fillToolStrip2.Location = new System.Drawing.Point(0, 438);
-            this.fillToolStrip2.Name = "fillToolStrip2";
-            this.fillToolStrip2.Size = new System.Drawing.Size(920, 31);
-            this.fillToolStrip2.TabIndex = 42;
-            this.fillToolStrip2.Text = "fillToolStrip2";
-            // 
-            // maDDHToolStripLabel
-            // 
-            this.maDDHToolStripLabel.Name = "maDDHToolStripLabel";
-            this.maDDHToolStripLabel.Size = new System.Drawing.Size(66, 28);
-            this.maDDHToolStripLabel.Text = "MaDDH:";
-            // 
-            // maDDHToolStripTextBox
-            // 
-            this.maDDHToolStripTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.maDDHToolStripTextBox.Name = "maDDHToolStripTextBox";
-            this.maDDHToolStripTextBox.Size = new System.Drawing.Size(100, 31);
-            // 
-            // fillToolStripButton2
-            // 
-            this.fillToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.fillToolStripButton2.Name = "fillToolStripButton2";
-            this.fillToolStripButton2.Size = new System.Drawing.Size(32, 28);
-            this.fillToolStripButton2.Text = "Fill";
-            this.fillToolStripButton2.Click += new System.EventHandler(this.fillToolStripButton2_Click);
-            // 
-            // fillToolStrip3
-            // 
-            this.fillToolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.fillToolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.maDDHToolStripLabel1,
-            this.maDDHToolStripTextBox1,
-            this.fillToolStripButton3});
-            this.fillToolStrip3.Location = new System.Drawing.Point(0, 469);
-            this.fillToolStrip3.Name = "fillToolStrip3";
-            this.fillToolStrip3.Size = new System.Drawing.Size(920, 31);
-            this.fillToolStrip3.TabIndex = 43;
-            this.fillToolStrip3.Text = "fillToolStrip3";
-            // 
-            // maDDHToolStripLabel1
-            // 
-            this.maDDHToolStripLabel1.Name = "maDDHToolStripLabel1";
-            this.maDDHToolStripLabel1.Size = new System.Drawing.Size(66, 28);
-            this.maDDHToolStripLabel1.Text = "MaDDH:";
-            // 
-            // maDDHToolStripTextBox1
-            // 
-            this.maDDHToolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.maDDHToolStripTextBox1.Name = "maDDHToolStripTextBox1";
-            this.maDDHToolStripTextBox1.Size = new System.Drawing.Size(100, 31);
-            // 
-            // fillToolStripButton3
-            // 
-            this.fillToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.fillToolStripButton3.Name = "fillToolStripButton3";
-            this.fillToolStripButton3.Size = new System.Drawing.Size(32, 28);
-            this.fillToolStripButton3.Text = "Fill";
-            this.fillToolStripButton3.Click += new System.EventHandler(this.fillToolStripButton3_Click);
-            // 
             // sp_getVTConThieuCTPNTableAdapter
             // 
             this.sp_getVTConThieuCTPNTableAdapter.ClearBeforeFill = true;
             // 
-            // fillToolStrip4
+            // sp_getVatTuConThieuCTPhieuTableAdapter
             // 
-            this.fillToolStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.fillToolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.maDDHToolStripLabel2,
-            this.maDDHToolStripTextBox2,
-            this.fillToolStripButton4});
-            this.fillToolStrip4.Location = new System.Drawing.Point(0, 500);
-            this.fillToolStrip4.Name = "fillToolStrip4";
-            this.fillToolStrip4.Size = new System.Drawing.Size(920, 31);
-            this.fillToolStrip4.TabIndex = 44;
-            this.fillToolStrip4.Text = "fillToolStrip4";
-            // 
-            // maDDHToolStripLabel2
-            // 
-            this.maDDHToolStripLabel2.Name = "maDDHToolStripLabel2";
-            this.maDDHToolStripLabel2.Size = new System.Drawing.Size(66, 28);
-            this.maDDHToolStripLabel2.Text = "MaDDH:";
-            // 
-            // maDDHToolStripTextBox2
-            // 
-            this.maDDHToolStripTextBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.maDDHToolStripTextBox2.Name = "maDDHToolStripTextBox2";
-            this.maDDHToolStripTextBox2.Size = new System.Drawing.Size(100, 31);
-            // 
-            // fillToolStripButton4
-            // 
-            this.fillToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.fillToolStripButton4.Name = "fillToolStripButton4";
-            this.fillToolStripButton4.Size = new System.Drawing.Size(32, 28);
-            this.fillToolStripButton4.Text = "Fill";
-            this.fillToolStripButton4.Click += new System.EventHandler(this.fillToolStripButton4_Click);
+            this.sp_getVatTuConThieuCTPhieuTableAdapter.ClearBeforeFill = true;
             // 
             // frmThemCTPN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(920, 339);
-            this.Controls.Add(this.fillToolStrip4);
-            this.Controls.Add(this.fillToolStrip3);
-            this.Controls.Add(this.fillToolStrip2);
-            this.Controls.Add(this.fillToolStrip1);
-            this.Controls.Add(this.fillToolStrip);
+            this.ClientSize = new System.Drawing.Size(914, 370);
             this.Controls.Add(this.panelControl2);
-            this.Controls.Add(this.panelControl1);
             this.Name = "frmThemCTPN";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thêm chi tiết PN";
             this.Load += new System.EventHandler(this.frmThemCTPN_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
-            this.panelControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bds_sp_CTDDH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gc_sp_getVTConThieuCTPN)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getVTConThieuCTPN)).EndInit();
+            this.groupBox_VT.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sp_getVatTuConThieuCTPhieuGridControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getVatTuConThieuCTPhieu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_getVTConThieuCTPN)).EndInit();
+            this.groupBox_InfoVT.ResumeLayout(false);
+            this.groupBox_InfoVT.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_TENVT.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_MAVT.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spin_DonGia.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spin_SoLuong.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getVTConThieuCTPN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getCTPN)).EndInit();
-            this.fillToolStrip.ResumeLayout(false);
-            this.fillToolStrip.PerformLayout();
-            this.fillToolStrip1.ResumeLayout(false);
-            this.fillToolStrip1.PerformLayout();
-            this.fillToolStrip2.ResumeLayout(false);
-            this.fillToolStrip2.PerformLayout();
-            this.fillToolStrip3.ResumeLayout(false);
-            this.fillToolStrip3.PerformLayout();
-            this.fillToolStrip4.ResumeLayout(false);
-            this.fillToolStrip4.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.BindingSource bds_sp_CTDDH;
         private DS DS;
-        private DevExpress.XtraEditors.PanelControl panelControl1;
-        private System.Windows.Forms.Label label1;
         private DSTableAdapters.sp_getCTDDHTableAdapter sp_getCTDDHTableAdapter;
         private DSTableAdapters.TableAdapterManager tableAdapterManager;
         private DevExpress.XtraEditors.PanelControl panelControl2;
-        private System.Windows.Forms.Button btn_ThemVaoCTPN;
         private System.Windows.Forms.BindingSource bds_sp_getCTPN;
         private DSTableAdapters.sp_getCTPNTableAdapter sp_getCTPNTableAdapter;
-        private System.Windows.Forms.ToolStrip fillToolStrip;
-        private System.Windows.Forms.ToolStripLabel mAPNToolStripLabel;
-        private System.Windows.Forms.ToolStripTextBox mAPNToolStripTextBox;
-        private System.Windows.Forms.ToolStripButton fillToolStripButton;
-        private System.Windows.Forms.ToolStrip fillToolStrip1;
-        private System.Windows.Forms.ToolStripLabel maPNToolStripLabel1;
-        private System.Windows.Forms.ToolStripTextBox maPNToolStripTextBox1;
-        private System.Windows.Forms.ToolStripButton fillToolStripButton1;
-        private System.Windows.Forms.ToolStrip fillToolStrip2;
-        private System.Windows.Forms.ToolStripLabel maDDHToolStripLabel;
-        private System.Windows.Forms.ToolStripTextBox maDDHToolStripTextBox;
-        private System.Windows.Forms.ToolStripButton fillToolStripButton2;
-        private System.Windows.Forms.ToolStrip fillToolStrip3;
-        private System.Windows.Forms.ToolStripLabel maDDHToolStripLabel1;
-        private System.Windows.Forms.ToolStripTextBox maDDHToolStripTextBox1;
-        private System.Windows.Forms.ToolStripButton fillToolStripButton3;
         private System.Windows.Forms.BindingSource bds_sp_getVTConThieuCTPN;
         private DSTableAdapters.sp_getVTConThieuCTPNTableAdapter sp_getVTConThieuCTPNTableAdapter;
-        private System.Windows.Forms.ToolStrip fillToolStrip4;
-        private System.Windows.Forms.ToolStripLabel maDDHToolStripLabel2;
-        private System.Windows.Forms.ToolStripTextBox maDDHToolStripTextBox2;
-        private System.Windows.Forms.ToolStripButton fillToolStripButton4;
-        private DevExpress.XtraGrid.GridControl gc_sp_getVTConThieuCTPN;
+        private System.Windows.Forms.BindingSource bds_sp_getVatTuConThieuCTPhieu;
+        private DSTableAdapters.sp_getVatTuConThieuCTPhieuTableAdapter sp_getVatTuConThieuCTPhieuTableAdapter;
+        private DevExpress.XtraGrid.GridControl sp_getVatTuConThieuCTPhieuGridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView_getVTConThieuCTPN;
         private DevExpress.XtraGrid.Columns.GridColumn colMAVT;
         private DevExpress.XtraGrid.Columns.GridColumn colTENVT;
-        private DevExpress.XtraGrid.Columns.GridColumn colDONGIA;
-        private DevExpress.XtraGrid.Columns.GridColumn colSOLUONG;
+        private DevExpress.XtraGrid.Columns.GridColumn colDVT;
+        private DevExpress.XtraGrid.Columns.GridColumn colSOLUONGTON;
+        private System.Windows.Forms.GroupBox groupBox_VT;
+        private System.Windows.Forms.GroupBox groupBox_InfoVT;
+        public DevExpress.XtraEditors.SpinEdit spin_DonGia;
+        private DevExpress.XtraEditors.SimpleButton btn_Them;
+        public DevExpress.XtraEditors.SpinEdit spin_SoLuong;
+        private DevExpress.XtraEditors.TextEdit txt_TENVT;
+        private DevExpress.XtraEditors.TextEdit txt_MAVT;
     }
 }

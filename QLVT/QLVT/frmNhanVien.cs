@@ -17,6 +17,12 @@ namespace QLVT
     {
         int vitri = 0;
         string macn = "";
+        ErrorProvider errorProviderMANV = new ErrorProvider();
+        ErrorProvider errorProviderHO = new ErrorProvider();
+        ErrorProvider errorProviderTEN = new ErrorProvider();
+        ErrorProvider errorProviderDIACHI = new ErrorProvider();
+        ErrorProvider errorProviderLUONG = new ErrorProvider();
+        ErrorProvider errorProviderNGAYSINH = new ErrorProvider();
         public frmNhanVien()
         {
             InitializeComponent();
@@ -93,9 +99,8 @@ namespace QLVT
             txtMaNV.Enabled = true;
             txtMACN.Text = macn;
             dtpNgaySinh.EditValue = "";
-            ckbXoa.Enabled = false;
-            ckbXoa.Checked = false;
-
+            ((DataRowView)bdsNV[bdsNV.Position])["TrangThaiXoa"] = 0;
+            txtMaNV.Focus();
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
             gcNhanVien.Enabled = false;
@@ -213,9 +218,48 @@ namespace QLVT
              
             }
         }
-
+        
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            gcNhanVien.Focus();
+            bool checkError = true;
+          
+            
+          
+            if (!Validate(txtDiaChi))
+            {
+                txtDiaChi.Focus();
+                checkError = false;
+            }
+            if (!ValidateLuong())
+            {
+                txtLuong.Focus();
+                checkError = false;
+            }
+            if(!ValidateNgaySinh())
+            {
+                dtpNgaySinh.Focus();
+                checkError = false;
+            }
+            if (!Validate(txtTen))
+            {
+                txtTen.Focus();
+                checkError = false;
+            }
+            if (!Validate(txtHo))
+            {
+                txtHo.Focus();
+                checkError = false;
+            }
+            if (!checkError)
+            {
+                return;
+            }
+            if (!Validate(txtMaNV))
+            {
+                txtMaNV.Focus();
+                checkError = false;
+            }
             if (txtMaNV.Text.Trim() == "")
             {
                 MessageBox.Show("Mã nhân viên không được thiếu", "", MessageBoxButtons.OK);
@@ -243,6 +287,7 @@ namespace QLVT
             if (dtpNgaySinh.DateTime >= DateTime.Now)
             {
                 MessageBox.Show("Ngày sinh nhân viên không được lớn hơn hoặc bằng ngày hiện tại ", "", MessageBoxButtons.OK);
+                errorProviderNGAYSINH.SetError(dtpNgaySinh, "Ngày sinh nhân viên không được lớn hơn hoặc bằng ngày hiện tại");
                 dtpNgaySinh.Focus();
                 return;
             }
@@ -250,27 +295,40 @@ namespace QLVT
                 && ((DateTime.Now.Day - dtpNgaySinh.DateTime.Day) == 0))))
             {
                 MessageBox.Show("Nhân viên phải đủ 15t trở lên mới được nhận việc", "", MessageBoxButtons.OK);
+                errorProviderNGAYSINH.SetError(dtpNgaySinh, "Nhân viên phải đủ 15t trở lên mới được nhận việc");
                 dtpNgaySinh.Focus();
                 return;
             }
-            try
+            if(txtLuong.Text.Equals(""))
             {
-                string luong = txtLuong.Text.ToString();
-                while (luong.IndexOf('.') != -1)
-                    luong = luong.Remove(luong.IndexOf('.'), 1);
-                if (int.Parse(luong) < 4000000)
-                {
-                    MessageBox.Show("Lương của nhân viên không được nhỏ 4.000.000đ", "", MessageBoxButtons.OK);
-                    txtLuong.Focus();
-                    return;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi" + ex.Message, "", MessageBoxButtons.OK);
+                MessageBox.Show("Lương nhân viên không được thiếu", "", MessageBoxButtons.OK);
+               
+                txtLuong.Focus();
                 return;
             }
+            else
+            {
+                try
+                {
+                    string luong = txtLuong.Text.ToString();
+                    while (luong.IndexOf('.') != -1)
+                        luong = luong.Remove(luong.IndexOf('.'), 1);
+                    if (int.Parse(luong) < 4000000)
+                    {
+                        MessageBox.Show("Lương của nhân viên không được nhỏ 4.000.000đ", "", MessageBoxButtons.OK);
+                        errorProviderLUONG.SetError(txtLuong, "Lương của nhân viên không được nhỏ 4.000.000đ");
+                        txtLuong.Focus();
+                        return;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi" + ex.Message, "", MessageBoxButtons.OK);
+                    return;
+                }
+            }
+          
             if (txtDiaChi.Text.Trim() == "")
             {
                 MessageBox.Show("Địa chỉ không được thiếu", "", MessageBoxButtons.OK);
@@ -289,6 +347,9 @@ namespace QLVT
             {
                 try
                 {
+                    ((DataRowView)bdsNV[bdsNV.Position])["HO"] = Program.StandardString(((DataRowView)bdsNV[bdsNV.Position])["HO"].ToString(), "name");
+                   ((DataRowView)bdsNV[bdsNV.Position])["TEN"] = Program.StandardString(((DataRowView)bdsNV[bdsNV.Position])["TEN"].ToString(), "name");
+                   ((DataRowView)bdsNV[bdsNV.Position])["DIACHI"] = Program.StandardString(((DataRowView)bdsNV[bdsNV.Position])["DIACHI"].ToString(), "add");
                     bdsNV.EndEdit();
                     bdsNV.ResetCurrentItem();
                     this.NHANVIENTableAdapter.Connection.ConnectionString = Program.connstr;
@@ -304,7 +365,6 @@ namespace QLVT
                 btnGhi.Enabled = btnUndo.Enabled = false;
 
                 panelCtrl_NhanVien.Enabled = false;
-                ckbXoa.Enabled = true;
                 this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
                 //     frmTaoAcc.LayDSNVChuaCoAcc("EXEC sp_getTaiKhoanChuaCoAcc");
                 //  frm
@@ -394,9 +454,7 @@ namespace QLVT
         String CNchuyen;
         public void chuyenChiNhanh(String index)
         {
-            CNchuyen = index;
-            if (CNchuyen != Program.servername)
-            {
+                CNchuyen = index;
                 String maCN = "";
                 if (CNchuyen.Contains("2")) maCN = "CN2";
                 else if (CNchuyen.Contains("1")) maCN = "CN1";
@@ -414,10 +472,12 @@ namespace QLVT
                 {
                     MessageBox.Show(ex.Message);
                 }
-            }
-            else
-                MessageBox.Show("Vui lòng chọn CN khác chi nhánh hiện tại", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+          //  else
+            //    MessageBox.Show("Vui lòng chọn CN khác chi nhánh hiện tại", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+        private SqlConnection conn_publisher = new SqlConnection();
+
+     
         private void btnChuyenCN_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             
@@ -426,5 +486,141 @@ namespace QLVT
                 pickCN.ShowDialog();
          
         }
-    }
+
+        private void txtMaNV_Validating(object sender, CancelEventArgs e)
+        {
+            Validate(txtMaNV);
+        }
+       
+
+        private void txtHo_Validating(object sender, CancelEventArgs e)
+        {
+            Validate(txtHo);
+        }
+        private bool Validate(TextBox txt)
+        {
+            bool bStatus = true;
+            if(txt.Name=="txtMaNV")
+            {
+                if (txt.Text.Trim() == "")
+                {
+                    errorProviderMANV.SetError(txt, "Vui lòng nhập mã nhân viên");
+                    bStatus = false;
+                }
+                else
+                    errorProviderMANV.SetError(txt, "");
+            }
+            else if (txt.Name=="txtHo")
+            {
+                if(txt.Text.Trim()=="")
+                {
+                    errorProviderHO.SetError(txt, "Vui lòng nhập họ nhân viên");
+                    bStatus = false;
+
+                }  
+                else if(txt.Text.Trim().Length>40)
+                {
+                    errorProviderHO.SetError(txt, "Họ nhân viên chỉ chứa tối đa 40 ký tự");
+                    bStatus = false;
+                }
+                else
+                {
+                    errorProviderHO.SetError(txt, "");
+                }
+            }
+            else if (txt.Name == "txtTen")
+            {
+                if (txt.Text.Trim() == "")
+                {
+                    errorProviderTEN.SetError(txt, "Vui lòng nhập tên nhân viên");
+                    bStatus = false;
+
+                }
+                else if (txt.Text.Trim().Length > 10)
+                {
+                    errorProviderTEN.SetError(txt, "Họ nhân viên chỉ chứa tối đa 40 ký tự");
+                    bStatus = false;
+                }
+                else
+                {
+                    errorProviderTEN.SetError(txt, "");
+                }
+            }
+            else if (txt.Name == "txtDiaChi")
+            {
+                if (txt.Text.Trim() == "")
+                {
+                    errorProviderDIACHI.SetError(txt, "Vui lòng nhập địa chỉ của nhân viên");
+                    bStatus = false;
+
+                }
+                else if (txt.Text.Trim().Length > 100)
+                {
+                    errorProviderDIACHI.SetError(txt, "Địa chỉ của nhân viên chỉ chứa tối đa 40 ký tự");
+                    bStatus = false;
+                }
+                else
+                {
+                    errorProviderDIACHI.SetError(txt, "");
+                }
+            }
+            
+            
+
+
+
+            return bStatus;
+        }
+
+        private void txtTen_Validating(object sender, CancelEventArgs e)
+        {
+            Validate(txtTen);
+        }
+
+        private void txtLuong_Validating(object sender, CancelEventArgs e)
+        {
+            ValidateLuong();
+        }
+
+        private void txtDiaChi_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void dtpNgaySinh_Validating(object sender, CancelEventArgs e)
+        {
+            ValidateNgaySinh();
+        }
+        private bool ValidateNgaySinh()
+        {
+            bool bStatus = true;
+            if (dtpNgaySinh.Text.Trim() == "")
+            {
+                errorProviderNGAYSINH.SetError(dtpNgaySinh, "Vui lòng nhập ngày sinh của nhân viên");
+                bStatus = false;
+            }
+         
+            else
+                errorProviderNGAYSINH.SetError(dtpNgaySinh, "");
+
+
+            return bStatus;
+        }
+        private bool ValidateLuong()
+        {
+            bool bStatus = true;
+
+            if (txtLuong.Text.Trim() == "")
+            {
+                errorProviderLUONG.SetError(txtLuong, "Vui lòng nhập lương của nhân viên");
+                bStatus = false;
+
+            }
+            else  errorProviderLUONG.SetError(txtLuong, "");
+            return bStatus;
+
+        }
+     
+
+}
  }
