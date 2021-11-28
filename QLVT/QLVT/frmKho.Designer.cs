@@ -83,6 +83,7 @@ namespace QLVT
             this.txtDiaChi = new DevExpress.XtraEditors.TextEdit();
             this.txtTenKho = new DevExpress.XtraEditors.TextEdit();
             this.txtMaKho = new DevExpress.XtraEditors.TextEdit();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             mAKHOLabel = new System.Windows.Forms.Label();
             tENKHOLabel = new System.Windows.Forms.Label();
             dIACHILabel = new System.Windows.Forms.Label();
@@ -104,6 +105,7 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.txtDiaChi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTenKho.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaKho.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // mAKHOLabel
@@ -366,6 +368,7 @@ namespace QLVT
             this.gridView_Kho,
             this.tileView1});
             this.gcKho.EditorKeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gcKho_EditorKeyPress);
+            this.gcKho.Validating += new System.ComponentModel.CancelEventHandler(this.gcKho_Validating);
             // 
             // gridView_Kho
             // 
@@ -376,6 +379,7 @@ namespace QLVT
             this.colMACN});
             this.gridView_Kho.GridControl = this.gcKho;
             this.gridView_Kho.Name = "gridView_Kho";
+            this.gridView_Kho.OptionsBehavior.Editable = false;
             this.gridView_Kho.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_Kho_FocusedRowChanged);
             this.gridView_Kho.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView_Kho_CellValueChanged);
             this.gridView_Kho.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView_Kho_CellValueChanging);
@@ -555,6 +559,7 @@ namespace QLVT
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.Size = new System.Drawing.Size(154, 26);
             this.txtDiaChi.TabIndex = 5;
+            this.txtDiaChi.Validating += new System.ComponentModel.CancelEventHandler(this.txtDiaChi_Validating);
             // 
             // txtTenKho
             // 
@@ -564,6 +569,7 @@ namespace QLVT
             this.txtTenKho.Name = "txtTenKho";
             this.txtTenKho.Size = new System.Drawing.Size(125, 26);
             this.txtTenKho.TabIndex = 3;
+            this.txtTenKho.Validating += new System.ComponentModel.CancelEventHandler(this.txtTenKho_Validating);
             // 
             // txtMaKho
             // 
@@ -574,6 +580,12 @@ namespace QLVT
             this.txtMaKho.Name = "txtMaKho";
             this.txtMaKho.Size = new System.Drawing.Size(125, 26);
             this.txtMaKho.TabIndex = 1;
+            this.txtMaKho.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaKho_KeyPress_1);
+            this.txtMaKho.Validating += new System.ComponentModel.CancelEventHandler(this.txtMaKho_Validating);
+            // 
+            // dxErrorProvider1
+            // 
+            this.dxErrorProvider1.ContainerControl = this;
             // 
             // frmKho
             // 
@@ -611,6 +623,7 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.txtDiaChi.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTenKho.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaKho.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -666,5 +679,6 @@ namespace QLVT
         private DevExpress.XtraEditors.TextEdit txtDiaChi;
         private DevExpress.XtraEditors.TextEdit txtTenKho;
         private DevExpress.XtraEditors.TextEdit txtMaKho;
+        private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
     }
 }

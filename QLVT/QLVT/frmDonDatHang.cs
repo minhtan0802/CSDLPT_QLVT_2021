@@ -17,7 +17,11 @@ namespace QLVT
     {
       
         DataTable dtVTDaCo = new DataTable();
-   
+        ErrorProvider errorProviderMDDH = new ErrorProvider();
+        ErrorProvider errorProviderNCC = new ErrorProvider();
+        ErrorProvider errorProviderMAKHO = new ErrorProvider();
+      
+
         public DataTable getDTVTDaCo()
         {
             return dtVTDaCo;
@@ -273,16 +277,16 @@ namespace QLVT
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmb_MaKho.DropDownStyle=ComboBoxStyle.DropDownList;
             bdsDatHang.AddNew();
             gc_DatHang.Enabled = false;
             label_Kho.Text = "Kho:";
             txt_MDDH.Enabled = true;
-            txt_MDDH.Focus();
+           
             gridView_getCTDDH.OptionsBehavior.Editable = true;
             cmb_MaKho.SelectedText="";
             cmb_MaKho.SelectedIndex = -1;
-       //     cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDownList;
+            //     cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDownList;
             cmb_MaKho.Enabled = true;
             txt_NCC.Enabled = true;
             dateEdit_NgayLap.Text = DateTime.Now.ToString("dd/MM/yyyy");
@@ -292,10 +296,11 @@ namespace QLVT
             mddh = "";
             this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu,mddh,"dh");
             dtVTDaCo.Clear();
+           
             panelCtrl_DatHang.Enabled = true;
             btn_ThemCTDDH.Enabled = true;
             btn_XoaCTDDH.Enabled = false;
-            
+            txt_MDDH.Focus();
         }
         private int saveDDH()
         {
@@ -339,7 +344,33 @@ namespace QLVT
         }    
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (txt_MDDH.Text.Trim() == "")
+            if(!gridView_getCTDDH.PostEditor())
+            {
+                return;
+            }    
+      
+            bool checkError = true;
+            if(!ValidateCombKho(cmb_MaKho))
+            {
+                cmb_MaKho.Focus();
+                checkError = false;
+            }
+           
+            if (!Validate(txt_NCC))
+            {
+                txt_NCC.Focus();
+                checkError = false;
+            }
+            if (!Validate(txt_MDDH))
+            {
+                txt_MDDH.Focus();
+                checkError = false;
+            }
+            if(!checkError)
+            {
+                return;
+            }    
+           /* if (txt_MDDH.Text.Trim() == "")
             {
                 MessageBox.Show("Mã đơn đặt hàng không được thiếu", "", MessageBoxButtons.OK);
                 txt_MDDH.Focus();
@@ -356,8 +387,8 @@ namespace QLVT
                      MessageBox.Show("Mã kho không được thiếu", "", MessageBoxButtons.OK);
                      txt_MaKho.Focus();
                      return;
-                 }*/
-            if(cmb_MaKho.SelectedIndex==-1 && cmb_MaKho.Text=="")
+                 }
+            if(cmb_MaKho.Text=="")
             {
                 MessageBox.Show("Kho không được thiếu", "", MessageBoxButtons.OK);
                 cmb_MaKho.Focus();
@@ -368,7 +399,7 @@ namespace QLVT
                 MessageBox.Show("Kho không có ở chi nhánh này", "", MessageBoxButtons.OK);
                 cmb_MaKho.Focus();
                 return;
-            }
+            }*/
             if (txt_MDDH.Enabled==true)
             {
                 string strLenh = "EXEC sp_TraCuu '" + txt_MDDH.Text + "'" + ", 'MDDH'";
@@ -376,13 +407,18 @@ namespace QLVT
                 if (ret == 1)
                 {
                     txt_MDDH.Focus();
+                    dxErrorProvider1.SetError(txt_MDDH, "Mã đơn đặt hàng đã tồn tại");
                     return;
                 }
-                else if (Program.ExecSqlNonQuery("EXEC sp_TraCuu '" + cmb_MaKho.SelectedValue + "'" + ", 'MAKHODDH'") == 1)
+                else
+                {
+                    dxErrorProvider1.SetError(txt_MDDH, null);
+                }    
+             /*   else if (Program.ExecSqlNonQuery("EXEC sp_TraCuu '" + cmb_MaKho.SelectedValue + "'" + ", 'MAKHODDH'") == 1)
                 {
                     cmb_MaKho.Focus();
                     return;
-                }
+                }*/
             }
             if (bds_sp_getCTPhieu.Count==0)
             {
@@ -400,7 +436,7 @@ namespace QLVT
             }
             label_Kho.Text = "Mã kho:";
                 gc_DatHang.Enabled = true;
-                cmb_MaKho.Enabled= txt_MaNV.Enabled = txt_MDDH.Enabled = dateEdit_NgayLap.Enabled = txt_MDDH.Enabled = false;
+            cmb_MaKho.Enabled= txt_MaNV.Enabled = txt_MDDH.Enabled = dateEdit_NgayLap.Enabled = txt_MDDH.Enabled = false;
                 btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
             
                 btnGhi.Enabled = btnUndo.Enabled = false;
@@ -952,6 +988,129 @@ namespace QLVT
                
              
             
+        }
+
+        private void txt_MDDH_Validating(object sender, CancelEventArgs e)
+        {
+            if(!Validate(txt_MDDH))
+            {
+                e.Cancel = true;
+            }    
+            else
+            {
+                e.Cancel = false;
+            }    
+        }
+        private bool Validate(DevExpress.XtraEditors.TextEdit txt)
+        {
+            bool bStatus = true;       
+            if (txt.Name == "txt_MDDH")
+            {
+                if (txt.Text.Trim() == "")
+                {
+                    dxErrorProvider1.SetError(txt, "Vui lòng nhập mã đơn đặt hàng");
+                    bStatus = false;
+                }
+                else if (txt.Text.Length > 8)
+                {
+                    dxErrorProvider1.SetError(txt, "Mã đơn đặt hàng chỉ chứa tối đa 8 ký tự");
+                    bStatus = false;
+                }
+                else
+                    dxErrorProvider1.SetError(txt, null);
+            }
+            else if (txt.Name == "txt_NCC")
+            {
+                if (txt.Text.Trim() == "")
+                {
+                    dxErrorProvider1.SetError(txt, "Vui lòng nhập nhà cung cấp");
+                    bStatus = false;
+
+                }
+                else if (Program.StandardString(txt.Text, "name").Length > 40)
+                {
+                    dxErrorProvider1.SetError(txt, "Tên nhà cung cấp chỉ chứa tối đa 100 ký tự");
+                    bStatus = false;
+                }
+                else
+                {
+                    dxErrorProvider1.SetError(txt, null);
+                }
+            } 
+            return bStatus;
+        }
+
+        private void txt_NCC_Validating(object sender, CancelEventArgs e)
+        {
+             if(!Validate(txt_NCC))
+              {
+                  e.Cancel = true;
+              }    
+              else
+              {
+                  e.Cancel = false;
+              }   
+           
+        }
+
+        private bool ValidateCombKho(System.Windows.Forms.ComboBox txt)
+        {
+            bool bStatus = true;
+            
+                if (txt.SelectedIndex ==-1)
+                {
+                    errorProviderMAKHO.SetError(txt, "Vui lòng chọn kho");
+                    bStatus = false;
+                }
+                else
+                {
+                    errorProviderMAKHO.SetError(txt, "");
+                }
+         
+            return bStatus;
+        }
+
+        private void cmb_MaKho_Validating(object sender, CancelEventArgs e)
+        {
+            if(!ValidateCombKho(cmb_MaKho))
+            {
+                e.Cancel = true;
+            }    
+            else
+            {
+                e.Cancel = false;
+            }    
+        }
+
+        private void mAKHOComboBoxEdit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_MDDH_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Space) || (!char.IsLetter(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(Keys.Back)))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.KeyChar = Convert.ToChar(e.KeyChar.ToString().ToUpper());
+            }
+        }
+
+        private void txt_NCC_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+            string specialChar = @"\|!#$%&/()=?»«@£§€{}.-;'<>_,";
+            foreach (var item in specialChar)
+            {
+                if (e.KeyChar == item)
+                {
+                    e.Handled = true;
+
+                }
+            }
         }
     }
 

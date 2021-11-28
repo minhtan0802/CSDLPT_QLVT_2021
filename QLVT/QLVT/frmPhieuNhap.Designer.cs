@@ -110,6 +110,8 @@ namespace QLVT
             this.dSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sp_getCTPhieuTableAdapter = new QLVT.DSTableAdapters.sp_getCTPhieuTableAdapter();
             this.sp_getVatTuConThieuCTPhieuTableAdapter = new QLVT.DSTableAdapters.sp_getVatTuConThieuCTPhieuTableAdapter();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             mAPNLabel = new System.Windows.Forms.Label();
             nGAYLabel = new System.Windows.Forms.Label();
             masoDDHLabel = new System.Windows.Forms.Label();
@@ -152,6 +154,8 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.vattuBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getCTDDH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dSBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // mAPNLabel
@@ -500,6 +504,7 @@ namespace QLVT
             this.colMAVT.FieldName = "MAVT";
             this.colMAVT.MinWidth = 25;
             this.colMAVT.Name = "colMAVT";
+            this.colMAVT.OptionsColumn.AllowEdit = false;
             this.colMAVT.Visible = true;
             this.colMAVT.VisibleIndex = 0;
             this.colMAVT.Width = 94;
@@ -510,6 +515,7 @@ namespace QLVT
             this.colTENVT.FieldName = "TENVT";
             this.colTENVT.MinWidth = 25;
             this.colTENVT.Name = "colTENVT";
+            this.colTENVT.OptionsColumn.AllowEdit = false;
             this.colTENVT.Visible = true;
             this.colTENVT.VisibleIndex = 1;
             this.colTENVT.Width = 94;
@@ -705,6 +711,7 @@ namespace QLVT
             this.txt_MaSoDDH.Name = "txt_MaSoDDH";
             this.txt_MaSoDDH.Size = new System.Drawing.Size(125, 26);
             this.txt_MaSoDDH.TabIndex = 5;
+            this.txt_MaSoDDH.Validating += new System.ComponentModel.CancelEventHandler(this.txt_MaSoDDH_Validating);
             // 
             // txt_date
             // 
@@ -727,10 +734,12 @@ namespace QLVT
             this.txt_MaPN.Location = new System.Drawing.Point(122, 34);
             this.txt_MaPN.MenuManager = this.barManager1;
             this.txt_MaPN.Name = "txt_MaPN";
+            this.txt_MaPN.Properties.Validating += new System.ComponentModel.CancelEventHandler(this.txt_MaPN_Properties_Validating);
             this.txt_MaPN.Size = new System.Drawing.Size(125, 26);
             this.txt_MaPN.TabIndex = 1;
             this.txt_MaPN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_MaPN_KeyPress);
             this.txt_MaPN.Validating += new System.ComponentModel.CancelEventHandler(this.txt_MaPN_Validating);
+            this.txt_MaPN.Validated += new System.EventHandler(this.txt_MaPN_Validated);
             // 
             // gc_PhieuNhap
             // 
@@ -902,6 +911,14 @@ namespace QLVT
             // 
             this.sp_getVatTuConThieuCTPhieuTableAdapter.ClearBeforeFill = true;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // dxErrorProvider1
+            // 
+            this.dxErrorProvider1.ContainerControl = this;
+            // 
             // frmPhieuNhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -962,6 +979,8 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.vattuBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getCTDDH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dSBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1044,5 +1063,7 @@ namespace QLVT
         private DevExpress.XtraGrid.Columns.GridColumn colSOLUONG;
         public System.Windows.Forms.BindingSource bds_sp_getCTPhieu;
         public DevExpress.XtraGrid.Views.Grid.GridView gridView_CTPN;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
     }
 }

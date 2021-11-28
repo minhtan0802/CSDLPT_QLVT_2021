@@ -34,6 +34,7 @@ namespace QLVT
             System.Windows.Forms.Label nGAYLabel;
             System.Windows.Forms.Label nhaCCLabel;
             System.Windows.Forms.Label mANVLabel;
+            System.Windows.Forms.Label mAKHOLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDonDatHang));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
@@ -94,10 +95,12 @@ namespace QLVT
             this.cmbChiNhanh = new System.Windows.Forms.ComboBox();
             this.sp_getCTDDHTableAdapter = new QLVT.DSTableAdapters.sp_getCTDDHTableAdapter();
             this.sp_getCTPhieuTableAdapter = new QLVT.DSTableAdapters.sp_getCTPhieuTableAdapter();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             masoDDHLabel = new System.Windows.Forms.Label();
             nGAYLabel = new System.Windows.Forms.Label();
             nhaCCLabel = new System.Windows.Forms.Label();
             mANVLabel = new System.Windows.Forms.Label();
+            mAKHOLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsDatHang)).BeginInit();
@@ -123,6 +126,7 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // masoDDHLabel
@@ -160,6 +164,14 @@ namespace QLVT
             mANVLabel.Size = new System.Drawing.Size(54, 17);
             mANVLabel.TabIndex = 6;
             mANVLabel.Text = "Mã NV:";
+            // 
+            // mAKHOLabel
+            // 
+            mAKHOLabel.AutoSize = true;
+            mAKHOLabel.Location = new System.Drawing.Point(364, 221);
+            mAKHOLabel.Name = "mAKHOLabel";
+            mAKHOLabel.Size = new System.Drawing.Size(0, 17);
+            mAKHOLabel.TabIndex = 10;
             // 
             // barManager1
             // 
@@ -424,6 +436,7 @@ namespace QLVT
             // 
             this.panelCtrl_DatHang.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.panelCtrl_DatHang.Appearance.Options.UseBackColor = true;
+            this.panelCtrl_DatHang.Controls.Add(mAKHOLabel);
             this.panelCtrl_DatHang.Controls.Add(this.label_Kho);
             this.panelCtrl_DatHang.Controls.Add(this.cmb_MaKho);
             this.panelCtrl_DatHang.Controls.Add(mANVLabel);
@@ -463,6 +476,7 @@ namespace QLVT
             this.cmb_MaKho.Size = new System.Drawing.Size(123, 24);
             this.cmb_MaKho.TabIndex = 9;
             this.cmb_MaKho.ValueMember = "MAKHO";
+            this.cmb_MaKho.Validating += new System.ComponentModel.CancelEventHandler(this.cmb_MaKho_Validating);
             // 
             // khoBindingSource
             // 
@@ -488,6 +502,8 @@ namespace QLVT
             this.txt_NCC.Size = new System.Drawing.Size(125, 26);
             this.txt_NCC.TabIndex = 5;
             this.txt_NCC.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.txt_NCC_EditValueChanging);
+            this.txt_NCC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_NCC_KeyPress);
+            this.txt_NCC.Validating += new System.ComponentModel.CancelEventHandler(this.txt_NCC_Validating);
             // 
             // dateEdit_NgayLap
             // 
@@ -513,6 +529,8 @@ namespace QLVT
             this.txt_MDDH.Name = "txt_MDDH";
             this.txt_MDDH.Size = new System.Drawing.Size(125, 26);
             this.txt_MDDH.TabIndex = 1;
+            this.txt_MDDH.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_MDDH_KeyPress);
+            this.txt_MDDH.Validating += new System.ComponentModel.CancelEventHandler(this.txt_MDDH_Validating);
             // 
             // bdsVatTu
             // 
@@ -703,6 +721,10 @@ namespace QLVT
             // 
             this.sp_getCTPhieuTableAdapter.ClearBeforeFill = true;
             // 
+            // dxErrorProvider1
+            // 
+            this.dxErrorProvider1.ContainerControl = this;
+            // 
             // frmDonDatHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -747,6 +769,7 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -797,7 +820,6 @@ namespace QLVT
         private DSTableAdapters.PhieuNhapTableAdapter phieuNhapTableAdapter;
         private System.Windows.Forms.BindingSource bdsCTDDH;
         public DSTableAdapters.CTDDHTableAdapter CTDDHTableAdapter;
-        private System.Windows.Forms.ComboBox cmb_MaKho;
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
         private System.Windows.Forms.Label label_Kho;
         private DevExpress.XtraEditors.PanelControl panelControl1;
@@ -814,6 +836,8 @@ namespace QLVT
         private DevExpress.XtraGrid.Columns.GridColumn colDONGIA;
         private DevExpress.XtraGrid.Columns.GridColumn colSOLUONG;
         public System.Windows.Forms.BindingSource bds_sp_getCTPhieu;
+        private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
+        private System.Windows.Forms.ComboBox cmb_MaKho;
 
         public DSTableAdapters.sp_getCTDDHTableAdapter Sp_getCTDDHTableAdapter { get => sp_getCTDDHTableAdapter; set => sp_getCTDDHTableAdapter = value; }
     }

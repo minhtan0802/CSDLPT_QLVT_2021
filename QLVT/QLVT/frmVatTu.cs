@@ -15,6 +15,11 @@ namespace QLVT
     public partial class frmVatTu : DevExpress.XtraEditors.XtraForm
     {
         int vitri = 0;
+        string tenVTCu = "";
+        string tenVTMoi = "";
+        ErrorProvider errorProviderTENVT = new ErrorProvider();
+        ErrorProvider errorProviderDVT = new ErrorProvider();
+        ErrorProvider errorProviderMAVT = new ErrorProvider();
         public frmVatTu()
         {
             InitializeComponent();
@@ -38,6 +43,7 @@ namespace QLVT
             // TODO: This line of code loads data into the 'DS.VatTu' table. You can move, or remove it, as needed.
             this.VatTuTableAdapter.Connection.ConnectionString = Program.connstr;
             this.VatTuTableAdapter.Fill(this.DS.Vattu);
+         
             // TODO: This line of code loads data into the 'DS.CTDDH' table. You can move, or remove it, as needed.
             this.CTDDHTableAdapter.Connection.ConnectionString = Program.connstr;
             this.CTDDHTableAdapter.Fill(this.DS.CTDDH);
@@ -63,11 +69,13 @@ namespace QLVT
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            tb_MaVatTu.Enabled = true;
+            txt_MaVatTu.Enabled = true;
             vitri = bdsVatTu.Position;
             panelCtrl_VatTu.Enabled = true;
             bdsVatTu.AddNew();
             ((DataRowView)bdsVatTu[bdsVatTu.Position])["SOLUONGTON"] = 0;
+            gridView_VatTu.FocusedRowHandle = bdsVatTu.Position;
+            gridView_VatTu.Columns[0].OptionsColumn.AllowEdit=true;
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
             gcVatTu.Enabled = false;
@@ -92,6 +100,7 @@ namespace QLVT
             btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
             gcVatTu.Enabled = false;
+            tenVTCu = txt_TenVatTu.Text;
         }
 
         private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -156,58 +165,117 @@ namespace QLVT
 
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (tb_MaVatTu.Text.Trim() == "")
+          
+            bool checkError = true;
+            if(!Validate(txt_DonViTinh))
+            {
+                txt_DonViTinh.Focus();
+                checkError = false;
+            }
+            if (!Validate(txt_TenVatTu))
+            {
+                txt_TenVatTu.Focus();
+                checkError = false;
+            }
+            if (!Validate(txt_MaVatTu))
+            {
+                txt_MaVatTu.Focus();
+                checkError = false;
+            }
+            if(!checkError)
+            {
+                return;
+            }  
+            /*
+            if (txt_MaVatTu.Text.Trim() == "")
             {
                 MessageBox.Show("Mã vật tư không được thiếu", "", MessageBoxButtons.OK);
-                tb_MaVatTu.Focus();
+                txt_MaVatTu.Focus();
                 return;
             }
-            if (tb_TenVatTu.Text.Trim() == "")
+            if (txt_TenVatTu.Text.Trim() == "")
             {
                 MessageBox.Show("Tên vật tư không được thiếu", "", MessageBoxButtons.OK);
-                tb_TenVatTu.Focus();
+                txt_TenVatTu.Focus();
                 return;
             }
-            if (tb_DonViTinh.Text.Trim() == "")
+            if (txt_DonViTinh.Text.Trim() == "")
             {
                 MessageBox.Show("Đơn vị tính không được thiếu", "", MessageBoxButtons.OK);
-                tb_DonViTinh.Focus();
-                return;
-            }
-            string strLenhMK = "EXEC sp_TraCuu @code='" + tb_MaVatTu.Text + "'" + ", @type='MAVT'";
-        
-            int kiemTraMaVT = 0;
-            if (tb_MaVatTu.Enabled == true)
-            {
-                kiemTraMaVT = Program.ExecSqlNonQuery(strLenhMK);
-            }
-           
+                txt_DonViTinh.Focus();
 
-            if (kiemTraMaVT != 1)
+                return;
+            }*/
+            string strLenhMAVT = "EXEC sp_TraCuu @code='"+ txt_MaVatTu.Text+ "'" + ", @type='MAVT'";
+            string strLenhTENVT = "EXEC sp_TraCuu @code=N'" + Program.StandardString(txt_TenVatTu.Text,"name") + "'" + ", @type='TENVT'";
+
+            int kiemTraMaVT = 0;
+            int kiemTraTenVT = 0;
+            if (txt_MaVatTu.Enabled == true)
             {
+               kiemTraMaVT = Program.ExecSqlNonQuery(strLenhMAVT);
+                if(kiemTraMaVT==1)
+                {
+                    txt_MaVatTu.Focus();
+                    dxErrorProvider1.SetError(txt_MaVatTu, "Mã vật tư đã tồn tại");
+                    return;
+                }
+                else
+                {
+                    dxErrorProvider1.SetError(txt_MaVatTu, "");
+                } 
+                    
+            }
+
+            if(txt_MaVatTu.Enabled==true)
+            {
+                kiemTraTenVT = Program.ExecSqlNonQuery(strLenhTENVT);
+                if (kiemTraTenVT==1)
+                {
+                    txt_TenVatTu.Focus();
+                    dxErrorProvider1.SetError(txt_TenVatTu, "Tên vật tư đã tồn tại");
+                    return;
+                }
+                else
+                {
+                    dxErrorProvider1.SetError(txt_TenVatTu, "");
+                } 
+                    
+            }
+        
+            if (txt_MaVatTu.Enabled == false && !tenVTCu.ToLower().Equals(Program.StandardString(txt_TenVatTu.Text, "name").ToLower()))
+            {
+                kiemTraTenVT = Program.ExecSqlNonQuery(strLenhTENVT);
+                if (kiemTraTenVT == 1)
+                {
+                    txt_TenVatTu.Focus();
+                    dxErrorProvider1.SetError(txt_TenVatTu, "Tên vật tư đã tồn tại");
+                    return;
+                }
+            }    
+          
                 try
                 {
+                    txt_TenVatTu.Text = Program.StandardString(txt_TenVatTu.Text, "name");
+                    txt_DonViTinh.Text= Program.StandardString(txt_DonViTinh.Text, "name");
                     bdsVatTu.EndEdit();
                     bdsVatTu.ResetCurrentItem();
                     this.VatTuTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.VatTuTableAdapter.Update(this.DS.Vattu);
-                    foreach (DataRow row in this.DS.Vattu)
-                    {
-                        Program.soLuongVatTu++;
-                    }
+                   
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Lỗi ghi vật tư.\n" + ex.Message, "", MessageBoxButtons.OK);
                     return;
                 }
-                tb_MaVatTu.Enabled = false;
+                txt_MaVatTu.Enabled = false;
                 gcVatTu.Enabled = true;
                 btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
                 btnGhi.Enabled = btnUndo.Enabled = false;
-
-                 panelCtrl_VatTu.Enabled = false;
-            }
+                gridView_VatTu.Columns[0].OptionsColumn.AllowEdit =false;
+                panelCtrl_VatTu.Enabled = false;
+           
         }
 
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -220,6 +288,224 @@ namespace QLVT
             Xrpt_DSVatTu rpt = new Xrpt_DSVatTu();
             ReportPrintTool print = new ReportPrintTool(rpt);
             print.ShowPreviewDialog();
+        }
+
+        private void gridView_VatTu_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            if (gridView_VatTu.FocusedColumn.FieldName == "MAVT")
+            {
+                string maVTTemp = e.Value as string;
+                if (maVTTemp.Trim().Length > 4)
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Mã vật tư chỉ được tối đa 4 ký tự";
+                }
+            }
+            else if (gridView_VatTu.FocusedColumn.FieldName == "TENVT")
+            {
+                string tenVTTemp = e.Value as string;
+                if (tenVTTemp.Trim().Length > 30)
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Tên vật tư chỉ được tối đa 30 ký tự";
+                }
+            }
+            else if (gridView_VatTu.FocusedColumn.FieldName == "DVT")
+            {
+                string DVTTemp = e.Value as string;
+                if (DVTTemp.Trim().Length > 15)
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Đơn vị tính chỉ được tối đa 15 ký tự";
+                }
+            }
+        }
+
+        private void gcVatTu_EditorKeyPress(object sender, KeyPressEventArgs e)
+        {
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
+            btnGhi.Enabled = btnUndo.Enabled = true;
+            if (gridView_VatTu.FocusedColumn.FieldName.Equals("MAVT"))
+            {
+                if (e.KeyChar == Convert.ToChar(Keys.Space) || (!char.IsLetter(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(Keys.Back)))
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.KeyChar = Convert.ToChar(e.KeyChar.ToString().ToUpper());
+                }
+            }
+        }
+
+        private void gridView_VatTu_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+        
+        }
+
+        private void gridView_VatTu_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            
+        }
+
+        private void tb_MaVatTu_Validating(object sender, CancelEventArgs e)
+        {
+        }
+        private bool Validate(DevExpress.XtraEditors.TextEdit txt)
+        {
+            bool bStatus = true;
+            if (txt.Name == "txt_MaVatTu")
+            {
+                if (txt.Text.Trim() == "")
+                {
+                    dxErrorProvider1.SetError(txt, "Vui lòng nhập mã vật tư");
+                    
+                    bStatus = false;
+                }
+                else if (txt.Text.Trim().Length > 4)
+                {
+                    dxErrorProvider1.SetError(txt, "Mã vật tư chỉ chứa tối đa 4 ký tự");
+                    bStatus = false;
+                }
+                else
+                    dxErrorProvider1.SetError(txt, "");
+            }
+            else if (txt.Name == "txt_TenVatTu")
+            {
+                if (txt.Text.Trim() == "")
+                {
+                    dxErrorProvider1.SetError(txt, "Vui lòng nhập tên vật tư");
+                    bStatus = false;
+
+                }
+                else if (Program.StandardString(txt.Text, "name").Length > 30)
+                {
+                    dxErrorProvider1.SetError(txt, "Tên vật tư chỉ chứa tối đa 30 ký tự");
+                    bStatus = false;
+                }
+                else
+                {
+                    dxErrorProvider1.SetError(txt, "");
+                }
+            }
+            else if (txt.Name == "txt_DonViTinh")
+            {
+                if (txt.Text.Trim() == "")
+                {
+                   dxErrorProvider1.SetError(txt, "Vui lòng nhập đơn vị tính");
+                    bStatus = false;
+
+                }
+                else if (Program.StandardString(txt.Text, "add").Length > 15)
+                {
+                    dxErrorProvider1.SetError(txt, "Đơn vị tính chỉ chứa tối đa 15 ký tự");
+                    bStatus = false;
+                }
+                else
+                {
+                    dxErrorProvider1.SetError(txt, "");
+                }
+            }
+
+
+
+
+
+            return bStatus;
+        }
+
+        private void txt_TenVatTu_Validating(object sender, CancelEventArgs e)
+        {
+           
+        }
+
+        private void txt_DonViTinh_Validating(object sender, CancelEventArgs e)
+        {
+            
+        }
+
+        private void txt_MaVatTu_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void txt_MaVatTu_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Space) || (!char.IsLetter(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(Keys.Back)))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.KeyChar = Convert.ToChar(e.KeyChar.ToString().ToUpper());
+            }
+        }
+
+        private void tENVTTextEdit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string specialChar = @"\|!#$%&/()=?»«@£§€{}.-;'<>_,";
+            foreach (var item in specialChar)
+            {
+                if (e.KeyChar == item)
+                {
+                    e.Handled = true;
+
+                }
+            }
+        }
+
+        private void txt_DonViTinh_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            string specialChar = @"\|!#$%&/()=?»«@£§€{}.-;'<>_,";
+            foreach (var item in specialChar)
+            {
+                if (e.KeyChar == item)
+                {
+                    e.Handled = true;
+
+                }
+            }
+        }
+
+        private void txt_MaVatTu_Validating(object sender, CancelEventArgs e)
+        {
+
+            if (!Validate(txt_MaVatTu))
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Cancel = false;
+            }
+        }
+
+        private void txt_DonViTinh_Validating_1(object sender, CancelEventArgs e)
+        {
+            if (!Validate(txt_DonViTinh))
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Cancel = false;
+            }
+        }
+
+        private void txt_TenVatTu_Validating_1(object sender, CancelEventArgs e)
+        {
+            if (!Validate(txt_TenVatTu))
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Cancel = false;
+            }
         }
     }
 }

@@ -100,6 +100,7 @@ namespace QLVT
             Program.conn.Close();
             return dt;
         }
+    
         public static int ExecSqlNonQuery(String strLenh)
         {
             SqlCommand sqlcmd = new SqlCommand(strLenh, conn);

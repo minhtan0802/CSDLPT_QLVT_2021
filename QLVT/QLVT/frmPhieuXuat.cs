@@ -145,7 +145,7 @@ namespace QLVT
             gc_PhieuXuat.Enabled = false;
             label_Kho.Text = "Kho:";
             txt_MAPX.Enabled = true;
-            txt_MAPX.Focus();
+            
 
             cmb_MaKho.SelectedText = "";
             cmb_MaKho.Text = "";
@@ -164,6 +164,7 @@ namespace QLVT
             btn_XoaCTPX.Enabled = false;
             this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
             this.sp_getCTPhieuTableAdapter.Fill(DS.sp_getCTPhieu, "", "x");
+            txt_MAPX.Focus();
         }
         private int savePX()
         {
@@ -205,49 +206,78 @@ namespace QLVT
         }
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-          
-            
-            if (txt_MAPX.Text.Trim() == "")
-            {
-                MessageBox.Show("Mã phiếu xuất không được thiếu", "", MessageBoxButtons.OK);
-                txt_MAPX.Focus();
+            if(!gridView_CTPX.PostEditor())
+            { 
                 return;
             }
-            if (txt_KH.Text.Trim() == "")
+            bool checkError = true;
+            if(!ValidateCombKho(cmb_MaKho))
             {
-                MessageBox.Show("Tên khách hàng không được thiếu", "", MessageBoxButtons.OK);
+                cmb_MaKho.Focus();
+                checkError = false;
+            }    
+            if(!Validate(txt_KH))
+            {
                 txt_KH.Focus();
-                return;
-            }
-           
-            if (cmb_MaKho.SelectedIndex == -1 && cmb_MaKho.Text == "")
+                checkError = false;
+            }    
+            if(!Validate(txt_MAPX))
             {
-                MessageBox.Show("Kho không được thiếu", "", MessageBoxButtons.OK);
-                cmb_MaKho.Focus();
-                return;
-            }
-            if (cmb_MaKho.SelectedIndex == -1 && cmb_MaKho.Text != "")
-            {
-                MessageBox.Show("Kho không có ở chi nhánh này", "", MessageBoxButtons.OK);
-                cmb_MaKho.Focus();
-                return;
+                txt_MAPX.Focus();
+                checkError = false;
             }
         
-                string strLenh = "EXEC sp_TraCuu '" + txt_MAPX.Text + "'" + ", 'MAPX'";
-                int ret = Program.ExecSqlNonQuery(strLenh);
-                if (ret == 1)
-                {
-                    txt_MAPX.Focus();
-                    return;
-                }
-              
-            
+            if (!checkError)
+            {
+                return;
+            }
             if (bds_sp_getCTPhieu.Count == 0)
             {
                 MessageBox.Show("Chi tiết phiếu xuất không được thiếu", "", MessageBoxButtons.OK);
                 gridView_CTPX.Focus();
                 return;
             }
+            /* if (txt_MAPX.Text.Trim() == "")
+             {
+                 MessageBox.Show("Mã phiếu xuất không được thiếu", "", MessageBoxButtons.OK);
+                 txt_MAPX.Focus();
+                 return;
+             }
+             if (txt_KH.Text.Trim() == "")
+             {
+                 MessageBox.Show("Tên khách hàng không được thiếu", "", MessageBoxButtons.OK);
+                 txt_KH.Focus();
+                 return;
+             }
+
+             if (cmb_MaKho.SelectedIndex == -1 && cmb_MaKho.Text == "")
+             {
+                 MessageBox.Show("Kho không được thiếu", "", MessageBoxButtons.OK);
+                 cmb_MaKho.Focus();
+                 return;
+             }
+             if (cmb_MaKho.SelectedIndex == -1 && cmb_MaKho.Text != "")
+             {
+                 MessageBox.Show("Kho không có ở chi nhánh này", "", MessageBoxButtons.OK);
+                 cmb_MaKho.Focus();
+                 return;
+             }*/
+
+            string strLenh = "EXEC sp_TraCuu '" + txt_MAPX.Text + "'" + ", 'MAPX'";
+                int ret = Program.ExecSqlNonQuery(strLenh);
+                if (ret == 1)
+                {
+                    txt_MAPX.Focus();
+                    dxErrorProvider1.SetError(txt_MAPX, "Mã phiếu xuất đã tồn tại");
+                    return;
+                }
+                else
+                {
+                    dxErrorProvider1.SetError(txt_MAPX, null);
+                }    
+              
+            
+            
             if (savePX() == 0)
             {
                 saveCTPX();
@@ -359,14 +389,8 @@ namespace QLVT
         private void gridView_CTPX_ValidatingEditor_1(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
         {
             string maVT = gridView_CTPX.GetRowCellValue(gridView_CTPX.FocusedRowHandle, "MAVT").ToString();
-
-            Program.KetNoi();
-            DataTable dt = new DataTable();
-            if (Program.conn.State == ConnectionState.Closed)
-                Program.conn.Open();
-            SqlDataAdapter da = new SqlDataAdapter("select SOLUONGTON from Vattu as VT where VT.MAVT ='" + maVT + "'", Program.conn);
-            da.Fill(dt);
-            int soLuongTon = Int32.Parse(dt.Rows[0][0].ToString());
+            int pos = bdsVatTu.Find("MAVT", maVT);
+            int soLuongTon = int.Parse(((DataRowView)bdsVatTu[pos])["SOLUONGTON"].ToString());
             if (gridView_CTPX.FocusedColumn.FieldName == "SOLUONG" || gridView_CTPX.FocusedColumn.FieldName == "DONGIA")
             {
                 int rows = gridView_CTPX.FocusedRowHandle;
@@ -391,7 +415,7 @@ namespace QLVT
                 else if (Int32.Parse(soLuongString) > soLuongTon && gridView_CTPX.FocusedColumn.FieldName == "SOLUONG")
                 {
                     e.Valid = false;
-                    e.ErrorText = "Số lượng nhập không được lớn hơn số lượng đã đặt là " + soLuongTon;
+                    e.ErrorText = "Số lượng nhập không được lớn hơn số lượng tồn là " + soLuongTon;
                 }
 
 
@@ -414,6 +438,125 @@ namespace QLVT
             }    
            
           
+        }
+
+        private void txt_MAPX_Validating(object sender, CancelEventArgs e)
+        {
+            if(!Validate(txt_MAPX))
+            {
+                e.Cancel = true;
+            }    
+            else
+            {
+                e.Cancel = false;
+            }    
+        }
+        private bool Validate(DevExpress.XtraEditors.TextEdit txt)
+        {
+            bool bStatus = true;
+            if (txt.Name == "txt_MAPX")
+            {
+                if (txt.Text.Trim() == "")
+                {
+                    dxErrorProvider1.SetError(txt, "Vui lòng nhập mã phiếu xuất");
+                    bStatus = false;
+                }
+                else if (txt.Text.Length > 8)
+                {
+                    dxErrorProvider1.SetError(txt, "Mã phiếu xuất chỉ chứa tối đa 8 ký tự");
+                    bStatus = false;
+                }
+                else
+                    dxErrorProvider1.SetError(txt, null);
+            }
+            else if (txt.Name == "txt_KH")
+            {
+                if (txt.Text.Trim() == "")
+                {
+                    dxErrorProvider1.SetError(txt, "Vui lòng nhập tên khách hàng");
+                    bStatus = false;
+
+                }
+                else if (Program.StandardString(txt.Text, "name").Length > 100)
+                {
+                    dxErrorProvider1.SetError(txt, "Tên khách hàng chỉ chứa tối đa 100 ký tự");
+                    bStatus = false;
+                }
+                else
+                {
+                    dxErrorProvider1.SetError(txt, null);
+                }
+            }
+            return bStatus;
+        }
+
+        private void cmb_MaKho_Validating(object sender, CancelEventArgs e)
+        {
+            if(!ValidateCombKho(cmb_MaKho))
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Cancel = false;
+            }    
+        }
+        private bool ValidateCombKho(System.Windows.Forms.ComboBox txt)
+        {
+            bool bStatus = true;
+
+            if (txt.SelectedIndex == -1)
+            {
+                errorProvider1.SetError(txt, "Vui lòng chọn kho");
+                bStatus = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txt, "");
+            }
+
+            return bStatus;
+        }
+
+        private void txt_MAPX_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Space) || (!char.IsLetter(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(Keys.Back)))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.KeyChar = Convert.ToChar(e.KeyChar.ToString().ToUpper());
+            }
+        }
+
+        private void txt_KH_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            string specialChar = @"\|!#$%&/()=?»«@£§€{}.-;'<>_,";
+            foreach (var item in specialChar)
+            {
+                if (e.KeyChar == item)
+                {
+                    e.Handled = true;
+
+                }
+            }
+        }
+
+        private void txt_KH_Validating(object sender, CancelEventArgs e)
+        {
+            if(!Validate(txt_KH))
+            {
+                e.Cancel = true;
+            }    
+            else
+            {
+                e.Cancel = false;
+            }    
         }
     }
 }

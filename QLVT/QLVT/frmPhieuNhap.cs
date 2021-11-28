@@ -591,29 +591,39 @@ namespace QLVT
 
         private void gridView_CTPN_MouseLeave(object sender, EventArgs e)
         {
-            gridView_CTPN.FocusedRowHandle = bds_sp_getCTPhieu.Position;
+           
         }
 
         private void txt_MaPN_Validating(object sender, CancelEventArgs e)
         {
-            ValidateMaPN();
+            if(!ValidateMaPN())
+            {
+                e.Cancel = true;
+                
+                   
+            }    
+            else
+            {
+                e.Cancel = false;
+            }    
         }
         private bool ValidateMaPN()
         {
             bool bStatus = true;
             if (txt_MaPN.Text.Trim() == "")
             {
-                errorProviderMAPN.SetError(txt_MaPN, "Vui lòng nhập mã phiếu nhập");
+                
+                dxErrorProvider1.SetError(txt_MaPN, "Vui lòng nhập mã phiếu nhập");
                 bStatus = false;
             }
             else if (txt_MaPN.Text.Trim().Length > 4)
             {
-                 errorProviderMAPN.SetError(txt_MaPN, "Mã phiếu nhập chỉ chứa tối đa 4 ký tự");
+                dxErrorProvider1.SetError(txt_MaPN, "Mã phiếu nhập chỉ chứa tối đa 4 ký tự");
                  bStatus = false;
                     
             } 
           else
-           errorProviderMAPN.SetError(txt_MaPN, "");
+                dxErrorProvider1.SetError(txt_MaPN, "");
               
         
             return bStatus;
@@ -642,6 +652,21 @@ namespace QLVT
                
                 gridView_PN.FocusedRowHandle = bdsPN.Position;
             }
+        }
+
+        private void txt_MaSoDDH_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void txt_MaPN_Validated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_MaPN_Properties_Validating(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }
