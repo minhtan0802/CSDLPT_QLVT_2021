@@ -74,7 +74,7 @@ namespace QLVT
             panelCtrl_VatTu.Enabled = true;
             bdsVatTu.AddNew();
             ((DataRowView)bdsVatTu[bdsVatTu.Position])["SOLUONGTON"] = 0;
-            gridView_VatTu.FocusedRowHandle = bdsVatTu.Position;
+       
             gridView_VatTu.Columns[0].OptionsColumn.AllowEdit=true;
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
@@ -87,6 +87,9 @@ namespace QLVT
         {
             bdsVatTu.CancelEdit();
             if (btnThem.Enabled == false) bdsVatTu.Position = vitri;
+            dxErrorProvider1.SetError(txt_DonViTinh, null);
+            dxErrorProvider1.SetError(txt_MaVatTu, null);
+            dxErrorProvider1.SetError(txt_TenVatTu, null);
             gcVatTu.Enabled = true;
             panelCtrl_VatTu.Enabled = false;
             btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
@@ -474,38 +477,21 @@ namespace QLVT
         private void txt_MaVatTu_Validating(object sender, CancelEventArgs e)
         {
 
-            if (!Validate(txt_MaVatTu))
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                e.Cancel = false;
-            }
+            Validate(txt_MaVatTu);
+           
         }
 
         private void txt_DonViTinh_Validating_1(object sender, CancelEventArgs e)
         {
-            if (!Validate(txt_DonViTinh))
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                e.Cancel = false;
-            }
+            Validate(txt_DonViTinh);
+           
         }
 
         private void txt_TenVatTu_Validating_1(object sender, CancelEventArgs e)
         {
-            if (!Validate(txt_TenVatTu))
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                e.Cancel = false;
-            }
+            Validate(txt_TenVatTu);
+            
+            
         }
     }
 }

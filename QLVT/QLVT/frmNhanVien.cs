@@ -112,6 +112,12 @@ namespace QLVT
         {
             bdsNV.CancelEdit();
             if (btnThem.Enabled == false) bdsNV.Position = vitri;
+            dxErrorProvider1.SetError(txtDiaChi, null);
+            dxErrorProvider1.SetError(txtHo, null);
+            dxErrorProvider1.SetError(txtTen, null);
+            dxErrorProvider1.SetError(txtMaNV, null);
+            dxErrorProvider1.SetError(txtLuong, null);
+            dxErrorProvider1.SetError(dtpNgaySinh, null);
             gcNhanVien.Enabled = true;
             panelCtrl_NhanVien.Enabled = false;
             btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
@@ -544,28 +550,16 @@ namespace QLVT
       
         private void txtLuong_Validating(object sender, CancelEventArgs e)
         {
-            if(!ValidateLuong())
-            {
-                e.Cancel = true;
-            }    
-            else
-            {
-                e.Cancel = false;
-            }    
+            ValidateLuong();
+              
         }
 
        
 
         private void dtpNgaySinh_Validating(object sender, CancelEventArgs e)
         {
-            if (!ValidateNgaySinh())
-            {
-                e.Cancel = true;
-            }  
-            else
-            {
-                e.Cancel = false;
-            }    
+            ValidateNgaySinh();
+            
         }
         private bool ValidateNgaySinh()
         {
@@ -643,50 +637,26 @@ namespace QLVT
 
         private void txtMaNV_Validating_1(object sender, CancelEventArgs e)
         {
-            if (!Validate(txtMaNV))
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                e.Cancel = false;
-            }
+            Validate(txtMaNV);
+           
         }
 
         private void txtHo_Validating_1(object sender, CancelEventArgs e)
         {
-            if (!Validate(txtHo))
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                e.Cancel = false;
-            }
+            Validate(txtHo);
+           
         }
 
         private void txtTen_Validating_1(object sender, CancelEventArgs e)
         {
-            if (!Validate(txtTen))
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                e.Cancel = false;
-            }
+            Validate(txtTen);
+           
         }
 
         private void txtDiaChi_Validating_1(object sender, CancelEventArgs e)
         {
-            if (!Validate(txtDiaChi))
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                e.Cancel = false;
-            }
+            Validate(txtDiaChi);
+           
         }
 
         private void txtMaNV_KeyPress_1(object sender, KeyPressEventArgs e)

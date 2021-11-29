@@ -19,6 +19,7 @@ namespace QLVT
         DataTable dtVTDaCo = new DataTable();
         ErrorProvider errorProviderMAKHO = new ErrorProvider();
         int vitri = 0;
+        int focusRowHandleTruoc;
         public DataTable getDTVTDaCo()
         {
             return dtVTDaCo;
@@ -69,6 +70,7 @@ namespace QLVT
       
             if (bdsDatHang.Count>0)
             {
+                vitri = 0;
                 mddh = txt_MDDH.Text;
                 if (bdsPN.Count>0)
                 {
@@ -89,8 +91,8 @@ namespace QLVT
         
             this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
             this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu,mddh,"dh");
-           
-            if (!txt_MaNV.Text.Equals(Program.username) || bdsPN.Count>0)
+          
+            if (!((DataRowView)bdsDatHang[bdsDatHang.Position])["MANV"].ToString().Equals(Program.username) || bdsPN.Count>0)
             {
                 btnXoa.Enabled = false;
                 btn_XoaCTDDH.Enabled = btn_ThemCTDDH.Enabled = false;
@@ -103,7 +105,7 @@ namespace QLVT
                 btnXoa.Enabled = true;
                 txt_NCC.Enabled = true;
                 gridView_getCTDDH.OptionsBehavior.Editable = true;
-               
+                panelCtrl_DatHang.Enabled = true;
                 for (int i = 0; i < bds_sp_getCTPhieu.Count; i++)
                 {
                     dtVTDaCo.Rows.Add(((DataRowView)bds_sp_getCTPhieu[i])["MAVT"]);
@@ -126,8 +128,8 @@ namespace QLVT
                 {
                     btn_ThemCTDDH.Enabled = true;
                 }
-                btn_XoaCTDDH.Enabled = txt_NCC.Enabled = true;
-                panelCtrl_DatHang.Enabled = true;
+              //  btn_XoaCTDDH.Enabled = txt_NCC.Enabled = true;
+                
             }
           
            
@@ -149,8 +151,9 @@ namespace QLVT
             cmbChiNhanh.ValueMember = "TENSERVER";
             cmbChiNhanh.SelectedIndex = Program.mChiNhanh;
             panelCtrl_DatHang.Enabled = false;
-            cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDown;
-            cmb_MaKho.Text = cmb_MaKho.SelectedValue.ToString();
+        //    cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDown;
+          //  cmb_MaKho.Text = cmb_MaKho.SelectedValue.ToString();
+            
             if (Program.mGroup == "CONGTY")
             {
                 cmbChiNhanh.Enabled = true;
@@ -273,20 +276,17 @@ namespace QLVT
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsDatHang.Position;
-            cmb_MaKho.DropDownStyle=ComboBoxStyle.DropDownList;
+            MessageBox.Show("Vi trí: " + vitri);
             bdsDatHang.AddNew();
             gc_DatHang.Enabled = false;
             label_Kho.Text = "Kho:";
             txt_MDDH.Enabled = true;
            
             gridView_getCTDDH.OptionsBehavior.Editable = true;
-            cmb_MaKho.SelectedText="";
-            cmb_MaKho.SelectedIndex = -1;
-            cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmb_MaKho.Enabled = true;
+            cmb_MaKho2.Enabled = true;
             txt_NCC.Enabled = true;
             dateEdit_NgayLap.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            txt_MaNV.Text = Program.username;
+           
             btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
             mddh = "";
@@ -296,21 +296,23 @@ namespace QLVT
             panelCtrl_DatHang.Enabled = true;
             btn_ThemCTDDH.Enabled = true;
             btn_XoaCTDDH.Enabled = false;
+        //    ((DataRowView)bdsDatHang[bdsDatHang.Position])["MANV"] = Program.username;
+            txt_MaNV.Text = Program.username;
             txt_MDDH.Focus();
         }
         private int saveDDH()
         {
             try
             {
-                cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDown;
-                cmb_MaKho.Text = cmb_MaKho.SelectedValue.ToString();
+           //     cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDown;
+           //     cmb_MaKho.Text = cmb_MaKho.SelectedValue.ToString();
                 bdsDatHang.EndEdit();
                 bdsDatHang.ResetCurrentItem();
     
                 this.datHangTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.datHangTableAdapter.Update(this.DS.DatHang);
                 mddh = txt_MDDH.Text;
-          
+               
                 return 0;
             }
             catch (Exception ex)
@@ -346,9 +348,9 @@ namespace QLVT
             }    
       
             bool checkError = true;
-            if(!ValidateCombKho(cmb_MaKho))
+           if(!ValidateCombKho(cmb_MaKho2))
             {
-                cmb_MaKho.Focus();
+                cmb_MaKho2.Focus();
                 checkError = false;
             }
            
@@ -418,7 +420,7 @@ namespace QLVT
             }
             if (bds_sp_getCTPhieu.Count==0)
             {
-                MessageBox.Show("Chi tiết đơn đặt hàng không được thiếu", "", MessageBoxButtons.OK);
+                MessageBox.Show("Chi tiết đơn đặt hàng không được thiếu", "", MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 gridView_getCTDDH.Focus();
                 return;
             }
@@ -432,7 +434,8 @@ namespace QLVT
             }
             label_Kho.Text = "Mã kho:";
                 gc_DatHang.Enabled = true;
-            cmb_MaKho.Enabled= txt_MaNV.Enabled = txt_MDDH.Enabled = dateEdit_NgayLap.Enabled = txt_MDDH.Enabled = false;
+            gc_DatHang.Focus();
+            txt_MaNV.Enabled = txt_MDDH.Enabled = dateEdit_NgayLap.Enabled = txt_MDDH.Enabled = false;
                 btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
             
                 btnGhi.Enabled = btnUndo.Enabled = false;
@@ -755,9 +758,16 @@ namespace QLVT
 
         private void txt_NCC_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
         {
+           
+            if(btnThem.Enabled==true)
+            {
+                vitri = bdsDatHang.Position;
+            }    
+          
             btnGhi.Enabled = true;
             btnThem.Enabled = btnXoa.Enabled = btnThoat.Enabled = false;
             btnUndo.Enabled = true;
+            gc_DatHang.Enabled = false;
         }
 
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -939,13 +949,13 @@ namespace QLVT
         {
         
                 mddh = txt_MDDH.Text;
-                vitri = bdsDatHang.Position;
-                if(btnThem.Enabled==true)
-            {
+                focusRowHandleTruoc = bdsDatHang.Position;
+            //    vitri = bdsDatHang.Position;
+             
                 this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu, mddh, "dh");
                 dtVTDaCo.Clear();
-                if (!txt_MaNV.Text.Equals(Program.username) || bdsPN.Count > 0)
+                if (!((DataRowView)bdsDatHang[bdsDatHang.Position])["MANV"].ToString().Equals(Program.username) || bdsPN.Count > 0)
                 {
                     btnXoa.Enabled = false;
                     btn_XoaCTDDH.Enabled = btn_ThemCTDDH.Enabled = false;
@@ -957,9 +967,8 @@ namespace QLVT
                 {
                     gridView_getCTDDH.OptionsBehavior.Editable = true;
                     btnXoa.Enabled = true;
-                    txt_NCC.Enabled = true;
                     panelCtrl_DatHang.Enabled = true;
-
+                    txt_NCC.Enabled = true;
                     for (int i = 0; i < bds_sp_getCTPhieu.Count; i++)
                     {
                         dtVTDaCo.Rows.Add(((DataRowView)bds_sp_getCTPhieu[i])["MAVT"]);
@@ -982,10 +991,10 @@ namespace QLVT
                         btn_ThemCTDDH.Enabled = true;
                     }
 
-                    panelCtrl_DatHang.Enabled = true;
+                   
                 }
 
-            }    
+               
                
              
             
@@ -993,14 +1002,8 @@ namespace QLVT
 
         private void txt_MDDH_Validating(object sender, CancelEventArgs e)
         {
-            if(!Validate(txt_MDDH))
-            {
-                e.Cancel = true;
-            }    
-            else
-            {
-                e.Cancel = false;
-            }    
+            Validate(txt_MDDH);
+           
         }
         private bool Validate(DevExpress.XtraEditors.TextEdit txt)
         {
@@ -1043,44 +1046,23 @@ namespace QLVT
 
         private void txt_NCC_Validating(object sender, CancelEventArgs e)
         {
-             if(!Validate(txt_NCC))
-              {
-                  e.Cancel = true;
-              }    
-              else
-              {
-                  e.Cancel = false;
-              }   
+            Validate(txt_NCC);
+             
            
         }
 
-        private bool ValidateCombKho(System.Windows.Forms.ComboBox txt)
-        {
-            bool bStatus = true;
-            
-                if (txt.SelectedIndex ==-1)
-                {
-                    errorProviderMAKHO.SetError(txt, "Vui lòng chọn kho");
-                    bStatus = false;
-                }
-                else
-                {
-                    errorProviderMAKHO.SetError(txt, "");
-                }
-         
-            return bStatus;
-        }
+        
 
         private void cmb_MaKho_Validating(object sender, CancelEventArgs e)
         {
-            if(!ValidateCombKho(cmb_MaKho))
+         /*   if(!ValidateCombKho(cmb_MaKho))
             {
                 e.Cancel = true;
             }    
             else
             {
                 e.Cancel = false;
-            }    
+            }    */
         }
 
         private void mAKHOComboBoxEdit_SelectedIndexChanged(object sender, EventArgs e)
@@ -1116,18 +1098,69 @@ namespace QLVT
 
         private void btnUndo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (btnThem.Enabled == false || btnGhi.Enabled == true) bdsDatHang.Position = vitri;
+         //   bdsDatHang.Position = vitri;
             bdsDatHang.CancelEdit();
+            if (!btnThem.Enabled)
+            {
+             
+                bdsDatHang.Position = vitri;    
+            }
+            dxErrorProvider1.SetError(txt_MDDH, null);
+            dxErrorProvider1.SetError(txt_NCC, null);
+            dxErrorProvider1.SetError(cmb_MaKho2, null);   
+            mddh = ((DataRowView)bdsDatHang[vitri])["MasoDDH"].ToString(); 
             bds_sp_getCTPhieu.CancelEdit();
-            mddh = ((DataRowView)bdsDatHang[vitri])["MasoDDH"].ToString();
-            cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDown;
+            if (!((DataRowView)bdsDatHang[vitri])["MANV"].ToString().Equals(Program.username) || bdsPN.Count > 0)
+            {
+                btnXoa.Enabled = false;
+                btn_XoaCTDDH.Enabled = btn_ThemCTDDH.Enabled = false;
+                txt_NCC.Enabled = false;
+                panelCtrl_DatHang.Enabled = false;
+                gridView_getCTDDH.OptionsBehavior.Editable = false;
+            }
+            else
+            {
+                gridView_getCTDDH.OptionsBehavior.Editable = true;
+                btnXoa.Enabled = true;
+                panelCtrl_DatHang.Enabled = true;
+                txt_NCC.Enabled = true;
+                for (int i = 0; i < bds_sp_getCTPhieu.Count; i++)
+                {
+                    dtVTDaCo.Rows.Add(((DataRowView)bds_sp_getCTPhieu[i])["MAVT"]);
+                }
+                if (bds_sp_getCTPhieu.Count == 0)
+                {
+                    btn_XoaCTDDH.Enabled = false;
+                }
+                else
+                {
+                    btn_XoaCTDDH.Enabled = true;
+                }
+
+                if (bds_sp_getCTPhieu.Count == bdsVatTu.Count)
+                {
+                    btn_ThemCTDDH.Enabled = false;
+                }
+                else
+                {
+                    btn_ThemCTDDH.Enabled = true;
+                }
+
+
+            }
+           
+          
+           // cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDown;
             this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
             this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu, mddh, "dh");
             gc_DatHang.Enabled = true;
-            panelCtrl_DatHang.Enabled = false;
+            // panelCtrl_DatHang.Enabled = false;
+             
+            
+            txt_MDDH.Enabled = false;
             btnThem.Enabled = btnXoa.Enabled =btnRefresh.Enabled = btnThoat.Enabled = true;
             btnGhi.Enabled = btnUndo.Enabled = false;
-
+            gc_DatHang.Focus();
         }
 
         private void txt_NCC_KeyUp(object sender, KeyEventArgs e)
@@ -1138,13 +1171,14 @@ namespace QLVT
         private void gridView_DatHang_ColumnFilterChanged(object sender, EventArgs e)
         {
             mddh = txt_MDDH.Text;
-            vitri = bdsDatHang.Position;
+            focusRowHandleTruoc = bdsDatHang.Position;
+         //   vitri = bdsDatHang.Position;
             if (btnThem.Enabled == true)
             {
                 this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu, mddh, "dh");
                 dtVTDaCo.Clear();
-                if (!txt_MaNV.Text.Equals(Program.username) || bdsPN.Count > 0)
+                if (!((DataRowView)bdsDatHang[bdsDatHang.Position])["MANV"].ToString().Equals(Program.username) || bdsPN.Count > 0)
                 {
                     btnXoa.Enabled = false;
                     btn_XoaCTDDH.Enabled = btn_ThemCTDDH.Enabled = false;
@@ -1158,7 +1192,7 @@ namespace QLVT
                     btnXoa.Enabled = true;
                     txt_NCC.Enabled = true;
                     panelCtrl_DatHang.Enabled = true;
-
+                    
                     for (int i = 0; i < bds_sp_getCTPhieu.Count; i++)
                     {
                         dtVTDaCo.Rows.Add(((DataRowView)bds_sp_getCTPhieu[i])["MAVT"]);
@@ -1181,10 +1215,51 @@ namespace QLVT
                         btn_ThemCTDDH.Enabled = true;
                     }
 
-                    panelCtrl_DatHang.Enabled = true;
+                   
                 }
 
             }
+        }
+
+        private void cmb_MaKho2_Validating(object sender, CancelEventArgs e)
+        {
+            ValidateCombKho(cmb_MaKho2);
+           
+        }
+        private bool ValidateCombKho(DevExpress.XtraEditors.GridLookUpEdit txt)
+        {
+            bool bStatus = true;
+
+            if (txt.Text == "")
+            {
+                dxErrorProvider1.SetError(txt, "Vui lòng chọn kho");
+                bStatus = false;
+            }
+            else
+            {
+                dxErrorProvider1.SetError(txt, "");
+            }
+
+            return bStatus;
+        }
+
+        private void cmb_MaKho2_EditValueChanged(object sender, EventArgs e)
+        {
+            int rowHandle = bdsDatHang.Position;
+            if(cmb_MaKho2.Enabled==true && focusRowHandleTruoc==rowHandle)
+            {
+                btnGhi.Enabled = true;
+                btnThem.Enabled = btnXoa.Enabled = btnThoat.Enabled = false;
+                btnUndo.Enabled = true;
+                gc_DatHang.Enabled = false;
+                if (!txt_MDDH.Enabled)
+                {
+                    vitri = bdsDatHang.Position;
+                } 
+          
+            }    
+         
+          
         }
     }
 

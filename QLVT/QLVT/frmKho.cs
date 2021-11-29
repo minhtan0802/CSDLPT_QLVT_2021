@@ -116,16 +116,18 @@ namespace QLVT
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            vitri = bdsKho.Position;
             txtMaKho.Enabled = true;
             btnThem.Enabled = false;
             btnGhi.Enabled = true;
+            btnUndo.Enabled = true;
             panelCtrl_Kho.Enabled = true;
             bdsKho.AddNew();
         
-            vitri = bdsKho.Position;
+          
             gridView_Kho.Columns[0].OptionsColumn.AllowEdit = true;
-            gridView_Kho.SetRowCellValue(bdsKho.Position, "MACN", macn);
-            gridView_Kho.FocusedRowHandle = bdsKho.Position;
+      
+       //     gridView_Kho.FocusedRowHandle = bdsKho.Position;
              gcKho.Enabled = false;
             panelCtrl_Kho.Enabled = true;
        //     ((DataRowView)bdsKho[vitri])["MACN"] = macn;
@@ -269,8 +271,12 @@ namespace QLVT
         private void btnUndo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             bdsKho.CancelEdit();
-            
             if (btnThem.Enabled == false) bdsKho.Position = vitri;
+            dxErrorProvider1.SetError(txtDiaChi, null);
+            dxErrorProvider1.SetError(txtMaKho, null);
+            dxErrorProvider1.SetError(txtTenKho, null);
+         
+
             gcKho.Enabled = true;
             panelCtrl_Kho.Enabled = false;
             btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
@@ -398,15 +404,9 @@ namespace QLVT
 
         private void txtMaKho_Validating(object sender, CancelEventArgs e)
         {
-            if (!Validate(txtMaKho))
-            {
-                e.Cancel = true;
-                
-            }
-            else
-            {
-                e.Cancel = false;
-            }        }
+            Validate(txtMaKho);
+            
+                   }
         private bool Validate(DevExpress.XtraEditors.TextEdit txt)
         {
             bool bStatus = true;
@@ -485,26 +485,14 @@ namespace QLVT
 
         private void txtDiaChi_Validating(object sender, CancelEventArgs e)
         {
-            if (!Validate(txtDiaChi))
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                e.Cancel = false;
-            }
+            Validate(txtDiaChi);
         }
 
         private void txtTenKho_Validating(object sender, CancelEventArgs e)
         {
-            if (!Validate(txtTenKho))
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                e.Cancel = false;
-            }
+            Validate(txtTenKho);
+           
+          
         }
 
         private void gcKho_Validating(object sender, CancelEventArgs e)

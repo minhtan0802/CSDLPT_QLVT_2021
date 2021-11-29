@@ -119,7 +119,7 @@ namespace QLVT
             {
                 if (e.Message.Contains("Error converting datatype varchar to int"))
                     MessageBox.Show("Bạn format Cell lại cột \"Ngày Thi\" qua kiểu Number hoặc mở file Excel");
-                else MessageBox.Show(e.Message);
+                else MessageBox.Show(e.Message,"", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Program.conn.Close();
                 return 1;
 

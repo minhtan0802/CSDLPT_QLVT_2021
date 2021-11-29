@@ -83,12 +83,13 @@ namespace QLVT
             this.panelCtrl_PN = new DevExpress.XtraEditors.PanelControl();
             this.panelCtrl_ThemPN = new DevExpress.XtraEditors.PanelControl();
             this.label_Kho = new System.Windows.Forms.Label();
-            this.cmb_Kho = new System.Windows.Forms.ComboBox();
-            this.bdsKho = new System.Windows.Forms.BindingSource(this.components);
             this.txt_MaNV = new DevExpress.XtraEditors.TextEdit();
             this.txt_MaSoDDH = new DevExpress.XtraEditors.TextEdit();
             this.txt_date = new DevExpress.XtraEditors.DateEdit();
             this.txt_MaPN = new DevExpress.XtraEditors.TextEdit();
+            this.cmb_Kho2 = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.bdsKho = new System.Windows.Forms.BindingSource(this.components);
+            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gc_PhieuNhap = new DevExpress.XtraGrid.GridControl();
             this.gridView_PN = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colMAPN = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -137,12 +138,14 @@ namespace QLVT
             this.panelCtrl_PN.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelCtrl_ThemPN)).BeginInit();
             this.panelCtrl_ThemPN.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bdsKho)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaNV.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaSoDDH.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_date.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_date.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaPN.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmb_Kho2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsKho)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gc_PhieuNhap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_PN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
@@ -461,9 +464,9 @@ namespace QLVT
             this.panelCtrl_CTPN.Controls.Add(this.btn_ThemCTPN);
             this.panelCtrl_CTPN.Controls.Add(this.panelControl4);
             this.panelCtrl_CTPN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCtrl_CTPN.Location = new System.Drawing.Point(0, 264);
+            this.panelCtrl_CTPN.Location = new System.Drawing.Point(0, 286);
             this.panelCtrl_CTPN.Name = "panelCtrl_CTPN";
-            this.panelCtrl_CTPN.Size = new System.Drawing.Size(871, 383);
+            this.panelCtrl_CTPN.Size = new System.Drawing.Size(871, 361);
             this.panelCtrl_CTPN.TabIndex = 11;
             // 
             // gc_sp_getCTPhieu
@@ -654,7 +657,6 @@ namespace QLVT
             // 
             this.panelCtrl_ThemPN.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelCtrl_ThemPN.Controls.Add(this.label_Kho);
-            this.panelCtrl_ThemPN.Controls.Add(this.cmb_Kho);
             this.panelCtrl_ThemPN.Controls.Add(mANVLabel);
             this.panelCtrl_ThemPN.Controls.Add(this.txt_MaNV);
             this.panelCtrl_ThemPN.Controls.Add(masoDDHLabel);
@@ -663,11 +665,12 @@ namespace QLVT
             this.panelCtrl_ThemPN.Controls.Add(this.txt_date);
             this.panelCtrl_ThemPN.Controls.Add(mAPNLabel);
             this.panelCtrl_ThemPN.Controls.Add(this.txt_MaPN);
+            this.panelCtrl_ThemPN.Controls.Add(this.cmb_Kho2);
             this.panelCtrl_ThemPN.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelCtrl_ThemPN.Enabled = false;
             this.panelCtrl_ThemPN.Location = new System.Drawing.Point(0, 154);
             this.panelCtrl_ThemPN.Name = "panelCtrl_ThemPN";
-            this.panelCtrl_ThemPN.Size = new System.Drawing.Size(871, 110);
+            this.panelCtrl_ThemPN.Size = new System.Drawing.Size(871, 132);
             this.panelCtrl_ThemPN.TabIndex = 12;
             // 
             // label_Kho
@@ -678,23 +681,6 @@ namespace QLVT
             this.label_Kho.Size = new System.Drawing.Size(58, 17);
             this.label_Kho.TabIndex = 10;
             this.label_Kho.Text = "Mã kho:";
-            // 
-            // cmb_Kho
-            // 
-            this.cmb_Kho.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsPN, "MAKHO", true));
-            this.cmb_Kho.DataSource = this.bdsKho;
-            this.cmb_Kho.DisplayMember = "TENKHO";
-            this.cmb_Kho.FormattingEnabled = true;
-            this.cmb_Kho.Location = new System.Drawing.Point(122, 71);
-            this.cmb_Kho.Name = "cmb_Kho";
-            this.cmb_Kho.Size = new System.Drawing.Size(125, 24);
-            this.cmb_Kho.TabIndex = 9;
-            this.cmb_Kho.ValueMember = "MAKHO";
-            // 
-            // bdsKho
-            // 
-            this.bdsKho.DataMember = "Kho";
-            this.bdsKho.DataSource = this.DS;
             // 
             // txt_MaNV
             // 
@@ -744,6 +730,35 @@ namespace QLVT
             this.txt_MaPN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_MaPN_KeyPress);
             this.txt_MaPN.Validating += new System.ComponentModel.CancelEventHandler(this.txt_MaPN_Validating);
             this.txt_MaPN.Validated += new System.EventHandler(this.txt_MaPN_Validated);
+            // 
+            // cmb_Kho2
+            // 
+            this.cmb_Kho2.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsPN, "MAKHO", true));
+            this.cmb_Kho2.Location = new System.Drawing.Point(125, 70);
+            this.cmb_Kho2.MenuManager = this.barManager1;
+            this.cmb_Kho2.Name = "cmb_Kho2";
+            this.cmb_Kho2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmb_Kho2.Properties.DataSource = this.bdsKho;
+            this.cmb_Kho2.Properties.DisplayMember = "MAKHO";
+            this.cmb_Kho2.Properties.NullText = "";
+            this.cmb_Kho2.Properties.PopupSizeable = false;
+            this.cmb_Kho2.Properties.PopupView = this.gridLookUpEdit1View;
+            this.cmb_Kho2.Properties.ValueMember = "MAKHO";
+            this.cmb_Kho2.Size = new System.Drawing.Size(125, 26);
+            this.cmb_Kho2.TabIndex = 11;
+            // 
+            // bdsKho
+            // 
+            this.bdsKho.DataMember = "Kho";
+            this.bdsKho.DataSource = this.DS;
+            // 
+            // gridLookUpEdit1View
+            // 
+            this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
+            this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // gc_PhieuNhap
             // 
@@ -964,12 +979,14 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.panelCtrl_ThemPN)).EndInit();
             this.panelCtrl_ThemPN.ResumeLayout(false);
             this.panelCtrl_ThemPN.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bdsKho)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaNV.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaSoDDH.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_date.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_date.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaPN.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmb_Kho2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsKho)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gc_PhieuNhap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_PN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
@@ -1040,7 +1057,6 @@ namespace QLVT
         private DevExpress.XtraEditors.PanelControl panelControl8;
         private System.Windows.Forms.Label label4;
         private DevExpress.XtraEditors.PanelControl panelCtrl_ThemPN;
-        private System.Windows.Forms.ComboBox cmb_Kho;
         private DevExpress.XtraEditors.TextEdit txt_MaNV;
         private DevExpress.XtraEditors.TextEdit txt_MaSoDDH;
         private DevExpress.XtraEditors.DateEdit txt_date;
@@ -1069,5 +1085,7 @@ namespace QLVT
         public DevExpress.XtraGrid.Views.Grid.GridView gridView_CTPN;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
+        private DevExpress.XtraEditors.GridLookUpEdit cmb_Kho2;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
     }
 }

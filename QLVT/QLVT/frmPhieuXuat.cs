@@ -86,7 +86,7 @@ namespace QLVT
             cmbChiNhanh.ValueMember = "TENSERVER";
             cmbChiNhanh.SelectedIndex = Program.mChiNhanh;
             panelCtrl_PX.Enabled = false;
-            cmb_MaKho.Text = cmb_MaKho.SelectedValue.ToString();
+           // cmb_MaKho.Text = cmb_MaKho.SelectedValue.ToString();
             if (Program.mGroup == "CONGTY")
             {
                 cmbChiNhanh.Enabled = true;
@@ -136,8 +136,9 @@ namespace QLVT
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            vitri = bdsPX.Position;
             gridView_CTPX.OptionsBehavior.Editable = true;
-            cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDownList;
+       //     cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDownList;
             bdsPX.AddNew();
             gc_PhieuXuat.Enabled = false;
             label_Kho.Text = "Kho:";
@@ -146,7 +147,7 @@ namespace QLVT
 
             cmb_MaKho.SelectedText = "";
             cmb_MaKho.Text = "";
-            cmb_MaKho.SelectedIndex = -1;
+        //    cmb_MaKho.SelectedIndex = -1;
     
             cmb_MaKho.Enabled = true;
             txt_KH.Enabled = true;
@@ -169,8 +170,8 @@ namespace QLVT
         {
             try
             {
-                cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDown;
-                cmb_MaKho.Text = cmb_MaKho.SelectedValue.ToString();
+         //       cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDown;
+          //      cmb_MaKho.Text = cmb_MaKho.SelectedValue.ToString();
                 ((DataRowView)bdsPX[bdsPX.Position])["MAKHO"] = cmb_MaKho.Text;
                 bdsPX.EndEdit();
                 bdsPX.ResetCurrentItem();
@@ -428,7 +429,7 @@ namespace QLVT
         private void gridView_PX_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
       
-            vitri = bdsPX.Position;
+            
             maPX = txt_MAPX.Text;
             if(btnThem.Enabled==true)
             {
@@ -439,7 +440,7 @@ namespace QLVT
                 {
                     dtVTDaCo.Rows.Add(((DataRowView)bds_sp_getCTPhieu[i])["MAVT"]);
                 }
-                cmb_MaKho.Text = ((DataRowView)bdsPX[bdsPX.Position])["MAKHO"].ToString();
+               
             }    
            
           
@@ -447,14 +448,8 @@ namespace QLVT
 
         private void txt_MAPX_Validating(object sender, CancelEventArgs e)
         {
-            if(!Validate(txt_MAPX))
-            {
-                e.Cancel = true;
-            }    
-            else
-            {
-                e.Cancel = false;
-            }    
+            Validate(txt_MAPX);
+             
         }
         private bool Validate(DevExpress.XtraEditors.TextEdit txt)
         {
@@ -506,18 +501,18 @@ namespace QLVT
                 e.Cancel = false;
             }    
         }
-        private bool ValidateCombKho(System.Windows.Forms.ComboBox txt)
+        private bool ValidateCombKho(DevExpress.XtraEditors.GridLookUpEdit txt)
         {
             bool bStatus = true;
 
-            if (txt.SelectedIndex == -1)
+            if (txt.SelectedText == "")
             {
-                errorProvider1.SetError(txt, "Vui lòng chọn kho");
+                dxErrorProvider1.SetError(txt, "Vui lòng chọn kho");
                 bStatus = false;
             }
             else
             {
-                errorProvider1.SetError(txt, "");
+                dxErrorProvider1.SetError(txt, "");
             }
 
             return bStatus;
@@ -554,26 +549,24 @@ namespace QLVT
 
         private void txt_KH_Validating(object sender, CancelEventArgs e)
         {
-            if(!Validate(txt_KH))
-            {
-                e.Cancel = true;
-            }    
-            else
-            {
-                e.Cancel = false;
-            }    
+            Validate(txt_KH);
+           
         }
 
         private void btnUndo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (btnThem.Enabled == false) bdsPX.Position = vitri;
             bdsPX.CancelEdit();
+            if (btnThem.Enabled == false) bdsPX.Position = vitri;
           
+            dxErrorProvider1.SetError(txt_KH, null);
+            dxErrorProvider1.SetError(txt_MAPX, null);
+            dxErrorProvider1.SetError(cmb_MaKho, null);
             maPX = ((DataRowView)bdsPX[vitri])["MAPX"].ToString();
-            cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDown;
+          //  cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDown;
             this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
             this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu, maPX, "x");
             gc_PhieuXuat.Enabled = true;
+            gc_PhieuXuat.Focus();
             panelCtrl_PX.Enabled = false;
             btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
             btnGhi.Enabled = btnUndo.Enabled = false;
@@ -588,6 +581,11 @@ namespace QLVT
         private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             load();
+        }
+
+        private void cmb_MaKho_Validating_1(object sender, CancelEventArgs e)
+        {
+            ValidateCombKho(cmb_MaKho);
         }
     }
 }

@@ -71,7 +71,8 @@ namespace QLVT
             this.dateEdit_NgayLap = new DevExpress.XtraEditors.DateEdit();
             this.txt_MAPX = new DevExpress.XtraEditors.TextEdit();
             this.label_Kho = new System.Windows.Forms.Label();
-            this.cmb_MaKho = new System.Windows.Forms.ComboBox();
+            this.cmb_MaKho = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bdsKho = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox_CTPX = new System.Windows.Forms.GroupBox();
             this.sp_getCTPhieuGridControl = new DevExpress.XtraGrid.GridControl();
@@ -110,6 +111,8 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MAPX.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmb_MaKho.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsKho)).BeginInit();
             this.groupBox_CTPX.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sp_getCTPhieuGridControl)).BeginInit();
@@ -449,10 +452,10 @@ namespace QLVT
             this.panelCtrl_PX.Controls.Add(this.dateEdit_NgayLap);
             this.panelCtrl_PX.Controls.Add(this.txt_MAPX);
             this.panelCtrl_PX.Controls.Add(this.label_Kho);
-            this.panelCtrl_PX.Controls.Add(this.cmb_MaKho);
             this.panelCtrl_PX.Controls.Add(mANVLabel);
             this.panelCtrl_PX.Controls.Add(nGAYLabel);
             this.panelCtrl_PX.Controls.Add(masoDDHLabel);
+            this.panelCtrl_PX.Controls.Add(this.cmb_MaKho);
             this.panelCtrl_PX.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelCtrl_PX.Enabled = false;
             this.panelCtrl_PX.Location = new System.Drawing.Point(0, 327);
@@ -518,16 +521,28 @@ namespace QLVT
             // 
             // cmb_MaKho
             // 
-            this.cmb_MaKho.DataSource = this.bdsKho;
-            this.cmb_MaKho.DisplayMember = "TENKHO";
-            this.cmb_MaKho.Enabled = false;
-            this.cmb_MaKho.FormattingEnabled = true;
-            this.cmb_MaKho.Location = new System.Drawing.Point(140, 123);
+            this.cmb_MaKho.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsPX, "MAKHO", true));
+            this.cmb_MaKho.Location = new System.Drawing.Point(138, 121);
+            this.cmb_MaKho.MenuManager = this.barManager1;
             this.cmb_MaKho.Name = "cmb_MaKho";
-            this.cmb_MaKho.Size = new System.Drawing.Size(123, 24);
-            this.cmb_MaKho.TabIndex = 9;
-            this.cmb_MaKho.ValueMember = "MAKHO";
-            this.cmb_MaKho.Validating += new System.ComponentModel.CancelEventHandler(this.cmb_MaKho_Validating);
+            this.cmb_MaKho.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmb_MaKho.Properties.DataSource = this.bdsKho;
+            this.cmb_MaKho.Properties.DisplayMember = "MAKHO";
+            this.cmb_MaKho.Properties.NullText = "";
+            this.cmb_MaKho.Properties.PopupSizeable = false;
+            this.cmb_MaKho.Properties.PopupView = this.gridLookUpEdit1View;
+            this.cmb_MaKho.Properties.ValueMember = "MAKHO";
+            this.cmb_MaKho.Size = new System.Drawing.Size(125, 26);
+            this.cmb_MaKho.TabIndex = 15;
+            this.cmb_MaKho.Validating += new System.ComponentModel.CancelEventHandler(this.cmb_MaKho_Validating_1);
+            // 
+            // gridLookUpEdit1View
+            // 
+            this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
+            this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // bdsKho
             // 
@@ -710,6 +725,8 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MAPX.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmb_MaKho.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsKho)).EndInit();
             this.groupBox_CTPX.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sp_getCTPhieuGridControl)).EndInit();
@@ -773,7 +790,6 @@ namespace QLVT
         public System.Windows.Forms.BindingSource bdsCTPX;
         public System.Windows.Forms.BindingSource bds_getCTPX;
         private DevExpress.XtraEditors.TextEdit txt_MaNV;
-        private System.Windows.Forms.ComboBox cmb_MaKho;
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
         private DSTableAdapters.sp_getCTPhieuTableAdapter sp_getCTPhieuTableAdapter;
         private DevExpress.XtraGrid.GridControl sp_getCTPhieuGridControl;
@@ -785,5 +801,7 @@ namespace QLVT
         public System.Windows.Forms.BindingSource bds_sp_getCTPhieu;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevExpress.XtraEditors.GridLookUpEdit cmb_MaKho;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
     }
 }

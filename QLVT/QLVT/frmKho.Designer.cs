@@ -564,10 +564,10 @@ namespace QLVT
             // txtTenKho
             // 
             this.txtTenKho.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsKho, "TENKHO", true));
-            this.txtTenKho.Location = new System.Drawing.Point(194, 92);
+            this.txtTenKho.Location = new System.Drawing.Point(188, 92);
             this.txtTenKho.MenuManager = this.barManager1;
             this.txtTenKho.Name = "txtTenKho";
-            this.txtTenKho.Size = new System.Drawing.Size(125, 26);
+            this.txtTenKho.Size = new System.Drawing.Size(131, 26);
             this.txtTenKho.TabIndex = 3;
             this.txtTenKho.Validating += new System.ComponentModel.CancelEventHandler(this.txtTenKho_Validating);
             // 

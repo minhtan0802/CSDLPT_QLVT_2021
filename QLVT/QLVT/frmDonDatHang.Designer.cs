@@ -63,13 +63,18 @@ namespace QLVT
             this.colMAKHO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bds_spgetCTDDH = new System.Windows.Forms.BindingSource(this.components);
             this.panelCtrl_DatHang = new DevExpress.XtraEditors.PanelControl();
-            this.label_Kho = new System.Windows.Forms.Label();
-            this.cmb_MaKho = new System.Windows.Forms.ComboBox();
-            this.khoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txt_MaNV = new DevExpress.XtraEditors.TextEdit();
+            this.label_Kho = new System.Windows.Forms.Label();
+            this.khoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txt_NCC = new DevExpress.XtraEditors.TextEdit();
             this.dateEdit_NgayLap = new DevExpress.XtraEditors.DateEdit();
             this.txt_MDDH = new DevExpress.XtraEditors.TextEdit();
+            this.cmb_MaKho2 = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colMAKHO1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTENKHO = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDIACHI = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colMACN = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bdsVatTu = new System.Windows.Forms.BindingSource(this.components);
             this.btn_ThemCTDDH = new DevExpress.XtraEditors.SimpleButton();
             this.vattuTableAdapter = new QLVT.DSTableAdapters.VattuTableAdapter();
@@ -109,12 +114,14 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.bds_spgetCTDDH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelCtrl_DatHang)).BeginInit();
             this.panelCtrl_DatHang.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.khoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaNV.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.khoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_NCC.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MDDH.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmb_MaKho2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsVatTu)).BeginInit();
             this.groupBox_CTDDH.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gc_sp_getCTPhieu)).BeginInit();
@@ -438,17 +445,17 @@ namespace QLVT
             // 
             this.panelCtrl_DatHang.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.panelCtrl_DatHang.Appearance.Options.UseBackColor = true;
+            this.panelCtrl_DatHang.Controls.Add(this.txt_MaNV);
             this.panelCtrl_DatHang.Controls.Add(mAKHOLabel);
             this.panelCtrl_DatHang.Controls.Add(this.label_Kho);
-            this.panelCtrl_DatHang.Controls.Add(this.cmb_MaKho);
             this.panelCtrl_DatHang.Controls.Add(mANVLabel);
-            this.panelCtrl_DatHang.Controls.Add(this.txt_MaNV);
             this.panelCtrl_DatHang.Controls.Add(nhaCCLabel);
             this.panelCtrl_DatHang.Controls.Add(this.txt_NCC);
             this.panelCtrl_DatHang.Controls.Add(nGAYLabel);
             this.panelCtrl_DatHang.Controls.Add(this.dateEdit_NgayLap);
             this.panelCtrl_DatHang.Controls.Add(masoDDHLabel);
             this.panelCtrl_DatHang.Controls.Add(this.txt_MDDH);
+            this.panelCtrl_DatHang.Controls.Add(this.cmb_MaKho2);
             this.panelCtrl_DatHang.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelCtrl_DatHang.Enabled = false;
             this.panelCtrl_DatHang.Location = new System.Drawing.Point(0, 358);
@@ -456,6 +463,16 @@ namespace QLVT
             this.panelCtrl_DatHang.Size = new System.Drawing.Size(850, 362);
             this.panelCtrl_DatHang.TabIndex = 30;
             this.panelCtrl_DatHang.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCtrl_DatHang_Paint);
+            // 
+            // txt_MaNV
+            // 
+            this.txt_MaNV.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsDatHang, "MANV", true));
+            this.txt_MaNV.Enabled = false;
+            this.txt_MaNV.Location = new System.Drawing.Point(408, 92);
+            this.txt_MaNV.MenuManager = this.barManager1;
+            this.txt_MaNV.Name = "txt_MaNV";
+            this.txt_MaNV.Size = new System.Drawing.Size(125, 26);
+            this.txt_MaNV.TabIndex = 13;
             // 
             // label_Kho
             // 
@@ -466,34 +483,10 @@ namespace QLVT
             this.label_Kho.TabIndex = 10;
             this.label_Kho.Text = "Mã kho:";
             // 
-            // cmb_MaKho
-            // 
-            this.cmb_MaKho.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsDatHang, "MAKHO", true));
-            this.cmb_MaKho.DataSource = this.khoBindingSource;
-            this.cmb_MaKho.DisplayMember = "TENKHO";
-            this.cmb_MaKho.Enabled = false;
-            this.cmb_MaKho.FormattingEnabled = true;
-            this.cmb_MaKho.Location = new System.Drawing.Point(140, 150);
-            this.cmb_MaKho.Name = "cmb_MaKho";
-            this.cmb_MaKho.Size = new System.Drawing.Size(123, 24);
-            this.cmb_MaKho.TabIndex = 9;
-            this.cmb_MaKho.ValueMember = "MAKHO";
-            this.cmb_MaKho.Validating += new System.ComponentModel.CancelEventHandler(this.cmb_MaKho_Validating);
-            // 
             // khoBindingSource
             // 
             this.khoBindingSource.DataMember = "Kho";
             this.khoBindingSource.DataSource = this.DS;
-            // 
-            // txt_MaNV
-            // 
-            this.txt_MaNV.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsDatHang, "MANV", true));
-            this.txt_MaNV.Enabled = false;
-            this.txt_MaNV.Location = new System.Drawing.Point(408, 94);
-            this.txt_MaNV.MenuManager = this.barManager1;
-            this.txt_MaNV.Name = "txt_MaNV";
-            this.txt_MaNV.Size = new System.Drawing.Size(125, 26);
-            this.txt_MaNV.TabIndex = 7;
             // 
             // txt_NCC
             // 
@@ -534,6 +527,68 @@ namespace QLVT
             this.txt_MDDH.TabIndex = 1;
             this.txt_MDDH.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_MDDH_KeyPress);
             this.txt_MDDH.Validating += new System.ComponentModel.CancelEventHandler(this.txt_MDDH_Validating);
+            // 
+            // cmb_MaKho2
+            // 
+            this.cmb_MaKho2.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsDatHang, "MAKHO", true));
+            this.cmb_MaKho2.Location = new System.Drawing.Point(134, 148);
+            this.cmb_MaKho2.MenuManager = this.barManager1;
+            this.cmb_MaKho2.Name = "cmb_MaKho2";
+            this.cmb_MaKho2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmb_MaKho2.Properties.DataSource = this.khoBindingSource;
+            this.cmb_MaKho2.Properties.DisplayMember = "MAKHO";
+            this.cmb_MaKho2.Properties.NullText = "";
+            this.cmb_MaKho2.Properties.PopupView = this.gridLookUpEdit1View;
+            this.cmb_MaKho2.Properties.ValueMember = "MAKHO";
+            this.cmb_MaKho2.Size = new System.Drawing.Size(129, 26);
+            this.cmb_MaKho2.TabIndex = 12;
+            this.cmb_MaKho2.EditValueChanged += new System.EventHandler(this.cmb_MaKho2_EditValueChanged);
+            this.cmb_MaKho2.Validating += new System.ComponentModel.CancelEventHandler(this.cmb_MaKho2_Validating);
+            // 
+            // gridLookUpEdit1View
+            // 
+            this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colMAKHO1,
+            this.colTENKHO,
+            this.colDIACHI,
+            this.colMACN});
+            this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
+            this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // colMAKHO1
+            // 
+            this.colMAKHO1.Caption = "MÃ KHO";
+            this.colMAKHO1.FieldName = "MAKHO";
+            this.colMAKHO1.Name = "colMAKHO1";
+            this.colMAKHO1.Visible = true;
+            this.colMAKHO1.VisibleIndex = 0;
+            // 
+            // colTENKHO
+            // 
+            this.colTENKHO.Caption = "TÊN KHO";
+            this.colTENKHO.FieldName = "TENKHO";
+            this.colTENKHO.Name = "colTENKHO";
+            this.colTENKHO.Visible = true;
+            this.colTENKHO.VisibleIndex = 1;
+            // 
+            // colDIACHI
+            // 
+            this.colDIACHI.Caption = "ĐỊA CHỈ";
+            this.colDIACHI.FieldName = "DIACHI";
+            this.colDIACHI.Name = "colDIACHI";
+            this.colDIACHI.Visible = true;
+            this.colDIACHI.VisibleIndex = 2;
+            // 
+            // colMACN
+            // 
+            this.colMACN.Caption = "MÃ CN";
+            this.colMACN.FieldName = "MACN";
+            this.colMACN.Name = "colMACN";
+            this.colMACN.Visible = true;
+            this.colMACN.VisibleIndex = 3;
             // 
             // bdsVatTu
             // 
@@ -754,12 +809,14 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.panelCtrl_DatHang)).EndInit();
             this.panelCtrl_DatHang.ResumeLayout(false);
             this.panelCtrl_DatHang.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.khoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaNV.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.khoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_NCC.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MDDH.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmb_MaKho2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsVatTu)).EndInit();
             this.groupBox_CTDDH.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gc_sp_getCTPhieu)).EndInit();
@@ -809,7 +866,6 @@ namespace QLVT
         public DevExpress.XtraBars.BarButtonItem btnThoat;
         private System.Windows.Forms.BindingSource khoBindingSource;
         private DSTableAdapters.KhoTableAdapter khoTableAdapter;
-        private DevExpress.XtraEditors.TextEdit txt_MaNV;
         private DevExpress.XtraEditors.TextEdit txt_NCC;
         private DevExpress.XtraEditors.DateEdit dateEdit_NgayLap;
         private DevExpress.XtraEditors.TextEdit txt_MDDH;
@@ -840,7 +896,13 @@ namespace QLVT
         private DevExpress.XtraGrid.Columns.GridColumn colSOLUONG;
         public System.Windows.Forms.BindingSource bds_sp_getCTPhieu;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
-        private System.Windows.Forms.ComboBox cmb_MaKho;
+        private DevExpress.XtraEditors.GridLookUpEdit cmb_MaKho2;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn colMAKHO1;
+        private DevExpress.XtraGrid.Columns.GridColumn colTENKHO;
+        private DevExpress.XtraGrid.Columns.GridColumn colDIACHI;
+        private DevExpress.XtraGrid.Columns.GridColumn colMACN;
+        private DevExpress.XtraEditors.TextEdit txt_MaNV;
 
         public DSTableAdapters.sp_getCTDDHTableAdapter Sp_getCTDDHTableAdapter { get => sp_getCTDDHTableAdapter; set => sp_getCTDDHTableAdapter = value; }
     }
