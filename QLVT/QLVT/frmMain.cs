@@ -76,7 +76,11 @@ namespace QLVT
      
 
     
-
+        private void closeForm(Type ftype)
+        {
+            Form frm = this.CheckExist(ftype);
+            if (frm != null) frm.Close();
+        }
         private void btn_DangXuat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 
@@ -88,16 +92,21 @@ namespace QLVT
             }
             else
             {
-                Form frm = this.CheckExist(typeof(frmKho));
-                if (frm != null) frm.Close();
-                frm = this.CheckExist(typeof(frmNhanVien));
-                if (frm != null) frm.Close();
-                frm = this.CheckExist(typeof(frmVatTu));
-                if (frm != null) frm.Close();
-                frm = this.CheckExist(typeof(frmTaoTaiKhoan));
-                if (frm != null) frm.Close();
-                frm = this.CheckExist(typeof(frmDonDatHang));
-                if (frm != null) frm.Close();
+                for(int i = 0; i < Application.OpenForms.Count; i++)
+                    {
+                       if(Application.OpenForms[i].Name.Equals("frmThemCTDDH")
+                        || Application.OpenForms[i].Name.Equals("frmThemCTPX")|| Application.OpenForms[i].Name.Equals("frmThemCTPN"))
+                       {
+                            Application.OpenForms[i].Close();
+                        }
+
+                    }
+                if (Program.CheckOpened("frmTaoTaiKhoan"))
+                {
+                    Program.frmTaoAcc.Close();
+                }
+               
+            }
                 btn_DangXuat.Enabled = btn_TaoTaiKhoan.Enabled = rib_DanhMuc.Visible = rib_BaoCao.Visible = rib_NghiepVu.Visible = false;
                 MANV.Text = "MANV";
                 HOTEN.Text = "HOTEN";
@@ -109,7 +118,7 @@ namespace QLVT
                 Program.frmChinh.Hide();
                 Program.frmDN.Show();
 
-            }
+         
 
 
 
@@ -121,9 +130,9 @@ namespace QLVT
             if (frm != null) frm.Activate();
             else
             {
-                frmVatTu f = new frmVatTu();
-                f.MdiParent = this;
-                f.Show();
+                Program.frmVT = new frmVatTu();
+                Program.frmVT.MdiParent = this;
+                Program.frmVT.Show();
             }
         }
 
@@ -162,7 +171,7 @@ namespace QLVT
                       MessageBox.Show("Tất cả nhân viên ở chi nhánh này đã có tài khoản", "", MessageBoxButtons.OK);
                   }
               }*/
-            if (!Program.CheckOpened("Tạo tài khoản"))
+            if (!Program.CheckOpened("frmTaoTaiKhoan"))
             {
                 Program.frmTaoAcc = new frmTaoTaiKhoan();
                 Program.frmTaoAcc.Show();
@@ -241,4 +250,5 @@ namespace QLVT
             }
         }
     }
+
 }

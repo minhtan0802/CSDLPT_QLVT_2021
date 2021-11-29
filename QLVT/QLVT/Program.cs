@@ -49,6 +49,7 @@ namespace QLVT
         public static frmThemCTPN frmCTPN;
         public static frmTaoTaiKhoan frmTaoAcc;
         public static frmPhieuXuat frmPX;
+        public static frmVatTu frmVT;
         public static int KetNoi()
         {
             if (Program.conn != null && Program.conn.State == ConnectionState.Open)
@@ -191,7 +192,7 @@ namespace QLVT
 
             foreach (Form frm in fc)
             {
-                if (frm.Text == name)
+                if (frm.Name == name)
                 {
                     return true;
                 }

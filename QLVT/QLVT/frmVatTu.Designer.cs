@@ -61,6 +61,8 @@ namespace QLVT
             this.colDVT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSOLUONGTON = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelCtrl_VatTu = new DevExpress.XtraEditors.PanelControl();
+            this.txt_TenVatTu = new DevExpress.XtraEditors.TextEdit();
+            this.txt_DonViTinh = new DevExpress.XtraEditors.TextEdit();
             this.txt_MaVatTu = new DevExpress.XtraEditors.TextEdit();
             this.bdsCTPX = new System.Windows.Forms.BindingSource(this.components);
             this.CTPXTableAdapter = new QLVT.DSTableAdapters.CTPXTableAdapter();
@@ -68,8 +70,6 @@ namespace QLVT
             this.CTPNTableAdapter = new QLVT.DSTableAdapters.CTPNTableAdapter();
             this.bdsCTDDH = new System.Windows.Forms.BindingSource(this.components);
             this.CTDDHTableAdapter = new QLVT.DSTableAdapters.CTDDHTableAdapter();
-            this.txt_DonViTinh = new DevExpress.XtraEditors.TextEdit();
-            this.txt_TenVatTu = new DevExpress.XtraEditors.TextEdit();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             mAVTLabel = new System.Windows.Forms.Label();
             tENVTLabel = new System.Windows.Forms.Label();
@@ -81,12 +81,12 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.gridView_VatTu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelCtrl_VatTu)).BeginInit();
             this.panelCtrl_VatTu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_TenVatTu.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_DonViTinh.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaVatTu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsCTPX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsCTPN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsCTDDH)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_DonViTinh.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_TenVatTu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -392,6 +392,28 @@ namespace QLVT
             this.panelCtrl_VatTu.Size = new System.Drawing.Size(809, 270);
             this.panelCtrl_VatTu.TabIndex = 6;
             // 
+            // txt_TenVatTu
+            // 
+            this.txt_TenVatTu.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsVatTu, "TENVT", true));
+            this.txt_TenVatTu.Location = new System.Drawing.Point(223, 97);
+            this.txt_TenVatTu.MenuManager = this.barManager1;
+            this.txt_TenVatTu.Name = "txt_TenVatTu";
+            this.txt_TenVatTu.Size = new System.Drawing.Size(174, 26);
+            this.txt_TenVatTu.TabIndex = 9;
+            this.txt_TenVatTu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tENVTTextEdit_KeyPress);
+            this.txt_TenVatTu.Validating += new System.ComponentModel.CancelEventHandler(this.txt_TenVatTu_Validating_1);
+            // 
+            // txt_DonViTinh
+            // 
+            this.txt_DonViTinh.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsVatTu, "DVT", true));
+            this.txt_DonViTinh.Location = new System.Drawing.Point(539, 36);
+            this.txt_DonViTinh.MenuManager = this.barManager1;
+            this.txt_DonViTinh.Name = "txt_DonViTinh";
+            this.txt_DonViTinh.Size = new System.Drawing.Size(162, 26);
+            this.txt_DonViTinh.TabIndex = 8;
+            this.txt_DonViTinh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_DonViTinh_KeyPress);
+            this.txt_DonViTinh.Validating += new System.ComponentModel.CancelEventHandler(this.txt_DonViTinh_Validating_1);
+            // 
             // txt_MaVatTu
             // 
             this.txt_MaVatTu.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsVatTu, "MAVT", true));
@@ -430,28 +452,6 @@ namespace QLVT
             // 
             this.CTDDHTableAdapter.ClearBeforeFill = true;
             // 
-            // txt_DonViTinh
-            // 
-            this.txt_DonViTinh.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsVatTu, "DVT", true));
-            this.txt_DonViTinh.Location = new System.Drawing.Point(539, 36);
-            this.txt_DonViTinh.MenuManager = this.barManager1;
-            this.txt_DonViTinh.Name = "txt_DonViTinh";
-            this.txt_DonViTinh.Size = new System.Drawing.Size(162, 26);
-            this.txt_DonViTinh.TabIndex = 8;
-            this.txt_DonViTinh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_DonViTinh_KeyPress);
-            this.txt_DonViTinh.Validating += new System.ComponentModel.CancelEventHandler(this.txt_DonViTinh_Validating_1);
-            // 
-            // txt_TenVatTu
-            // 
-            this.txt_TenVatTu.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsVatTu, "TENVT", true));
-            this.txt_TenVatTu.Location = new System.Drawing.Point(223, 97);
-            this.txt_TenVatTu.MenuManager = this.barManager1;
-            this.txt_TenVatTu.Name = "txt_TenVatTu";
-            this.txt_TenVatTu.Size = new System.Drawing.Size(174, 26);
-            this.txt_TenVatTu.TabIndex = 9;
-            this.txt_TenVatTu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tENVTTextEdit_KeyPress);
-            this.txt_TenVatTu.Validating += new System.ComponentModel.CancelEventHandler(this.txt_TenVatTu_Validating_1);
-            // 
             // dxErrorProvider1
             // 
             this.dxErrorProvider1.ContainerControl = this;
@@ -483,12 +483,12 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.panelCtrl_VatTu)).EndInit();
             this.panelCtrl_VatTu.ResumeLayout(false);
             this.panelCtrl_VatTu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_TenVatTu.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_DonViTinh.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaVatTu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsCTPX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsCTPN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsCTDDH)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_DonViTinh.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_TenVatTu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -527,12 +527,12 @@ namespace QLVT
         private System.Windows.Forms.BindingSource bdsCTDDH;
         private DSTableAdapters.CTDDHTableAdapter CTDDHTableAdapter;
         private System.Windows.Forms.BindingSource bdsVatTu;
-        private DS DS;
-        private DSTableAdapters.VattuTableAdapter VatTuTableAdapter;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraEditors.TextEdit txt_MaVatTu;
         private DevExpress.XtraEditors.TextEdit txt_TenVatTu;
         private DevExpress.XtraEditors.TextEdit txt_DonViTinh;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
+        public DSTableAdapters.VattuTableAdapter VatTuTableAdapter;
+        public DS DS;
     }
 }

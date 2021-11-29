@@ -37,7 +37,7 @@ namespace QLVT
                 soLuongDat = Int64.Parse((((DataRowView)bds_sp_getVatTuConThieuCTPhieu[pos])["SOLUONG"].ToString()));
              
                 spin_SoLuong.Value = soLuongDat;
-                MessageBox.Show("So Luong Dat: " + soLuongDat);
+            
                 spin_DonGia.Value = Int64.Parse((((DataRowView)bds_sp_getVatTuConThieuCTPhieu[pos])["DONGIA"].ToString()));
                 
             }
@@ -236,7 +236,7 @@ namespace QLVT
         private void gridView_getVTConThieuCTPN_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             pos = bds_sp_getVatTuConThieuCTPhieu.Position;
-            txt_TENVT.Text = (((DataRowView)bds_sp_getVatTuConThieuCTPhieu[pos])["TENVT"].ToString());
+         
             soLuongDat = Int64.Parse((((DataRowView)bds_sp_getVatTuConThieuCTPhieu[pos])["SOLUONG"].ToString()));
 
             spin_SoLuong.Value = soLuongDat;

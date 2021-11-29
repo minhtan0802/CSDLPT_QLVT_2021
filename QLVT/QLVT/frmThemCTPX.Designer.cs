@@ -135,7 +135,7 @@ namespace QLVT
             this.groupBox_InfoVT.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox_InfoVT.Location = new System.Drawing.Point(0, 0);
             this.groupBox_InfoVT.Name = "groupBox_InfoVT";
-            this.groupBox_InfoVT.Size = new System.Drawing.Size(341, 390);
+            this.groupBox_InfoVT.Size = new System.Drawing.Size(341, 402);
             this.groupBox_InfoVT.TabIndex = 1;
             this.groupBox_InfoVT.TabStop = false;
             this.groupBox_InfoVT.Text = "Thông tin";
@@ -253,7 +253,7 @@ namespace QLVT
             this.groupBox_VT.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox_VT.Location = new System.Drawing.Point(341, 0);
             this.groupBox_VT.Name = "groupBox_VT";
-            this.groupBox_VT.Size = new System.Drawing.Size(618, 390);
+            this.groupBox_VT.Size = new System.Drawing.Size(660, 402);
             this.groupBox_VT.TabIndex = 4;
             this.groupBox_VT.TabStop = false;
             this.groupBox_VT.Text = "Vật tư";
@@ -265,11 +265,12 @@ namespace QLVT
             this.sp_getVatTuConThieuCTPhieuGridControl.Location = new System.Drawing.Point(3, 18);
             this.sp_getVatTuConThieuCTPhieuGridControl.MainView = this.gridView_VatTuChuaCo;
             this.sp_getVatTuConThieuCTPhieuGridControl.Name = "sp_getVatTuConThieuCTPhieuGridControl";
-            this.sp_getVatTuConThieuCTPhieuGridControl.Size = new System.Drawing.Size(612, 369);
+            this.sp_getVatTuConThieuCTPhieuGridControl.Size = new System.Drawing.Size(654, 381);
             this.sp_getVatTuConThieuCTPhieuGridControl.TabIndex = 0;
             this.sp_getVatTuConThieuCTPhieuGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_VatTuChuaCo});
             this.sp_getVatTuConThieuCTPhieuGridControl.FocusedViewChanged += new DevExpress.XtraGrid.ViewFocusEventHandler(this.sp_getVatTuConThieuCTPhieuGridControl_FocusedViewChanged);
+            this.sp_getVatTuConThieuCTPhieuGridControl.Click += new System.EventHandler(this.sp_getVatTuConThieuCTPhieuGridControl_Click);
             this.sp_getVatTuConThieuCTPhieuGridControl.MouseCaptureChanged += new System.EventHandler(this.sp_getVatTuConThieuCTPhieuGridControl_MouseCaptureChanged);
             // 
             // gridView_VatTuChuaCo
@@ -283,6 +284,7 @@ namespace QLVT
             this.gridView_VatTuChuaCo.Name = "gridView_VatTuChuaCo";
             this.gridView_VatTuChuaCo.OptionsBehavior.Editable = false;
             this.gridView_VatTuChuaCo.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_VatTuChuaCo_FocusedRowChanged);
+            this.gridView_VatTuChuaCo.ColumnFilterChanged += new System.EventHandler(this.gridView_VatTuChuaCo_ColumnFilterChanged);
             // 
             // colMAVT
             // 
@@ -352,7 +354,7 @@ namespace QLVT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(959, 390);
+            this.ClientSize = new System.Drawing.Size(1001, 402);
             this.Controls.Add(this.groupBox_VT);
             this.Controls.Add(this.groupBox_InfoVT);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

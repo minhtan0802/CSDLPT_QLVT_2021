@@ -244,6 +244,7 @@ namespace QLVT
             this.btnUndo.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnUndo.ImageOptions.Image")));
             this.btnUndo.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnUndo.ImageOptions.LargeImage")));
             this.btnUndo.Name = "btnUndo";
+            this.btnUndo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUndo_ItemClick);
             // 
             // btnRefresh
             // 
@@ -371,6 +372,7 @@ namespace QLVT
             this.gridView_DatHang.Name = "gridView_DatHang";
             this.gridView_DatHang.OptionsBehavior.Editable = false;
             this.gridView_DatHang.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_DatHang_FocusedRowChanged);
+            this.gridView_DatHang.ColumnFilterChanged += new System.EventHandler(this.gridView_DatHang_ColumnFilterChanged);
             this.gridView_DatHang.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gridView_DatHang_KeyPress);
             // 
             // colMasoDDH
@@ -503,6 +505,7 @@ namespace QLVT
             this.txt_NCC.TabIndex = 5;
             this.txt_NCC.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.txt_NCC_EditValueChanging);
             this.txt_NCC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_NCC_KeyPress);
+            this.txt_NCC.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_NCC_KeyUp);
             this.txt_NCC.Validating += new System.ComponentModel.CancelEventHandler(this.txt_NCC_Validating);
             // 
             // dateEdit_NgayLap

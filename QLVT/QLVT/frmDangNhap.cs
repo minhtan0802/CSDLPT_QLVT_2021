@@ -88,10 +88,10 @@ namespace QLVT
             }
             Program.myReader.Close();
             Program.conn.Close();
-            this.Hide();
+           
             Program.frmChinh.Show();
             Program.frmChinh.HienThiMenu();
-
+            this.Visible = false;
 
 
 
@@ -145,7 +145,7 @@ namespace QLVT
         }
 
         private void frmDangNhap_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        { 
             DialogResult result = MessageBox.Show("Bạn muốn thoát hoàn toàn chương trình không?", "Thông báo", MessageBoxButtons.YesNo);
             if (result == DialogResult.No)
             {

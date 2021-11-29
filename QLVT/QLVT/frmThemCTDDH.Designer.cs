@@ -171,7 +171,7 @@ namespace QLVT
             this.groupBox_VT.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox_VT.Location = new System.Drawing.Point(287, 0);
             this.groupBox_VT.Name = "groupBox_VT";
-            this.groupBox_VT.Size = new System.Drawing.Size(582, 402);
+            this.groupBox_VT.Size = new System.Drawing.Size(657, 391);
             this.groupBox_VT.TabIndex = 3;
             this.groupBox_VT.TabStop = false;
             this.groupBox_VT.Text = "Vật tư";
@@ -183,10 +183,11 @@ namespace QLVT
             this.sp_getVatTuConThieuCTPhieuGridControl.Location = new System.Drawing.Point(3, 18);
             this.sp_getVatTuConThieuCTPhieuGridControl.MainView = this.gridView_VatTuChuaCo;
             this.sp_getVatTuConThieuCTPhieuGridControl.Name = "sp_getVatTuConThieuCTPhieuGridControl";
-            this.sp_getVatTuConThieuCTPhieuGridControl.Size = new System.Drawing.Size(576, 381);
+            this.sp_getVatTuConThieuCTPhieuGridControl.Size = new System.Drawing.Size(651, 370);
             this.sp_getVatTuConThieuCTPhieuGridControl.TabIndex = 0;
             this.sp_getVatTuConThieuCTPhieuGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_VatTuChuaCo});
+            this.sp_getVatTuConThieuCTPhieuGridControl.Click += new System.EventHandler(this.sp_getVatTuConThieuCTPhieuGridControl_Click);
             this.sp_getVatTuConThieuCTPhieuGridControl.MouseCaptureChanged += new System.EventHandler(this.sp_getVatTuConThieuCTPhieuGridControl_MouseCaptureChanged);
             // 
             // bds_sp_getVatTuConThieuCTPhieu
@@ -321,7 +322,7 @@ namespace QLVT
             this.groupBox_InfoVT.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox_InfoVT.Location = new System.Drawing.Point(0, 0);
             this.groupBox_InfoVT.Name = "groupBox_InfoVT";
-            this.groupBox_InfoVT.Size = new System.Drawing.Size(287, 402);
+            this.groupBox_InfoVT.Size = new System.Drawing.Size(287, 391);
             this.groupBox_InfoVT.TabIndex = 0;
             this.groupBox_InfoVT.TabStop = false;
             this.groupBox_InfoVT.Text = "Thông tin";
@@ -402,7 +403,7 @@ namespace QLVT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(869, 402);
+            this.ClientSize = new System.Drawing.Size(944, 391);
             this.Controls.Add(this.groupBox_VT);
             this.Controls.Add(this.groupBox_InfoVT);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;

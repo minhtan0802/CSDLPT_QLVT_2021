@@ -153,7 +153,7 @@ namespace QLVT
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl2.Location = new System.Drawing.Point(0, 0);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(914, 327);
+            this.panelControl2.Size = new System.Drawing.Size(1044, 327);
             this.panelControl2.TabIndex = 38;
             // 
             // groupBox_VT
@@ -162,7 +162,7 @@ namespace QLVT
             this.groupBox_VT.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox_VT.Location = new System.Drawing.Point(373, 0);
             this.groupBox_VT.Name = "groupBox_VT";
-            this.groupBox_VT.Size = new System.Drawing.Size(541, 327);
+            this.groupBox_VT.Size = new System.Drawing.Size(671, 327);
             this.groupBox_VT.TabIndex = 2;
             this.groupBox_VT.TabStop = false;
             this.groupBox_VT.Text = "Chi tiết đơn đặt hàng";
@@ -175,7 +175,7 @@ namespace QLVT
             this.sp_getVatTuConThieuCTPhieuGridControl.Location = new System.Drawing.Point(3, 18);
             this.sp_getVatTuConThieuCTPhieuGridControl.MainView = this.gridView_getVTConThieuCTPN;
             this.sp_getVatTuConThieuCTPhieuGridControl.Name = "sp_getVatTuConThieuCTPhieuGridControl";
-            this.sp_getVatTuConThieuCTPhieuGridControl.Size = new System.Drawing.Size(535, 306);
+            this.sp_getVatTuConThieuCTPhieuGridControl.Size = new System.Drawing.Size(665, 306);
             this.sp_getVatTuConThieuCTPhieuGridControl.TabIndex = 1;
             this.sp_getVatTuConThieuCTPhieuGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_getVTConThieuCTPN});
@@ -365,7 +365,7 @@ namespace QLVT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 370);
+            this.ClientSize = new System.Drawing.Size(1044, 370);
             this.Controls.Add(this.panelControl2);
             this.Name = "frmThemCTPN";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

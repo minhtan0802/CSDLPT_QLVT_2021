@@ -17,7 +17,7 @@ namespace QLVT
         DataTable dtVTDaCo = new DataTable();
     
         String maPX = "";
-        String macn = "";
+        int vitri;
         public string getMaPX()
         {
             return maPX;
@@ -57,24 +57,21 @@ namespace QLVT
             this.vattuTableAdapter.Fill(this.DS.Vattu);
             dtVTDaCo = new DataTable();
             dtVTDaCo.Columns.Add("MAVT", typeof(string));
+        
             if (bdsPX.Count > 0)
             {
+                vitri = 0;
                 maPX = txt_MAPX.Text;
-                if (bdsPX.Count > 0)
-                {
-                    btn_ThemCTPX.Enabled = btn_XoaCTPX.Enabled = false;
-                    gridView_CTPX.OptionsBehavior.Editable = false;
-                }
-                else
-                {
-                    btn_ThemCTPX.Enabled = btn_XoaCTPX.Enabled = true;
-                    gridView_CTPX.OptionsBehavior.Editable = true;
-                }
+                btn_ThemCTPX.Enabled = btn_XoaCTPX.Enabled = false;
+                gridView_CTPX.OptionsBehavior.Editable = false;
+               
 
             }
             else
             {
-               maPX= "";
+                btn_ThemCTPX.Enabled = btn_XoaCTPX.Enabled = true;
+                gridView_CTPX.OptionsBehavior.Editable = true;
+                maPX = "";
             }
 
             this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
@@ -165,6 +162,8 @@ namespace QLVT
             this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
             this.sp_getCTPhieuTableAdapter.Fill(DS.sp_getCTPhieu, "", "x");
             txt_MAPX.Focus();
+            gridView_CTPX.Columns[2].OptionsColumn.AllowEdit = true;
+            gridView_CTPX.Columns[3].OptionsColumn.AllowEdit = true;
         }
         private int savePX()
         {
@@ -192,7 +191,11 @@ namespace QLVT
                 Program.savePhieu("x", txt_MAPX.Text, bds_sp_getCTPhieu, gridView_CTPX);
                 this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu, txt_MAPX.Text,"x");
+                gridView_CTPX.Columns[2].OptionsColumn.AllowEdit = false;
+                gridView_CTPX.Columns[3].OptionsColumn.AllowEdit = false; ;
                 gridView_CTPX.OptionsBehavior.Editable = false;
+                Program.frmVT.VatTuTableAdapter.Connection.ConnectionString = Program.connstr;
+                Program.frmVT.VatTuTableAdapter.Fill(Program.frmVT.DS.Vattu);
                 MessageBox.Show("Ghi thành công!", "", MessageBoxButtons.OK);
                 panelCtrl_PX.Enabled = false;
                 return 0;
@@ -293,7 +296,7 @@ namespace QLVT
 
         private void btn_ThemCTPX_Click(object sender, EventArgs e)
         {
-            if (!Program.CheckOpened("Thêm chi tiết PX"))
+            if (!Program.CheckOpened("frmThemCTPX"))
             {
                 frmThemCTPX f = new frmThemCTPX();
                 f.Show();
@@ -415,7 +418,7 @@ namespace QLVT
                 else if (Int32.Parse(soLuongString) > soLuongTon && gridView_CTPX.FocusedColumn.FieldName == "SOLUONG")
                 {
                     e.Valid = false;
-                    e.ErrorText = "Số lượng nhập không được lớn hơn số lượng tồn là " + soLuongTon;
+                    e.ErrorText = "Số lượng xuất không được lớn hơn số lượng tồn là " + soLuongTon;
                 }
 
 
@@ -424,6 +427,8 @@ namespace QLVT
 
         private void gridView_PX_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
+      
+            vitri = bdsPX.Position;
             maPX = txt_MAPX.Text;
             if(btnThem.Enabled==true)
             {
@@ -434,7 +439,7 @@ namespace QLVT
                 {
                     dtVTDaCo.Rows.Add(((DataRowView)bds_sp_getCTPhieu[i])["MAVT"]);
                 }
-                cmb_MaKho.Text = ((DataRowView)bdsPX[gridView_PX.FocusedRowHandle])["MAKHO"].ToString();
+                cmb_MaKho.Text = ((DataRowView)bdsPX[bdsPX.Position])["MAKHO"].ToString();
             }    
            
           
@@ -557,6 +562,32 @@ namespace QLVT
             {
                 e.Cancel = false;
             }    
+        }
+
+        private void btnUndo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (btnThem.Enabled == false) bdsPX.Position = vitri;
+            bdsPX.CancelEdit();
+          
+            maPX = ((DataRowView)bdsPX[vitri])["MAPX"].ToString();
+            cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDown;
+            this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
+            this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu, maPX, "x");
+            gc_PhieuXuat.Enabled = true;
+            panelCtrl_PX.Enabled = false;
+            btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
+            btnGhi.Enabled = btnUndo.Enabled = false;
+
+        }
+
+        private void gc_PhieuXuat_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            load();
         }
     }
 }

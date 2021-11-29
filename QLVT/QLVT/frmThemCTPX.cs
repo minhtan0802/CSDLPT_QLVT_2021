@@ -156,8 +156,8 @@ namespace QLVT
         private void gridView_VatTuChuaCo_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             pos = bds_sp_getVatTuConThieuCTPhieu.Position;
-            txt_TENVT.Text = ((DataRowView)bds_sp_getVatTuConThieuCTPhieu[gridView_VatTuChuaCo.FocusedRowHandle])["TENVT"].ToString();    
-            soLuongTon = Int32.Parse(((DataRowView)bds_sp_getVatTuConThieuCTPhieu[gridView_VatTuChuaCo.FocusedRowHandle])["SOLUONGTON"].ToString());  
+            //txt_TENVT.Text = ((DataRowView)bds_sp_getVatTuConThieuCTPhieu[gridView_VatTuChuaCo.FocusedRowHandle])["TENVT"].ToString();    
+            soLuongTon = Int32.Parse(((DataRowView)bds_sp_getVatTuConThieuCTPhieu[bds_sp_getVatTuConThieuCTPhieu.Position])["SOLUONGTON"].ToString());  
             spin_SoLuong.Focus();
             //    spin_SoLuong.Properties.MaxValue = max;
             if (soLuongTon == 0)
@@ -182,6 +182,58 @@ namespace QLVT
         private void sp_getVatTuConThieuCTPhieuGridControl_FocusedViewChanged(object sender, DevExpress.XtraGrid.ViewFocusEventArgs e)
         {
 
+        }
+
+        private void sp_getVatTuConThieuCTPhieuGridControl_Click(object sender, EventArgs e)
+        {
+            pos = bds_sp_getVatTuConThieuCTPhieu.Position;
+            //txt_TENVT.Text = ((DataRowView)bds_sp_getVatTuConThieuCTPhieu[gridView_VatTuChuaCo.FocusedRowHandle])["TENVT"].ToString();    
+            soLuongTon = Int32.Parse(((DataRowView)bds_sp_getVatTuConThieuCTPhieu[bds_sp_getVatTuConThieuCTPhieu.Position])["SOLUONGTON"].ToString());
+            spin_SoLuong.Focus();
+            //    spin_SoLuong.Properties.MaxValue = max;
+            if (soLuongTon == 0)
+            {
+                spin_SoLuong.Properties.MinValue = 0;
+                spin_SoLuong.Value = 0;
+                spin_SoLuong.Enabled = false;
+                spin_DonGia.Enabled = false;
+                btn_Them.Enabled = false;
+
+            }
+            else
+            {
+                spin_SoLuong.Properties.MinValue = 1;
+                spin_SoLuong.Value = 1;
+                spin_SoLuong.Enabled = true;
+                spin_DonGia.Enabled = true;
+                btn_Them.Enabled = true;
+            }
+        }
+
+        private void gridView_VatTuChuaCo_ColumnFilterChanged(object sender, EventArgs e)
+        {
+            pos = bds_sp_getVatTuConThieuCTPhieu.Position;
+            //txt_TENVT.Text = ((DataRowView)bds_sp_getVatTuConThieuCTPhieu[gridView_VatTuChuaCo.FocusedRowHandle])["TENVT"].ToString();    
+            soLuongTon = Int32.Parse(((DataRowView)bds_sp_getVatTuConThieuCTPhieu[bds_sp_getVatTuConThieuCTPhieu.Position])["SOLUONGTON"].ToString());
+            spin_SoLuong.Focus();
+            //    spin_SoLuong.Properties.MaxValue = max;
+            if (soLuongTon == 0)
+            {
+                spin_SoLuong.Properties.MinValue = 0;
+                spin_SoLuong.Value = 0;
+                spin_SoLuong.Enabled = false;
+                spin_DonGia.Enabled = false;
+                btn_Them.Enabled = false;
+
+            }
+            else
+            {
+                spin_SoLuong.Properties.MinValue = 1;
+                spin_SoLuong.Value = 1;
+                spin_SoLuong.Enabled = true;
+                spin_DonGia.Enabled = true;
+                btn_Them.Enabled = true;
+            }
         }
     }
 }

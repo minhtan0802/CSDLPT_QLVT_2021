@@ -269,6 +269,7 @@ namespace QLVT
         private void btnUndo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             bdsKho.CancelEdit();
+            
             if (btnThem.Enabled == false) bdsKho.Position = vitri;
             gcKho.Enabled = true;
             panelCtrl_Kho.Enabled = false;

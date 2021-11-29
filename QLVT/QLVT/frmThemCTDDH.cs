@@ -177,5 +177,10 @@ namespace QLVT
             spin_SoLuong.Value = 1;
             spin_DonGia.Value = 1;
         }
+
+        private void sp_getVatTuConThieuCTPhieuGridControl_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

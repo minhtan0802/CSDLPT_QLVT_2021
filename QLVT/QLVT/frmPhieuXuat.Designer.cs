@@ -229,6 +229,7 @@ namespace QLVT
             this.btnUndo.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnUndo.ImageOptions.Image")));
             this.btnUndo.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnUndo.ImageOptions.LargeImage")));
             this.btnUndo.Name = "btnUndo";
+            this.btnUndo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUndo_ItemClick);
             // 
             // btnRefresh
             // 
@@ -237,6 +238,7 @@ namespace QLVT
             this.btnRefresh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.ImageOptions.Image")));
             this.btnRefresh.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnRefresh.ImageOptions.LargeImage")));
             this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRefresh_ItemClick);
             // 
             // btnThoat
             // 
@@ -374,6 +376,7 @@ namespace QLVT
             this.gc_PhieuXuat.TabIndex = 46;
             this.gc_PhieuXuat.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_PX});
+            this.gc_PhieuXuat.Click += new System.EventHandler(this.gc_PhieuXuat_Click);
             this.gc_PhieuXuat.MouseCaptureChanged += new System.EventHandler(this.phieuXuatGridControl_MouseCaptureChanged);
             // 
             // gridView_PX
@@ -387,6 +390,8 @@ namespace QLVT
             this.gridView_PX.GridControl = this.gc_PhieuXuat;
             this.gridView_PX.Name = "gridView_PX";
             this.gridView_PX.OptionsBehavior.Editable = false;
+            this.gridView_PX.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colNGAY, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gridView_PX.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_PX_FocusedRowChanged);
             // 
             // colMAPX
@@ -405,7 +410,7 @@ namespace QLVT
             this.colNGAY.Name = "colNGAY";
             this.colNGAY.Visible = true;
             this.colNGAY.VisibleIndex = 1;
-            this.colNGAY.Width = 94;
+            this.colNGAY.Width = 107;
             // 
             // colHOTENKH
             // 
@@ -598,6 +603,7 @@ namespace QLVT
             this.colDONGIA.FieldName = "DONGIA";
             this.colDONGIA.MinWidth = 25;
             this.colDONGIA.Name = "colDONGIA";
+            this.colDONGIA.OptionsColumn.AllowEdit = false;
             this.colDONGIA.Visible = true;
             this.colDONGIA.VisibleIndex = 2;
             this.colDONGIA.Width = 94;
@@ -608,6 +614,7 @@ namespace QLVT
             this.colSOLUONG.FieldName = "SOLUONG";
             this.colSOLUONG.MinWidth = 25;
             this.colSOLUONG.Name = "colSOLUONG";
+            this.colSOLUONG.OptionsColumn.AllowEdit = false;
             this.colSOLUONG.Visible = true;
             this.colSOLUONG.VisibleIndex = 3;
             this.colSOLUONG.Width = 94;
