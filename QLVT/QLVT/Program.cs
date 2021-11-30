@@ -50,6 +50,9 @@ namespace QLVT
         public static frmTaoTaiKhoan frmTaoAcc;
         public static frmPhieuXuat frmPX;
         public static frmVatTu frmVT;
+        public static frmNhanVien frmNV;
+        public static frmKho frmKHO;
+
         public static int KetNoi()
         {
             if (Program.conn != null && Program.conn.State == ConnectionState.Open)
@@ -267,7 +270,8 @@ namespace QLVT
             }    
             return strResult.TrimEnd();
         }
-
+        
+        
 
         [STAThread]
         static void Main()

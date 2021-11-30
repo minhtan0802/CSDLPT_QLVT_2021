@@ -650,11 +650,9 @@ namespace QLVT
         private DevExpress.XtraBars.BarListItem barListItem1;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private System.Windows.Forms.ComboBox cmbChiNhanh;
-        private DSTableAdapters.KhoTableAdapter khoTableAdapter;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraGrid.GridControl gcKho;
         private System.Windows.Forms.BindingSource bdsKho;
-        private DS DS;
         private DSTableAdapters.TableAdapterManager tableAdapterManager;
         private DSTableAdapters.PhieuXuatTableAdapter phieuXuatTableAdapter;
         private System.Windows.Forms.BindingSource bdsPX;
@@ -680,5 +678,7 @@ namespace QLVT
         private DevExpress.XtraEditors.TextEdit txtTenKho;
         private DevExpress.XtraEditors.TextEdit txtMaKho;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
+        public DSTableAdapters.KhoTableAdapter khoTableAdapter;
+        public DS DS;
     }
 }

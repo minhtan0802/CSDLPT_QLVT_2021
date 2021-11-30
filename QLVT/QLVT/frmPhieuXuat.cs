@@ -38,14 +38,17 @@ namespace QLVT
             this.tableAdapterManager.UpdateAll(this.DS);
 
         }
-        private void load()
+        public void load()
         {
             // TODO: This line of code loads data into the 'DS.Vattu' table. You can move, or remove it, as needed.
         
             DS.EnforceConstraints = false;
             // TODO: This line of code loads data into the 'dS.Kho' table. You can move, or remove it, as needed.
-            this.phieuXuatTableAdapter.Connection.ConnectionString = Program.connstr;
-            this.phieuXuatTableAdapter.Fill(this.DS.PhieuXuat);
+            
+                this.phieuXuatTableAdapter.Connection.ConnectionString = Program.connstr;
+                this.phieuXuatTableAdapter.Fill(this.DS.PhieuXuat);
+           
+          
 
             this.cTPXTableAdapter.Connection.ConnectionString = Program.connstr;
             this.cTPXTableAdapter.Fill(this.DS.CTPX);
@@ -55,16 +58,22 @@ namespace QLVT
 
             this.vattuTableAdapter.Connection.ConnectionString = Program.connstr;
             this.vattuTableAdapter.Fill(this.DS.Vattu);
+            
+        }
+        private void frmPhieuXuat_Load(object sender, EventArgs e)
+        {
+            DS.EnforceConstraints = false;
+            load();
             dtVTDaCo = new DataTable();
             dtVTDaCo.Columns.Add("MAVT", typeof(string));
-        
+
             if (bdsPX.Count > 0)
             {
                 vitri = 0;
                 maPX = txt_MAPX.Text;
                 btn_ThemCTPX.Enabled = btn_XoaCTPX.Enabled = false;
                 gridView_CTPX.OptionsBehavior.Editable = false;
-               
+
 
             }
             else
@@ -76,11 +85,6 @@ namespace QLVT
 
             this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
             this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu, maPX, "x");
-        }
-        private void frmPhieuXuat_Load(object sender, EventArgs e)
-        {
-            DS.EnforceConstraints = false;
-            load();
             cmbChiNhanh.DataSource = Program.bds_dspm;  // sao chép bds_dspm đã load ở form đăng nhập  qua
             cmbChiNhanh.DisplayMember = "TENCN";
             cmbChiNhanh.ValueMember = "TENSERVER";
@@ -195,8 +199,7 @@ namespace QLVT
                 gridView_CTPX.Columns[2].OptionsColumn.AllowEdit = false;
                 gridView_CTPX.Columns[3].OptionsColumn.AllowEdit = false; ;
                 gridView_CTPX.OptionsBehavior.Editable = false;
-                Program.frmVT.VatTuTableAdapter.Connection.ConnectionString = Program.connstr;
-                Program.frmVT.VatTuTableAdapter.Fill(Program.frmVT.DS.Vattu);
+            //    Program.frmChinh.ReFresh();
                 MessageBox.Show("Ghi thành công!", "", MessageBoxButtons.OK);
                 panelCtrl_PX.Enabled = false;
                 return 0;
@@ -288,11 +291,12 @@ namespace QLVT
             }
             label_Kho.Text = "Mã kho:";
             gc_PhieuXuat.Enabled = true;
+            gc_PhieuXuat.Focus();
             cmb_MaKho.Enabled = txt_MaNV.Enabled = txt_MAPX.Enabled = dateEdit_NgayLap.Enabled = false;
             btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
             btn_ThemCTPX.Enabled = btn_XoaCTPX.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = false;
-            groupBox_CTPX.Enabled = true;
+         
         }
 
         private void btn_ThemCTPX_Click(object sender, EventArgs e)
@@ -431,7 +435,7 @@ namespace QLVT
       
             
             maPX = txt_MAPX.Text;
-            if(btnThem.Enabled==true)
+            if(btnThem.Enabled==true|| Program.mGroup.Equals("CONGTY"))
             {
                 this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu, maPX, "x");
@@ -441,9 +445,14 @@ namespace QLVT
                     dtVTDaCo.Rows.Add(((DataRowView)bds_sp_getCTPhieu[i])["MAVT"]);
                 }
                
-            }    
-           
-          
+            }
+            if (Program.mGroup == "CONGTY")
+            {
+                cmbChiNhanh.Enabled = true;
+                btnThem.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
+            }
+
+
         }
 
         private void txt_MAPX_Validating(object sender, CancelEventArgs e)
@@ -505,7 +514,7 @@ namespace QLVT
         {
             bool bStatus = true;
 
-            if (txt.SelectedText == "")
+            if (txt.Text == "")
             {
                 dxErrorProvider1.SetError(txt, "Vui lòng chọn kho");
                 bStatus = false;
@@ -586,6 +595,27 @@ namespace QLVT
         private void cmb_MaKho_Validating_1(object sender, CancelEventArgs e)
         {
             ValidateCombKho(cmb_MaKho);
+        }
+
+        private void gridView_PX_ColumnFilterChanged(object sender, EventArgs e)
+        {
+            maPX = txt_MAPX.Text;
+            if (btnThem.Enabled == true|| Program.mGroup.Equals("CONGTY"))
+            {
+                this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
+                this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu, maPX, "x");
+                dtVTDaCo.Clear();
+                for (int i = 0; i < bds_sp_getCTPhieu.Count; i++)
+                {
+                    dtVTDaCo.Rows.Add(((DataRowView)bds_sp_getCTPhieu[i])["MAVT"]);
+                }
+
+            }
+            if (Program.mGroup == "CONGTY")
+            {
+                cmbChiNhanh.Enabled = true;
+                btnThem.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
+            }
         }
     }
 }

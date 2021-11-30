@@ -72,8 +72,8 @@ namespace QLVT
             this.txt_MAPX = new DevExpress.XtraEditors.TextEdit();
             this.label_Kho = new System.Windows.Forms.Label();
             this.cmb_MaKho = new DevExpress.XtraEditors.GridLookUpEdit();
-            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bdsKho = new System.Windows.Forms.BindingSource(this.components);
+            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupBox_CTPX = new System.Windows.Forms.GroupBox();
             this.sp_getCTPhieuGridControl = new DevExpress.XtraGrid.GridControl();
             this.bds_sp_getCTPhieu = new System.Windows.Forms.BindingSource(this.components);
@@ -112,8 +112,8 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MAPX.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmb_MaKho.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsKho)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             this.groupBox_CTPX.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sp_getCTPhieuGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getCTPhieu)).BeginInit();
@@ -323,6 +323,7 @@ namespace QLVT
             // 
             // cmbChiNhanh
             // 
+            this.cmbChiNhanh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbChiNhanh.FormattingEnabled = true;
             this.cmbChiNhanh.Location = new System.Drawing.Point(134, 15);
             this.cmbChiNhanh.Name = "cmbChiNhanh";
@@ -396,6 +397,7 @@ namespace QLVT
             this.gridView_PX.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colNGAY, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gridView_PX.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_PX_FocusedRowChanged);
+            this.gridView_PX.ColumnFilterChanged += new System.EventHandler(this.gridView_PX_ColumnFilterChanged);
             // 
             // colMAPX
             // 
@@ -537,17 +539,17 @@ namespace QLVT
             this.cmb_MaKho.TabIndex = 15;
             this.cmb_MaKho.Validating += new System.ComponentModel.CancelEventHandler(this.cmb_MaKho_Validating_1);
             // 
+            // bdsKho
+            // 
+            this.bdsKho.DataMember = "Kho";
+            this.bdsKho.DataSource = this.DS;
+            // 
             // gridLookUpEdit1View
             // 
             this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
             this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // bdsKho
-            // 
-            this.bdsKho.DataMember = "Kho";
-            this.bdsKho.DataSource = this.DS;
             // 
             // groupBox_CTPX
             // 
@@ -726,8 +728,8 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MAPX.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmb_MaKho.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsKho)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             this.groupBox_CTPX.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sp_getCTPhieuGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bds_sp_getCTPhieu)).EndInit();

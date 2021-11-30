@@ -36,11 +36,8 @@ namespace QLVT
             this.tableAdapterManager.UpdateAll(this.DS);
 
         }
-
-        private void frmKho_Load(object sender, EventArgs e)
+        public void load()
         {
-            DS.EnforceConstraints = false;
-            // TODO: This line of code loads data into the 'dS.Kho' table. You can move, or remove it, as needed.
             this.khoTableAdapter.Connection.ConnectionString = Program.connstr;
             this.khoTableAdapter.Fill(this.DS.Kho);
             // TODO: This line of code loads data into the 'DS.DatHang' table. You can move, or remove it, as needed.ư
@@ -52,6 +49,12 @@ namespace QLVT
             // TODO: This line of code loads data into the 'DS.PhieuXuat' table. You can move, or remove it, as needed.
             this.phieuXuatTableAdapter.Connection.ConnectionString = Program.connstr;
             this.phieuXuatTableAdapter.Fill(this.DS.PhieuXuat);
+        }
+        private void frmKho_Load(object sender, EventArgs e)
+        {
+            DS.EnforceConstraints = false;
+            // TODO: This line of code loads data into the 'dS.Kho' table. You can move, or remove it, as needed.
+            load();
 
             macn = ((DataRowView)bdsKho[0])["MACN"].ToString(); // Lúc đúng lúc sai, tìm cách khác.
             cmbChiNhanh.DataSource = Program.bds_dspm;  // sao chép bds_dspm đã load ở form đăng nhập  qua
@@ -118,13 +121,13 @@ namespace QLVT
         {
             vitri = bdsKho.Position;
             txtMaKho.Enabled = true;
-            btnThem.Enabled = false;
-            btnGhi.Enabled = true;
-            btnUndo.Enabled = true;
+          
+            
             panelCtrl_Kho.Enabled = true;
             bdsKho.AddNew();
-        
-          
+
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
+            btnGhi.Enabled = btnUndo.Enabled = true;
             gridView_Kho.Columns[0].OptionsColumn.AllowEdit = true;
       
        //     gridView_Kho.FocusedRowHandle = bdsKho.Position;
@@ -252,6 +255,7 @@ namespace QLVT
                     bdsKho.ResetCurrentItem();
                     this.khoTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.khoTableAdapter.Update(this.DS.Kho);
+              //      Program.frmChinh.ReFresh();
                     MessageBox.Show("Ghi thành công", "", MessageBoxButtons.OK);
                 }
                 catch (Exception ex)

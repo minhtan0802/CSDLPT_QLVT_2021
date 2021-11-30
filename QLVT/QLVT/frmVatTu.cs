@@ -32,18 +32,12 @@ namespace QLVT
             this.tableAdapterManager.UpdateAll(this.DS);
 
         }
-
-        private void frmVatTu_Load(object sender, EventArgs e)
+        public void load()
         {
-            foreach (DataRow row in this.DS.Vattu)
-            {
-                Program.soLuongVatTu++;
-            }
-            DS.EnforceConstraints = false;
             // TODO: This line of code loads data into the 'DS.VatTu' table. You can move, or remove it, as needed.
             this.VatTuTableAdapter.Connection.ConnectionString = Program.connstr;
             this.VatTuTableAdapter.Fill(this.DS.Vattu);
-         
+
             // TODO: This line of code loads data into the 'DS.CTDDH' table. You can move, or remove it, as needed.
             this.CTDDHTableAdapter.Connection.ConnectionString = Program.connstr;
             this.CTDDHTableAdapter.Fill(this.DS.CTDDH);
@@ -53,6 +47,12 @@ namespace QLVT
             // TODO: This line of code loads data into the 'DS.CTPX' table. You can move, or remove it, as needed.
             this.CTPXTableAdapter.Connection.ConnectionString = Program.connstr;
             this.CTPXTableAdapter.Fill(this.DS.CTPX);
+        }
+        private void frmVatTu_Load(object sender, EventArgs e)
+        {
+           
+            DS.EnforceConstraints = false;
+            load();
             panelCtrl_VatTu.Enabled = false;
             if (Program.mGroup == "CONGTY")
             {
@@ -265,8 +265,8 @@ namespace QLVT
                     bdsVatTu.ResetCurrentItem();
                     this.VatTuTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.VatTuTableAdapter.Update(this.DS.Vattu);
-                   
-                }
+             //   Program.frmChinh.ReFresh();
+            }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Lỗi ghi vật tư.\n" + ex.Message, "", MessageBoxButtons.OK);

@@ -65,11 +65,11 @@ namespace QLVT
             this.panelCtrl_DatHang = new DevExpress.XtraEditors.PanelControl();
             this.txt_MaNV = new DevExpress.XtraEditors.TextEdit();
             this.label_Kho = new System.Windows.Forms.Label();
-            this.khoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txt_NCC = new DevExpress.XtraEditors.TextEdit();
             this.dateEdit_NgayLap = new DevExpress.XtraEditors.DateEdit();
             this.txt_MDDH = new DevExpress.XtraEditors.TextEdit();
             this.cmb_MaKho2 = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.khoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colMAKHO1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTENKHO = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -115,12 +115,12 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.panelCtrl_DatHang)).BeginInit();
             this.panelCtrl_DatHang.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaNV.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.khoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_NCC.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MDDH.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmb_MaKho2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.khoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsVatTu)).BeginInit();
             this.groupBox_CTDDH.SuspendLayout();
@@ -483,11 +483,6 @@ namespace QLVT
             this.label_Kho.TabIndex = 10;
             this.label_Kho.Text = "Mã kho:";
             // 
-            // khoBindingSource
-            // 
-            this.khoBindingSource.DataMember = "Kho";
-            this.khoBindingSource.DataSource = this.DS;
-            // 
             // txt_NCC
             // 
             this.txt_NCC.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsDatHang, "NhaCC", true));
@@ -545,6 +540,11 @@ namespace QLVT
             this.cmb_MaKho2.TabIndex = 12;
             this.cmb_MaKho2.EditValueChanged += new System.EventHandler(this.cmb_MaKho2_EditValueChanged);
             this.cmb_MaKho2.Validating += new System.ComponentModel.CancelEventHandler(this.cmb_MaKho2_Validating);
+            // 
+            // khoBindingSource
+            // 
+            this.khoBindingSource.DataMember = "Kho";
+            this.khoBindingSource.DataSource = this.DS;
             // 
             // gridLookUpEdit1View
             // 
@@ -764,6 +764,7 @@ namespace QLVT
             // 
             // cmbChiNhanh
             // 
+            this.cmbChiNhanh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbChiNhanh.FormattingEnabled = true;
             this.cmbChiNhanh.Location = new System.Drawing.Point(134, 15);
             this.cmbChiNhanh.Name = "cmbChiNhanh";
@@ -810,12 +811,12 @@ namespace QLVT
             this.panelCtrl_DatHang.ResumeLayout(false);
             this.panelCtrl_DatHang.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaNV.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.khoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_NCC.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_NgayLap.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_MDDH.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmb_MaKho2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.khoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsVatTu)).EndInit();
             this.groupBox_CTDDH.ResumeLayout(false);
@@ -847,7 +848,6 @@ namespace QLVT
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraBars.BarListItem barListItem1;
-        private DSTableAdapters.DatHangTableAdapter datHangTableAdapter;
         private DSTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.BindingSource bdsDatHang;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView_DatHang;
@@ -903,6 +903,7 @@ namespace QLVT
         private DevExpress.XtraGrid.Columns.GridColumn colDIACHI;
         private DevExpress.XtraGrid.Columns.GridColumn colMACN;
         private DevExpress.XtraEditors.TextEdit txt_MaNV;
+        public DSTableAdapters.DatHangTableAdapter datHangTableAdapter;
 
         public DSTableAdapters.sp_getCTDDHTableAdapter Sp_getCTDDHTableAdapter { get => sp_getCTDDHTableAdapter; set => sp_getCTDDHTableAdapter = value; }
     }

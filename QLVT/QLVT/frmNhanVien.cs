@@ -27,10 +27,8 @@ namespace QLVT
         {
             InitializeComponent();
         }
-
-        private void frmNhanVien_Load(object sender, EventArgs e)
+        public void load()
         {
-            DS.EnforceConstraints = false;
             this.NHANVIENTableAdapter.Connection.ConnectionString = Program.connstr;
             this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
 
@@ -42,7 +40,12 @@ namespace QLVT
 
             this.phieuNhapTableAdapter.Connection.ConnectionString = Program.connstr;
             this.phieuNhapTableAdapter.Fill(this.DS.PhieuNhap);
+        }
+        private void frmNhanVien_Load(object sender, EventArgs e)
+        {
+            DS.EnforceConstraints = false;
 
+            load();
             macn = ((DataRowView)bdsNV[0])["MACN"].ToString(); // Lúc đúng lúc sai, tìm cách khác.
             cmbChiNhanh.DataSource = Program.bds_dspm;  // sao chép bds_dspm đã load ở form đăng nhập  qua
             cmbChiNhanh.DisplayMember = "TENCN";
@@ -343,6 +346,7 @@ namespace QLVT
                     bdsNV.ResetCurrentItem();
                     this.NHANVIENTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.NHANVIENTableAdapter.Update(this.DS.NhanVien);
+                
                 }
                 catch (Exception ex)
                 {
@@ -440,14 +444,21 @@ namespace QLVT
         String CNchuyen;
         public void chuyenChiNhanh(String index)
         {
-                CNchuyen = index;
-                String maCN = "";
-                if (CNchuyen.Contains("2")) maCN = "CN2";
-                else if (CNchuyen.Contains("1")) maCN = "CN1";
+            int pos = bdsNV.Position;
+            string ho = ((DataRowView)bdsNV[pos])["HO"].ToString();
+            string ten = ((DataRowView)bdsNV[pos])["TEN"].ToString();
+            string diachi = ((DataRowView)bdsNV[pos])["DIACHI"].ToString();
+            string ngsinh = ((DataRowView)bdsNV[pos])["NGAYSINH"].ToString();
+            string luong = ((DataRowView)bdsNV[pos])["LUONG"].ToString();
+            CNchuyen = index;
+            String maCN = "";
+            if (CNchuyen.Contains("2")) maCN = "CN2";
+            else if (CNchuyen.Contains("1")) maCN = "CN1";
 
                 String maNV = ((DataRowView)bdsNV[bdsNV.Position])["MANV"].ToString();
-                string strLenh = "EXEC sp_ChuyenChiNhanhNV @MANV='" + maNV + "'" + ", @MACN='" + maCN + "'";
-                try
+            string strLenh = "EXEC sp_ChuyenChiNhanhNV @MANV='" + maNV + "'" + ", @HO='" + ho + "'" + ", @TEN='" + ten + "'" +
+                            ", @DIACHI='" + diachi + "'" + ", @NGAYSINH='" + ngsinh + "'" + ", @LUONG='" + luong + "'" + ", @MACN='" + maCN + "'";
+            try
                 {
                     Program.ExecSqlNonQuery(strLenh);
                     MessageBox.Show("Chuyển nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -466,11 +477,15 @@ namespace QLVT
      
         private void btnChuyenCN_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            
-                frmChuyenCN pickCN = new frmChuyenCN();
-                pickCN.getCN = new frmChuyenCN.getChiNhanh(chuyenChiNhanh);
-                pickCN.ShowDialog();
-         
+
+            if (!Program.CheckOpened("frmChuyenCN"))
+            {
+                frmChuyenCN f = new frmChuyenCN();
+                f.Show();
+            }
+            else return;
+
+
         }
 
   
@@ -699,6 +714,50 @@ namespace QLVT
 
                 }
             }
+        }
+
+        private void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            string manv = ((DataRowView)bdsNV[bdsNV.Position])["MANV"].ToString();
+            if(manv.Equals(Program.username)&& !Program.mGroup.Equals("CONGTY"))
+            {
+                btnXoa.Enabled = false;
+                btnChuyenCN.Enabled = false;
+ 
+            }
+            else if (Program.mGroup.Equals("CONGTY"))
+            {
+                btnXoa.Enabled = false;
+                btnChuyenCN.Enabled = false;
+            }
+            else
+            {
+                btnXoa.Enabled = true;
+                btnChuyenCN.Enabled = true;
+            }    
+
+        }
+
+        private void gridView1_ColumnFilterChanged(object sender, EventArgs e)
+        {
+
+            string manv = ((DataRowView)bdsNV[bdsNV.Position])["MANV"].ToString();
+            if (manv.Equals(Program.username) && !Program.mGroup.Equals("CONGTY"))
+            {
+                btnXoa.Enabled = false;
+                btnChuyenCN.Enabled = false;
+            }
+            else if(Program.mGroup.Equals("CONGTY"))
+            {
+                btnXoa.Enabled = false;
+                btnChuyenCN.Enabled = false;
+            } 
+            else
+            {
+                btnXoa.Enabled =true;
+                btnChuyenCN.Enabled = true;
+            }    
+           
         }
     }
  }

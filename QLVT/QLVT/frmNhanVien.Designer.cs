@@ -440,6 +440,8 @@ namespace QLVT
             this.gridView1.GridControl = this.gcNhanVien;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView1_FocusedRowChanged);
+            this.gridView1.ColumnFilterChanged += new System.EventHandler(this.gridView1_ColumnFilterChanged);
             // 
             // colMANV
             // 
@@ -682,10 +684,8 @@ namespace QLVT
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
-        private System.Windows.Forms.BindingSource bdsNV;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private System.Windows.Forms.ComboBox cmbChiNhanh;
-        private DSTableAdapters.NhanVienTableAdapter NHANVIENTableAdapter;
         private DSTableAdapters.TableAdapterManager tableAdapterManager;
         private DevExpress.XtraGrid.GridControl gcNhanVien;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
@@ -699,7 +699,6 @@ namespace QLVT
         private DevExpress.XtraGrid.Columns.GridColumn colMACN;
         private DevExpress.XtraEditors.TextEdit txtLuong;
         private System.Windows.Forms.TextBox txtMACN;
-        private DevExpress.XtraEditors.DateEdit dtpNgaySinh;
         private DevExpress.XtraBars.BarButtonItem btnSua;
         private DevExpress.XtraBars.BarButtonItem btnGhi;
         private DevExpress.XtraBars.BarButtonItem btnXoa;
@@ -722,5 +721,8 @@ namespace QLVT
         private DevExpress.XtraEditors.TextEdit txtDiaChi;
         private DevExpress.XtraEditors.TextEdit txtTen;
         private DevExpress.XtraEditors.TextEdit txtHo;
+        public DSTableAdapters.NhanVienTableAdapter NHANVIENTableAdapter;
+        public System.Windows.Forms.BindingSource bdsNV;
+        public DevExpress.XtraEditors.DateEdit dtpNgaySinh;
     }
 }

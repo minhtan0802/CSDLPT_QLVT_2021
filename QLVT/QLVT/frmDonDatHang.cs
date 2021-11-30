@@ -40,7 +40,7 @@ namespace QLVT
 
         }
 
-        private void load()
+        public void load()
         { // TODO: This line of code loads data into the 'dS.DatHang' table. You can move, or remove it, as needed.
             this.datHangTableAdapter.Connection.ConnectionString = Program.connstr;
             this.datHangTableAdapter.Fill(this.DS.DatHang);
@@ -276,7 +276,7 @@ namespace QLVT
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsDatHang.Position;
-            MessageBox.Show("Vi trí: " + vitri);
+       
             bdsDatHang.AddNew();
             gc_DatHang.Enabled = false;
             label_Kho.Text = "Kho:";
@@ -325,11 +325,12 @@ namespace QLVT
         {
             try
             {
-             
+                MessageBox.Show("bdsCTPhieu: " + bds_sp_getCTPhieu.Count);
                 Program.savePhieu("dh", mddh, bds_sp_getCTPhieu, gridView_getCTDDH); ;
                 this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu, mddh,"dh");
                 MessageBox.Show("Ghi thành công!", "", MessageBoxButtons.OK);
+             //   Program.frmChinh.ReFresh();
                 panelCtrl_DatHang.Enabled = true;
                 return 0;
             }
@@ -951,7 +952,10 @@ namespace QLVT
                 mddh = txt_MDDH.Text;
                 focusRowHandleTruoc = bdsDatHang.Position;
             //    vitri = bdsDatHang.Position;
-             
+            if (btnThem.Enabled== true|| Program.mGroup.Equals("CONGTY"))
+            {
+
+
                 this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu, mddh, "dh");
                 dtVTDaCo.Clear();
@@ -991,11 +995,11 @@ namespace QLVT
                         btn_ThemCTDDH.Enabled = true;
                     }
 
-                   
+
                 }
 
-               
-               
+
+            } 
              
             
         }
@@ -1173,7 +1177,7 @@ namespace QLVT
             mddh = txt_MDDH.Text;
             focusRowHandleTruoc = bdsDatHang.Position;
          //   vitri = bdsDatHang.Position;
-            if (btnThem.Enabled == true)
+            if (btnThem.Enabled == true|| Program.mGroup.Equals("CONGTY"))
             {
                 this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu, mddh, "dh");

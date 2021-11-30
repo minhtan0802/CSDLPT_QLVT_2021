@@ -129,6 +129,7 @@ namespace QLVT
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.button1);
             this.Name = "frmChuyenCN";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmChuyenCN";
             this.Load += new System.EventHandler(this.frmChuyenCN_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dS)).EndInit();

@@ -33,6 +33,43 @@ namespace QLVT
                     return f;
             return null;
         }
+        public void ReFresh()
+        {
+            Form frm;
+            frm = this.CheckExist(typeof(frmNhanVien));
+            if (frm != null)
+            {
+                Program.frmNV.load();
+            }
+            frm = this.CheckExist(typeof(frmVatTu));
+            if(frm!=null)
+            {
+                Program.frmVT.load();
+            }
+
+            frm = this.CheckExist(typeof(frmKho));
+            if (frm != null)
+            {
+            
+                Program.frmKHO.load();
+            }
+
+            frm = this.CheckExist(typeof(frmDonDatHang));
+            if (frm != null)
+            {
+                Program.frmDDH.load();
+            }
+            frm = this.CheckExist(typeof(frmPhieuNhap));
+            if (frm != null)
+            {
+                Program.frmPN.load();
+            }
+            frm = this.CheckExist(typeof(frmPhieuXuat));
+            if (frm != null)
+            {
+                Program.frmPX.load();
+            }
+        }
         private void btn_DangNhap_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Form frm = this.CheckExist(typeof(frmDangNhap));
@@ -67,9 +104,9 @@ namespace QLVT
             if (frm != null) frm.Activate();
             else
             {
-                frmNhanVien f = new frmNhanVien();
-                f.MdiParent = this;
-                f.Show();
+                Program.frmNV = new frmNhanVien();
+                Program.frmNV.MdiParent = this;
+                Program.frmNV.Show();
             }
         }
 
@@ -142,9 +179,9 @@ namespace QLVT
             if (frm != null) frm.Activate();
             else
             {
-                frmKho f = new frmKho();
-                f.MdiParent = this;
-                f.Show();
+                Program.frmKHO = new frmKho();
+                Program.frmKHO.MdiParent = this;
+                Program.frmKHO.Show();
             }
         }
 

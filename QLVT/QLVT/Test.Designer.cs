@@ -90,27 +90,27 @@ namespace QLVT
             this.fillToolStripButton});
             this.fillToolStrip.Location = new System.Drawing.Point(0, 0);
             this.fillToolStrip.Name = "fillToolStrip";
-            this.fillToolStrip.Size = new System.Drawing.Size(795, 27);
+            this.fillToolStrip.Size = new System.Drawing.Size(795, 31);
             this.fillToolStrip.TabIndex = 1;
             this.fillToolStrip.Text = "fillToolStrip";
             // 
             // mDDHToolStripLabel
             // 
             this.mDDHToolStripLabel.Name = "mDDHToolStripLabel";
-            this.mDDHToolStripLabel.Size = new System.Drawing.Size(58, 24);
+            this.mDDHToolStripLabel.Size = new System.Drawing.Size(58, 28);
             this.mDDHToolStripLabel.Text = "MDDH:";
             // 
             // mDDHToolStripTextBox
             // 
             this.mDDHToolStripTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mDDHToolStripTextBox.Name = "mDDHToolStripTextBox";
-            this.mDDHToolStripTextBox.Size = new System.Drawing.Size(100, 27);
+            this.mDDHToolStripTextBox.Size = new System.Drawing.Size(100, 31);
             // 
             // fillToolStripButton
             // 
             this.fillToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.fillToolStripButton.Name = "fillToolStripButton";
-            this.fillToolStripButton.Size = new System.Drawing.Size(32, 24);
+            this.fillToolStripButton.Size = new System.Drawing.Size(32, 28);
             this.fillToolStripButton.Text = "Fill";
             this.fillToolStripButton.Click += new System.EventHandler(this.fillToolStripButton_Click);
             // 

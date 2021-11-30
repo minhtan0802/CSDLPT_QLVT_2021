@@ -53,7 +53,7 @@ namespace QLVT
             this.tableAdapterManager.UpdateAll(this.DS);
 
         }
-        private void load()
+        public void load()
         {
 
             // TODO: This line of code loads data into the 'dS.DatHang' table. You can move, or remove it, as needed.
@@ -78,7 +78,7 @@ namespace QLVT
             {
                 gc_DDH.Focus();
                 mddh = ((DataRowView)bdsDH[0])["MasoDDH"].ToString();
-                vitri = bdsDH.Position;
+              
             }
             else
             {
@@ -114,7 +114,7 @@ namespace QLVT
                 cmbChiNhanh.Enabled = true;
                 btnThem.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
             }
-
+            btnUndo.Enabled=false;
 
 
         }
@@ -235,7 +235,10 @@ namespace QLVT
                 bdsPN.ResetCurrentItem();
                 this.PhieuNhapTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.PhieuNhapTableAdapter.Update(this.DS.PhieuNhap);
-              
+                this.datHangTableAdapter.Connection.ConnectionString = Program.connstr;
+                this.datHangTableAdapter.Fill(this.DS.DatHang);
+             
+                bdsDH.Position = vitri;
                 return 0;
             }
             catch (Exception ex)
@@ -250,10 +253,9 @@ namespace QLVT
             {
                 Program.savePhieu("n", txt_MaPN.Text, bds_sp_getCTPhieu, gridView_CTPN);
                 MessageBox.Show("Ghi thành công", "", MessageBoxButtons.OK);
-                bdsDH.Position = vitri;
-                this.datHangTableAdapter.Connection.ConnectionString = Program.connstr;
-                this.datHangTableAdapter.Fill(this.DS.DatHang);
-               
+           
+            //    Program.frmChinh.ReFresh();
+
                 return 0;
             }
             catch (Exception ex)
@@ -553,18 +555,19 @@ namespace QLVT
 
         private void gridView_DDH_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            vitri = bdsDH.Position;
+            
             if (bdsDH.Count > 0)
             {
                 gc_DDH.Focus();
                 mddh = ((DataRowView)bdsDH[0])["MasoDDH"].ToString();
-                vitri = bdsDH.Position;
+                
             }
             else
             {
                 mddh = "";
+                
             }
-            if (bdsPN.Count > 0)
+            if (bdsPN.Count > 0 && btnUndo.Enabled==false|| Program.mGroup.Equals("CONGTY")&& bdsPN.Count > 0)
             {
 
                 mapn = ((DataRowView)bdsPN[0])["MAPN"].ToString();
@@ -577,7 +580,7 @@ namespace QLVT
                 gridView_CTPN.OptionsBehavior.Editable = false;
 
             }
-            else
+            else if (btnUndo.Enabled == false)
             {
                 btn_ThemCTPN.Enabled = false;
                 btnThem.Enabled = true;
@@ -588,7 +591,11 @@ namespace QLVT
 
                 gridView_CTPN.OptionsBehavior.Editable = true;
             }
-
+            if (Program.mGroup == "CONGTY")
+            {
+                cmbChiNhanh.Enabled = true;
+                btnThem.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
+            }
 
             mddh = ((DataRowView)bdsDH[bdsDH.Position])["MasoDDH"].ToString();
         }
@@ -739,18 +746,19 @@ namespace QLVT
 
         private void gridView_DDH_ColumnFilterChanged(object sender, EventArgs e)
         {
-            vitri = bdsDH.Position;
+           
+         
             if (bdsDH.Count > 0)
             {
                 gc_DDH.Focus();
                 mddh = ((DataRowView)bdsDH[0])["MasoDDH"].ToString();
-                vitri = bdsDH.Position;
+               
             }
             else
             {
                 mddh = "";
             }
-            if (bdsPN.Count > 0)
+            if (bdsPN.Count > 0 && btnThem.Enabled==false || Program.mGroup.Equals("CONGTY")&& bdsPN.Count > 0)
             {
 
                 mapn = ((DataRowView)bdsPN[0])["MAPN"].ToString();
@@ -774,7 +782,11 @@ namespace QLVT
 
                 gridView_CTPN.OptionsBehavior.Editable = true;
             }
-
+            if (Program.mGroup == "CONGTY")
+            {
+                cmbChiNhanh.Enabled = true;
+                btnThem.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
+            }
 
             mddh = ((DataRowView)bdsDH[bdsDH.Position])["MasoDDH"].ToString();
         }

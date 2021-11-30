@@ -70,26 +70,48 @@ namespace QLVT
             cmb_ChiNhanh.DropDownStyle = ComboBoxStyle.DropDownList;
             cmb_ChiNhanh.SelectedIndex = 0;
         }
-
-        public delegate void getChiNhanh(String index);
-        public getChiNhanh getCN;
         private void btnConfirm_Click(object sender, EventArgs e)
         {
            
-           
+            BindingSource bdsNV = Program.frmNV.bdsNV;
+            string CNchuyen = "";
             if (cmb_ChiNhanh.Text.Trim().Equals(""))
             {
                 MessageBox.Show("Vui lòng chọn chi nhánh cần chuyển", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cmb_ChiNhanh.Focus();
                 return;
             }
-            else
+            if (MessageBox.Show("Bạn có thật sự muốn chuyển nhân viên này sang "+cmb_ChiNhanh.Text, "Xác nhận",
+               MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                cmb_ChiNhanh.DropDownStyle = ComboBoxStyle.DropDown;
-                getCN(cmb_ChiNhanh.SelectedValue.ToString());
-                this.Close();
-           
+
+                CNchuyen = cmb_ChiNhanh.Text;
+                MessageBox.Show("cnchuyen: " + CNchuyen);
+                int pos = bdsNV.Position;
+                string maCN = "";
+                if (CNchuyen.Contains("2")) maCN = "CN2";
+                if (CNchuyen.Contains("1")) maCN = "CN1";
+
+                string maNV = ((DataRowView)bdsNV[bdsNV.Position])["MANV"].ToString();
+                string strLenh = "EXEC sp_ChuyenChiNhanhNV @MANV='" + maNV + "'" + ", @MACN='" + maCN + "'";
+                try
+                {
+                    Program.ExecSqlNonQuery(strLenh);
+                    
+                    Program.frmNV.NHANVIENTableAdapter.Connection.ConnectionString = Program.connstr;
+                    Program.frmNV.NHANVIENTableAdapter.Fill(Program.frmNV.DS.NhanVien);
+                    MessageBox.Show("Chuyển nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                    //btnUndo.Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
             }
+
+            
         }
 
         private void chiNhanhBindingNavigatorSaveItem_Click(object sender, EventArgs e)
