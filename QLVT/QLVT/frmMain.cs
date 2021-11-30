@@ -228,5 +228,21 @@ namespace QLVT
         {
 
         }
+
+        private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExist(typeof(Frpt_HoatDongCuaNhanVienTheoThang));
+            if(frm != null)
+            {
+                frm.Activate();
+            }
+            else
+            {
+                Frpt_HoatDongCuaNhanVienTheoThang f = new Frpt_HoatDongCuaNhanVienTheoThang();
+                f.MdiParent = this;
+                f.Show();
+            } 
+                
+        }
     }
 }

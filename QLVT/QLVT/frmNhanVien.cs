@@ -402,11 +402,19 @@ namespace QLVT
                 else if (CNchuyen.Contains("1")) maCN = "CN1";
 
                 String maNV = ((DataRowView)bdsNV[bdsNV.Position])["MANV"].ToString();
-                string strLenh = "EXEC sp_ChuyenChiNhanhNV @MANV='" + maNV + "'" + ", @MACN='" + maCN + "'";
+                String ho = ((DataRowView)bdsNV[bdsNV.Position])["HO"].ToString();
+                String ten = ((DataRowView)bdsNV[bdsNV.Position])["TEN"].ToString();
+                String diachi = ((DataRowView)bdsNV[bdsNV.Position])["DIACHI"].ToString();
+                String ngsinh = ((DataRowView)bdsNV[bdsNV.Position])["NGAYSINH"].ToString();
+                String luong = ((DataRowView)bdsNV[bdsNV.Position])["LUONG"].ToString();
+ 
+                string strLenh = "EXEC sp_ChuyenChiNhanhNV @MANV='" + maNV + "'" + ", @HO='" + ho + "'" + ", @TEN='" + ten + "'" +
+                                ", @DIACHI='" + diachi + "'" + ", @NGAYSINH='" + ngsinh + "'" + ", @LUONG='" + luong + "'" + ", @MACN='" + maCN + "'";
                 try
                 {
                     Program.ExecSqlNonQuery(strLenh);
                     MessageBox.Show("Chuyển nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.NHANVIENTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
                     btnUndo.Enabled = true;
                 }
