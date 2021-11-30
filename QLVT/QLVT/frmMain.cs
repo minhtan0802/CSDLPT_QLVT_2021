@@ -33,6 +33,43 @@ namespace QLVT
                     return f;
             return null;
         }
+        public void ReFresh()
+        {
+            Form frm;
+            frm = this.CheckExist(typeof(frmNhanVien));
+            if (frm != null)
+            {
+                Program.frmNV.load();
+            }
+            frm = this.CheckExist(typeof(frmVatTu));
+            if(frm!=null)
+            {
+                Program.frmVT.load();
+            }
+
+            frm = this.CheckExist(typeof(frmKho));
+            if (frm != null)
+            {
+            
+                Program.frmKHO.load();
+            }
+
+            frm = this.CheckExist(typeof(frmDonDatHang));
+            if (frm != null)
+            {
+                Program.frmDDH.load();
+            }
+            frm = this.CheckExist(typeof(frmPhieuNhap));
+            if (frm != null)
+            {
+                Program.frmPN.load();
+            }
+            frm = this.CheckExist(typeof(frmPhieuXuat));
+            if (frm != null)
+            {
+                Program.frmPX.load();
+            }
+        }
         private void btn_DangNhap_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Form frm = this.CheckExist(typeof(frmDangNhap));
@@ -67,16 +104,20 @@ namespace QLVT
             if (frm != null) frm.Activate();
             else
             {
-                frmNhanVien f = new frmNhanVien();
-                f.MdiParent = this;
-                f.Show();
+                Program.frmNV = new frmNhanVien();
+                Program.frmNV.MdiParent = this;
+                Program.frmNV.Show();
             }
         }
 
      
 
     
-
+        private void closeForm(Type ftype)
+        {
+            Form frm = this.CheckExist(ftype);
+            if (frm != null) frm.Close();
+        }
         private void btn_DangXuat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 
@@ -88,16 +129,21 @@ namespace QLVT
             }
             else
             {
-                Form frm = this.CheckExist(typeof(frmKho));
-                if (frm != null) frm.Close();
-                frm = this.CheckExist(typeof(frmNhanVien));
-                if (frm != null) frm.Close();
-                frm = this.CheckExist(typeof(frmVatTu));
-                if (frm != null) frm.Close();
-                frm = this.CheckExist(typeof(frmTaoTaiKhoan));
-                if (frm != null) frm.Close();
-                frm = this.CheckExist(typeof(frmDonDatHang));
-                if (frm != null) frm.Close();
+                for(int i = 0; i < Application.OpenForms.Count; i++)
+                    {
+                       if(Application.OpenForms[i].Name.Equals("frmThemCTDDH")
+                        || Application.OpenForms[i].Name.Equals("frmThemCTPX")|| Application.OpenForms[i].Name.Equals("frmThemCTPN"))
+                       {
+                            Application.OpenForms[i].Close();
+                        }
+
+                    }
+                if (Program.CheckOpened("frmTaoTaiKhoan"))
+                {
+                    Program.frmTaoAcc.Close();
+                }
+               
+            }
                 btn_DangXuat.Enabled = btn_TaoTaiKhoan.Enabled = rib_DanhMuc.Visible = rib_BaoCao.Visible = rib_NghiepVu.Visible = false;
                 MANV.Text = "MANV";
                 HOTEN.Text = "HOTEN";
@@ -109,7 +155,7 @@ namespace QLVT
                 Program.frmChinh.Hide();
                 Program.frmDN.Show();
 
-            }
+         
 
 
 
@@ -121,9 +167,9 @@ namespace QLVT
             if (frm != null) frm.Activate();
             else
             {
-                frmVatTu f = new frmVatTu();
-                f.MdiParent = this;
-                f.Show();
+                Program.frmVT = new frmVatTu();
+                Program.frmVT.MdiParent = this;
+                Program.frmVT.Show();
             }
         }
 
@@ -133,9 +179,9 @@ namespace QLVT
             if (frm != null) frm.Activate();
             else
             {
-                frmKho f = new frmKho();
-                f.MdiParent = this;
-                f.Show();
+                Program.frmKHO = new frmKho();
+                Program.frmKHO.MdiParent = this;
+                Program.frmKHO.Show();
             }
         }
 
@@ -162,7 +208,7 @@ namespace QLVT
                       MessageBox.Show("Tất cả nhân viên ở chi nhánh này đã có tài khoản", "", MessageBoxButtons.OK);
                   }
               }*/
-            if (!Program.CheckOpened("Tạo tài khoản"))
+            if (!Program.CheckOpened("frmTaoTaiKhoan"))
             {
                 Program.frmTaoAcc = new frmTaoTaiKhoan();
                 Program.frmTaoAcc.Show();
@@ -229,6 +275,18 @@ namespace QLVT
 
         }
 
+        private void barButtonItem7_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExist(typeof(frmPhieuXuat));
+            if (frm != null) frm.Activate();
+            else
+            {
+                Program.frmPX = new frmPhieuXuat();
+                Program.frmPX.MdiParent = this;
+                Program.frmPX.Show();
+            }
+        }
+
         private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Form frm = this.CheckExist(typeof(Frpt_HoatDongCuaNhanVienTheoThang));
@@ -245,4 +303,5 @@ namespace QLVT
                 
         }
     }
+
 }

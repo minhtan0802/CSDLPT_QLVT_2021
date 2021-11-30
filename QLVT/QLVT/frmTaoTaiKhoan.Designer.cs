@@ -37,7 +37,6 @@ namespace QLVT
             this.rdbtn_CongTy = new System.Windows.Forms.RadioButton();
             this.rdbtn_User = new System.Windows.Forms.RadioButton();
             this.rdbtn_ChiNhanh = new System.Windows.Forms.RadioButton();
-            this.radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
             this.txt_MatKhau = new System.Windows.Forms.TextBox();
             this.txt_TaiKhoan = new System.Windows.Forms.TextBox();
             this.cmb_ChiNhanhTTK = new System.Windows.Forms.ComboBox();
@@ -46,7 +45,6 @@ namespace QLVT
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // cmb_NhanVien
@@ -105,7 +103,7 @@ namespace QLVT
             // 
             this.rdbtn_CongTy.AutoSize = true;
             this.rdbtn_CongTy.BackColor = System.Drawing.Color.Transparent;
-            this.rdbtn_CongTy.Location = new System.Drawing.Point(592, 344);
+            this.rdbtn_CongTy.Location = new System.Drawing.Point(559, 352);
             this.rdbtn_CongTy.Name = "rdbtn_CongTy";
             this.rdbtn_CongTy.Size = new System.Drawing.Size(77, 21);
             this.rdbtn_CongTy.TabIndex = 14;
@@ -117,7 +115,7 @@ namespace QLVT
             // 
             this.rdbtn_User.AutoSize = true;
             this.rdbtn_User.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.rdbtn_User.Location = new System.Drawing.Point(592, 371);
+            this.rdbtn_User.Location = new System.Drawing.Point(709, 352);
             this.rdbtn_User.Name = "rdbtn_User";
             this.rdbtn_User.Size = new System.Drawing.Size(59, 21);
             this.rdbtn_User.TabIndex = 9;
@@ -129,23 +127,13 @@ namespace QLVT
             // 
             this.rdbtn_ChiNhanh.AutoSize = true;
             this.rdbtn_ChiNhanh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.rdbtn_ChiNhanh.Location = new System.Drawing.Point(592, 344);
+            this.rdbtn_ChiNhanh.Location = new System.Drawing.Point(559, 352);
             this.rdbtn_ChiNhanh.Name = "rdbtn_ChiNhanh";
             this.rdbtn_ChiNhanh.Size = new System.Drawing.Size(93, 21);
             this.rdbtn_ChiNhanh.TabIndex = 8;
             this.rdbtn_ChiNhanh.TabStop = true;
             this.rdbtn_ChiNhanh.Text = "Chi nhánh";
             this.rdbtn_ChiNhanh.UseVisualStyleBackColor = false;
-            // 
-            // radioGroup1
-            // 
-            this.radioGroup1.Location = new System.Drawing.Point(570, 337);
-            this.radioGroup1.Name = "radioGroup1";
-            this.radioGroup1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.radioGroup1.Properties.Appearance.Options.UseBackColor = true;
-            this.radioGroup1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.radioGroup1.Size = new System.Drawing.Size(206, 65);
-            this.radioGroup1.TabIndex = 7;
             // 
             // txt_MatKhau
             // 
@@ -241,6 +229,7 @@ namespace QLVT
             this.BackgroundImageLayoutStore = System.Windows.Forms.ImageLayout.Tile;
             this.BackgroundImageStore = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImageStore")));
             this.ClientSize = new System.Drawing.Size(874, 451);
+            this.Controls.Add(this.rdbtn_CongTy);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -251,17 +240,14 @@ namespace QLVT
             this.Controls.Add(this.btn_Thoat);
             this.Controls.Add(this.btn_TaoTaiKhoan);
             this.Controls.Add(this.cmb_ChiNhanhTTK);
-            this.Controls.Add(this.rdbtn_CongTy);
             this.Controls.Add(this.txt_TaiKhoan);
             this.Controls.Add(this.txt_MatKhau);
-            this.Controls.Add(this.radioGroup1);
             this.Controls.Add(this.rdbtn_ChiNhanh);
             this.Controls.Add(this.rdbtn_User);
             this.Name = "frmTaoTaiKhoan";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tạo tài khoản";
             this.Load += new System.EventHandler(this.frmTaoTaiKhoan_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -271,7 +257,6 @@ namespace QLVT
         private System.Windows.Forms.ComboBox cmb_ChiNhanhTTK;
         private System.Windows.Forms.RadioButton rdbtn_User;
         private System.Windows.Forms.RadioButton rdbtn_ChiNhanh;
-        private DevExpress.XtraEditors.RadioGroup radioGroup1;
         private System.Windows.Forms.RadioButton rdbtn_CongTy;
         private System.Windows.Forms.Button btn_TaoTaiKhoan;
         private System.Windows.Forms.Button btn_Thoat;

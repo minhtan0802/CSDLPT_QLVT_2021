@@ -27,6 +27,7 @@ namespace QLVT
             }
         }
         DataTable dt = new DataTable();
+        int pos;
         public frmThemCTDDH()
         {
             InitializeComponent();
@@ -46,30 +47,20 @@ namespace QLVT
             /*   this.sp_getVatTuChuaCoTableAdapter.Connection.ConnectionString = Program.connstr;
                dt = Program.ExecSqlDataTable("EXEC sp_getVatTuChuaCo '" + Program.MDDH + "'");
                this.sp_getVatTuChuaCoTableAdapter.Fill(this.DS.sp_getVatTuChuaCo, Program.MDDH);*/
-            this.sp_getVTChuaCoTableAdapter.Connection.ConnectionString = Program.connstr;
-            this.sp_getVTChuaCoTableAdapter.Fill(this.DS.sp_getVTChuaCo,Program.frmDDH.getDTVTDaCo());
-          
-            if(bds_spgetVTChuaCo.Count!=0)
-            {
-                txt_TenVT.Text = (((DataRowView)bds_spgetVTChuaCo[0])["TENVT"].ToString());
-            }
-         
-            /* 
-              int max = Int32.Parse(((DataRowView)bds_sp_getVatTuChuaCo[0])["SOLUONGTON"].ToString());
-              spin_SoLuong.Properties.MaxValue = max;
-              if (max == 0)
-              {
-                  spin_SoLuong.Enabled = false;
-                  spin_DonGia.Enabled = false;
-                  btn_Them.Enabled = false;
+            this.sp_getVatTuConThieuCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
+            this.sp_getVatTuConThieuCTPhieuTableAdapter.Fill(this.DS.sp_getVatTuConThieuCTPhieu,Program.frmDDH.getDTVTDaCo(),"","dh");
 
-              }
-              else
-              {
-                  spin_SoLuong.Enabled = true;
-                  spin_DonGia.Enabled = true;
-                  btn_Them.Enabled = true;
-              }*/
+            if (bds_sp_getVatTuConThieuCTPhieu.Count > 0)
+            {
+                pos = 0;
+         
+            }
+            else
+            {
+                groupBox_InfoVT.Enabled = false;
+                groupBox_VT.Enabled = false;
+            }
+
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -84,41 +75,28 @@ namespace QLVT
 
         private void btn_Them_Click(object sender, EventArgs e)
         {
-            if (spin_SoLuong.Value==0)
-            {
-                MessageBox.Show("Số lượng phải lớn hơn 0", "", MessageBoxButtons.OK);
-                spin_SoLuong.Focus();
-                return;
-            }   
-            if (spin_DonGia.Value==0)
-            {
-                MessageBox.Show("Đơn giá phải lớn hơn 0", "", MessageBoxButtons.OK);
-                spin_DonGia.Focus();
-                return;
-            }
-            if (MessageBox.Show("Bạn có muốn thêm vật tư này vào chi tiết ĐĐH?", "Xác nhận",
-            MessageBoxButtons.OKCancel) == DialogResult.OK)
-            {
+           
+           
                 Program.frmDDH.gc_DatHang.Enabled = false;
                     Program.frmDDH.btnXoa.Enabled = Program.frmDDH.btnThem.Enabled = false;
                     Program.frmDDH.btnGhi.Enabled = true;
-                    MessageBox.Show("Thêm vật tư thành công", "", MessageBoxButtons.OK);
-                    Program.frmDDH.bds_spgetCTDDH.AddNew();
-                    int pos = Program.frmDDH.bds_spgetCTDDH.Position;
-                    ((DataRowView)Program.frmDDH.bds_spgetCTDDH[pos])["MAVT"] = txt_MaVT.Text;
-                    ((DataRowView)Program.frmDDH.bds_spgetCTDDH[pos])["TENVT"] = txt_TenVT.Text;
-                    ((DataRowView)Program.frmDDH.bds_spgetCTDDH[pos])["DONGIA"] = spin_DonGia.Value.ToString();
-                    ((DataRowView)Program.frmDDH.bds_spgetCTDDH[pos])["SOLUONG"] = spin_SoLuong.Value.ToString();
+                    Program.frmDDH.bds_sp_getCTPhieu.AddNew();
+                    int pos = Program.frmDDH.bds_sp_getCTPhieu.Position;
+                    ((DataRowView)Program.frmDDH.bds_sp_getCTPhieu[pos])["MAVT"] = txt_MaVT.Text;
+                    ((DataRowView)Program.frmDDH.bds_sp_getCTPhieu[pos])["TENVT"] = txt_TenVT.Text;
+                    ((DataRowView)Program.frmDDH.bds_sp_getCTPhieu[pos])["DONGIA"] = spin_DonGia.Value.ToString();
+                    ((DataRowView)Program.frmDDH.bds_sp_getCTPhieu[pos])["SOLUONG"] = spin_SoLuong.Value.ToString();
                     
                     
                     Program.frmDDH.getDTVTDaCo().Rows.Add(txt_MaVT.Text);
-                    
-                
 
 
 
 
-                if (Program.frmDDH.bds_spgetCTDDH.Count==Program.soLuongVatTu)
+                this.vattuTableAdapter.Connection.ConnectionString = Program.connstr;
+                this.vattuTableAdapter.Fill(this.DS.Vattu);
+
+                if (Program.frmDDH.bds_sp_getCTPhieu.Count==bdsVatTu.Count)
                     {
                         Program.frmDDH.btn_ThemCTDDH.Enabled = false;
                     }
@@ -126,7 +104,7 @@ namespace QLVT
                     {
                         Program.frmDDH.btn_ThemCTDDH.Enabled = true;
                     }
-                    if (Program.frmDDH.bds_spgetCTDDH.Count == 0)
+                    if (Program.frmDDH.bds_sp_getCTPhieu.Count == 0)
                     {
                         Program.frmDDH.btn_XoaCTDDH.Enabled = false;
                     }
@@ -135,13 +113,13 @@ namespace QLVT
                         Program.frmDDH.btn_XoaCTDDH.Enabled = true;
                     }
                  
-                }
+                
             this.Close();
             }
         
         private void gc_sp_getVatTuChuaCo_MouseCaptureChanged(object sender, EventArgs e)
         {
-            txt_TenVT.Text = (((DataRowView)bds_spgetVTChuaCo[0])["TENVT"].ToString());
+            txt_TenVT.Text = (((DataRowView)bds_sp_getVatTuConThieuCTPhieu[gridView_VatTuChuaCo.FocusedRowHandle])["TENVT"].ToString());
            
             /*  int max = Int32.Parse(gridView_VatTuChuaCo.GetFocusedRowCellValue("SOLUONGTON").ToString());
                spin_SoLuong.Value = 0;
@@ -160,6 +138,49 @@ namespace QLVT
                    spin_DonGia.Enabled = true;
                    btn_Them.Enabled = true;
                }*/
+        }
+
+        private void fillToolStripButton_Click(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void spin_SoLuong_Validating(object sender, CancelEventArgs e)
+        {
+            if ((sender as SpinEdit).Value == 0 && spin_SoLuong.Enabled==true)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Cancel = false;
+            }
+        }
+
+        private void spin_SoLuong_InvalidValue(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
+        {
+            if ((sender as SpinEdit).Value == 0)
+            {
+                e.ErrorText = "Số lượng phải lớn hơn 0";
+            }
+        }
+
+        private void sp_getVatTuConThieuCTPhieuGridControl_MouseCaptureChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void gridView_VatTuChuaCo_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            pos = bds_sp_getVatTuConThieuCTPhieu.Position;
+            spin_SoLuong.Value = 1;
+            spin_DonGia.Value = 1;
+        }
+
+        private void sp_getVatTuConThieuCTPhieuGridControl_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

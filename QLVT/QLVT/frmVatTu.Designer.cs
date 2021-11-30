@@ -33,7 +33,6 @@ namespace QLVT
             System.Windows.Forms.Label mAVTLabel;
             System.Windows.Forms.Label tENVTLabel;
             System.Windows.Forms.Label dVTLabel;
-            System.Windows.Forms.Label sOLUONGTONLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVatTu));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
@@ -56,37 +55,39 @@ namespace QLVT
             this.VatTuTableAdapter = new QLVT.DSTableAdapters.VattuTableAdapter();
             this.tableAdapterManager = new QLVT.DSTableAdapters.TableAdapterManager();
             this.gcVatTu = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView_VatTu = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colMAVT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTENVT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDVT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSOLUONGTON = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.tb_MaVatTu = new System.Windows.Forms.TextBox();
-            this.tb_TenVatTu = new System.Windows.Forms.TextBox();
-            this.tb_DonViTinh = new System.Windows.Forms.TextBox();
-            this.nud_SoLuongTon = new System.Windows.Forms.NumericUpDown();
             this.panelCtrl_VatTu = new DevExpress.XtraEditors.PanelControl();
+            this.txt_TenVatTu = new DevExpress.XtraEditors.TextEdit();
+            this.txt_DonViTinh = new DevExpress.XtraEditors.TextEdit();
+            this.txt_MaVatTu = new DevExpress.XtraEditors.TextEdit();
             this.bdsCTPX = new System.Windows.Forms.BindingSource(this.components);
             this.CTPXTableAdapter = new QLVT.DSTableAdapters.CTPXTableAdapter();
             this.bdsCTPN = new System.Windows.Forms.BindingSource(this.components);
             this.CTPNTableAdapter = new QLVT.DSTableAdapters.CTPNTableAdapter();
             this.bdsCTDDH = new System.Windows.Forms.BindingSource(this.components);
             this.CTDDHTableAdapter = new QLVT.DSTableAdapters.CTDDHTableAdapter();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             mAVTLabel = new System.Windows.Forms.Label();
             tENVTLabel = new System.Windows.Forms.Label();
             dVTLabel = new System.Windows.Forms.Label();
-            sOLUONGTONLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsVatTu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcVatTu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_SoLuongTon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_VatTu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelCtrl_VatTu)).BeginInit();
             this.panelCtrl_VatTu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_TenVatTu.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_DonViTinh.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_MaVatTu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsCTPX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsCTPN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsCTDDH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // mAVTLabel
@@ -115,15 +116,6 @@ namespace QLVT
             dVTLabel.Size = new System.Drawing.Size(79, 17);
             dVTLabel.TabIndex = 4;
             dVTLabel.Text = "Đơn vị tính:";
-            // 
-            // sOLUONGTONLabel
-            // 
-            sOLUONGTONLabel.AutoSize = true;
-            sOLUONGTONLabel.Location = new System.Drawing.Point(445, 100);
-            sOLUONGTONLabel.Name = "sOLUONGTONLabel";
-            sOLUONGTONLabel.Size = new System.Drawing.Size(92, 17);
-            sOLUONGTONLabel.TabIndex = 6;
-            sOLUONGTONLabel.Text = "Số lượng tồn:";
             // 
             // barManager1
             // 
@@ -321,24 +313,28 @@ namespace QLVT
             this.gcVatTu.DataSource = this.bdsVatTu;
             this.gcVatTu.Dock = System.Windows.Forms.DockStyle.Top;
             this.gcVatTu.Location = new System.Drawing.Point(0, 57);
-            this.gcVatTu.MainView = this.gridView1;
+            this.gcVatTu.MainView = this.gridView_VatTu;
             this.gcVatTu.MenuManager = this.barManager1;
             this.gcVatTu.Name = "gcVatTu";
             this.gcVatTu.Size = new System.Drawing.Size(809, 253);
             this.gcVatTu.TabIndex = 5;
             this.gcVatTu.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gridView_VatTu});
+            this.gcVatTu.EditorKeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gcVatTu_EditorKeyPress);
             // 
-            // gridView1
+            // gridView_VatTu
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridView_VatTu.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colMAVT,
             this.colTENVT,
             this.colDVT,
             this.colSOLUONGTON});
-            this.gridView1.GridControl = this.gcVatTu;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView_VatTu.GridControl = this.gcVatTu;
+            this.gridView_VatTu.Name = "gridView_VatTu";
+            this.gridView_VatTu.OptionsBehavior.Editable = false;
+            this.gridView_VatTu.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_VatTu_FocusedRowChanged);
+            this.gridView_VatTu.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView_VatTu_CellValueChanging);
+            this.gridView_VatTu.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView_VatTu_ValidatingEditor);
             // 
             // colMAVT
             // 
@@ -346,6 +342,7 @@ namespace QLVT
             this.colMAVT.FieldName = "MAVT";
             this.colMAVT.MinWidth = 25;
             this.colMAVT.Name = "colMAVT";
+            this.colMAVT.OptionsColumn.AllowEdit = false;
             this.colMAVT.Visible = true;
             this.colMAVT.VisibleIndex = 0;
             this.colMAVT.Width = 127;
@@ -376,63 +373,57 @@ namespace QLVT
             this.colSOLUONGTON.FieldName = "SOLUONGTON";
             this.colSOLUONGTON.MinWidth = 25;
             this.colSOLUONGTON.Name = "colSOLUONGTON";
+            this.colSOLUONGTON.OptionsColumn.AllowEdit = false;
             this.colSOLUONGTON.Visible = true;
             this.colSOLUONGTON.VisibleIndex = 3;
             this.colSOLUONGTON.Width = 94;
             // 
-            // tb_MaVatTu
-            // 
-            this.tb_MaVatTu.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsVatTu, "MAVT", true));
-            this.tb_MaVatTu.Enabled = false;
-            this.tb_MaVatTu.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_MaVatTu.Location = new System.Drawing.Point(223, 38);
-            this.tb_MaVatTu.Name = "tb_MaVatTu";
-            this.tb_MaVatTu.Size = new System.Drawing.Size(174, 22);
-            this.tb_MaVatTu.TabIndex = 1;
-            // 
-            // tb_TenVatTu
-            // 
-            this.tb_TenVatTu.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsVatTu, "TENVT", true));
-            this.tb_TenVatTu.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_TenVatTu.Location = new System.Drawing.Point(223, 97);
-            this.tb_TenVatTu.Name = "tb_TenVatTu";
-            this.tb_TenVatTu.Size = new System.Drawing.Size(174, 22);
-            this.tb_TenVatTu.TabIndex = 3;
-            // 
-            // tb_DonViTinh
-            // 
-            this.tb_DonViTinh.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsVatTu, "DVT", true));
-            this.tb_DonViTinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_DonViTinh.Location = new System.Drawing.Point(563, 38);
-            this.tb_DonViTinh.Name = "tb_DonViTinh";
-            this.tb_DonViTinh.Size = new System.Drawing.Size(174, 22);
-            this.tb_DonViTinh.TabIndex = 5;
-            // 
-            // nud_SoLuongTon
-            // 
-            this.nud_SoLuongTon.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.bdsVatTu, "SOLUONGTON", true));
-            this.nud_SoLuongTon.Enabled = false;
-            this.nud_SoLuongTon.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nud_SoLuongTon.Location = new System.Drawing.Point(563, 97);
-            this.nud_SoLuongTon.Name = "nud_SoLuongTon";
-            this.nud_SoLuongTon.Size = new System.Drawing.Size(80, 22);
-            this.nud_SoLuongTon.TabIndex = 7;
-            // 
             // panelCtrl_VatTu
             // 
-            this.panelCtrl_VatTu.Controls.Add(sOLUONGTONLabel);
-            this.panelCtrl_VatTu.Controls.Add(this.nud_SoLuongTon);
+            this.panelCtrl_VatTu.Controls.Add(this.txt_TenVatTu);
+            this.panelCtrl_VatTu.Controls.Add(this.txt_DonViTinh);
+            this.panelCtrl_VatTu.Controls.Add(this.txt_MaVatTu);
             this.panelCtrl_VatTu.Controls.Add(dVTLabel);
-            this.panelCtrl_VatTu.Controls.Add(this.tb_DonViTinh);
             this.panelCtrl_VatTu.Controls.Add(tENVTLabel);
-            this.panelCtrl_VatTu.Controls.Add(this.tb_TenVatTu);
             this.panelCtrl_VatTu.Controls.Add(mAVTLabel);
-            this.panelCtrl_VatTu.Controls.Add(this.tb_MaVatTu);
             this.panelCtrl_VatTu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCtrl_VatTu.Location = new System.Drawing.Point(0, 310);
             this.panelCtrl_VatTu.Name = "panelCtrl_VatTu";
             this.panelCtrl_VatTu.Size = new System.Drawing.Size(809, 270);
             this.panelCtrl_VatTu.TabIndex = 6;
+            // 
+            // txt_TenVatTu
+            // 
+            this.txt_TenVatTu.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsVatTu, "TENVT", true));
+            this.txt_TenVatTu.Location = new System.Drawing.Point(223, 97);
+            this.txt_TenVatTu.MenuManager = this.barManager1;
+            this.txt_TenVatTu.Name = "txt_TenVatTu";
+            this.txt_TenVatTu.Size = new System.Drawing.Size(174, 26);
+            this.txt_TenVatTu.TabIndex = 9;
+            this.txt_TenVatTu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tENVTTextEdit_KeyPress);
+            this.txt_TenVatTu.Validating += new System.ComponentModel.CancelEventHandler(this.txt_TenVatTu_Validating_1);
+            // 
+            // txt_DonViTinh
+            // 
+            this.txt_DonViTinh.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsVatTu, "DVT", true));
+            this.txt_DonViTinh.Location = new System.Drawing.Point(539, 36);
+            this.txt_DonViTinh.MenuManager = this.barManager1;
+            this.txt_DonViTinh.Name = "txt_DonViTinh";
+            this.txt_DonViTinh.Size = new System.Drawing.Size(162, 26);
+            this.txt_DonViTinh.TabIndex = 8;
+            this.txt_DonViTinh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_DonViTinh_KeyPress);
+            this.txt_DonViTinh.Validating += new System.ComponentModel.CancelEventHandler(this.txt_DonViTinh_Validating_1);
+            // 
+            // txt_MaVatTu
+            // 
+            this.txt_MaVatTu.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsVatTu, "MAVT", true));
+            this.txt_MaVatTu.Location = new System.Drawing.Point(223, 36);
+            this.txt_MaVatTu.MenuManager = this.barManager1;
+            this.txt_MaVatTu.Name = "txt_MaVatTu";
+            this.txt_MaVatTu.Size = new System.Drawing.Size(174, 26);
+            this.txt_MaVatTu.TabIndex = 7;
+            this.txt_MaVatTu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_MaVatTu_KeyPress_1);
+            this.txt_MaVatTu.Validating += new System.ComponentModel.CancelEventHandler(this.txt_MaVatTu_Validating);
             // 
             // bdsCTPX
             // 
@@ -461,6 +452,10 @@ namespace QLVT
             // 
             this.CTDDHTableAdapter.ClearBeforeFill = true;
             // 
+            // dxErrorProvider1
+            // 
+            this.dxErrorProvider1.ContainerControl = this;
+            // 
             // frmVatTu
             // 
             this.Appearance.Options.UseFont = true;
@@ -484,14 +479,17 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.DS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsVatTu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcVatTu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_SoLuongTon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_VatTu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelCtrl_VatTu)).EndInit();
             this.panelCtrl_VatTu.ResumeLayout(false);
             this.panelCtrl_VatTu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_TenVatTu.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_DonViTinh.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_MaVatTu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsCTPX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsCTPN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsCTDDH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -516,16 +514,12 @@ namespace QLVT
         private DevExpress.XtraBars.BarListItem barListItem1;
         private DSTableAdapters.TableAdapterManager tableAdapterManager;
         private DevExpress.XtraGrid.GridControl gcVatTu;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView_VatTu;
         private DevExpress.XtraGrid.Columns.GridColumn colMAVT;
         private DevExpress.XtraGrid.Columns.GridColumn colTENVT;
         private DevExpress.XtraGrid.Columns.GridColumn colDVT;
         private DevExpress.XtraGrid.Columns.GridColumn colSOLUONGTON;
         private DevExpress.XtraEditors.PanelControl panelCtrl_VatTu;
-        private System.Windows.Forms.NumericUpDown nud_SoLuongTon;
-        private System.Windows.Forms.TextBox tb_DonViTinh;
-        private System.Windows.Forms.TextBox tb_TenVatTu;
-        private System.Windows.Forms.TextBox tb_MaVatTu;
         private System.Windows.Forms.BindingSource bdsCTPX;
         private DSTableAdapters.CTPXTableAdapter CTPXTableAdapter;
         private System.Windows.Forms.BindingSource bdsCTPN;
@@ -533,8 +527,12 @@ namespace QLVT
         private System.Windows.Forms.BindingSource bdsCTDDH;
         private DSTableAdapters.CTDDHTableAdapter CTDDHTableAdapter;
         private System.Windows.Forms.BindingSource bdsVatTu;
-        private DS DS;
-        private DSTableAdapters.VattuTableAdapter VatTuTableAdapter;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraEditors.TextEdit txt_MaVatTu;
+        private DevExpress.XtraEditors.TextEdit txt_TenVatTu;
+        private DevExpress.XtraEditors.TextEdit txt_DonViTinh;
+        private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
+        public DSTableAdapters.VattuTableAdapter VatTuTableAdapter;
+        public DS DS;
     }
 }

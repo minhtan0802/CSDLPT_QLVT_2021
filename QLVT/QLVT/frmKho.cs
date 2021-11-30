@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,14 @@ namespace QLVT
     {
         int vitri = 0;
         string macn = "";
-        string tenkho = "";
+        string tenKhoCu = "";
+        string maKhoTemp = "";
+        string tenKhoTemp = "";
+        string diaChiTemp = "";
+        string tenKhoMoi = "";
+        ErrorProvider errorProviderMAKHO = new ErrorProvider();
+        ErrorProvider errorProviderDIACHI = new ErrorProvider();
+        ErrorProvider errorProviderTENKHO = new ErrorProvider();
         public frmKho()
         {
             InitializeComponent();
@@ -28,11 +36,8 @@ namespace QLVT
             this.tableAdapterManager.UpdateAll(this.DS);
 
         }
-
-        private void frmKho_Load(object sender, EventArgs e)
+        public void load()
         {
-            DS.EnforceConstraints = false;
-            // TODO: This line of code loads data into the 'dS.Kho' table. You can move, or remove it, as needed.
             this.khoTableAdapter.Connection.ConnectionString = Program.connstr;
             this.khoTableAdapter.Fill(this.DS.Kho);
             // TODO: This line of code loads data into the 'DS.DatHang' table. You can move, or remove it, as needed.ư
@@ -44,6 +49,12 @@ namespace QLVT
             // TODO: This line of code loads data into the 'DS.PhieuXuat' table. You can move, or remove it, as needed.
             this.phieuXuatTableAdapter.Connection.ConnectionString = Program.connstr;
             this.phieuXuatTableAdapter.Fill(this.DS.PhieuXuat);
+        }
+        private void frmKho_Load(object sender, EventArgs e)
+        {
+            DS.EnforceConstraints = false;
+            // TODO: This line of code loads data into the 'dS.Kho' table. You can move, or remove it, as needed.
+            load();
 
             macn = ((DataRowView)bdsKho[0])["MACN"].ToString(); // Lúc đúng lúc sai, tìm cách khác.
             cmbChiNhanh.DataSource = Program.bds_dspm;  // sao chép bds_dspm đã load ở form đăng nhập  qua
@@ -59,8 +70,8 @@ namespace QLVT
             else
             {
                 cmbChiNhanh.Enabled = false;
-                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled =  btnRefresh.Enabled = true;
-                btnGhi.Enabled = btnUndo.Enabled =  false;
+                btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = true;
+                btnGhi.Enabled = btnUndo.Enabled = false;
             }
 
 
@@ -94,87 +105,169 @@ namespace QLVT
                 this.datHangTableAdapter.Fill(this.DS.DatHang);
                 this.phieuNhapTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.phieuNhapTableAdapter.Fill(this.DS.PhieuNhap);
-                macn = ((DataRowView)bdsKho[0])["MACN"].ToString();
+                if (Program.servername.Contains("1"))
+                {
+                    macn = "CN1";
+                }
+                else
+                {
+                    macn = "CN2";
+                }
+
             }
         }
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            txtMaKho.Enabled = true;
             vitri = bdsKho.Position;
+            txtMaKho.Enabled = true;
+          
+            
             panelCtrl_Kho.Enabled = true;
             bdsKho.AddNew();
-            
+
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
-            gcKho.Enabled = false;
+            gridView_Kho.Columns[0].OptionsColumn.AllowEdit = true;
+      
+       //     gridView_Kho.FocusedRowHandle = bdsKho.Position;
+             gcKho.Enabled = false;
             panelCtrl_Kho.Enabled = true;
+       //     ((DataRowView)bdsKho[vitri])["MACN"] = macn;
             txtMaCN.Text = macn;
-            
+
         }
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsKho.Position;
-            tenkho = txtTenKho.Text;
-            txtMaCN.Enabled = txtMaKho.Enabled = false;
+            txtMaKho.Enabled = false;
             panelCtrl_Kho.Enabled = true;
             btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
             gcKho.Enabled = false;
+            tenKhoCu = txtTenKho.Text;
         }
 
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (txtMaKho.Text.Trim() == "")
+            bool checkError = true;
+            if(!Validate(txtDiaChi))
+            {
+                txtDiaChi.Focus();
+                checkError = false;
+            }    
+            if(!Validate(txtTenKho))
+            {
+                txtTenKho.Focus();
+                checkError = false;
+            }    
+            if(!Validate(txtMaKho))
+            {
+                txtMaKho.Focus();
+                checkError = false;
+            }   
+            if(!checkError)
+            {
+                return;
+            }    
+        /*    if (((DataRowView)bdsKho[bdsKho.Position])["MAKHO"].ToString() == "")
             {
                 MessageBox.Show("Mã kho không được thiếu", "", MessageBoxButtons.OK);
-                txtMaKho.Focus();
+                gridView_Kho.FocusedRowHandle = bdsKho.Position;
                 return;
             }
-            if (txtTenKho.Text.Trim() == "")
+            if (((DataRowView)bdsKho[bdsKho.Position])["TENKHO"].ToString().Trim()=="")
             {
                 MessageBox.Show("Tên kho không được thiếu", "", MessageBoxButtons.OK);
                 txtTenKho.Focus();
                 return;
             }
-            if (txtDiaChi.Text.Trim() == "")
+            if (((DataRowView)bdsKho[bdsKho.Position])["DIACHI"].ToString().Trim() == "")
             {
                 MessageBox.Show("Địa chỉ không được thiếu", "", MessageBoxButtons.OK);
                 txtDiaChi.Focus();
                 return;
-            }    
-            string strLenhMK = "EXEC sp_TraCuu @code='" + txtMaKho.Text + "'" + ", @type='MAKHO'";
-            string strLenhTK = "EXEC sp_TraCuu @code='" + txtTenKho.Text + "'" + ", @type='TENKHO'";
+            }*/
+            string strLenhMK = "EXEC sp_TraCuu @code='" +txtMaKho.Text + "',@type='MAKHO'";
+            string strLenhTK = "EXEC sp_TraCuu @code=N'" + Program.StandardString(txtTenKho.Text,"name") + "'" + ", @type='TENKHO'";
             int kiemTraMK = 0;
-            if (txtMaKho.Enabled == true)
+            int kiemTraTK = 0;
+           
+            if (txtMaKho.Enabled==true)
             {
                 kiemTraMK = Program.ExecSqlNonQuery(strLenhMK);
+               if(kiemTraMK==1)
+                {
+                    txtMaKho.Focus();
+                    dxErrorProvider1.SetError(txtMaKho, "Mã kho đã tồn tại");
+                    return;
+                }
+                else
+                {
+                    dxErrorProvider1.SetError(txtMaKho, "");
+                }    
+                kiemTraTK = Program.ExecSqlNonQuery(strLenhTK);
+                if (kiemTraTK == 1)
+                {
+                    txtTenKho.Focus();
+                    dxErrorProvider1.SetError(txtTenKho, "Tên kho đã tồn tại ");
+                    return;
+                }
+                else
+                {
+                    dxErrorProvider1.SetError(txtTenKho, "");
+                }    
+
             }
-            int kiemtraTK = 0;
-            if (!(txtTenKho.Text == tenkho))//edit
+
+            
+
+
+
+
+
+
+
+            if (txtMaKho.Enabled==false && !tenKhoCu.ToLower().Equals(Program.StandardString(txtTenKho.Text, "name").ToLower()))
             {
-                kiemtraTK = Program.ExecSqlNonQuery(strLenhTK);
+           
+                kiemTraTK = Program.ExecSqlNonQuery(strLenhTK);
+                if(kiemTraTK==1)
+                {
+                    txtTenKho.Focus();
+                    errorProviderMAKHO.SetError(txtTenKho, "Tên kho đã tồn tại");
+                    return;
+                } 
+                else
+                {
+                    errorProviderMAKHO.SetError(txtTenKho, "");
+                }    
             }    
-               
-            if (kiemTraMK != 1 && kiemtraTK!=1)
+             
+            if (kiemTraMK != 1 && kiemTraTK != 1)
             {
                 try
                 {
+                    txtDiaChi.Text = Program.StandardString(txtDiaChi.Text, "add");
+                    txtTenKho.Text = Program.StandardString(txtTenKho.Text, "name");
                     bdsKho.EndEdit();
                     bdsKho.ResetCurrentItem();
                     this.khoTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.khoTableAdapter.Update(this.DS.Kho);
+              //      Program.frmChinh.ReFresh();
+                    MessageBox.Show("Ghi thành công", "", MessageBoxButtons.OK);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Lỗi ghi kho.\n" + ex.Message, "", MessageBoxButtons.OK);
                     return;
                 }
+                gridView_Kho.Columns[0].OptionsColumn.AllowEdit = false;
                 gcKho.Enabled = true;
                 btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
                 btnGhi.Enabled = btnUndo.Enabled = false;
-               
+
                 panelCtrl_Kho.Enabled = false;
             }
         }
@@ -183,6 +276,11 @@ namespace QLVT
         {
             bdsKho.CancelEdit();
             if (btnThem.Enabled == false) bdsKho.Position = vitri;
+            dxErrorProvider1.SetError(txtDiaChi, null);
+            dxErrorProvider1.SetError(txtMaKho, null);
+            dxErrorProvider1.SetError(txtTenKho, null);
+         
+
             gcKho.Enabled = true;
             panelCtrl_Kho.Enabled = false;
             btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
@@ -278,5 +376,132 @@ namespace QLVT
         {
             this.Close();
         }
+
+        private void gcKho_EditorKeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void gridView_Kho_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+           
+
+
+
+
+        }
+
+        private void gridView_Kho_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        { 
+        }
+
+        private void gridView_Kho_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+             
+            
+        }
+
+        private void gridView_Kho_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+           
+        }
+
+        private void txtMaKho_Validating(object sender, CancelEventArgs e)
+        {
+            Validate(txtMaKho);
+            
+                   }
+        private bool Validate(DevExpress.XtraEditors.TextEdit txt)
+        {
+            bool bStatus = true;
+            if (txt.Name == "txtMaKho")
+            {
+               
+             
+                if (txt.Text.Trim() == "")
+                {
+                    dxErrorProvider1.SetError(txt, "Vui lòng nhập mã kho");
+                    bStatus = false;
+                }
+                else if(txt.Text.Trim().Length>4)
+                {
+                    dxErrorProvider1.SetError(txt, "Mã kho chỉ chứa tối đa 4 ký tự");
+                    bStatus = false;
+                }
+                else
+                    dxErrorProvider1.SetError(txt, "");
+            }
+            else if (txt.Name == "txtTenKho")
+            {
+                if (txt.Text.Trim() == "")
+                {
+                   dxErrorProvider1.SetError(txt, "Vui lòng nhập tên kho");
+                    bStatus = false;
+
+                }
+                else if (Program.StandardString(txt.Text,"name").Length > 40)
+                {
+                    dxErrorProvider1.SetError(txt, "Tên kho chỉ chứa tối đa 30 ký tự");
+                    bStatus = false;
+                }
+                else
+                {
+                    dxErrorProvider1.SetError(txt, "");
+                }
+            }
+            else if (txt.Name == "txtDiaChi")
+            {
+                if (txt.Text.Trim() == "")
+                {
+                    dxErrorProvider1.SetError(txt, "Vui lòng nhập địa chỉ kho");
+                    bStatus = false;
+
+                }
+                else if (Program.StandardString(txt.Text, "add").Length > 100)
+                {
+                    dxErrorProvider1.SetError(txt, "Địa chỉ kho chỉ chứa tối đa 100 ký tự");
+                    bStatus = false;
+                }
+                else
+                {
+                    dxErrorProvider1.SetError(txt, "");
+                }
+            }
+
+
+
+
+
+            return bStatus;
+        }
+
+        private void txtMaKho_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Space) || (!char.IsLetter(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(Keys.Back)))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.KeyChar = Convert.ToChar(e.KeyChar.ToString().ToUpper());
+            }
+        }
+
+        private void txtDiaChi_Validating(object sender, CancelEventArgs e)
+        {
+            Validate(txtDiaChi);
+        }
+
+        private void txtTenKho_Validating(object sender, CancelEventArgs e)
+        {
+            Validate(txtTenKho);
+           
+          
+        }
+
+        private void gcKho_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
     }
-    }
+}

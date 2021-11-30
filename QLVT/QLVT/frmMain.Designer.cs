@@ -49,6 +49,7 @@ namespace QLVT
             this.btn_VatTu = new DevExpress.XtraBars.BarButtonItem();
             this.btn_Kho = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
             this.rib_HeThong = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rib_DanhMuc = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -90,10 +91,11 @@ namespace QLVT
             this.barButtonItem5,
             this.btn_VatTu,
             this.btn_Kho,
-            this.barButtonItem6});
+            this.barButtonItem6,
+            this.barButtonItem7});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ribbonControl1.MaxItemId = 26;
+            this.ribbonControl1.MaxItemId = 27;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.rib_HeThong,
@@ -143,7 +145,7 @@ namespace QLVT
             // 
             // btn_LapPhieu
             // 
-            this.btn_LapPhieu.Caption = "Lập phiếu nhập/ xuất";
+            this.btn_LapPhieu.Caption = "Lập phiếu nhập";
             this.btn_LapPhieu.Id = 5;
             this.btn_LapPhieu.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_LapPhieu.ImageOptions.Image")));
             this.btn_LapPhieu.Name = "btn_LapPhieu";
@@ -245,6 +247,15 @@ namespace QLVT
             this.barButtonItem6.Name = "barButtonItem6";
             this.barButtonItem6.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem6_ItemClick);
             // 
+            // barButtonItem7
+            // 
+            this.barButtonItem7.Caption = "Lập phiếu xuất";
+            this.barButtonItem7.Id = 26;
+            this.barButtonItem7.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem7.ImageOptions.Image")));
+            this.barButtonItem7.Name = "barButtonItem7";
+            this.barButtonItem7.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem7.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem7_ItemClick);
+            // 
             // rib_HeThong
             // 
             this.rib_HeThong.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -287,6 +298,7 @@ namespace QLVT
             // 
             this.ribbonPageGroup3.ItemLinks.Add(this.btn_LapPhieu);
             this.ribbonPageGroup3.ItemLinks.Add(this.btn_LapDDH);
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem7);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             // 
             // ribbonPageGroup5
@@ -382,7 +394,6 @@ namespace QLVT
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
         private DevExpress.XtraBars.Ribbon.RibbonPage rib_HeThong;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
-        private DevExpress.XtraBars.BarButtonItem btn_DangXuat;
         private DevExpress.XtraBars.BarButtonItem btn_NhanVien;
         private DevExpress.XtraBars.BarButtonItem btn_LapPhieu;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
@@ -411,6 +422,8 @@ namespace QLVT
         public DevExpress.XtraBars.BarButtonItem btn_TaoTaiKhoan;
         private DevExpress.XtraBars.BarButtonItem barButtonItem6;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem7;
+        public DevExpress.XtraBars.BarButtonItem btn_DangXuat;
     }
 }
 

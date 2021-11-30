@@ -59,7 +59,7 @@ namespace QLVT
             this.bdsKho = new System.Windows.Forms.BindingSource(this.components);
             this.DS = new QLVT.DS();
             this.gcKho = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView_Kho = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colMAKHO2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTENKHO2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDIACHI = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -83,6 +83,7 @@ namespace QLVT
             this.txtDiaChi = new DevExpress.XtraEditors.TextEdit();
             this.txtTenKho = new DevExpress.XtraEditors.TextEdit();
             this.txtMaKho = new DevExpress.XtraEditors.TextEdit();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             mAKHOLabel = new System.Windows.Forms.Label();
             tENKHOLabel = new System.Windows.Forms.Label();
             dIACHILabel = new System.Windows.Forms.Label();
@@ -93,7 +94,7 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.bdsKho)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcKho)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_Kho)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsPX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsPN)).BeginInit();
@@ -104,12 +105,13 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.txtDiaChi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTenKho.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaKho.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // mAKHOLabel
             // 
             mAKHOLabel.AutoSize = true;
-            mAKHOLabel.Location = new System.Drawing.Point(149, 52);
+            mAKHOLabel.Location = new System.Drawing.Point(126, 37);
             mAKHOLabel.Name = "mAKHOLabel";
             mAKHOLabel.Size = new System.Drawing.Size(58, 17);
             mAKHOLabel.TabIndex = 0;
@@ -118,7 +120,7 @@ namespace QLVT
             // tENKHOLabel
             // 
             tENKHOLabel.AutoSize = true;
-            tENKHOLabel.Location = new System.Drawing.Point(141, 110);
+            tENKHOLabel.Location = new System.Drawing.Point(118, 95);
             tENKHOLabel.Name = "tENKHOLabel";
             tENKHOLabel.Size = new System.Drawing.Size(64, 17);
             tENKHOLabel.TabIndex = 2;
@@ -127,7 +129,7 @@ namespace QLVT
             // dIACHILabel
             // 
             dIACHILabel.AutoSize = true;
-            dIACHILabel.Location = new System.Drawing.Point(517, 52);
+            dIACHILabel.Location = new System.Drawing.Point(494, 37);
             dIACHILabel.Name = "dIACHILabel";
             dIACHILabel.Size = new System.Drawing.Size(55, 17);
             dIACHILabel.TabIndex = 4;
@@ -136,7 +138,7 @@ namespace QLVT
             // mACNLabel
             // 
             mACNLabel.AutoSize = true;
-            mACNLabel.Location = new System.Drawing.Point(522, 110);
+            mACNLabel.Location = new System.Drawing.Point(499, 95);
             mACNLabel.Name = "mACNLabel";
             mACNLabel.Size = new System.Drawing.Size(54, 17);
             mACNLabel.TabIndex = 6;
@@ -357,25 +359,31 @@ namespace QLVT
             this.gcKho.DataSource = this.bdsKho;
             this.gcKho.Dock = System.Windows.Forms.DockStyle.Top;
             this.gcKho.Location = new System.Drawing.Point(0, 107);
-            this.gcKho.MainView = this.gridView1;
+            this.gcKho.MainView = this.gridView_Kho;
             this.gcKho.MenuManager = this.barManager1;
             this.gcKho.Name = "gcKho";
-            this.gcKho.Size = new System.Drawing.Size(854, 191);
+            this.gcKho.Size = new System.Drawing.Size(854, 338);
             this.gcKho.TabIndex = 9;
             this.gcKho.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1,
+            this.gridView_Kho,
             this.tileView1});
+            this.gcKho.EditorKeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gcKho_EditorKeyPress);
+            this.gcKho.Validating += new System.ComponentModel.CancelEventHandler(this.gcKho_Validating);
             // 
-            // gridView1
+            // gridView_Kho
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridView_Kho.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colMAKHO2,
             this.colTENKHO2,
             this.colDIACHI,
             this.colMACN});
-            this.gridView1.GridControl = this.gcKho;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView_Kho.GridControl = this.gcKho;
+            this.gridView_Kho.Name = "gridView_Kho";
+            this.gridView_Kho.OptionsBehavior.Editable = false;
+            this.gridView_Kho.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_Kho_FocusedRowChanged);
+            this.gridView_Kho.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView_Kho_CellValueChanged);
+            this.gridView_Kho.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView_Kho_CellValueChanging);
+            this.gridView_Kho.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView_Kho_ValidatingEditor);
             // 
             // colMAKHO2
             // 
@@ -383,6 +391,7 @@ namespace QLVT
             this.colMAKHO2.FieldName = "MAKHO";
             this.colMAKHO2.MinWidth = 25;
             this.colMAKHO2.Name = "colMAKHO2";
+            this.colMAKHO2.OptionsColumn.AllowEdit = false;
             this.colMAKHO2.Visible = true;
             this.colMAKHO2.VisibleIndex = 0;
             this.colMAKHO2.Width = 127;
@@ -413,6 +422,7 @@ namespace QLVT
             this.colMACN.FieldName = "MACN";
             this.colMACN.MinWidth = 25;
             this.colMACN.Name = "colMACN";
+            this.colMACN.OptionsColumn.AllowEdit = false;
             this.colMACN.Visible = true;
             this.colMACN.VisibleIndex = 3;
             this.colMACN.Width = 94;
@@ -526,16 +536,16 @@ namespace QLVT
             this.panelCtrl_Kho.Controls.Add(mAKHOLabel);
             this.panelCtrl_Kho.Controls.Add(this.txtMaKho);
             this.panelCtrl_Kho.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCtrl_Kho.Location = new System.Drawing.Point(0, 298);
+            this.panelCtrl_Kho.Location = new System.Drawing.Point(0, 445);
             this.panelCtrl_Kho.Name = "panelCtrl_Kho";
-            this.panelCtrl_Kho.Size = new System.Drawing.Size(854, 275);
+            this.panelCtrl_Kho.Size = new System.Drawing.Size(854, 128);
             this.panelCtrl_Kho.TabIndex = 16;
             // 
             // txtMaCN
             // 
             this.txtMaCN.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsKho, "MACN", true));
             this.txtMaCN.Enabled = false;
-            this.txtMaCN.Location = new System.Drawing.Point(579, 107);
+            this.txtMaCN.Location = new System.Drawing.Point(556, 92);
             this.txtMaCN.MenuManager = this.barManager1;
             this.txtMaCN.Name = "txtMaCN";
             this.txtMaCN.Size = new System.Drawing.Size(154, 26);
@@ -544,30 +554,38 @@ namespace QLVT
             // txtDiaChi
             // 
             this.txtDiaChi.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsKho, "DIACHI", true));
-            this.txtDiaChi.Location = new System.Drawing.Point(579, 49);
+            this.txtDiaChi.Location = new System.Drawing.Point(556, 34);
             this.txtDiaChi.MenuManager = this.barManager1;
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.Size = new System.Drawing.Size(154, 26);
             this.txtDiaChi.TabIndex = 5;
+            this.txtDiaChi.Validating += new System.ComponentModel.CancelEventHandler(this.txtDiaChi_Validating);
             // 
             // txtTenKho
             // 
             this.txtTenKho.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsKho, "TENKHO", true));
-            this.txtTenKho.Location = new System.Drawing.Point(217, 107);
+            this.txtTenKho.Location = new System.Drawing.Point(188, 92);
             this.txtTenKho.MenuManager = this.barManager1;
             this.txtTenKho.Name = "txtTenKho";
-            this.txtTenKho.Size = new System.Drawing.Size(125, 26);
+            this.txtTenKho.Size = new System.Drawing.Size(131, 26);
             this.txtTenKho.TabIndex = 3;
+            this.txtTenKho.Validating += new System.ComponentModel.CancelEventHandler(this.txtTenKho_Validating);
             // 
             // txtMaKho
             // 
             this.txtMaKho.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsKho, "MAKHO", true));
             this.txtMaKho.Enabled = false;
-            this.txtMaKho.Location = new System.Drawing.Point(217, 49);
+            this.txtMaKho.Location = new System.Drawing.Point(194, 34);
             this.txtMaKho.MenuManager = this.barManager1;
             this.txtMaKho.Name = "txtMaKho";
             this.txtMaKho.Size = new System.Drawing.Size(125, 26);
             this.txtMaKho.TabIndex = 1;
+            this.txtMaKho.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaKho_KeyPress_1);
+            this.txtMaKho.Validating += new System.ComponentModel.CancelEventHandler(this.txtMaKho_Validating);
+            // 
+            // dxErrorProvider1
+            // 
+            this.dxErrorProvider1.ContainerControl = this;
             // 
             // frmKho
             // 
@@ -593,7 +611,7 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.bdsKho)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcKho)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_Kho)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsPX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsPN)).EndInit();
@@ -605,6 +623,7 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.txtDiaChi.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTenKho.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaKho.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -631,11 +650,9 @@ namespace QLVT
         private DevExpress.XtraBars.BarListItem barListItem1;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private System.Windows.Forms.ComboBox cmbChiNhanh;
-        private DSTableAdapters.KhoTableAdapter khoTableAdapter;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraGrid.GridControl gcKho;
         private System.Windows.Forms.BindingSource bdsKho;
-        private DS DS;
         private DSTableAdapters.TableAdapterManager tableAdapterManager;
         private DSTableAdapters.PhieuXuatTableAdapter phieuXuatTableAdapter;
         private System.Windows.Forms.BindingSource bdsPX;
@@ -643,7 +660,7 @@ namespace QLVT
         private System.Windows.Forms.BindingSource bdsPN;
         private DSTableAdapters.DatHangTableAdapter datHangTableAdapter;
         private System.Windows.Forms.BindingSource bdsDH;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView_Kho;
         private DevExpress.XtraGrid.Columns.GridColumn colMAKHO2;
         private DevExpress.XtraGrid.Columns.GridColumn colTENKHO2;
         private DevExpress.XtraGrid.Columns.GridColumn colDIACHI;
@@ -660,5 +677,8 @@ namespace QLVT
         private DevExpress.XtraEditors.TextEdit txtDiaChi;
         private DevExpress.XtraEditors.TextEdit txtTenKho;
         private DevExpress.XtraEditors.TextEdit txtMaKho;
+        private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
+        public DSTableAdapters.KhoTableAdapter khoTableAdapter;
+        public DS DS;
     }
 }
