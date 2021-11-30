@@ -153,7 +153,7 @@ namespace QLVT
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Int32 manv = 0;
-            if (bdsDH.Count > 0)
+           if (bdsDH.Count > 0)
             {
                 MessageBox.Show("Không thể xóa nhân viên vì đã lập đơn đặt hàng", "", MessageBoxButtons.OK);
                 return;
@@ -174,7 +174,7 @@ namespace QLVT
                 MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 try
-                {
+                { 
                     manv = int.Parse(((DataRowView)bdsNV[bdsNV.Position])["MANV"].ToString());
                     bdsNV.RemoveCurrent();//Xóa trên máy hiện tại trước
                     this.NHANVIENTableAdapter.Connection.ConnectionString = Program.connstr;
