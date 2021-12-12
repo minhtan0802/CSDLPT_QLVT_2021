@@ -51,6 +51,7 @@ namespace QLVT
             this.pageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.pageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.lblHoten = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
             this.labelTieude = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
@@ -84,7 +85,6 @@ namespace QLVT
             this.GroupFooter2 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
-            this.lblHoten = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.table1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table3)).BeginInit();
@@ -244,6 +244,14 @@ namespace QLVT
             this.ReportHeader.HeightF = 97.83338F;
             this.ReportHeader.Name = "ReportHeader";
             // 
+            // lblHoten
+            // 
+            this.lblHoten.LocationFloat = new DevExpress.Utils.PointFloat(371.5732F, 47.52767F);
+            this.lblHoten.Multiline = true;
+            this.lblHoten.Name = "lblHoten";
+            this.lblHoten.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.lblHoten.SizeF = new System.Drawing.SizeF(100F, 23F);
+            // 
             // xrLabel4
             // 
             this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(271.5732F, 47.52767F);
@@ -269,7 +277,7 @@ namespace QLVT
             this.labelTieude.StylePriority.UseFont = false;
             this.labelTieude.StylePriority.UseForeColor = false;
             this.labelTieude.StylePriority.UseTextAlignment = false;
-            this.labelTieude.Text = "DANH SÁCH CÁC PHIẾU ... CỦA NHÂN VIÊN THEO THÁNG";
+            this.labelTieude.Text = "DANH SÁCH CÁC PHIẾU...CỦA NHÂN VIÊN THEO THÁNG";
             this.labelTieude.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
             // GroupHeader1
@@ -690,14 +698,6 @@ namespace QLVT
             this.xrLabel1.Text = "xrLabel1";
             this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             this.xrLabel1.TextFormatString = "{0:#,#}";
-            // 
-            // lblHoten
-            // 
-            this.lblHoten.LocationFloat = new DevExpress.Utils.PointFloat(371.5732F, 47.52767F);
-            this.lblHoten.Multiline = true;
-            this.lblHoten.Name = "lblHoten";
-            this.lblHoten.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblHoten.SizeF = new System.Drawing.SizeF(100F, 23F);
             // 
             // Xrpt_HoatDongCuaNhanVienTheoThang
             // 

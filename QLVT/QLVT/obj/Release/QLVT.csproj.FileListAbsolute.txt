@@ -505,3 +505,8 @@ D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_DSNhanVi
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_DSVatTu.resources
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Frpt_HoatDongCuaNhanVienTheoThang.resources
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_HoatDongCuaNhanVienTheoThang.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmPhieuXuat.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmThemCTPX.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_DonHangChuaCoPhieuNhap.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Frpt_TongHopNhapXuat.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_TongHopNhapXuat.resources
