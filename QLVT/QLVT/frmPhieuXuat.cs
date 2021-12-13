@@ -94,12 +94,12 @@ namespace QLVT
             if (Program.mGroup == "CONGTY")
             {
                 cmbChiNhanh.Enabled = true;
-                btnThem.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
+                btnThem.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
             }
             else
             {
                 cmbChiNhanh.Enabled = false;
-                btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = true;
+                btnThem.Enabled =  btnRefresh.Enabled = true;
                 btnGhi.Enabled = btnUndo.Enabled = false;
             }
 
@@ -157,7 +157,7 @@ namespace QLVT
             txt_KH.Enabled = true;
             dateEdit_NgayLap.Text = DateTime.Now.ToString("dd/MM/yyyy");
             txt_MaNV.Text = Program.username;
-            btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
+            btnThem.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
           
             dtVTDaCo.Clear();
@@ -177,6 +177,7 @@ namespace QLVT
          //       cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDown;
           //      cmb_MaKho.Text = cmb_MaKho.SelectedValue.ToString();
                 ((DataRowView)bdsPX[bdsPX.Position])["MAKHO"] = cmb_MaKho.Text;
+                txt_KH.Text = Program.StandardString(txt_KH.Text,"name");
                 bdsPX.EndEdit();
                 bdsPX.ResetCurrentItem();
                 this.phieuXuatTableAdapter.Connection.ConnectionString = Program.connstr;
@@ -293,7 +294,7 @@ namespace QLVT
             gc_PhieuXuat.Enabled = true;
             gc_PhieuXuat.Focus();
             cmb_MaKho.Enabled = txt_MaNV.Enabled = txt_MAPX.Enabled = dateEdit_NgayLap.Enabled = false;
-            btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
+            btnThem.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
             btn_ThemCTPX.Enabled = btn_XoaCTPX.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = false;
          
@@ -449,7 +450,7 @@ namespace QLVT
             if (Program.mGroup == "CONGTY")
             {
                 cmbChiNhanh.Enabled = true;
-                btnThem.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
+                btnThem.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
             }
 
 
@@ -577,7 +578,7 @@ namespace QLVT
             gc_PhieuXuat.Enabled = true;
             gc_PhieuXuat.Focus();
             panelCtrl_PX.Enabled = false;
-            btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
+            btnThem.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
             btnGhi.Enabled = btnUndo.Enabled = false;
 
         }
@@ -614,7 +615,7 @@ namespace QLVT
             if (Program.mGroup == "CONGTY")
             {
                 cmbChiNhanh.Enabled = true;
-                btnThem.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
+                btnThem.Enabled =btnGhi.Enabled = btnUndo.Enabled = false;
             }
         }
     }

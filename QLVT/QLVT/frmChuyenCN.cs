@@ -121,5 +121,30 @@ namespace QLVT
             this.tableAdapterManager.UpdateAll(this.dS);
 
         }
+
+        private void cmb_ChiNhanh_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmb_ChiNhanh.SelectedValue.ToString() == "System.Data.DataRowView") return;
+            Program.servername = cmb_ChiNhanh.SelectedValue.ToString();
+
+            if (cmb_ChiNhanh.SelectedIndex != Program.mChiNhanh)
+            {
+                Program.mlogin = Program.remoteLogin;
+                Program.password = Program.remotePassword;
+            }
+            else
+            {
+                Program.mlogin = Program.mloginDN;
+                Program.password = Program.passwordDN;
+            }
+
+            if (Program.KetNoi() == 0)
+                MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

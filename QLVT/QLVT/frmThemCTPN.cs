@@ -229,6 +229,7 @@ namespace QLVT
             }
             else
             {
+             
                 e.ErrorText = "Số lượng không được lớn hơn số lượng đã đặt là " + soLuongDat;
             }
         }

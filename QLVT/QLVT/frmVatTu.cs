@@ -189,26 +189,6 @@ namespace QLVT
             {
                 return;
             }  
-            /*
-            if (txt_MaVatTu.Text.Trim() == "")
-            {
-                MessageBox.Show("Mã vật tư không được thiếu", "", MessageBoxButtons.OK);
-                txt_MaVatTu.Focus();
-                return;
-            }
-            if (txt_TenVatTu.Text.Trim() == "")
-            {
-                MessageBox.Show("Tên vật tư không được thiếu", "", MessageBoxButtons.OK);
-                txt_TenVatTu.Focus();
-                return;
-            }
-            if (txt_DonViTinh.Text.Trim() == "")
-            {
-                MessageBox.Show("Đơn vị tính không được thiếu", "", MessageBoxButtons.OK);
-                txt_DonViTinh.Focus();
-
-                return;
-            }*/
             string strLenhMAVT = "EXEC sp_TraCuu @code='"+ txt_MaVatTu.Text+ "'" + ", @type='MAVT'";
             string strLenhTENVT = "EXEC sp_TraCuu @code=N'" + Program.StandardString(txt_TenVatTu.Text,"name") + "'" + ", @type='TENVT'";
 
@@ -265,7 +245,7 @@ namespace QLVT
                     bdsVatTu.ResetCurrentItem();
                     this.VatTuTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.VatTuTableAdapter.Update(this.DS.Vattu);
-             //   Program.frmChinh.ReFresh();
+           
             }
                 catch (Exception ex)
                 {
@@ -288,9 +268,7 @@ namespace QLVT
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Xrpt_DSVatTu rpt = new Xrpt_DSVatTu();
-            ReportPrintTool print = new ReportPrintTool(rpt);
-            print.ShowPreviewDialog();
+         
         }
 
         private void gridView_VatTu_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)

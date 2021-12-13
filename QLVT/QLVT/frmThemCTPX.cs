@@ -13,6 +13,7 @@ namespace QLVT
 {
     public partial class frmThemCTPX : DevExpress.XtraEditors.XtraForm
     {
+      
         int pos;
         int soLuongTon;
         public frmThemCTPX()
@@ -97,6 +98,7 @@ namespace QLVT
 
         private void spin_SoLuong_Validating(object sender, CancelEventArgs e)
         {
+          
             pos = gridView_VatTuChuaCo.FocusedRowHandle;
             if ((sender as SpinEdit).Value > soLuongTon)
             {
@@ -112,7 +114,7 @@ namespace QLVT
             }
 
         }
-
+        
         private void spin_SoLuong_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
         {
            
@@ -132,13 +134,19 @@ namespace QLVT
 
         private void spin_SoLuong_InvalidValue(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
         {
+            
+       
             if ((sender as SpinEdit).Value == 0 && spin_SoLuong.Enabled==true)
             {
+              
                 e.ErrorText = "Số lượng phải lớn hơn 0";
             } 
-            else 
+            else  
             {
+                MessageBox.Show("Số lượng không được lớn hơn số lượng tồn là " + soLuongTon,"",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 e.ErrorText = "Số lượng không được lớn hơn số lượng tồn là " + soLuongTon;
+                   
+              
             }    
             
         }
@@ -155,10 +163,13 @@ namespace QLVT
 
         private void gridView_VatTuChuaCo_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
+          
             pos = bds_sp_getVatTuConThieuCTPhieu.Position;
             //txt_TENVT.Text = ((DataRowView)bds_sp_getVatTuConThieuCTPhieu[gridView_VatTuChuaCo.FocusedRowHandle])["TENVT"].ToString();    
             soLuongTon = Int32.Parse(((DataRowView)bds_sp_getVatTuConThieuCTPhieu[bds_sp_getVatTuConThieuCTPhieu.Position])["SOLUONGTON"].ToString());  
             spin_SoLuong.Focus();
+            spin_DonGia.Value = 0;
+            spin_SoLuong.Value = 1;
             //    spin_SoLuong.Properties.MaxValue = max;
             if (soLuongTon == 0)
             {
@@ -186,7 +197,7 @@ namespace QLVT
 
         private void sp_getVatTuConThieuCTPhieuGridControl_Click(object sender, EventArgs e)
         {
-            pos = bds_sp_getVatTuConThieuCTPhieu.Position;
+        /*    pos = bds_sp_getVatTuConThieuCTPhieu.Position;
             //txt_TENVT.Text = ((DataRowView)bds_sp_getVatTuConThieuCTPhieu[gridView_VatTuChuaCo.FocusedRowHandle])["TENVT"].ToString();    
             soLuongTon = Int32.Parse(((DataRowView)bds_sp_getVatTuConThieuCTPhieu[bds_sp_getVatTuConThieuCTPhieu.Position])["SOLUONGTON"].ToString());
             spin_SoLuong.Focus();
@@ -207,7 +218,7 @@ namespace QLVT
                 spin_SoLuong.Enabled = true;
                 spin_DonGia.Enabled = true;
                 btn_Them.Enabled = true;
-            }
+            }*/
         }
 
         private void gridView_VatTuChuaCo_ColumnFilterChanged(object sender, EventArgs e)

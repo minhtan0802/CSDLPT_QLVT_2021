@@ -80,6 +80,7 @@ namespace QLVT
             this.label1.Size = new System.Drawing.Size(74, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = "Chi Nhánh";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // cmb_ChiNhanh
             // 
@@ -88,6 +89,7 @@ namespace QLVT
             this.cmb_ChiNhanh.Name = "cmb_ChiNhanh";
             this.cmb_ChiNhanh.Size = new System.Drawing.Size(247, 24);
             this.cmb_ChiNhanh.TabIndex = 5;
+            this.cmb_ChiNhanh.SelectedIndexChanged += new System.EventHandler(this.cmb_ChiNhanh_SelectedIndexChanged);
             // 
             // dS
             // 

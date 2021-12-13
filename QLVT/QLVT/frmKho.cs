@@ -129,11 +129,8 @@ namespace QLVT
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
             gridView_Kho.Columns[0].OptionsColumn.AllowEdit = true;
-      
-       //     gridView_Kho.FocusedRowHandle = bdsKho.Position;
              gcKho.Enabled = false;
             panelCtrl_Kho.Enabled = true;
-       //     ((DataRowView)bdsKho[vitri])["MACN"] = macn;
             txtMaCN.Text = macn;
 
         }
@@ -171,24 +168,6 @@ namespace QLVT
             {
                 return;
             }    
-        /*    if (((DataRowView)bdsKho[bdsKho.Position])["MAKHO"].ToString() == "")
-            {
-                MessageBox.Show("Mã kho không được thiếu", "", MessageBoxButtons.OK);
-                gridView_Kho.FocusedRowHandle = bdsKho.Position;
-                return;
-            }
-            if (((DataRowView)bdsKho[bdsKho.Position])["TENKHO"].ToString().Trim()=="")
-            {
-                MessageBox.Show("Tên kho không được thiếu", "", MessageBoxButtons.OK);
-                txtTenKho.Focus();
-                return;
-            }
-            if (((DataRowView)bdsKho[bdsKho.Position])["DIACHI"].ToString().Trim() == "")
-            {
-                MessageBox.Show("Địa chỉ không được thiếu", "", MessageBoxButtons.OK);
-                txtDiaChi.Focus();
-                return;
-            }*/
             string strLenhMK = "EXEC sp_TraCuu @code='" +txtMaKho.Text + "',@type='MAKHO'";
             string strLenhTK = "EXEC sp_TraCuu @code=N'" + Program.StandardString(txtTenKho.Text,"name") + "'" + ", @type='TENKHO'";
             int kiemTraMK = 0;
@@ -220,15 +199,6 @@ namespace QLVT
                 }    
 
             }
-
-            
-
-
-
-
-
-
-
             if (txtMaKho.Enabled==false && !tenKhoCu.ToLower().Equals(Program.StandardString(txtTenKho.Text, "name").ToLower()))
             {
            
@@ -255,7 +225,6 @@ namespace QLVT
                     bdsKho.ResetCurrentItem();
                     this.khoTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.khoTableAdapter.Update(this.DS.Kho);
-              //      Program.frmChinh.ReFresh();
                     MessageBox.Show("Ghi thành công", "", MessageBoxButtons.OK);
                 }
                 catch (Exception ex)

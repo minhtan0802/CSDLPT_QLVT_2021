@@ -112,7 +112,7 @@ namespace QLVT
             if (Program.mGroup == "CONGTY")
             {
                 cmbChiNhanh.Enabled = true;
-                btnThem.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
+                btnThem.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
             }
             btnUndo.Enabled=false;
 
@@ -168,7 +168,7 @@ namespace QLVT
             gc_DDH.Enabled = false;
             panelCtrl_ThemPN.Enabled = true;
             btn_xoaCTPN.Enabled = true;
-            btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
+            btnThem.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
             bdsPN.AddNew();
          //   ((DataRowView)bdsPN[bdsPN.Position])["MANV"] = txt_MaNV.Text = Program.username;
@@ -331,7 +331,7 @@ namespace QLVT
                 saveCTPN();
             }
 
-            btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
+            btnThem.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
             btnGhi.Enabled = btnUndo.Enabled = false;
             btn_xoaCTPN.Enabled = btn_ThemCTPN.Enabled = false;
             label_Kho.Text = "Mã kho:";
@@ -594,7 +594,7 @@ namespace QLVT
             if (Program.mGroup == "CONGTY")
             {
                 cmbChiNhanh.Enabled = true;
-                btnThem.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
+                btnThem.Enabled =btnGhi.Enabled = btnUndo.Enabled = false;
             }
 
             mddh = ((DataRowView)bdsDH[bdsDH.Position])["MasoDDH"].ToString();
@@ -733,7 +733,7 @@ namespace QLVT
             gc_DDH.Enabled = true;
             gc_DDH.Focus();
             txt_MaPN.Enabled = false;
-            btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
+            btnThem.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
             btnGhi.Enabled = btnUndo.Enabled = false;
             btn_xoaCTPN.Enabled = btn_ThemCTPN.Enabled = false;
             gc_PhieuNhap.Enabled = true;
@@ -785,7 +785,7 @@ namespace QLVT
             if (Program.mGroup == "CONGTY")
             {
                 cmbChiNhanh.Enabled = true;
-                btnThem.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
+                btnThem.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
             }
 
             mddh = ((DataRowView)bdsDH[bdsDH.Position])["MasoDDH"].ToString();

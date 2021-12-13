@@ -94,7 +94,7 @@ namespace QLVT
           
             if (!((DataRowView)bdsDatHang[bdsDatHang.Position])["MANV"].ToString().Equals(Program.username) || bdsPN.Count>0)
             {
-                btnXoa.Enabled = false;
+          
                 btn_XoaCTDDH.Enabled = btn_ThemCTDDH.Enabled = false;
                 txt_NCC.Enabled = false;
                 panelCtrl_DatHang.Enabled = false;
@@ -102,7 +102,7 @@ namespace QLVT
             }
             else
             {
-                btnXoa.Enabled = true;
+            
                 txt_NCC.Enabled = true;
                 gridView_getCTDDH.OptionsBehavior.Editable = true;
                 panelCtrl_DatHang.Enabled = true;
@@ -157,12 +157,12 @@ namespace QLVT
             if (Program.mGroup == "CONGTY")
             {
                 cmbChiNhanh.Enabled = true;
-                btnThem.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnUndo.Enabled = false;
+                btnThem.Enabled =btnGhi.Enabled = btnUndo.Enabled = false;
             }
             else
             {
                 cmbChiNhanh.Enabled = false;
-                btnThem.Enabled = btnXoa.Enabled =  btnRefresh.Enabled = true;
+                btnThem.Enabled =btnRefresh.Enabled = true;
                 btnGhi.Enabled = btnUndo.Enabled = false;
             }
 
@@ -203,7 +203,7 @@ namespace QLVT
                 gc_sp_getCTPhieu.Focus();
                 gc_DatHang.Enabled = false;
                 btnGhi.Enabled =btnUndo.Enabled= true;
-                btnThoat.Enabled =btnXoa.Enabled =btnThem.Enabled = false;
+                btnThoat.Enabled =btnThem.Enabled = false;
                 
                 dtVTDaCo.Rows.RemoveAt(bds_sp_getCTPhieu.Position);
 
@@ -287,7 +287,7 @@ namespace QLVT
             txt_NCC.Enabled = true;
             dateEdit_NgayLap.Text = DateTime.Now.ToString("dd/MM/yyyy");
            
-            btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = false;
+            btnThem.Enabled =  btnRefresh.Enabled = btnThoat.Enabled = false;
             btnGhi.Enabled = btnUndo.Enabled = true;
             mddh = "";
             this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu,mddh,"dh");
@@ -304,11 +304,9 @@ namespace QLVT
         {
             try
             {
-           //     cmb_MaKho.DropDownStyle = ComboBoxStyle.DropDown;
-           //     cmb_MaKho.Text = cmb_MaKho.SelectedValue.ToString();
                 bdsDatHang.EndEdit();
                 bdsDatHang.ResetCurrentItem();
-    
+                txt_NCC.Text = Program.StandardString(txt_NCC.Text, "name");
                 this.datHangTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.datHangTableAdapter.Update(this.DS.DatHang);
                 mddh = txt_MDDH.Text;
@@ -325,7 +323,6 @@ namespace QLVT
         {
             try
             {
-                MessageBox.Show("bdsCTPhieu: " + bds_sp_getCTPhieu.Count);
                 Program.savePhieu("dh", mddh, bds_sp_getCTPhieu, gridView_getCTDDH); ;
                 this.sp_getCTPhieuTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.sp_getCTPhieuTableAdapter.Fill(this.DS.sp_getCTPhieu, mddh,"dh");
@@ -369,36 +366,6 @@ namespace QLVT
             {
                 return;
             }    
-           /* if (txt_MDDH.Text.Trim() == "")
-            {
-                MessageBox.Show("Mã đơn đặt hàng không được thiếu", "", MessageBoxButtons.OK);
-                txt_MDDH.Focus();
-                return;
-            }
-            if (txt_NCC.Text.Trim() == "")
-            {
-                MessageBox.Show("Nhà cung cấp không được thiếu", "", MessageBoxButtons.OK);
-                txt_NCC.Focus();
-                return;
-            }
-            /*     if (txt_MaKho.Text.Trim().Equals(""))
-                 {
-                     MessageBox.Show("Mã kho không được thiếu", "", MessageBoxButtons.OK);
-                     txt_MaKho.Focus();
-                     return;
-                 }
-            if(cmb_MaKho.Text=="")
-            {
-                MessageBox.Show("Kho không được thiếu", "", MessageBoxButtons.OK);
-                cmb_MaKho.Focus();
-                return;
-            }
-            if(cmb_MaKho.SelectedIndex == -1 && cmb_MaKho.Text !="")
-            {
-                MessageBox.Show("Kho không có ở chi nhánh này", "", MessageBoxButtons.OK);
-                cmb_MaKho.Focus();
-                return;
-            }*/
             if (txt_MDDH.Enabled==true)
             {
                 string strLenh = "EXEC sp_TraCuu '" + txt_MDDH.Text + "'" + ", 'MDDH'";
@@ -413,11 +380,6 @@ namespace QLVT
                 {
                     dxErrorProvider1.SetError(txt_MDDH, null);
                 }    
-             /*   else if (Program.ExecSqlNonQuery("EXEC sp_TraCuu '" + cmb_MaKho.SelectedValue + "'" + ", 'MAKHODDH'") == 1)
-                {
-                    cmb_MaKho.Focus();
-                    return;
-                }*/
             }
             if (bds_sp_getCTPhieu.Count==0)
             {
@@ -437,7 +399,7 @@ namespace QLVT
                 gc_DatHang.Enabled = true;
             gc_DatHang.Focus();
             txt_MaNV.Enabled = txt_MDDH.Enabled = dateEdit_NgayLap.Enabled = txt_MDDH.Enabled = false;
-                btnThem.Enabled = btnXoa.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
+                btnThem.Enabled =  btnRefresh.Enabled = btnThoat.Enabled = true;
             
                 btnGhi.Enabled = btnUndo.Enabled = false;
                 groupBox_CTDDH.Enabled = true;
@@ -676,7 +638,7 @@ namespace QLVT
 
                 gc_DatHang.Enabled = false;
                 panelCtrl_DatHang.Enabled = false;
-                Program.frmDDH.btnGhi.Enabled = Program.frmDDH.btnThoat.Enabled = Program.frmDDH.btnXoa.Enabled = Program.frmDDH.btnThem.Enabled = false;
+                Program.frmDDH.btnGhi.Enabled = Program.frmDDH.btnThoat.Enabled = Program.frmDDH.btnThem.Enabled = false;
 
 
             }
@@ -766,7 +728,7 @@ namespace QLVT
             }    
           
             btnGhi.Enabled = true;
-            btnThem.Enabled = btnXoa.Enabled = btnThoat.Enabled = false;
+            btnThem.Enabled = btnThoat.Enabled = false;
             btnUndo.Enabled = true;
             gc_DatHang.Enabled = false;
         }
@@ -926,7 +888,7 @@ namespace QLVT
         private void gc_sp_getCTPhieu_EditorKeyPress(object sender, KeyPressEventArgs e)
         {
             btnGhi.Enabled = btnUndo.Enabled = true; ;
-            btnXoa.Enabled = false;
+        
             if (gridView_getCTDDH.FocusedColumn.FieldName == "SOLUONG" || gridView_getCTDDH.FocusedColumn.FieldName == "DONGIA")
             {
                 if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -961,7 +923,7 @@ namespace QLVT
                 dtVTDaCo.Clear();
                 if (!((DataRowView)bdsDatHang[bdsDatHang.Position])["MANV"].ToString().Equals(Program.username) || bdsPN.Count > 0)
                 {
-                    btnXoa.Enabled = false;
+                
                     btn_XoaCTDDH.Enabled = btn_ThemCTDDH.Enabled = false;
                     txt_NCC.Enabled = false;
                     panelCtrl_DatHang.Enabled = false;
@@ -970,7 +932,7 @@ namespace QLVT
                 else
                 {
                     gridView_getCTDDH.OptionsBehavior.Editable = true;
-                    btnXoa.Enabled = true;
+              
                     panelCtrl_DatHang.Enabled = true;
                     txt_NCC.Enabled = true;
                     for (int i = 0; i < bds_sp_getCTPhieu.Count; i++)
@@ -1116,7 +1078,7 @@ namespace QLVT
             bds_sp_getCTPhieu.CancelEdit();
             if (!((DataRowView)bdsDatHang[vitri])["MANV"].ToString().Equals(Program.username) || bdsPN.Count > 0)
             {
-                btnXoa.Enabled = false;
+            
                 btn_XoaCTDDH.Enabled = btn_ThemCTDDH.Enabled = false;
                 txt_NCC.Enabled = false;
                 panelCtrl_DatHang.Enabled = false;
@@ -1125,7 +1087,7 @@ namespace QLVT
             else
             {
                 gridView_getCTDDH.OptionsBehavior.Editable = true;
-                btnXoa.Enabled = true;
+          
                 panelCtrl_DatHang.Enabled = true;
                 txt_NCC.Enabled = true;
                 for (int i = 0; i < bds_sp_getCTPhieu.Count; i++)
@@ -1162,7 +1124,7 @@ namespace QLVT
              
             
             txt_MDDH.Enabled = false;
-            btnThem.Enabled = btnXoa.Enabled =btnRefresh.Enabled = btnThoat.Enabled = true;
+            btnThem.Enabled = btnRefresh.Enabled = btnThoat.Enabled = true;
             btnGhi.Enabled = btnUndo.Enabled = false;
             gc_DatHang.Focus();
         }
@@ -1184,7 +1146,7 @@ namespace QLVT
                 dtVTDaCo.Clear();
                 if (!((DataRowView)bdsDatHang[bdsDatHang.Position])["MANV"].ToString().Equals(Program.username) || bdsPN.Count > 0)
                 {
-                    btnXoa.Enabled = false;
+            
                     btn_XoaCTDDH.Enabled = btn_ThemCTDDH.Enabled = false;
                     txt_NCC.Enabled = false;
                     panelCtrl_DatHang.Enabled = false;
@@ -1193,7 +1155,7 @@ namespace QLVT
                 else
                 {
                     gridView_getCTDDH.OptionsBehavior.Editable = true;
-                    btnXoa.Enabled = true;
+                   
                     txt_NCC.Enabled = true;
                     panelCtrl_DatHang.Enabled = true;
                     
@@ -1253,7 +1215,7 @@ namespace QLVT
             if(cmb_MaKho2.Enabled==true && focusRowHandleTruoc==rowHandle)
             {
                 btnGhi.Enabled = true;
-                btnThem.Enabled = btnXoa.Enabled = btnThoat.Enabled = false;
+                btnThem.Enabled =  btnThoat.Enabled = false;
                 btnUndo.Enabled = true;
                 gc_DatHang.Enabled = false;
                 if (!txt_MDDH.Enabled)

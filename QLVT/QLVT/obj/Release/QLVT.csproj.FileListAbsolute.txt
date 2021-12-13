@@ -505,3 +505,6 @@ D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_DSNhanVi
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_DSVatTu.resources
 D:\University\HK7 2021-2022\CSDLPT\Project\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmPhieuXuat.resources
 D:\University\HK7 2021-2022\CSDLPT\Project\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmThemCTPX.resources
+D:\University\HK7 2021-2022\CSDLPT\Project\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frm_ReportHangHoa.resources
+D:\University\HK7 2021-2022\CSDLPT\Project\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_HangHoa.resources
+D:\University\HK7 2021-2022\CSDLPT\Project\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmRptDSNV.resources

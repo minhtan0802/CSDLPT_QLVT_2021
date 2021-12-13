@@ -293,8 +293,7 @@ namespace QLVT
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.spin_DonGia.Properties.DisplayFormat.FormatString = "n0";
             this.spin_DonGia.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.spin_DonGia.Properties.IsFloatValue = false;
-            this.spin_DonGia.Properties.Mask.EditMask = "n0";
+            this.spin_DonGia.Properties.Mask.EditMask = "#,###,##0.00##########";
             this.spin_DonGia.Properties.MaxValue = new decimal(new int[] {
             10000000,
             0,

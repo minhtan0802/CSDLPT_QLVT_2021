@@ -221,8 +221,7 @@ namespace QLVT
             this.spin_DonGia.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.spin_DonGia.Properties.EditFormat.FormatString = "n0";
             this.spin_DonGia.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.spin_DonGia.Properties.IsFloatValue = false;
-            this.spin_DonGia.Properties.Mask.EditMask = "n0";
+            this.spin_DonGia.Properties.Mask.EditMask = "#,###,##0.00##########";
             this.spin_DonGia.Properties.MaxValue = new decimal(new int[] {
             10000000,
             0,

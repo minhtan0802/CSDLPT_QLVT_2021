@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.XtraReports.UI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -285,6 +286,33 @@ namespace QLVT
                 Program.frmPX.MdiParent = this;
                 Program.frmPX.Show();
             }
+        }
+
+        private void btn_InBangKeNX_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if(!Program.CheckOpened("frm_ReportHangHoa"))
+            {
+                frm_ReportHangHoa f = new frm_ReportHangHoa();
+                f.Show();
+            }    
+        }
+
+        private void btn_InDSNV_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (!Program.CheckOpened("frmRptDSNV"))
+            {
+                frmRptDSNV f = new frmRptDSNV();
+                f.Show();
+            }
+            else return;
+
+        }
+
+        private void btn_InVT_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Xrpt_DSVatTu rpt = new Xrpt_DSVatTu();
+            ReportPrintTool print = new ReportPrintTool(rpt);
+            print.ShowPreviewDialog();
         }
     }
 

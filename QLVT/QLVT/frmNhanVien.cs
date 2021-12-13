@@ -52,8 +52,9 @@ namespace QLVT
             cmbChiNhanh.ValueMember = "TENSERVER";
             cmbChiNhanh.SelectedIndex = Program.mChiNhanh;
             panelCtrl_NhanVien.Enabled = false;
-         //   txtMaNV.Enabled = false;
-
+            //   txtMaNV.Enabled = false;
+            gcNhanVien.Focus();
+            gridView1.Focus();
             if (Program.mGroup == "CONGTY")
             {
                 cmbChiNhanh.Enabled = true;
@@ -231,7 +232,7 @@ namespace QLVT
         
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            txtMaNV.DoValidate();
+           // txtMaNV.DoValidate();
             bool checkError = true;
             if (!Validate(txtDiaChi))
             {
@@ -270,53 +271,6 @@ namespace QLVT
             {
                 return;
             }
-
-
-
-
-
-            /*     if (txtMaNV.Text.Trim() == "")
-                 {
-                     MessageBox.Show("Mã nhân viên không được thiếu", "", MessageBoxButtons.OK);
-                     txtMaNV.Focus();
-                     return;
-                 }
-                 if (txtHo.Text.Trim() == "")
-                 {
-                     MessageBox.Show("Họ nhân viên không được thiếu", "", MessageBoxButtons.OK);
-                     txtHo.Focus();
-                     return;
-                 }
-                 if (txtTen.Text.Trim() == "")
-                 {
-                     MessageBox.Show("Tên nhân viên không được thiếu", "", MessageBoxButtons.OK);
-                     txtTen.Focus();
-                     return;
-                 }
-                 if (dtpNgaySinh.Text.ToString().Trim() == "")
-                 {
-                     MessageBox.Show("Ngày sinh nhân viên không được thiếu", "", MessageBoxButtons.OK);
-                     dtpNgaySinh.Focus();
-                     return;
-                 }*/
-
-            /*    if(txtLuong.Text.Equals(""))
-                {
-                 //   MessageBox.Show("Lương nhân viên không được thiếu", "", MessageBoxButtons.OK);
-
-                    txtLuong.Focus();
-                    checkError = false;
-                   return;
-                }*/
-
-
-            /*   if (txtDiaChi.Text.Trim() == "")
-               {
-                //   MessageBox.Show("Địa chỉ không được thiếu", "", MessageBoxButtons.OK);
-                   txtDiaChi.Focus();
-                   return;
-               }*/
-
             string strLenh = "EXEC sp_TraCuu @code='" + txtMaNV.Text + "'" + ", @type='MANV'";
             int kiemTraMaNV = 0;
         
@@ -339,13 +293,15 @@ namespace QLVT
             {
                 try
                 {
-                    ((DataRowView)bdsNV[bdsNV.Position])["HO"] = Program.StandardString(txtHo.Text, "name");
-                   ((DataRowView)bdsNV[bdsNV.Position])["TEN"] = Program.StandardString(txtTen.Text, "name");
-                   ((DataRowView)bdsNV[bdsNV.Position])["DIACHI"] = Program.StandardString(txtDiaChi.Text, "add");
+                    txtHo.Text = Program.StandardString(txtHo.Text, "name");
+                   txtTen.Text = Program.StandardString(txtTen.Text, "name");
+                   txtDiaChi.Text = Program.StandardString(txtDiaChi.Text, "add");
+               //     MessageBox.Show("Add: " + ((DataRowView)bdsNV[bdsNV.Position])["DIACHI"]);
                     bdsNV.EndEdit();
                     bdsNV.ResetCurrentItem();
                     this.NHANVIENTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.NHANVIENTableAdapter.Update(this.DS.NhanVien);
+                    MessageBox.Show("Ghi thành công!", "", MessageBoxButtons.OK);
                 
                 }
                 catch (Exception ex)
@@ -421,19 +377,7 @@ namespace QLVT
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Xrpt_DSNhanVien rpt = new Xrpt_DSNhanVien();
-            string tenCN = "";
-            if (Program.servername.Contains("1"))
-            {
-                tenCN = "1";
-            }
-            else
-            {
-                tenCN = "2";
-            }
-            rpt.label_TieuDe.Text = "DANH SÁCH NHÂN VIÊN CHI NHÁNH " + tenCN;
-            ReportPrintTool print = new ReportPrintTool(rpt);
-            print.ShowPreviewDialog();
+           
         }
 
         private void panelControl1_Paint(object sender, PaintEventArgs e)
@@ -459,18 +403,16 @@ namespace QLVT
             string strLenh = "EXEC sp_ChuyenChiNhanhNV @MANV='" + maNV + "'" + ", @HO='" + ho + "'" + ", @TEN='" + ten + "'" +
                             ", @DIACHI='" + diachi + "'" + ", @NGAYSINH='" + ngsinh + "'" + ", @LUONG='" + luong + "'" + ", @MACN='" + maCN + "'";
             try
-                {
-                    Program.ExecSqlNonQuery(strLenh);
-                    MessageBox.Show("Chuyển nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
-                    btnUndo.Enabled = true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-          //  else
-            //    MessageBox.Show("Vui lòng chọn CN khác chi nhánh hiện tại", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            {
+                Program.ExecSqlNonQuery(strLenh);
+                MessageBox.Show("Chuyển nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
+                btnUndo.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private SqlConnection conn_publisher = new SqlConnection();
 
@@ -533,7 +475,7 @@ namespace QLVT
                 }
                 else if (txt.Text.Trim().Length > 10)
                 {
-                    dxErrorProvider1.SetError(txt, "Họ nhân viên chỉ chứa tối đa 40 ký tự");
+                    dxErrorProvider1.SetError(txt, "Tên nhân viên chỉ chứa tối đa 10 ký tự");
                     bStatus = false;
                 }
                 else
@@ -587,20 +529,20 @@ namespace QLVT
 
             else if (dtpNgaySinh.DateTime >= DateTime.Now)
             {
-                //  MessageBox.Show("Ngày sinh nhân viên không được lớn hơn hoặc bằng ngày hiện tại ", "", MessageBoxButtons.OK);
+           
                 dxErrorProvider1.SetError(dtpNgaySinh, "Ngày sinh nhân viên không được lớn hơn hoặc bằng ngày hiện tại");
                 bStatus = false;
 
-                //   return;
+               
             }
             else if (!((DateTime.Now.Year - dtpNgaySinh.DateTime.Year) > 15 || ((DateTime.Now.Year - dtpNgaySinh.DateTime.Year) == 15 && ((DateTime.Now.Month - dtpNgaySinh.DateTime.Month) == 0)
                 && ((DateTime.Now.Day - dtpNgaySinh.DateTime.Day) == 0))))
             {
-                //  MessageBox.Show("Nhân viên phải đủ 15t trở lên mới được nhận việc", "", MessageBoxButtons.OK);
+             
                 dxErrorProvider1.SetError(dtpNgaySinh, "Nhân viên phải đủ 15t trở lên mới được nhận việc");
 
                 bStatus = false;
-                //return;
+               
             }
             else
             {
@@ -740,7 +682,6 @@ namespace QLVT
 
         private void gridView1_ColumnFilterChanged(object sender, EventArgs e)
         {
-
             string manv = ((DataRowView)bdsNV[bdsNV.Position])["MANV"].ToString();
             if (manv.Equals(Program.username) && !Program.mGroup.Equals("CONGTY"))
             {

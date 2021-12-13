@@ -63,6 +63,7 @@ namespace QLVT
             this.sp_getCTPNTableAdapter = new QLVT.DSTableAdapters.sp_getCTPNTableAdapter();
             this.sp_getVTChuaCoTableAdapter = new QLVT.DSTableAdapters.sp_getVTChuaCoTableAdapter();
             this.sp_getVatTuConThieuCTPhieuTableAdapter = new QLVT.DSTableAdapters.sp_getVatTuConThieuCTPhieuTableAdapter();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             sOLUONGLabel = new System.Windows.Forms.Label();
             dONGIALabel = new System.Windows.Forms.Label();
             mAVTLabel = new System.Windows.Forms.Label();
@@ -84,6 +85,7 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaVT.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spin_DonGia.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spgetCTPNBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // sOLUONGLabel
@@ -171,7 +173,7 @@ namespace QLVT
             this.groupBox_VT.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox_VT.Location = new System.Drawing.Point(287, 0);
             this.groupBox_VT.Name = "groupBox_VT";
-            this.groupBox_VT.Size = new System.Drawing.Size(657, 391);
+            this.groupBox_VT.Size = new System.Drawing.Size(657, 366);
             this.groupBox_VT.TabIndex = 3;
             this.groupBox_VT.TabStop = false;
             this.groupBox_VT.Text = "Vật tư";
@@ -183,7 +185,7 @@ namespace QLVT
             this.sp_getVatTuConThieuCTPhieuGridControl.Location = new System.Drawing.Point(3, 18);
             this.sp_getVatTuConThieuCTPhieuGridControl.MainView = this.gridView_VatTuChuaCo;
             this.sp_getVatTuConThieuCTPhieuGridControl.Name = "sp_getVatTuConThieuCTPhieuGridControl";
-            this.sp_getVatTuConThieuCTPhieuGridControl.Size = new System.Drawing.Size(651, 370);
+            this.sp_getVatTuConThieuCTPhieuGridControl.Size = new System.Drawing.Size(651, 345);
             this.sp_getVatTuConThieuCTPhieuGridControl.TabIndex = 0;
             this.sp_getVatTuConThieuCTPhieuGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_VatTuChuaCo});
@@ -206,6 +208,7 @@ namespace QLVT
             this.gridView_VatTuChuaCo.Name = "gridView_VatTuChuaCo";
             this.gridView_VatTuChuaCo.OptionsBehavior.Editable = false;
             this.gridView_VatTuChuaCo.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_VatTuChuaCo_FocusedRowChanged);
+            this.gridView_VatTuChuaCo.ColumnFilterChanged += new System.EventHandler(this.gridView_VatTuChuaCo_ColumnFilterChanged);
             // 
             // colMAVT
             // 
@@ -322,7 +325,7 @@ namespace QLVT
             this.groupBox_InfoVT.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox_InfoVT.Location = new System.Drawing.Point(0, 0);
             this.groupBox_InfoVT.Name = "groupBox_InfoVT";
-            this.groupBox_InfoVT.Size = new System.Drawing.Size(287, 391);
+            this.groupBox_InfoVT.Size = new System.Drawing.Size(287, 366);
             this.groupBox_InfoVT.TabIndex = 0;
             this.groupBox_InfoVT.TabStop = false;
             this.groupBox_InfoVT.Text = "Thông tin";
@@ -367,8 +370,7 @@ namespace QLVT
             this.spin_DonGia.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.spin_DonGia.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.spin_DonGia.Properties.IsFloatValue = false;
-            this.spin_DonGia.Properties.Mask.EditMask = "n0";
+            this.spin_DonGia.Properties.Mask.EditMask = "#,###,##0.00##########";
             this.spin_DonGia.Properties.MaxValue = new decimal(new int[] {
             10000000,
             0,
@@ -381,6 +383,7 @@ namespace QLVT
             0});
             this.spin_DonGia.Size = new System.Drawing.Size(158, 34);
             this.spin_DonGia.TabIndex = 13;
+            this.spin_DonGia.InvalidValue += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.spin_DonGia_InvalidValue);
             // 
             // spgetCTPNBindingSource
             // 
@@ -399,11 +402,15 @@ namespace QLVT
             // 
             this.sp_getVatTuConThieuCTPhieuTableAdapter.ClearBeforeFill = true;
             // 
+            // dxErrorProvider1
+            // 
+            this.dxErrorProvider1.ContainerControl = this;
+            // 
             // frmThemCTDDH
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 391);
+            this.ClientSize = new System.Drawing.Size(944, 366);
             this.Controls.Add(this.groupBox_VT);
             this.Controls.Add(this.groupBox_InfoVT);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -428,6 +435,7 @@ namespace QLVT
             ((System.ComponentModel.ISupportInitialize)(this.txt_MaVT.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spin_DonGia.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spgetCTPNBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -461,5 +469,6 @@ namespace QLVT
         private DevExpress.XtraEditors.TextEdit txt_TenVT;
         private DevExpress.XtraEditors.TextEdit txt_MaVT;
         private DevExpress.XtraEditors.TextEdit txt_DVT;
+        private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
     }
 }

@@ -174,6 +174,7 @@ namespace QLVT
             this.btn_InDSNV.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_InDSNV.ImageOptions.Image")));
             this.btn_InDSNV.Name = "btn_InDSNV";
             this.btn_InDSNV.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btn_InDSNV.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_InDSNV_ItemClick);
             // 
             // btn_InVT
             // 
@@ -182,6 +183,7 @@ namespace QLVT
             this.btn_InVT.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_InVT.ImageOptions.Image")));
             this.btn_InVT.Name = "btn_InVT";
             this.btn_InVT.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btn_InVT.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_InVT_ItemClick);
             // 
             // btn_InBangKeNX
             // 
@@ -190,6 +192,7 @@ namespace QLVT
             this.btn_InBangKeNX.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_InBangKeNX.ImageOptions.Image")));
             this.btn_InBangKeNX.Name = "btn_InBangKeNX";
             this.btn_InBangKeNX.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btn_InBangKeNX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_InBangKeNX_ItemClick);
             // 
             // barButtonItem1
             // 

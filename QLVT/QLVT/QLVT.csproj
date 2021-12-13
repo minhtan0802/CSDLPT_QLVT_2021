@@ -121,6 +121,12 @@
     <Compile Include="frmPhieuXuat.Designer.cs">
       <DependentUpon>frmPhieuXuat.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRptDSNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRptDSNV.Designer.cs">
+      <DependentUpon>frmRptDSNV.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmThemCTPN.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +150,12 @@
     </Compile>
     <Compile Include="frmThemCTDDH.Designer.cs">
       <DependentUpon>frmThemCTDDH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_ReportHangHoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_ReportHangHoa.Designer.cs">
+      <DependentUpon>frm_ReportHangHoa.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -177,6 +189,12 @@
     <Compile Include="Xrpt_DSVatTu.Designer.cs">
       <DependentUpon>Xrpt_DSVatTu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Xrpt_HangHoa.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Xrpt_HangHoa.Designer.cs">
+      <DependentUpon>Xrpt_HangHoa.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmChuyenCN.resx">
       <DependentUpon>frmChuyenCN.cs</DependentUpon>
     </EmbeddedResource>
@@ -198,6 +216,9 @@
     <EmbeddedResource Include="frmPhieuXuat.resx">
       <DependentUpon>frmPhieuXuat.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmRptDSNV.resx">
+      <DependentUpon>frmRptDSNV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmThemCTPN.resx">
       <DependentUpon>frmThemCTPN.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,6 +230,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmThemCTDDH.resx">
       <DependentUpon>frmThemCTDDH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_ReportHangHoa.resx">
+      <DependentUpon>frm_ReportHangHoa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -234,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Xrpt_DSVatTu.resx">
       <DependentUpon>Xrpt_DSVatTu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xrpt_HangHoa.resx">
+      <DependentUpon>Xrpt_HangHoa.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="DS.xsc">
