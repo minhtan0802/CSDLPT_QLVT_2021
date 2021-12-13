@@ -403,16 +403,19 @@ namespace QLVT
             string strLenh = "EXEC sp_ChuyenChiNhanhNV @MANV='" + maNV + "'" + ", @HO='" + ho + "'" + ", @TEN='" + ten + "'" +
                             ", @DIACHI='" + diachi + "'" + ", @NGAYSINH='" + ngsinh + "'" + ", @LUONG='" + luong + "'" + ", @MACN='" + maCN + "'";
             try
-            {
-                Program.ExecSqlNonQuery(strLenh);
-                MessageBox.Show("Chuyển nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
-                btnUndo.Enabled = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+                {
+                    Program.ExecSqlNonQuery(strLenh);
+                    MessageBox.Show("Chuyển nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.NHANVIENTableAdapter.Connection.ConnectionString = Program.connstr;
+                    this.NHANVIENTableAdapter.Fill(this.DS.NhanVien);
+                    btnUndo.Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+          //  else
+            //    MessageBox.Show("Vui lòng chọn CN khác chi nhánh hiện tại", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
         private SqlConnection conn_publisher = new SqlConnection();
 

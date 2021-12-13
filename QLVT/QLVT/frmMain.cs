@@ -1,5 +1,4 @@
-﻿using DevExpress.XtraReports.UI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DevExpress.XtraReports.UI;
 
 namespace QLVT
 {
@@ -313,6 +313,52 @@ namespace QLVT
             Xrpt_DSVatTu rpt = new Xrpt_DSVatTu();
             ReportPrintTool print = new ReportPrintTool(rpt);
             print.ShowPreviewDialog();
+        }
+
+        private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExist(typeof(Frpt_HoatDongCuaNhanVienTheoThang));
+            if(frm != null)
+            {
+                frm.Activate();
+            }
+            else
+            {
+                Frpt_HoatDongCuaNhanVienTheoThang f = new Frpt_HoatDongCuaNhanVienTheoThang();
+                f.MdiParent = this;
+                f.Show();
+            } 
+                
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                Xrpt_DonHangChuaCoPhieuNhap rpt = new Xrpt_DonHangChuaCoPhieuNhap();
+                
+                ReportPrintTool print = new ReportPrintTool(rpt);
+                print.ShowPreviewDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void barButtonItem5_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExist(typeof(Frpt_TongHopNhapXuat));
+            if (frm != null)
+            {
+                frm.Activate();
+            }
+            else
+            {
+                Frpt_TongHopNhapXuat f = new Frpt_TongHopNhapXuat();
+                f.MdiParent = this;
+                f.Show();
+            }
         }
     }
 

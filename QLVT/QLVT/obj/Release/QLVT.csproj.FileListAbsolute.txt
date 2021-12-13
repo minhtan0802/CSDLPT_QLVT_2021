@@ -503,8 +503,10 @@ D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmTaoTaiKhoa
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Test.resources
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_DSNhanVien.resources
 D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_DSVatTu.resources
-D:\University\HK7 2021-2022\CSDLPT\Project\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmPhieuXuat.resources
-D:\University\HK7 2021-2022\CSDLPT\Project\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmThemCTPX.resources
-D:\University\HK7 2021-2022\CSDLPT\Project\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frm_ReportHangHoa.resources
-D:\University\HK7 2021-2022\CSDLPT\Project\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_HangHoa.resources
-D:\University\HK7 2021-2022\CSDLPT\Project\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmRptDSNV.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Frpt_HoatDongCuaNhanVienTheoThang.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_HoatDongCuaNhanVienTheoThang.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmPhieuXuat.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.frmThemCTPX.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_DonHangChuaCoPhieuNhap.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Frpt_TongHopNhapXuat.resources
+D:\HocTap\CSDLPT\Do-an\CSDLPT_QLVT_2021\QLVT\QLVT\obj\Release\QLVT.Xrpt_TongHopNhapXuat.resources
